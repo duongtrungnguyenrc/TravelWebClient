@@ -1,8 +1,8 @@
 // File: /Users/duongtrungnguyen/Documents/study/Java technology/TravelWebClient/src/app/layout.tsx
-import * as entry from '../../../src/app/layout.js'
+import * as entry from '../../../src/app/(routes)/layout.jsx'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../src/app/layout.js')
+type TEntry = typeof import('../../../src/app/(routes)/layout.jsx')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{
