@@ -1,0 +1,115 @@
+* {
+    color: #3E334E
+}
+
+.login-site {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 130px;
+
+    .login-site-header {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 2rem;
+
+        .brand {
+            display: flex;
+            align-items: center;
+
+            svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand-name {
+                color: #3E334E;
+                font-family: 'Inter', sans-serif;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 100%; /* 32px */
+            }
+        }
+
+        .description {
+            width: 347px;
+            color: #3E334E;
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%; /* 30px */
+        }
+    }
+
+    .login-form-frame {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+
+        .login-form-title {
+            font-size: 2rem;
+        }
+
+        .login-form-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+
+            label {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+
+            .login-options {
+                display: flex;
+                justify-content: space-between;
+                gap: 1rem;
+
+                li {
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-start;
+                    gap: 8px;
+                    flex: 1 0 0;
+                    border-radius: 4px;
+                    border: 1px solid #AFA2C3;
+                    
+                    a {
+                        padding: 12px 16px;
+                        width: 100%;
+                        height: 100%;
+                        color: #3E334E;
+                        text-align: center;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 100%; /* 14px */
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .login-site {
+        width: 100%;
+        padding: 2rem;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}

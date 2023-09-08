@@ -1,0 +1,137 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/app/_components/LoginForm/styles.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+* {
+  color: #3E334E;
+}
+
+.login-site {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 130px;
+}
+.login-site .login-site-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.login-site .login-site-header .brand {
+  display: flex;
+  align-items: center;
+}
+.login-site .login-site-header .brand svg {
+  width: 40px;
+  height: 40px;
+}
+.login-site .login-site-header .brand .brand-name {
+  color: #3E334E;
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 32px */
+}
+.login-site .login-site-header .description {
+  width: 347px;
+  color: #3E334E;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 30px */
+}
+.login-site .login-form-frame {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.login-site .login-form-frame .login-form-title {
+  font-size: 2rem;
+}
+.login-site .login-form-frame .login-form-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.login-site .login-form-frame .login-form-bottom label {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.login-site .login-form-frame .login-form-bottom .login-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.login-site .login-form-frame .login-form-bottom .login-options li {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0;
+  border-radius: 4px;
+  border: 1px solid #AFA2C3;
+}
+.login-site .login-form-frame .login-form-bottom .login-options li a {
+  padding: 12px 16px;
+  width: 100%;
+  height: 100%;
+  color: #3E334E;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+}
+
+@media only screen and (max-width: 768px) {
+  .login-site {
+    width: 100%;
+    padding: 2rem;
+  }
+}
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/app/_components/LoginGallery/styles.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.login-gallery-site {
+  width: 60%;
+  background: #191A24;
+  padding: 0 2rem;
+}
+.login-gallery-site .gallery-list-container {
+  height: 100%;
+  display: flex;
+  gap: 1.5rem;
+  overflow: hidden;
+}
+.login-gallery-site .gallery-list-container .gallery-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 33.3%;
+  height: max-content;
+}
+.login-gallery-site .gallery-list-container .gallery-list:first-child {
+  top: -5%;
+}
+.login-gallery-site .gallery-list-container .gallery-list:last-child {
+  top: -10%;
+}
+.login-gallery-site .gallery-list-container .gallery-list .gallery-item {
+  width: 100%;
+  height: 450px;
+  border-radius: 8px;
+  background-size: cover;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-gallery-site {
+    display: none;
+  }
+}

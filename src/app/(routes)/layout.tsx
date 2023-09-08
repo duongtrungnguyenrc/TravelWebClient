@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Provider from '../_context/Provider'
+import '../_assets/globalStyles.scss'
 
 
 

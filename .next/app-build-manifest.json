@@ -5,11 +5,22 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(routes)/page.js"
     ],
+    "/(routes)/auth/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(routes)/auth/login/page.css",
+      "static/chunks/app/(routes)/auth/login/page.js"
+    ],
     "/(routes)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/(routes)/layout.css",
       "static/chunks/app/(routes)/layout.js"
+    ],
+    "/(routes)/loading": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(routes)/loading.js"
     ]
   }
 }
