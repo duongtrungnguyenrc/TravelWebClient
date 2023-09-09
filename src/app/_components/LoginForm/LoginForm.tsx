@@ -2,7 +2,7 @@ import './styles.scss'
 
 const LoginForm = () => {
   return (
-    <section className="login-site">
+    <div className="login-site">
         <div className="login-site-header">
             <div className="brand">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -46,7 +46,7 @@ const LoginForm = () => {
                 </ul>
             </div>
         </div>
-    </section>
+    </div>
   );
 };
 export default LoginForm;

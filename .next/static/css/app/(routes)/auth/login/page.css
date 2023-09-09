@@ -1,3 +1,40 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/app/(routes)/auth/login/styles.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.login-container {
+  display: flex;
+}
+.login-container .left-container {
+  width: 60%;
+}
+.login-container .right-container {
+  width: 40%;
+}
+
+@media only screen and (max-width: 767px) {
+  .login-container .left-container {
+    display: none;
+  }
+  .login-container .right-container {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .login-container .left-container {
+    width: 40%;
+  }
+  .login-container .right-container {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  .login-container .left-container {
+    width: 55%;
+  }
+  .login-container .right-container {
+    width: 45%;
+  }
+}
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/app/_components/LoginForm/styles.scss ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -6,7 +43,7 @@
 }
 
 .login-site {
-  width: 40%;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -18,22 +55,6 @@
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 2rem;
-}
-.login-site .login-site-header .brand {
-  display: flex;
-  align-items: center;
-}
-.login-site .login-site-header .brand svg {
-  width: 40px;
-  height: 40px;
-}
-.login-site .login-site-header .brand .brand-name {
-  color: #3E334E;
-  font-family: "Inter", sans-serif;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 100%; /* 32px */
 }
 .login-site .login-site-header .description {
   width: 347px;
@@ -89,17 +110,39 @@
   line-height: 100%; /* 14px */
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .login-site {
     width: 100%;
     padding: 2rem;
   }
 }
+@media only screen and (min-width: 768px) and (max-width: 1400px) {
+  .login-site {
+    padding: 70px;
+  }
+}
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[5].oneOf[13].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[5].oneOf[13].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[5].oneOf[13].use[5]!./src/app/_components/LoginGallery/styles.scss ***!
   \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@keyframes slideToTop {
+  from {
+    transform: translate(0, 0%);
+  }
+  to {
+    transform: translate(0, -40%);
+  }
+}
+@keyframes slideToBottom {
+  from {
+    transform: translate(0, 0%);
+  }
+  to {
+    transform: translate(0, 40%);
+  }
+}
 .login-gallery-site {
-  width: 60%;
+  height: 100%;
+  width: 100%;
   background: #191A24;
   padding: 0 2rem;
 }
@@ -116,12 +159,16 @@
   gap: 1.5rem;
   width: 33.3%;
   height: max-content;
+  animation: slideToTop 60s linear infinite;
+  animation-delay: 1s;
 }
 .login-gallery-site .gallery-list-container .gallery-list:first-child {
-  top: -5%;
+  top: -10%;
+  animation: slideToTop 50s linear infinite;
 }
 .login-gallery-site .gallery-list-container .gallery-list:last-child {
-  top: -10%;
+  top: -40%;
+  animation: slideToBottom 50s linear infinite;
 }
 .login-gallery-site .gallery-list-container .gallery-list .gallery-item {
   width: 100%;
@@ -130,8 +177,19 @@
   background-size: cover;
 }
 
-@media only screen and (max-width: 768px) {
-  .login-gallery-site {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .login-gallery-site .gallery-list-container .gallery-list {
+    width: 100%;
+  }
+  .login-gallery-site .gallery-list-container .gallery-list:first-child, .login-gallery-site .gallery-list-container .gallery-list:last-child {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  .login-gallery-site .gallery-list-container .gallery-list {
+    width: 50%;
+  }
+  .login-gallery-site .gallery-list-container .gallery-list:first-child {
     display: none;
   }
 }

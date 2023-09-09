@@ -1,0 +1,61 @@
+.login-container {
+    display: flex;
+
+    .left-container {
+        width: 60%;
+    }
+
+    .right-container {
+        width: 40%;
+    }
+
+}
+
+// MOBILE RESPONSIVE
+
+@media only screen and (max-width: 767px) {
+    .login-container {
+    
+        .left-container {
+            display: none;
+        }
+    
+        .right-container {
+            width: 100%;
+        }
+    
+    }
+}
+
+// TABLET RESPONSIVE
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .login-container {
+    
+        .left-container {
+            width: 40%;
+        }
+    
+        .right-container {
+            width: 60%;
+        }
+    
+    }
+}
+
+// MINI PC RESPONSIVE
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+
+    .login-container {
+    
+        .left-container {
+            width: 55%;
+        }
+    
+        .right-container {
+            width: 45%;
+        }
+    
+    }
+}

@@ -1,3 +1,5 @@
+import "./styles.scss"
+
 const Loading = () => {
     return (
       <>

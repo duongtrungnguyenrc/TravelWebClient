@@ -3,7 +3,7 @@ import Loading from "../_components/Loading/Loading";
 const LoadingPage = () => {
     return (
       <>
-          <Loading/>
+          {/* <Loading/> */}
       </>
     );
   };
