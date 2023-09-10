@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Mulish:wght@200;300;400;500;600;700;800&display=swap');
 
 :root {
-    --primary-dark: #1A242D;
+    --primary-dark: #3E334E;
     --primary-medium: #27343F;
     --primary-yellow: #C7923E;
     --font-inter: 'Inter', sans-serif;
@@ -14,6 +14,7 @@
     margin: 0;
     box-sizing: border-box;
     font-family: 'Mulish', sans-serif;
+    color: var(--primary-dark);
 }
 
 html {
@@ -64,9 +65,11 @@ button {
         font-weight: normal;
     }
 }
+
 .text-light {
     color: #fff !important;
 }
+
 .btn {
     display: flex;
     padding: 16px;
@@ -83,6 +86,11 @@ button {
     &.btn-dark {
         background: var(--dark);
         color: var(--light);
+    }
+
+    &.btn-light {
+        background: var(--light);
+        color: var(--dark);
     }
 }
 
@@ -106,8 +114,13 @@ form {
     flex-direction: column;
     gap: 1.5rem;
 
+    .multi-group {
+        display: flex;
+        gap: 1rem;
+    }
 
     .input-group {
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -121,6 +134,7 @@ form {
         }
 
         input {
+            width: 100%;
             padding: 1rem;
             border-radius: 8px;
             border: 1px solid #AFA2C3;
@@ -140,7 +154,7 @@ form {
         gap: 24px;
         align-self: stretch;
 
-        button {
+        button, a {
             width: 47%;
             display: flex;
             padding: 16px;
@@ -153,8 +167,8 @@ form {
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
-            line-height: 100%;
-
+            line-height: 120%;
+            border: 1px solid var(--primary-dark);
 
             &:first-child {
                 background: #3E334E;
@@ -170,6 +184,14 @@ form {
         label {
             font-weight: 400;
             font-family: 'Inter', sans-serif;
+
+            a {
+                color: #007AFF;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
         }
 
 

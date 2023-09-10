@@ -1,3 +1,4 @@
+// Produced by Duong Trung Nguyen
 
 @keyframes slideToTop {
     from {
@@ -36,23 +37,23 @@
             gap: 1.5rem;
             width: 33.3%;
             height: max-content;
-            animation: slideToTop 60s linear infinite;
+            animation: slideToTop 120s linear infinite;
             animation-delay: 1s;
             
 
             &:first-child {
-                top: -10%;
-                animation: slideToTop 50s linear infinite;
+                top: -50%;
+                animation: slideToBottom 40s linear infinite;
             }
 
             &:last-child {
-                top: -40%;
+                top: -50%;
                 animation: slideToBottom 50s linear infinite;
             }
 
             .gallery-item {
                 width: 100%;
-                height: 450px;
+                height: 400px;
                 border-radius: 8px;
                 background-size: cover;
             }

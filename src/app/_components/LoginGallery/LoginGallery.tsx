@@ -1,3 +1,5 @@
+// Produced by Duong Trung Nguyen
+
 import './styles.scss'
 
 const LoginGallery = () => {
