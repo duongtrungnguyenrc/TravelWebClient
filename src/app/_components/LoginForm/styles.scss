@@ -9,6 +9,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 130px;
+    animation: slowlyShow 1s linear;
 
     .login-site-header {
         display: flex;
@@ -77,6 +78,15 @@
                 }
             }
         }
+    }
+}
+
+@keyframes slowlyShow {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 

@@ -4,7 +4,7 @@ import "./styles.scss"
 
 const Loading = () => {
   console.log("render");
-  
+    
     return (
       <>
           <div className="loading-container">

@@ -53,13 +53,13 @@ const RegisterForm = () => {
                 </div>
                 <div className="d-flex">
                     <div className="check-group">
-                        <input type="checkbox" name="" id="" />
+                        <input type="checkbox" />
                         <label>Remember me</label>
                     </div>
                     <Link className='line-decor' href="">Forgot password</Link>
                 </div>
                 <div className="check-group">
-                        <input type="checkbox" name="" id="" />
+                        <input type="checkbox" />
                         <label>I agree to all the <Link href="">Terms</Link> and <Link href="">Privacy policy</Link> </label>
                     </div>
                 <div className="button-group">

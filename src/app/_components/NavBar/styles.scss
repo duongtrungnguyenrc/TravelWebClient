@@ -2,9 +2,14 @@
 
 .navbar-site {
     width: 100%;
-    position: sticky;
+    position: fixed;
     height: 72px;
-    padding: 1rem 3rem;
+    padding: 1rem 5rem;
+    transition: 0.5s;
+
+    &.active {
+        background-color: #fff;
+    }
 
     nav {
         height: 100%;
@@ -71,11 +76,13 @@
 @media only screen and (max-width: 1024px) {
     .navbar-site {   
         padding: 1rem;
+        background-color: #fff;
+        
         nav { 
             justify-content: space-between;
 
             .navbar-colapse {
-                position: absolute;
+                position: fixed;
                 width: 70%;
                 height: 100vh;
                 left: 0;

@@ -1,0 +1,168 @@
+// Produced by Duong Trung Nguyen
+
+.home-hero-site {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+
+    .hero-left-site {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        .hero-content {
+            padding: 5rem 8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+
+            .hero-title {
+                font-family: 'Lora';
+                font-size: 5rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 110%; /* 74.4px */
+                letter-spacing: 0.186px;
+            }
+
+            .hero-description {
+                font-size: 1.2rem;
+                font-style: normal;
+                line-height: 125%; /* 20px */
+                letter-spacing: 0.08px;
+            }
+        }
+
+        .booking-group{
+            padding: 1rem;
+            border-radius: 10px;
+            background-color: #fff;
+            transform: translate(10%, 0);
+
+            .booking-btn {
+                width: 50%;
+            }
+        }
+
+        .parner-group {
+            width: 100%;
+            padding: 1rem 5rem;
+            // background-color: grey;
+            display: flex;
+        }
+    }
+
+    .hero-right-site {
+        width: 40%;
+        background-image: url(../../../../public/images/hero-placeholder.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+
+// MOBILE RESPONSIVE
+@media only screen and (max-width: 1024px) {
+    .home-hero-site {
+        padding-top: 70px;
+        flex-direction: column;
+
+        .hero-left-site {
+            flex: 1;
+            order: 2;
+            width: 100%;
+            padding:  2rem;
+
+            .hero-content {
+                padding: 0;
+                gap: 1rem;
+    
+                .hero-title {
+                    font-size: 2rem;
+                    text-align: center;
+                }
+    
+                .hero-description {
+                    font-size: 1rem;
+                    text-align: center;
+                }
+            }
+
+            .booking-group {
+                padding: 0;
+                transform: none;
+                margin-top: 2rem;
+                
+                .multi-group {
+                    flex-direction: column;
+                }
+
+                .booking-btn {
+                    width: 100%;
+                }
+            }
+
+            .parner-group {
+                display: none;
+            }
+        }
+        
+        .hero-right-site {
+            flex: 1;
+            order: 1;
+            width: 100%;
+            height: auto;
+            background-position: unset;
+        }
+    }
+}
+
+// TABLET RESPONSIVE
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+    .home-hero-site {
+        flex-direction: row;
+        height: 100%;
+
+        .hero-left-site {
+            width: 55%;
+            flex: 1;
+            order: 1;
+
+            .hero-content {
+                .hero-title {
+                    font-size: 2.3rem;
+                }
+            }
+        }
+
+        .hero-right-site {
+            flex: 1;
+            order: 2;
+            width: 45%;
+            display: block;
+            background-position: center;
+        }
+    }
+}
+
+// MINI PC RESPONSIVE
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+
+    .home-hero-site {
+        height: 100%;
+        
+        .hero-left-site {
+            padding: 50px 0;
+
+            .hero-content {
+                .hero-title {
+                    font-size: 3rem;
+                }
+            }
+        }
+
+    }
+}

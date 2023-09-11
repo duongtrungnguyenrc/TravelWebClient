@@ -2,7 +2,7 @@ import './styles.scss'
 
 const Bottom = () => {
   return (
-    <section className="bottom-site">
+    <footer className="bottom-site">
       <div className="bottom-left">
         <div className="bottom-left-header">
           <h1 className="header-left">
@@ -76,7 +76,7 @@ const Bottom = () => {
           </div>
         </div>
       </div>
-    </section>
+    </footer>
   );
 };
 export default Bottom;
