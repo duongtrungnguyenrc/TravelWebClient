@@ -4,21 +4,31 @@
 
 import "./styles.scss";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NavBar = () => {
     console.log("render");
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
 
-    window.addEventListener("scroll", () => {
-       if(window.scrollY <= 70 && scrollY) {
-        setScrollY(false);
-       }
-       else if(window.scrollY > 70 && !scrollY) {
-        setScrollY(true);
-       }
-    }) // temp
+    useEffect(() => {
+        const handleScroll = () => {
+            if(window.scrollY <= 70 && scrollY) {
+                setScrollY(false);
+            }
+            else if(window.scrollY > 70 && !scrollY) {
+                setScrollY(true);
+            }
+        };
+    
+        if (typeof window !== 'undefined') {
+          window.addEventListener('scroll', handleScroll);
+    
+          return () => {
+            window.removeEventListener('scroll', handleScroll);
+          };
+        }
+      }, [scrollY]);
 
 
     const handleShow = () => {
