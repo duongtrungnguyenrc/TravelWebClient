@@ -18,7 +18,7 @@ const IntroBlog = ({title , content}: LayoutProps) => {
             {content}
           </p>
           <div className="btn-more">
-            <button className=" btn btn-yellow">Learn More</button>
+            <button className=" btn btn-big btn-yellow">Learn More</button>
           </div>
         </div>
       </div>

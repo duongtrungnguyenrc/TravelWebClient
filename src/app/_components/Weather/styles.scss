@@ -5,7 +5,7 @@
     .container-item{
         width: 70%;
 
-        .date {
+        .wheather-item {
 
             flex-direction: column;
             padding-bottom: 20px;
@@ -17,47 +17,33 @@
                 background: #9A9AB0;
             }
 
-            .current-date{
+            .item-title{
+                    color: #9A9AB0;
+                    text-align: center;
 
-                padding: 20px 0px 20px 0px;
-            }
-        }
-        .time {
-
-            flex-direction: column;
-            padding-bottom: 20px;
-
-            .time-icon{
-
-                width: 100px ;
-                height: 100px;
-                background: var(--light-fills-color-icon, #9A9AB0);
+                    font-family: "Mulish";
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 120%; /* 28.8px */
+                    letter-spacing: 0.072px;
+                    padding: 20px 0px 20px 0px;
             }
 
-            .current-time{
+            .detail-value {
+                p {
+                    color: #000;
+                    text-align: center;
 
-                padding: 20px 0px 20px 0px;
+                    /* Heading/H3 Bold */
+                    font-family: "Lora";
+                    font-size: 39px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 120%; /* 46.8px */
+                    letter-spacing: 0.195px;
+                }
             }
-
-        }
-
-        .temperature {
-
-            flex-direction: column;
-            padding-bottom: 20px;
-            .temperature-icon{
-
-                width: 100px ;
-                height: 100px;
-                background: var(--light-fills-color-icon, #9A9AB0);
-            }
-
-            .current-temperature{
-
-                padding: 20px 0px 20px 0px;
-            }
-
-
         }
     }
 }

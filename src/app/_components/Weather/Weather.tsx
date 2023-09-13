@@ -3,32 +3,32 @@ const Weather = () => {
   return (
     <section className="container-weather flex-center">
         <div className="container-item d-flex">
-            <div className="date flex-center">
+            <div className="wheather-item flex-center">
                 <div className="image-icon"></div>
-                <div className="current-date">
+                <div className="item-title">
                     <p>Today date</p>
                 </div>
-                <div className="detail-date">
+                <div className="detail-value">
                     <p>March 15 2021</p>
                 </div>
 
             </div>
-            <div className="time flex-center">
-                <div className="time-icon"></div>
-                <div className="current-time">
+            <div className="wheather-item flex-center">
+                <div className="image-icon"></div>
+                <div className="item-title">
                     <p>current time</p>
                 </div>
-                <div className="detail-time">
+                <div className="detail-value">
                     <p>08:12 PM</p>
                 </div>
 
             </div>
-            <div className="temperature flex-center">
-                <div className="temperature-icon"></div>
-                <div className="current-temperature">
+            <div className="wheather-item flex-center">
+                <div className="image-icon"></div>
+                <div className="item-title">
                     <p>Temperature weather</p>
                 </div>
-                <div className="detail-temperature">
+                <div className="detail-value">
                     <p>14 ° C </p>
                 </div>
 
