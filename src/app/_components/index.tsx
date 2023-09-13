@@ -7,3 +7,7 @@ export { default as RegisterGallery } from "./RegisterGallery/RegisterGallery";
 export { default as Loading } from "./Loading/Loading";
 export { default as StateProvider } from "./StateProvider/StateProvider";
 export { default as HomeHero } from "./HomeHero/HomeHero";
+export { default as DefaultHero } from "./DefaultHero/DefaultHero";
+export { default as ServicesList } from "./ServicesList/ServicesList";
+export { default as ServicesGroup } from "./ServicesGroup/ServicesGroup";
+export { default as Benefit } from "./Benefit/Benefit";

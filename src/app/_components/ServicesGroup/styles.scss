@@ -1,0 +1,132 @@
+.services-group-site {
+    width: 100%;
+    padding: 5rem;
+    padding-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    
+    .services-group-top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .services-group-title {
+            color: #0C111F;
+            font-family: 'Inter';
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 130%; /* 62.4px */
+            letter-spacing: -0.48px;
+        }
+
+        .services-group-control {
+            display: flex;
+            gap: 1rem;
+            
+            button {
+                padding: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: #000;
+                border: none;
+                cursor: pointer;
+
+                &:first-child {
+                    box-shadow: 0 0 0 3px #ededed;
+                    background-color: #fff;
+                }
+                
+                svg {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+
+    .services-group-body {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        // overflow: hidden;
+
+        .service-item:nth-child(n+5) {
+            display: none;
+        }
+    }
+}
+
+// MOBILE RESPONSIVE
+
+@media only screen and (max-width: 767px) {
+    .services-group-site {
+        padding:1rem;
+
+        .services-group-top {
+            
+            .services-group-title {
+                font-size: 2rem;
+            }
+
+            .services-group-description {
+                display: none;
+            }
+        }
+
+
+        .services-group-body {
+            gap: 0.5rem;
+
+            .service-item:nth-child(n+3) {
+                display: none;
+            }
+        }
+    }
+    
+}
+
+// TABLET RESPONSIVE
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .services-group-site {
+        padding:1rem;
+
+        .services-group-top {
+            
+            .services-group-title {
+                font-size: 2.5rem;
+            }
+
+            .services-group-description {
+                display: none;
+            }
+        }
+
+        .services-group-body {
+            // justify-content: left;
+            gap: 0.5rem!important;
+
+            .service-item:nth-child(n+4) {
+                display: none;
+            }
+        }
+    }
+}
+
+// MINI PC RESPONSIVE
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+
+    .services-group-site {
+
+        .services-group-body {
+            .service-item:nth-child(n+4) {
+                display: none;
+            }
+        }
+    }
+}

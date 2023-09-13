@@ -24,47 +24,7 @@ html {
 
 body {
     width: 100%;
-    // height: 100vh;
     position: relative;
-    // background-color: #909090; // temp
-}
-
-button {
-    cursor: pointer;
-    border: 1px solid var(--dark);
-    text-transform: capitalize;
-
-    &.btn {
-        display: flex;
-        padding: 16px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 8px;
-        text-align: center;
-        font-family: 'Inter', sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 100%;
-    }
-    
-
-    &.btn-light {
-        background: var(--light);
-        color: var(--dark);
-    }
-    
-    &.btn-dark {
-        background: var(--dark);
-        color: var(--light);
-    }
-
-    &.btn-yellow {
-        background-color: var(--primary-yellow);
-        color: var(--light);
-        border: none;
-        font-weight: normal;
-    }
 }
 
 .text-light {
@@ -72,8 +32,9 @@ button {
 }
 
 .btn {
+    width: 100%;
     display: flex;
-    padding: 16px;
+    padding: 0.5rem 1rem;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
@@ -83,15 +44,33 @@ button {
     font-style: normal;
     font-weight: 600;
     line-height: 100%;
+    cursor: pointer;
 
-    &.btn-dark {
-        background: var(--dark);
-        color: var(--light);
+    &.btn-big {
+        padding: 1rem;
+    }
+    
+    &.btn-sm {
+       width: unset;
     }
 
+    &.btn-dark {
+        background: var(--primary-dark);
+        color: var(--light);
+    }
+    
     &.btn-light {
+        border: 1px solid;
         background: var(--light);
         color: var(--dark);
+    }
+
+    &.btn-yellow {
+        background-color: var(--primary-yellow);
+        color: var(--light)!important;
+        border: none;
+        font-weight: normal;
+        transition: 0.5s;
     }
 }
 
@@ -187,27 +166,6 @@ form {
         align-items: flex-start;
         gap: 24px;
         align-self: stretch;
-
-        button, a {
-            width: 47%;
-            display: flex;
-            padding: 16px;
-            justify-content: center;
-            align-items: center;
-            flex: 1 0 0;
-            border-radius: 8px;
-            text-align: center;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 120%;
-            border: 1px solid var(--primary-dark);
-
-            &:first-child {
-                background: #3E334E;
-            }
-        }
     }
 
     .check-group {
@@ -259,7 +217,7 @@ form {
     }
 
     .brand-name {
-        color: #3E334E;
+        transition: 0.5s;
         font-family: 'Inter', sans-serif;
         font-size: 32px;
         font-style: normal;

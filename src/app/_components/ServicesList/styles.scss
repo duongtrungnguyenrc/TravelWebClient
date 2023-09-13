@@ -1,0 +1,115 @@
+
+.services-list-site {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .services-filter {
+        padding: 1rem 1.5rem;
+        width: 90%;
+        height: max-content;
+        transform: translate(0, -50%);
+        background-color: #fff;
+        border-radius: 10px;
+        
+        form {
+            flex-direction: row;
+            .search-group {
+                min-width: 50%;
+                position: relative;
+
+                .search-input {
+                    width: 100%;
+                    border: 1px solid #E1E1E1;
+                    border-radius: 8px;
+                    padding: 1rem;
+                }
+
+                .search-submit {
+                    height: 100%;
+                    padding: 0 1rem;
+                    border: none;
+                    background-color: transparent;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+            }
+        }
+    }
+
+    .services-list {
+        width: 100%;
+        height: 100%;
+        padding:5rem;
+        padding-top: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+// MOBILE RESPONSIVE
+
+@media only screen and (max-width: 767px) {
+    
+    .services-list-site {
+        padding: 1rem;
+
+        .services-filter {
+            transform: translate(0, -20%);
+            
+            form {
+                flex-direction: column;
+            }
+        }
+
+        .services-list {
+            padding: 0rem;
+            gap: 0.5rem;
+        }
+    }
+}
+
+// TABLET RESPONSIVE
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .services-list-site {
+        .services-filter {
+            transform: translate(0, -20%);
+            
+            form {
+                flex-direction: column;
+            }
+        }
+
+        .services-list {
+            padding: 1rem;
+            gap: 0.5rem;
+        }
+    }
+}
+
+// MINI PC RESPONSIVE
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+    .services-list-site {
+        .services-filter {
+            transform: translate(0, -20%);
+            
+            form {
+                flex-direction: column;
+            }
+        }
+
+        .services-list {
+            padding: 1rem;
+            gap: 0.5rem;
+        }
+    }
+}

@@ -39,8 +39,8 @@ const LoginForm = () => {
                         <a className='line-decor' href="">Forgot password</a>
                     </div>
                     <div className="button-group">
-                        <button className="btn-dark" type='submit'>Login</button>
-                        <Link href="/auth/register" className="btn btn-light">Sign Up</Link>
+                        <button className="btn btn-big btn-dark" type='submit'>Login</button>
+                        <Link href="/auth/register" className="btn btn-big btn-light">Sign Up</Link>
                     </div>
                 </form>
                 <div className="login-form-bottom">
