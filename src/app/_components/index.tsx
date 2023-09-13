@@ -7,3 +7,7 @@ export { default as RegisterGallery } from "./RegisterGallery/RegisterGallery";
 export { default as Loading } from "./Loading/Loading";
 export { default as StateProvider } from "./StateProvider/StateProvider";
 export { default as HomeHero } from "./HomeHero/HomeHero";
+export { default as IntroBlog } from "./IntroBlog/IntroBlog";
+export { default as IntroBlogRight } from "./IntroBlogRight/IntroBlogRight";
+export { default as Weather } from "./Weather/Weather";
+export { default as VideoPlace } from "./VideoPlace/VideoPlace";
