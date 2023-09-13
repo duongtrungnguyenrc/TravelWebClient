@@ -1,0 +1,88 @@
+.container-weather{
+
+    width: 100% ;
+    margin-top: 100px ;
+    .container-item{
+        width: 70%;
+
+        .date {
+
+            flex-direction: column;
+            padding-bottom: 20px;
+
+            .image-icon{
+
+                width: 100px ;
+                height: 100px;
+                background: #9A9AB0;
+            }
+
+            .current-date{
+
+                padding: 20px 0px 20px 0px;
+            }
+        }
+        .time {
+
+            flex-direction: column;
+            padding-bottom: 20px;
+
+            .time-icon{
+
+                width: 100px ;
+                height: 100px;
+                background: var(--light-fills-color-icon, #9A9AB0);
+            }
+
+            .current-time{
+
+                padding: 20px 0px 20px 0px;
+            }
+
+        }
+
+        .temperature {
+
+            flex-direction: column;
+            padding-bottom: 20px;
+            .temperature-icon{
+
+                width: 100px ;
+                height: 100px;
+                background: var(--light-fills-color-icon, #9A9AB0);
+            }
+
+            .current-temperature{
+
+                padding: 20px 0px 20px 0px;
+            }
+
+
+        }
+    }
+}
+
+// TABLET RESPONSIVE
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .container-weather{
+
+        .container-item{
+
+            width: 50%;
+            justify-content: center;
+            
+        }
+    }
+  }
+
+// MOBILE RESPONSIVE
+@media only screen and (max-width: 1024px) {
+    .container-weather{
+        
+        .container-item{
+            
+            flex-direction: column;
+
+        }
+    }
+}

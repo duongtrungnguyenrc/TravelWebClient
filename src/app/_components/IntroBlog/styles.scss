@@ -1,0 +1,130 @@
+.container-blog {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .blog-left-site {
+
+    width: 192%;
+    background-color: #909090;
+    height: 600px;
+  }
+
+  .blog-right-site {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 10%;
+    z-index: -1;
+
+
+    .heading-blog {
+
+      .heading-name {
+
+        color: #11142d;
+
+        
+        font-family: Lora;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: 0.195px;
+        padding-bottom: 50px;
+      }
+
+    }
+    .content-intro-blog {
+
+      position: relative;
+
+      .content-blog {
+        
+        color: #515151;
+
+        font-family: Mulish;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 125%; 
+        letter-spacing: 0.08px;
+        
+      }
+
+      .btn-more {
+
+        padding-top: 64px;
+        position: absolute;
+        left: 0;
+
+      }
+    }
+  }
+}
+
+// MOBILE RESPONSIVE
+@media only screen and (max-width: 1024px) {
+
+  .container-blog {
+
+    margin-top: 50px;
+    flex-direction: column;
+    .blog-left-site {
+
+      width: 100%;
+    }
+    .blog-right-site {
+
+      margin-top: 50px;
+      .content-intro-blog {
+
+        z-index: -1;
+        .btn-more {
+          
+          position: relative;
+          padding-top: 20px;
+          left: 0;
+        }
+      }
+      
+    }
+  }
+}
+
+// TABLET RESPONSIVE
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+  .container-blog {
+
+    margin-top: 50px;
+    flex-direction: row;
+    .blog-left-site {
+
+      width: 300%;
+    }
+    .blog-right-site {
+
+      margin-top: 50px;
+      .content-intro-blog {
+
+        z-index: -1;
+        .btn-more {
+
+          position: relative;
+          left: 0;
+        }
+      }
+      
+    }
+    
+  }
+}
+
+// MINI PC RESPONSIVE
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+}
