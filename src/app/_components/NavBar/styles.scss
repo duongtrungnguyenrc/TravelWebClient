@@ -11,14 +11,17 @@
     &.active {
         background-color: #f4f4f4;
 
-        & * {
-            color: #000;
-            fill: #000;
-        }
+        // & * {
+        //     color: #000;
+        //     fill: #000;
+        // }
 
-        & button {
-            color: #fff;
-        }
+        // & button{
+        //     color: #fff;
+        //     svg {
+        //         fill: #fff;
+        //     }
+        // }
     }
 
     nav {

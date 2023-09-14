@@ -7,7 +7,9 @@ interface LayoutProps {
 const IntroBlogRight = ({title , content , myList}: LayoutProps) => {
   return (
     <section className="container-blog-right">
-      <div className="blog-right-site"></div>
+      <div className="blog-right-site">
+        <img src="/images/home-slider-3.jpg" alt="" />
+      </div>
       <div className="blog-left-site">
         <div className="heading-blog">
           <h1 className="heading-name">

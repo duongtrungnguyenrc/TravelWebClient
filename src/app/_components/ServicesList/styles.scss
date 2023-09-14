@@ -11,6 +11,7 @@
         transform: translate(0, -50%);
         background-color: #fff;
         border-radius: 10px;
+        animation: upShow 2s;
         
         form {
             flex-direction: row;
@@ -53,6 +54,17 @@
         gap: 1rem;
     }
 }
+
+
+@keyframes upShow {
+    from {
+        transform: translate(0, 0%);
+    }
+    to {
+        transform: translate(0, -50%);
+    }
+}
+
 
 // MOBILE RESPONSIVE
 

@@ -63,8 +63,8 @@ const RegisterForm = () => {
                         <label>I agree to all the <Link href="">Terms</Link> and <Link href="">Privacy policy</Link> </label>
                     </div>
                 <div className="button-group">
-                    <button className="btn btn-big btn-dark" type='submit'>Create an account</button>
                     <button className="btn btn-big btn-light">Join with Google</button>
+                    <button className="btn btn-big btn-dark" type='submit'>Create an account</button>
                 </div>
             </form>
             <div className="register-form-bottom">

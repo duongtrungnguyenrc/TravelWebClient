@@ -13,17 +13,17 @@
         .benefit-title {
             color: #0C111F;
             font-family: 'Lora';
-            font-size: 48px;
+            font-size: 50px;
             font-style: normal;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 130%; /* 62.4px */
             letter-spacing: -0.48px;
         }
 
         .short-description {
-            color: #0C111F;
+            color: #5f6166;
             font-family: 'Inter';
-            font-size: 20px;
+            font-size: 1.2rem;
             font-style: normal;
             font-weight: 400;
             line-height: 180%; /* 36px */
@@ -33,7 +33,7 @@
             position: relative;
 
             img {
-                width: 80%;
+                width: 100%;
                 height: max-content;
                 object-fit: cover;
             }
@@ -41,11 +41,11 @@
             .location {
                 position: absolute;
                 top: 10px;
-                left: 10px;
+                left: 20px;
                 display: flex;
                 align-items: center;
                 gap: 5px;
-                border-radius: 100px;
+                border-radius: 80px;
                 background: rgba(255, 255, 255, 0.22);
                 backdrop-filter: blur(7.5px);
                 padding: 6px 12px;
@@ -59,6 +59,7 @@
 
     .benefit-right {
         width: 50%;
+        position: relative;
         
         .benefits-list {
             height: 100%;
@@ -66,7 +67,7 @@
             padding: 4rem 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
             gap: 25px;
 
@@ -74,7 +75,7 @@
                 display: flex;
                 gap: 1rem;
                 align-items: center;
-                padding: 3rem 0;
+                padding: 2rem 0;
 
                 .icon {
                     padding: 1rem;
@@ -83,7 +84,7 @@
                 }
 
                 .content {
-                    .name {
+                    .benefit-name {
                         color: #0C111F;
                         font-size: 30px;
                         font-style: normal;
@@ -91,6 +92,11 @@
                         line-height: 28px;
                         text-transform: capitalize;
                         margin-bottom: 18px;
+                    }
+
+                    .benefit-description {
+                        font-size: 1.2rem;
+                        font-weight: 400;
                     }
 
                 }
@@ -111,6 +117,15 @@
     }
 }
 
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
 // MOBILE RESPONSIVE
 
@@ -121,10 +136,11 @@
 
         .benefit-left {
             width: 100%;
+            gap: 20px;
 
             .benefit-title {
                 text-align: center;
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
     
             .short-description {

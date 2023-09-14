@@ -6,8 +6,8 @@ const Benefit = () => {
   return (
     <section className="benefit-site">
         <div className="benefit-left">
-            <h1 className="benefit-title">Get Experience <br /> Which are fun</h1>
-            <p className="short-description">With travala you can get the best experience on holiday <br /> travel, and we always update the latest and best <br /> destinations in the world</p>
+            <h1 className="benefit-title">Get Experience Which are fun</h1>
+            <p className="short-description">With travala you can get the best experience on holiday travel, and we always update the latest and best destinations in the world</p>
             <div className="benefit-gallery">
                 <img src="/images/benefit-gallery.png" alt="" />
                 <div className="location">
@@ -33,8 +33,8 @@ const Benefit = () => {
                         </svg>
                     </div>
                     <div className="content">
-                        <h2 className="name">Affordable prices</h2>
-                        <p>We provide some very affordable prices compared to others.</p>
+                        <h2 className="benefit-name">Affordable prices</h2>
+                        <p className="benefit-description">We provide some very affordable prices compared to others.</p>
                     </div>
                 </li>
                 <li className="benefit-item">
@@ -50,8 +50,8 @@ const Benefit = () => {
                     </svg>
                     </div>
                     <div className="content">
-                        <h2 className="name">Unforgettable experience</h2>
-                        <p>We provide some very affordable prices compared to others.</p>
+                        <h2 className="benefit-name">Unforgettable experience</h2>
+                        <p className="benefit-description">We provide some very affordable prices compared to others.</p>
                     </div>
                 </li>
                 <li className="benefit-item">
@@ -67,8 +67,8 @@ const Benefit = () => {
                     </svg>
                     </div>
                     <div className="content">
-                        <h2 className="name">Very Friendly Service</h2>
-                        <p>We provide some very affordable prices compared to others.</p>
+                        <h2 className="benefit-name">Very Friendly Service</h2>
+                        <p className="benefit-description">We provide some very affordable prices compared to others.</p>
                     </div>
                 </li>
             </ul>

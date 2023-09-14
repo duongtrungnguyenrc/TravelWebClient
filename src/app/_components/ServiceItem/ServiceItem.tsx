@@ -51,11 +51,11 @@ const ServiceItem = ({ service } : { service : Tour }) => {
           </li>
         </ul>
         <div className="service-detail">
-          <Link href="" className="btn btn-sm btn-yellow">Learn More</Link>
           <div className="price-detail">
             <label>Start from</label>
             <p><b>{ "$" + service.price }</b> /Night</p>
           </div>
+          <Link href="" className="btn btn-sm btn-yellow">Learn More</Link>
         </div>
       </div>
     </div>

@@ -1,0 +1,252 @@
+$primary: #C7923E;
+
+.calendar-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0, 5%);
+
+    .image-icon {
+        width: 150px;
+        height: 150px;
+        padding: 1rem;
+    }
+
+    .calendarMain{
+        span {
+            color: #fff;
+        }
+    }
+
+    /*-----*/
+
+    .outer {
+        position: relative;
+        top: 50%;
+        z-index: 1;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+    /*-----*/
+
+    .signboard {
+        width: 100px;
+        height: 100px;
+        color: #fff;
+        border-radius: 10px;
+    }
+    /*-----*/
+
+    .front {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        background: $primary;
+        text-align: center;
+    }
+    .right {
+        position: absolute;
+        right: 0;
+        z-index: 2;
+        -webkit-transform: rotate(-10deg) translate(7px, 8px);
+        -moz-transform: rotate(-10deg) translate(7px, 8px);
+        -ms-transform: rotate(-10deg) translate(7px, 8px);
+        -o-transform: rotate(-10deg) translate(7px, 8px);
+        transform: rotate(-10deg) translate(7px, 8px);
+        transition: 0.5s;
+        background: #EFC94C;
+    }
+    .left {
+        position: absolute;
+        left: 0;
+        z-index: 1;
+        -webkit-transform: rotate(5deg) translate(-4px, 4px);
+        -moz-transform: rotate(5deg) translate(-4px, 4px);
+        -ms-transform: rotate(5deg) translate(-4px, 4px);
+        -o-transform: rotate(5deg) translate(-4px, 4px);
+        transform: rotate(10deg) translate(-4px, 4px);
+        transition: 0.5s;
+        background: #fea755;
+    }
+    /*-----*/
+
+    .outer:hover .inner {
+        -webkit-transform: rotate(0) translate(0);
+        -moz-transform: rotate(0) translate(0);
+        -ms-transform: rotate(0) translate(0);
+        -o-transform: rotate(0) translate(0);
+        transform: rotate(0) translate(0);
+    }
+    /*-----*/
+
+    .outer:active .inner {
+        -webkit-transform: rotate(0) translate(0) scale(0.9);
+        -moz-transform: rotate(0) translate(0) scale(0.9);
+        -ms-transform: rotate(0) translate(0) scale(0.9);
+        -o-transform: rotate(0) translate(0) scale(0.9);
+        transform: rotate(0) translate(0) scale(0.9);
+    }
+    .outer:active .front .date {
+        -webkit-transform: scale(2);
+    }
+    .outer:active .front .day,
+    .outer:active .front .month {
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transform: scale(0);
+        -moz-transform: scale(0);
+        -ms-transform: scale(0);
+        -o-transform: scale(0);
+        transform: scale(0);
+    }
+    .outer:active .right {
+        -webkit-transform: rotate(-5deg) translateX(80px) scale(0.9);
+        -moz-transform: rotate(-5deg) translateX(80px) scale(0.9);
+        -ms-transform: rotate(-5deg) translateX(80px) scale(0.9);
+        -o-transform: rotate(-5deg) translateX(80px) scale(0.9);
+        transform: rotate(-5deg) translateX(80px) scale(0.9);
+    }
+    .outer:active .left {
+        -webkit-transform: rotate(5deg) translateX(-80px) scale(0.9);
+        -moz-transform: rotate(5deg) translateX(-80px) scale(0.9);
+        -ms-transform: rotate(5deg) translateX(-80px) scale(0.9);
+        -o-transform: rotate(5deg) translateX(-80px) scale(0.9);
+        transform: rotate(5deg) translateX(-80px) scale(0.9);
+    }
+    /*-----*/
+
+    .outer:active .calendarMain {
+        -webkit-transform: scale(1.8);
+        opacity: 0;
+        visibility: hidden;
+    }
+    .outer:active .clock {
+        -webkit-transform: scale(1.4);
+        opacity: 1;
+        visibility: visible;
+    }
+    .outer:active .calendarNormal {
+        bottom: -30px;
+        opacity: 1;
+        visibility: visible;
+    }
+    .outer:active .year {
+        top: -30px;
+        opacity: 1;
+        visibility: visible;
+        letter-spacing: 3px;
+    }
+    /*-----*/
+
+    .calendarMain {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 1;
+    }
+    .month,
+    .day {
+        font-size: 10px;
+        line-height: 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+    .date {
+        font-size: 40px;
+        line-height: 40px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+    /*-----*/
+
+    .calender-clock {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        font-size: 40px;
+        line-height: 100px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+    }
+    /*-----*/
+
+    .year {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        font-size: 14px;
+        line-height: 30px;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 0;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        color: #ff726b;
+    }
+    .calendarNormal {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        font-size: 14px;
+        line-height: 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .date2 {
+        color: #ff726b;
+    }
+    .day2 {
+        color: #3498DB;
+    }
+    .month2 {
+        color: #EFC94C;
+    }
+
+
+    .item-title{
+        color: #9A9AB0;
+        text-align: center;
+
+        font-family: "Mulish";
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%; /* 28.8px */
+        letter-spacing: 0.072px;
+        padding: 1rem;
+}
+
+    .detail-value {
+        p {
+            color: #000;
+            text-align: center;
+
+            /* Heading/H3 Bold */
+            font-family: "Lora";
+            font-size: 39px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 120%; /* 46.8px */
+            letter-spacing: 0.195px;
+        }
+    }
+}

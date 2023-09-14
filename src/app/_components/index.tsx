@@ -11,3 +11,4 @@ export { default as ServicesList } from "./ServicesList/ServicesList";
 export { default as ServicesGroup } from "./ServicesGroup/ServicesGroup";
 export { default as HomeHero } from "./HomeHero/HomeHero";
 export { default as DefaultHero } from "./DefaultHero/DefaultHero";
+export { default as DailyStatus } from "./DailyStatus/DailyStatus";

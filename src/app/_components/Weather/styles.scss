@@ -1,74 +1,169 @@
-.container-weather{
+$primary: #C7923E;
+$blue: #27AAE1;
+$yellow: #FFCD41;
 
-    width: 100% ;
-    margin-top: 100px ;
-    .container-item{
-        width: 70%;
+.weather-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-        .wheather-item {
+  .image-icon {
+    width: 150px;
+    height: 150px;
+    position: relative;
+  }
 
-            flex-direction: column;
-            padding-bottom: 20px;
+  .item-title {
+    color: #9A9AB0;
+    text-align: center;
 
-            .image-icon{
+    font-family: "Mulish";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 28.8px */
+    letter-spacing: 0.072px;
+    padding: 1rem;
+  }
 
-                width: 100px ;
-                height: 100px;
-                background: #9A9AB0;
-            }
+  .detail-value {
+    p {
+        color: #000;
+        text-align: center;
 
-            .item-title{
-                    color: #9A9AB0;
-                    text-align: center;
-
-                    font-family: "Mulish";
-                    font-size: 24px;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 120%; /* 28.8px */
-                    letter-spacing: 0.072px;
-                    padding: 20px 0px 20px 0px;
-            }
-
-            .detail-value {
-                p {
-                    color: #000;
-                    text-align: center;
-
-                    /* Heading/H3 Bold */
-                    font-family: "Lora";
-                    font-size: 39px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 120%; /* 46.8px */
-                    letter-spacing: 0.195px;
-                }
-            }
-        }
-    }
-}
-
-// TABLET RESPONSIVE
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-    .container-weather{
-
-        .container-item{
-
-            width: 50%;
-            justify-content: center;
-            
-        }
+        /* Heading/H3 Bold */
+        font-family: "Lora";
+        font-size: 39px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%; /* 46.8px */
+        letter-spacing: 0.195px;
     }
   }
 
-// MOBILE RESPONSIVE
-@media only screen and (max-width: 1024px) {
-    .container-weather{
-        
-        .container-item{
-            
-            flex-direction: column;
-
-        }
+  .rain {
+    
+    svg {
+      height: 100%;
+      width: 100%;
+      transform: scale(1.2) translate(0, 10%);
     }
+    
+    &__raindrops {
+      path {
+        fill: $blue;
+      }
+      
+      @for $i from 1 through 10 {
+          &--#{$i} {
+            animation: rain #{random(4)/2}s #{random(5)/10}s infinite;
+          }
+      }
+      
+    }
+      
+    &__clouds path {
+      fill: white;
+      stroke: $primary;
+      stroke-width: 6;
+      stroke-miterlimit: 6;
+      background: #fefbf2;
+      &:first-child {
+        animation: thunder 3s 1s infinite linear;
+      }
+      &:last-child {
+        animation: thunder 3s 1.2s infinite linear;
+      }
+    }
+    &__lightning polygon {
+      fill: $yellow;
+      opacity: 0;
+      
+      &:first-child {
+        animation: lightning 3s 1s infinite linear;
+      }
+      &:last-child {
+        animation: lightning 3s 1.2s infinite linear;
+      }
+    }
+  }
+
+  .sun { 
+    position: relative;
+    width: 90%;
+    height: 90%;
+    top: 0;
+    float: right;
+    padding: 1rem;
+    animation: weather-icon-move 5s ease-in-out infinite;
+    background: $yellow; 
+    border-radius: 50%; 
+    box-shadow: rgba(255,255,0,0.1) 0 0 0 4px;
+    animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
+  }
+
+}
+
+@keyframes light {
+    from {
+        box-shadow: rgba(255,255,0,0.2) 0 0 0px 10px;
+    }
+    to {
+        box-shadow: rgba(255,255,0,0.2) 0 0 0px 25px;
+    }
+}
+
+
+
+@keyframes rain {
+  0% {
+    opacity: 1;
+    transform: translate(0,0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-25px,35px);
+  }
+}
+
+@keyframes thunder {
+0% {
+  fill: #fff;
+}
+1% {
+  fill: #333;
+}
+2% {
+  fill: #fff;
+}
+5% {
+  fill: #fff;
+}
+6% {
+  fill: #333;
+}
+12% {
+  fill: #fff;
+}
+}
+
+
+
+@keyframes lightning {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  5% {
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  16% {
+    opacity: 0;
+  }
 }
