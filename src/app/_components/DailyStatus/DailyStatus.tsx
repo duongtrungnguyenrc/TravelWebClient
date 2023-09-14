@@ -1,4 +1,5 @@
 // Produced by Duong Trung Nguyen
+
 import "./styles.scss";
 import Clock from "../Clock/Clock";
 import Weather from "../Weather/Weather";
