@@ -2,13 +2,14 @@
 
 'use client'
 
-import { useEffect, useState } from 'react';
 import './styles.scss';
+import { useEffect, useState } from 'react';
 import { weatherServices } from '@/app/_services';
 import { Weather } from '@/app/_types';
 
+
 const Weather = () => {    
-    const [ weather, setWeather ] = useState<Weather>();
+    const [ weather, setWeather ] = useState<Weather | null>(null);
 
     useEffect(() => {
         navigator?.geolocation.getCurrentPosition(async (position) => {
