@@ -1,0 +1,44 @@
+.video-container {
+
+    width: 100%;
+
+    .video-play{
+
+        display: flex;
+        justify-content: center;
+    }
+
+    .video {
+
+        width:80% ;
+        height:688px
+    }
+}
+@media only screen and (max-width: 1024px) {
+
+    .video-container {
+
+        height:100%;
+    
+        .video {
+
+            width:80% ;
+            height:400px;
+            margin-bottom: 150px;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .video-container {
+
+        height:100%;
+    
+        .video {
+
+            width:80% ;
+            height:500px;
+            margin-bottom: 50px;
+        }
+    }
+}
