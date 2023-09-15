@@ -5,11 +5,11 @@
 import './styles.scss';
 import { useEffect, useState } from 'react';
 import { weatherServices } from '@/app/_services';
-import { Weather } from '@/app/_types';
+import { Weather as WeatherType } from '@/app/_types';
 
 
 const Weather = () => {    
-    const [ weather, setWeather ] = useState<Weather | null>(null);
+    const [ weather, setWeather ] = useState<WeatherType| null>(null);
 
     useEffect(() => {
         navigator?.geolocation.getCurrentPosition(async (position) => {
