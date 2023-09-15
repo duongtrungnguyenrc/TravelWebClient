@@ -1,7 +1,9 @@
+// Produced by Duong Trung Nguyen
+
 'use client'
 
-import { useState, useEffect } from "react";
 import "./styles.scss";
+import { useState, useEffect } from "react";
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -10,8 +12,12 @@ const Clock = () => {
       setTime(new Date());
     }, 10000);
 
-    clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+    }
   }, []);
+
+
   
   return (
     <div className="clock-site">

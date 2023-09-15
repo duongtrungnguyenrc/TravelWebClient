@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 const NavBar = () => {
-    console.log("render");
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
 

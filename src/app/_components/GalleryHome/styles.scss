@@ -1,9 +1,7 @@
 .container-gallery {
-
   width: 100%;
   background: #27343f;
   margin-top: -344px;
-  padding: 0 2rem;
   z-index: -1;
 
   .gallery-site {
@@ -13,11 +11,21 @@
   }
 
   .content-gallery {
-
-    padding: 0px 104px 80px 104px;
+    padding: 0px 5rem 80px 5rem;
+    align-items: center;
     .content {
-
       width: 50%;
+
+      .heading-name {
+        font-family: 'Lora';
+        margin-bottom: 8px;
+        font-size: 50px;
+      }
+    }
+
+    .btn {
+      height: max-content;
+      padding: 1rem;
     }
   }
 
@@ -26,81 +34,112 @@
     padding-bottom: 40px;
 
     .gallery-list {
-
-      display: grid;
-      grid-template-columns: repeat(5, 1fr); 
-      grid-gap: 10px; 
-
+      display: flex;
+      width: 100%;
+      gap: 10px;
       height: 690px;
 
-      .column-one {
+      .column-collapse {
+        width: 60%;
+        display: flex;
+        gap: 10px;
 
-        display: grid;
-        grid-template-columns: repeat(1, 1fr); 
-        grid-gap: 10px; 
-
-        .gallery-item {
-
-          width: 100%;
+        .column {
+          width: calc(100% / 3);
           height: 100%;
+
+          &.column-one {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+    
+            .gallery-item {
+              width: 100%;
+              height: 50%;
+    
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+    
+          &.column-two {
+            .gallery-item {
+              width: 100%;
+              height: 100%;
+    
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+          &.column-three {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+    
+            .gallery-item:nth-child(1) {
+              width: 100%;
+              height: 70%;
+            }
+            .gallery-item:nth-child(2) {
+              width: 100%;
+              height: 30%;
+            }
+    
+            .gallery-item {
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
         }
+  
       }
-
-      .column-two {
-
-        .gallery-item {
-
-          width: 100%;
-          height: 100%;
-        }
-      }
-      .column-three {
-
-        display: grid;
-        grid-template-columns: repeat(1, 2fr);
-        grid-template-rows: 69% 29.5%;
-        grid-gap: 10px;
-
-        .gallery-item:nth-child(1) {
-
-          width: 100%;
-          height: 100%;
-        }
-        .gallery-item:nth-child(2) {
-
-          width: 100%;
-          height: 100%;
-        }
-      }
-
       .column-four {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        .column-four-top {
+          width: 100%;
+          height: calc(50% - 10px);
 
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(1, 2fr);
-        grid-gap: 10px;
-
-        .gallery-item:nth-child(1) {
-
-          width: calc( 200% + 10px);
-          height: 100%;
-        }
-        .gallery-item:nth-child(2) {
-
-          display: flex;
-          flex-direction: row;
-          width: calc( 200% + 10px);
-          height: 100%;
           .gallery-item {
+            width: 100%;
+            height: 100%;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+        
+        .column-four-bottom {
+          width: 100%;
+          height: 50%;
+          display: flex;
+          gap: 10px;
 
+          .gallery-item {
             width: 50%;
             height: 100%;
-          }
-          .gallery-item:nth-child(2) {
-
-            margin-left: 10px;
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
           }
         }
+        
       }
     }
   }
@@ -120,76 +159,42 @@
   .container-gallery {
 
     .gallery-site {
-
-      padding-top: 232px;
+      padding: 0 1rem;
+      padding-top: 180px;
+      
       .content-gallery {
-
+        padding: 0;
+        margin-bottom: 1rem;
         position: relative;
         display: flex;
         flex-direction: column;
+
         .content {
-
           width: 100%;
-          margin-bottom: 10px;
-        }
-        .btn-open {
+          margin-bottom: 1rem;
 
+          .heading-name {
+            font-size: 2rem;
+          }
+        }
+        .btn {
           width: 100%;
         }
       }
     }
     .gallery-list-container {
       .gallery-list {
+        flex-direction: column;
 
-        display: grid;
-        grid-template-columns: repeat(
-          3,
-          2fr
-        );
-        grid-gap: 10px;
-
-        .column-three {
-
-          grid-template-rows: 69% 28%;
-
-          .gallery-item:nth-child(1) {
-
-            width: 100%;
-            height: 100%;
-          }
-          .gallery-item:nth-child(2) {
-
-            width: 100%;
-            height: 100%;
-          }
+        .column-collapse {
+          width: 100%;
+          height: 50%;
         }
 
         .column-four {
-
-          width:100%;
-          display: grid;
-          grid-template-columns: repeat(1, 2fr);
-  
-          .gallery-item:nth-child(1) {
-  
-            width: calc(300% + 20px);
-            height: 100%;
-          }
-          .gallery-item:nth-child(2) {
-  
-            display: flex;
-            flex-direction: row;
-            width: calc(300% + 20px);
-            height: 100%;
-            .gallery-item {
-  
-              width: 100%;
-              height: 100%;
-            }
-          }
+          width: 100%;
+          height: 50%;
         }
-
-        
       }
     }
   }
@@ -208,7 +213,7 @@
       padding-top: 360px;
 
       .content-gallery {
-
+        padding: 1rem;
         flex-direction: column;
         .btn-open {
 

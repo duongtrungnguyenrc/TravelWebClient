@@ -11,7 +11,7 @@ const ServicesGroup = ({ servicesList } : { servicesList : TourType[] }) => {
   return (
     <section className="services-group-site">
         <div className="services-group-top">
-            <h1 className="services-group-title">Destinations <br /> Most Popular</h1>
+            <h1 className="services-group-title">Destinations Most Popular</h1>
             <h1 className="services-group-description">Some of the most popular destinations for you visit with a view the beautiful one.</h1>
             <div className="services-group-control">
               <button>

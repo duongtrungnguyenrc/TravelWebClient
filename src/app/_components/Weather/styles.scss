@@ -1,3 +1,5 @@
+// Produced by Duong Trung Nguyen
+
 $primary: #C7923E;
 $blue: #27AAE1;
 $yellow: #FFCD41;
@@ -57,7 +59,7 @@ $yellow: #FFCD41;
       
       @for $i from 1 through 10 {
           &--#{$i} {
-            animation: rain #{random(4)/2}s #{random(5)/10}s infinite;
+            animation: rain #{random(7)/2}s #{random(10)/10}s infinite;
           }
       }
       
@@ -97,7 +99,7 @@ $yellow: #FFCD41;
     float: right;
     padding: 1rem;
     animation: weather-icon-move 5s ease-in-out infinite;
-    background: $yellow; 
+    background: $primary; 
     border-radius: 50%; 
     box-shadow: rgba(255,255,0,0.1) 0 0 0 4px;
     animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
@@ -107,10 +109,10 @@ $yellow: #FFCD41;
 
 @keyframes light {
     from {
-        box-shadow: rgba(255,255,0,0.2) 0 0 0px 10px;
+      box-shadow: rgba(255, 200, 0, 0.2) 0 0 0px 10px;
     }
     to {
-        box-shadow: rgba(255,255,0,0.2) 0 0 0px 25px;
+      box-shadow: rgba(255, 221, 0, 0.2) 0 0 0px 25px;
     }
 }
 

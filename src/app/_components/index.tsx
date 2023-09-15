@@ -12,3 +12,7 @@ export { default as ServicesGroup } from "./ServicesGroup/ServicesGroup";
 export { default as HomeHero } from "./HomeHero/HomeHero";
 export { default as DefaultHero } from "./DefaultHero/DefaultHero";
 export { default as DailyStatus } from "./DailyStatus/DailyStatus";
+export { default as IntroBlog } from "./IntroBlog/IntroBlog";
+export { default as IntroBlogRight } from "./IntroBlogRight/IntroBlogRight";
+export { default as VideoPlace } from "./VideoPlace/VideoPlace";
+export { default as GalleryHome } from "./GalleryHome/GalleryHome";

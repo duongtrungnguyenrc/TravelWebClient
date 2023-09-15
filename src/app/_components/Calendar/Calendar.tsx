@@ -1,5 +1,7 @@
 // Produced by Duong Trung Nguyen
 
+'use client'
+
 import "./styles.scss";
 
 const Calendar = () => {
@@ -7,7 +9,6 @@ const Calendar = () => {
     const dayNames = [ "Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday" ];
 
     const newDate = new Date();
-    newDate.setDate(newDate.getDate());
 
     return (
         <div className="calendar-wrapper">
@@ -30,15 +31,15 @@ const Calendar = () => {
                                 </li>
                             </ul>
                             <li className="calender-clock minute anim04c">
-                                <span>{(new Date().getMinutes() < 10 ? "0" : "" ) + new Date().getMinutes()}</span>
+                                <span>{(newDate.getMinutes() < 10 ? "0" : "" ) + newDate.getMinutes()}</span>
                             </li>
                             <li className="calendarNormal date2 anim04c">
-                                <span>{(new Date().getSeconds() < 10 ? "0" : "" ) + new Date().getSeconds()}</span>
+                                {/* <span>{(newDate.getSeconds() < 10 ? "0" : "" ) + newDate.getSeconds()}</span> */}
                             </li>
                         </div>
                         <div className="signboard left inner anim04c">
                             <li className="calender-clock hour anim04c">
-                                <span>{( new Date().getHours() < 10 ? "0" : "" ) + new Date().getHours()}</span>
+                                <span>{( newDate.getHours() < 10 ? "0" : "" ) + newDate.getHours()}</span>
                             </li>
                             <li className="calendarNormal day2 anim04c">
                                 <span>{dayNames[newDate.getDay()]}</span>
@@ -46,7 +47,7 @@ const Calendar = () => {
                         </div>
                         <div className="signboard right inner anim04c">
                             <li className="calender-clock second anim04c">
-                                <span>{( new Date().getSeconds() < 10 ? "0" : "" ) + new Date().getSeconds()}</span>
+                                {/* <span>{( newDate.getSeconds() < 10 ? "0" : "" ) + newDate.getSeconds()}</span> */}
                             </li>
                             <li className="calendarNormal month2 anim04c">
                                 <span>{monthNames[newDate.getMonth()]}</span>

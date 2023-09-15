@@ -5,9 +5,9 @@ import { ReactNode } from "react";
 const HomeLayout = ({ children } : { children: ReactNode }) => {
   return (
     <>
-        <NavBar/>
-            { children }
-        <Bottom/>
+      <NavBar/>
+          { children }
+      <Bottom/>
     </>
   );
 };

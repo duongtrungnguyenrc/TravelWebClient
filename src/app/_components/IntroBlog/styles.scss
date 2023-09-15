@@ -1,5 +1,5 @@
 .container-blog {
-  margin-top: 100px;
+  margin-bottom: 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -28,21 +28,17 @@
 
 
     .heading-blog {
+      margin-bottom: 50px;
 
       .heading-name {
-
         color: #11142d;
-
-        
         font-family: Lora;
         font-size: 50px;
         font-style: normal;
         font-weight: 700;
         line-height: 120%;
         letter-spacing: 0.195px;
-        padding-bottom: 50px;
       }
-
     }
     .content-intro-blog {
 
@@ -84,13 +80,18 @@
       width: 100%;
     }
     .blog-right-site {
+      margin-bottom: 50px;
+      padding: 1rem;
 
-      margin-top: 50px;
+      .heading-blog {
+
+        margin-bottom: 24px;
+      }
+    
       .content-intro-blog {
-
         z-index: -1;
         .btn-more {
-          
+          margin-top: 24px;
           position: relative;
           padding-top: 20px;
           left: 0;
@@ -106,7 +107,7 @@
 
   .container-blog {
 
-    margin-top: 50px;
+    margin-bottom: 50px;
     flex-direction: row;
     .blog-left-site {
 

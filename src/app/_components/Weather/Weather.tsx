@@ -14,9 +14,7 @@ const Weather = () => {
     useEffect(() => {
         navigator?.geolocation.getCurrentPosition(async (position) => {
             const weather = await weatherServices().getWeather(position.coords.latitude, position.coords.longitude);
-            setWeather(weather);    
-            console.log(weather);
-                    
+            setWeather(weather);      
         })
     }, []);
     

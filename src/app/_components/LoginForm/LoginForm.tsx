@@ -36,7 +36,7 @@ const LoginForm = () => {
                             <input type="checkbox"/>
                             <label>Remember me</label>
                         </div>
-                        <a className='line-decor' href="">Forgot password</a>
+                        <Link className='line-decor' href="">Forgot password</Link>
                     </div>
                     <div className="button-group">
                         <Link href="/auth/register" className="btn btn-big btn-light">Sign Up</Link>
@@ -46,9 +46,9 @@ const LoginForm = () => {
                 <div className="login-form-bottom">
                     <label>Or, login with</label>
                     <ul className="login-options">
-                        <li><a href="">Facebook</a></li>
-                        <li><a href="">Linked in</a></li>
-                        <li><a href="">Google</a></li>
+                        <li><Link href="">Facebook</Link></li>
+                        <li><Link href="">Linked in</Link></li>
+                        <li><Link href="">Google</Link></li>
                     </ul>
                 </div>
             </div>

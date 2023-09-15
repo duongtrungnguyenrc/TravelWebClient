@@ -1,3 +1,5 @@
+// produced by Khai Nguyen
+
 import "./styles.scss";
 
 const GalleryHome = () => {
@@ -12,50 +14,49 @@ const GalleryHome = () => {
               elit sed pretium, egestas sed sit.
             </p>
           </div>
-          <button className="btn btn-yellow w-30 btn-open">Open Instagram</button>
+          <button className="btn btn-yellow w-30 btn-lg">Open Instagram</button>
         </div>
         <div className="gallery-list-container">
           <div className="gallery-list">
-            <div className="column-one collumn-100">
-              <div
-                className="gallery-item"
-                style={{ backgroundColor: "#909090" }}
-              ></div>
-              <div
-                className="gallery-item"
-                style={{ backgroundColor: "#909090" }}
-              ></div>
-            </div>
-            <div className="column-two collumn-100">
-              <div
-                className="gallery-item"
-                style={{ backgroundColor: "#909090" }}
-              ></div>
-            </div>
-            <div className="column-three collumn-100">
-              <div
-                className="gallery-item"
-                style={{ backgroundColor: "#909090" }}
-              ></div>
-              <div
-                className="gallery-item"
-                style={{ backgroundColor: "#909090" }}
-              ></div>
-            </div>
-            <div className="column-four collumn-100">
-              <div
-                className="gallery-item"
-                style={{ backgroundColor: "#909090" }}
-              ></div>
-              <div className="gallery-item">
+            <div className="column-collapse">
+              <div className="column column-one">
+                <div className="gallery-item">
+                  <img src="/images/login-gallery-1.png" alt="" />
+                </div>
+                <div className="gallery-item">
+                  <img src="/images/login-gallery-2.png" alt="" />
+                </div>
+              </div>
+              <div className="column column-two">
                 <div
                   className="gallery-item"
-                  style={{ backgroundColor: "#909090" }}
-                ></div>
-                <div
-                  className="gallery-item"
-                  style={{ backgroundColor: "#909090" }}
-                ></div>
+                
+                >
+                  <img src="/images/login-gallery-3.png" alt="" />
+                </div>
+              </div>
+              <div className="column column-three">
+                <div className="gallery-item">
+                  <img src="/images/login-gallery-4.png" alt="" />
+                </div>
+                <div className="gallery-item">
+                  <img src="/images/login-gallery-5.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div className="column-four">
+              <div className="column-four-top">
+                <div className="gallery-item">
+                  <img src="/images/login-gallery-6.png" alt="" />
+                </div>
+              </div>
+              <div className="column-four-bottom">
+                <div className="gallery-item">
+                  <img src="/images/login-gallery-7.png" alt="" />
+                </div>
+                <div className="gallery-item">
+                  <img src="/images/login-gallery-8.png" alt="" />
+                </div>
               </div>
             </div>
           </div>
