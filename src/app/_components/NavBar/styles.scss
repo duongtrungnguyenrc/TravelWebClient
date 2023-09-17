@@ -5,23 +5,39 @@
     position: fixed;
     height: 72px;
     padding: 1rem 5rem;
-    transition: 0.5s;
+    transition: 0.2s;
     z-index: 9999;
 
     &.active {
         background-color: #f4f4f4;
 
-        // & * {
-        //     color: #000;
-        //     fill: #000;
-        // }
-
-        // & button{
-        //     color: #fff;
-        //     svg {
-        //         fill: #fff;
-        //     }
-        // }
+        nav {
+            .brand {
+                svg {
+                    path {
+                        fill: #000!important;
+                    }
+                }
+                a {
+                    color: #000!important;
+                }
+            }
+            .navbar-colapse {
+    
+                .colapse-segment {
+        
+                    .nav-list {
+        
+                        .nav-item {
+        
+                            a {
+                               color: #000!important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     nav {
@@ -82,6 +98,36 @@
 
         .colapse-btn {
             display: none;
+        }
+    }
+
+    &.light {
+        nav {
+            .brand {
+                svg {
+                    path {
+                        fill: #fff;
+                    }
+                }
+                a {
+                    color: #fff;
+                }
+            }
+            .navbar-colapse {
+    
+                .colapse-segment {
+        
+                    .nav-list {
+        
+                        .nav-item {
+        
+                            a {
+                               color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 import "./styles.scss";
 import TourType from "@/app/_data/Tour";
 import ServiceItem from "../ServiceItem/ServiceItem";
+import { Suspense } from "react";
+import { SkeletonServicesList } from "..";
 
 const ServicesList = ({ servicesList } : { servicesList : TourType[] }) => {
   return (
@@ -43,13 +45,16 @@ const ServicesList = ({ servicesList } : { servicesList : TourType[] }) => {
           </div>
         </form>
       </div>
-      <div className="services-list">
-        {
-          servicesList?.map((value, index) => {
-            return <ServiceItem key={index} service={value}/>
-          })
-        }
-      </div>
+
+      <Suspense fallback={<SkeletonServicesList/>}>
+        <div className="services-list">
+          {
+            servicesList?.map((value, index) => {
+              return <ServiceItem key={index} service={value}/>
+            })
+          }
+        </div>
+      </Suspense>
     </section>
   );
 };

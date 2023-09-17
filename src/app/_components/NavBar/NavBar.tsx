@@ -2,13 +2,17 @@
 
 'use client'
 
+import { Route } from "@/app/_types";
 import "./styles.scss";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from 'next/navigation';
 
-const NavBar = () => {
+
+const NavBar = ({ routes } : { routes: Route[] }) => {
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
+    const pathName = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,6 +26,9 @@ const NavBar = () => {
     
         if (typeof window !== 'undefined') {
           window.addEventListener('scroll', handleScroll);
+          if(window.scrollY > 70) {
+            setScrollY(true);
+          }
     
           return () => {
             window.removeEventListener('scroll', handleScroll);
@@ -40,7 +47,7 @@ const NavBar = () => {
     }
 
     return (
-        <header className={scrollY ? "navbar-site active" : "navbar-site"}>
+        <header className={"navbar-site" + (scrollY ? " active" : "") + (pathName.includes("explore") ? " light" : "")}>
             <nav>
                 <div className="brand">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -51,21 +58,15 @@ const NavBar = () => {
                 <div className={isShow ? "navbar-colapse active" : "navbar-colapse"}>
                     <div className="colapse-segment left-segment">
                         <ul className="nav-list">
-                            <li className="nav-item">
-                                <Link href="/explore">Explore</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link href="">Room & Suites</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link href="">Restaurant & Bar</Link>
-                            </li>
-                            <li className="nav-item active">
-                                <Link href="">Blog</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link href="/auth/login">Login</Link>
-                            </li>
+                            {
+                                routes?.map((link, index) => {
+                                    return (
+                                        <li key={index} className="nav-item">
+                                            <Link href={link.routePath}>{link.routeName}</Link>
+                                        </li>
+                                    )
+                                })
+                            }
                         </ul>
                     </div>
                     <div className="colapse-segment right-segment">
@@ -74,7 +75,7 @@ const NavBar = () => {
                         </button>
                     </div>
                 </div>
-                <button className="btn btn-yellow btn-sm colapse-btn flex-center" onClick={() => handleShow()}>
+                <button className="btn btn-yellow btn-normal colapse-btn flex-center" onClick={() => handleShow()}>
                     {/* {
                         isShow ? 
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">

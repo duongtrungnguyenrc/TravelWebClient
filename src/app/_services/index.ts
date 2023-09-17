@@ -1,2 +1,3 @@
 export { default as weatherServices } from "./weatherServices";
-export { default as requestServices } from "./requestServices";
+export { default as authServices } from "./authServices";
+export { default as tourServices } from "./tourServices";

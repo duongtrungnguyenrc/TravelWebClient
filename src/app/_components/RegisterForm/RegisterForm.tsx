@@ -1,9 +1,83 @@
 // Produced by Duong Trung Nguyen
+'use client'
 
 import Link from "next/link";
 import "./styles.scss"
+import { FormEventHandler, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
+import { authServices } from "@/app/_services";
+import { toast } from 'react-toastify';
+
+interface FormData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    password: string;
+    confirmPassword: string;
+    isRemember: boolean;
+}
 
 const RegisterForm = () => {
+    console.log("render");
+    
+    const [ formData, setFormData ] = useState<FormData>({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirmPassword: "",
+        isRemember: false,
+    });
+
+    const handleChange = useDebouncedCallback((payload) => {
+        const { name, value } = payload;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        
+    }, 300)
+
+    const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        Object.keys(formData).forEach((key) => {
+            if(key != "isRemember")
+                if(!formData[key as keyof FormData] || (formData[key as keyof FormData] as string)?.trim().length === 0) {
+                    toast.error(`${key} cannot be a null value`);
+                    return;
+                }
+        })
+
+        if(formData.password !== formData.confirmPassword) {
+            toast.error(`Incorrect password confirm!`);
+            return;
+        }
+
+        if(!formData.password.match("^(?=[a-zA-Z0-9#@$?]{6,}$)(?=.*?[a-z])(?=.*?[A-Z])")) {
+            toast.error(`Password must have least 6 character and have 1 special character!`);
+            return;
+        }
+
+        const response = await authServices.signUp(`${formData.firstName} ${formData.lastName}`, formData.email, formData.phone, formData.password);
+        if(response.status) {            
+            if(formData.isRemember) {
+                localStorage.setItem("saved_email", formData.email);
+                localStorage.setItem("saved_password", formData.password);
+            }
+            toast.success(response.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        }
+        else {
+            toast.error(response.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        }
+    }
+
+    
   return (
     <div className="register-site">
         <div className="register-site-header">
@@ -22,38 +96,38 @@ const RegisterForm = () => {
         </div>
 
         <div className="register-site-frame">
-            <form action="">
+            <form action="" onSubmit={(e) => handleSubmit(e)}>
                 <div className="multi-group">
                     <div className="input-group">
                         <label>First name</label>
-                        <input type="text" placeholder="Nguyen" />
+                        <input type="text" placeholder="Nguyen" name="firstName" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                     <div className="input-group">
                         <label>Last name</label>
-                        <input type="text" placeholder="Duong Trung" />
+                        <input type="text" placeholder="Duong Trung" name="lastName" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 </div>
                     <div className="input-group">
                         <label>Email</label>
-                        <input type="email" placeholder="david.abc@gmail.com" />
+                        <input type="email" placeholder="david.abc@gmail.com" name="email" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                     <div className="input-group">
                         <label>Phone</label>
-                        <input type="text" placeholder="xxxx-xxx-xxx" />
+                        <input type="text" placeholder="xxxx-xxx-xxx" name="phone" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 <div className="multi-group">
                     <div className="input-group">
                         <label>Password</label>
-                        <input type="password" placeholder="Your password" />
+                        <input type="password" placeholder="Your password" name="password" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                     <div className="input-group">
                         <label>Confirm password</label>
-                        <input type="text" placeholder="Password confirm" />
+                        <input type="text" placeholder="Password confirm" name="confirmPassword" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 </div>
                 <div className="d-flex">
                     <div className="check-group">
-                        <input type="checkbox" />
+                        <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
                         <label>Remember me</label>
                     </div>
                     <Link className='line-decor' href="">Forgot password</Link>
@@ -63,8 +137,8 @@ const RegisterForm = () => {
                         <label>I agree to all the <Link href="">Terms</Link> and <Link href="">Privacy policy</Link> </label>
                     </div>
                 <div className="button-group">
-                    <button className="btn btn-big btn-light">Join with Google</button>
-                    <button className="btn btn-big btn-dark" type='submit'>Create an account</button>
+                    <button className="btn btn-big btn-light btn-shadow">Join with Google</button>
+                    <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Create an account</button>
                 </div>
             </form>
             <div className="register-form-bottom">

@@ -1,7 +1,7 @@
 import { Tour } from "../_types";
 
 const Tour : Tour = {
-    img : "/images/home-slider-3.jpg",
+    img : "/images/benefit-gallery.png",
     name : "Deluxe Double with New York City View",
     price : 59,
     ratedStar : 4.9,

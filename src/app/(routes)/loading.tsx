@@ -1,10 +1,6 @@
-// import Loading from "../_components/Loading/Loading";
+import LoadingUI from "../_components/Loading/Loading";
 
-const LoadingPage = () => {
-    return (
-      <>
-        {/* <Loading/> */}
-      </>
-    );
+const Loading = () => {
+    return <LoadingUI/>;
   };
-  export default LoadingPage;
+  export default Loading;

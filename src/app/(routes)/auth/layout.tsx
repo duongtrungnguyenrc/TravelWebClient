@@ -1,4 +1,4 @@
-import { LoginGallery, StateProvider } from "@/app/_components";
+import { LoginGallery } from "@/app/_components";
 import { ReactNode } from "react";
 import "./styles.scss";
 
@@ -11,9 +11,7 @@ const AuthLayout = ({ children } : { children: ReactNode }) => {
           <LoginGallery/>
         </section>
         <section className="right-container">
-          <StateProvider>
-            { children }
-          </StateProvider>
+          { children }
         </section>
     </div>
   );

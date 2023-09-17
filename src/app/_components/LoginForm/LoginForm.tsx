@@ -1,12 +1,59 @@
 // Produced by Duong Trung Nguyen
 
-'use client'
+"use client"
 
-import Link from 'next/link';
-import './styles.scss';
+import "./styles.scss";
+import Link from "next/link";
+import { useDebouncedCallback } from "use-debounce";
+import { FormEventHandler, useEffect, useState } from "react";
+import { authServices } from "@/app/_services";
+import { toast } from "react-toastify";
 
-const LoginForm = () => {
+const LoginForm = () => {   
+    const initialFormData = {
+        email: "",
+        password: "",
+        isRemember: false,
+    }
+    const [formData, setFormData] = useState(initialFormData);
+    const [isRemember, setIsRemember] = useState(false);
+
+    useEffect(() => {
+        const savedEmail = localStorage.getItem("saved_email");
+        const savedPassword = localStorage.getItem("saved_password");
+        if (savedEmail && savedPassword) {
+            setFormData({ email: savedEmail, password: savedPassword, isRemember })
+        }
+    }, []);
     
+
+    const handleChange = useDebouncedCallback((payload) => {
+        const { name, value } = payload;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+        
+    }, 300)
+
+    const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const response = await authServices.signIn(formData.email, formData.password);
+        if(response.status) {            
+            if(isRemember) {
+                localStorage.setItem("saved_email", formData.email);
+                localStorage.setItem("saved_password", formData.password);
+            }
+            setFormData(initialFormData);
+            
+        }
+        else {
+            toast.error(response.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+              });
+        }
+    };
+
     return  (
         <div className="login-site">
             <div className="login-site-header">
@@ -22,25 +69,25 @@ const LoginForm = () => {
             </div>
             <div className="login-form-frame">
                 <h1 className="login-form-title">Login</h1>
-                <form action="">
+                <form action="" method="get" onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label>Email</label>
-                        <input type="email" placeholder="david.abc@gmail.com" />
+                        <input type="email" name="email" defaultValue={formData.email} placeholder="david.abc@gmail.com" onChange={(e) => handleChange(e.target)} />
                     </div>
                     <div className="input-group">
                         <label>Password</label>
-                        <input type="password" placeholder="Your password" />
+                        <input type="password" name="password" defaultValue={formData.password} placeholder="Your password" onChange={(e) => handleChange(e.target)} />
                     </div>
                     <div className="d-flex">
                         <div className="check-group">
-                            <input type="checkbox"/>
+                            <input type="checkbox" name="isRemember" onChange={() => setIsRemember((prevState) => !prevState)}/>
                             <label>Remember me</label>
                         </div>
-                        <Link className='line-decor' href="">Forgot password</Link>
+                        <Link className="line-decor" href="">Forgot password</Link>
                     </div>
                     <div className="button-group">
-                        <Link href="/auth/register" className="btn btn-big btn-light">Sign Up</Link>
-                        <button className="btn btn-big btn-dark" type='submit'>Login</button>
+                        <Link href="/auth/register" className="btn btn-big btn-light btn-shadow">Sign Up</Link>
+                        <button className="btn btn-big btn-yellow btn-shadow" type="submit">Login</button>
                     </div>
                 </form>
                 <div className="login-form-bottom">
