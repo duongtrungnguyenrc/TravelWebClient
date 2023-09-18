@@ -3,15 +3,15 @@
 .service-item {
     min-width: 300px;
     width: calc(25% - 8px);
-    // height: 350px;
     border-radius: 0.5rem;
     border: 1px solid #E1E1E1;
     overflow: hidden;
-    position: relative;
+    transition: 1s;
 
     .service-top {
         height: 190px;
         background-color: grey;
+        position: relative;
 
         .service-image {
             width: 100%;

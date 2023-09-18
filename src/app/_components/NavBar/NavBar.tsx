@@ -47,7 +47,7 @@ const NavBar = ({ routes } : { routes: Route[] }) => {
     }
 
     return (
-        <header className={"navbar-site" + (scrollY ? " active" : "") + (pathName.includes("explore") ? " light" : "")}>
+        <header className={"navbar-site" + (pathName.includes("explore") ? " light" : "") + (scrollY ? " active" : "")}>
             <nav>
                 <div className="brand">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">

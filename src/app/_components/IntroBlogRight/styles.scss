@@ -1,9 +1,9 @@
 .container-blog-right {
-
   margin-bottom: 100px;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
+  overflow: hidden;
 
   .blog-right-site {
     
@@ -99,7 +99,7 @@
     }
     .blog-left-site {
       margin-top: 50px;
-
+      padding: 1rem;
       .content-intro-blog {
 
         z-index: -1;

@@ -22,9 +22,6 @@ const IntroBlogRight = ({title , content , myList}: LayoutProps) => {
     if (inView) {
       control.start("visible");
     } 
-    else {
-      control.start("hidden");
-    }
   }, [control, inView]);
   return (
     <section ref={ref} className="container-blog-right">

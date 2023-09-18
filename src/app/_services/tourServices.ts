@@ -6,8 +6,7 @@ import { AxiosError, AxiosResponse } from "axios";
 const tourServies = {
     getAllTours: async () => {        
         try {
-            const response: AxiosResponse = await request.get("/tour/all");       
-                 
+            const response: AxiosResponse = await request.get("/tour/all");                        
             return {
                 code: response.status, 
                 status: true, 

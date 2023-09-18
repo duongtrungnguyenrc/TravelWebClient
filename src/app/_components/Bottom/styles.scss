@@ -53,9 +53,8 @@
           gap: 0.5rem;
 
           .input-layout {
-            width: 80%;
+            width: 100%;
             height: 56px;
-            flex-shrink: 0;
             border-radius: 8px;
             padding: 1rem;
             border: none;
@@ -64,7 +63,6 @@
           .btn-bottom {
             width: 56px;
             height: 56px;
-            flex-shrink: 0;
             border-radius: 8px;
             background-color: #c7923e;
           }
@@ -142,7 +140,7 @@
 
       .bottom-right {
         width: 100%;
-        padding: 1rem;
+        padding: 1.5rem 1rem;
 
         .bottom-right-header {
           gap: 1.5rem;
@@ -184,8 +182,6 @@
 
         .bottom-left-body {
           form {
-            display: flex;
-            flex-direction: column;
             .input-layout {
               width: 100%;
             }

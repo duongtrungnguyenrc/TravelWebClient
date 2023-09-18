@@ -25,6 +25,7 @@ html {
 body {
     width: 100%;
     position: relative;
+    overflow-x: hidden;
 }
 
 .text-light {
@@ -245,18 +246,15 @@ form {
     svg {
         width: 40px;
         height: 40px;
-        path {
-            transition: 0.5s;
-        }
+
     }
 
     .brand-name {
-        transition: 0.5s;
         font-family: 'Inter', sans-serif;
         font-size: 32px;
         font-style: normal;
         font-weight: 600;
-        line-height: 100%; /* 32px */
+        line-height: 100%;
     }
 }
 

@@ -5,14 +5,45 @@
     position: fixed;
     height: 72px;
     padding: 1rem 5rem;
-    transition: 0.2s;
+    transition: 0.3s;
     z-index: 9999;
+
+    &.light {
+        nav {
+            .brand {
+                svg {
+                    path {
+                        fill: #fff;
+                    }
+                }
+                a {
+                    color: #fff;
+                }
+            }
+            .navbar-colapse {
+    
+                .colapse-segment {
+        
+                    .nav-list {
+        
+                        .nav-item {
+        
+                            a {
+                               color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     &.active {
         background-color: #f4f4f4;
 
         nav {
             .brand {
+                color: #000!important;
                 svg {
                     path {
                         fill: #000!important;
@@ -101,35 +132,7 @@
         }
     }
 
-    &.light {
-        nav {
-            .brand {
-                svg {
-                    path {
-                        fill: #fff;
-                    }
-                }
-                a {
-                    color: #fff;
-                }
-            }
-            .navbar-colapse {
     
-                .colapse-segment {
-        
-                    .nav-list {
-        
-                        .nav-item {
-        
-                            a {
-                               color: #fff;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 // MOBILE RESPONSIVE
@@ -140,6 +143,18 @@
         
         nav { 
             justify-content: space-between;
+
+            .brand {
+                color: #000!important;
+                svg {
+                    path {
+                        fill: #000!important;
+                    }
+                }
+                a {
+                    color: #000!important;
+                }
+            }
 
             .navbar-colapse {
                 position: fixed;
@@ -173,6 +188,7 @@
                                 font-size: 1.3rem;
                                 padding: 0.5rem 0;
                                 font-weight: bold;
+                                color: #000!important;
                                 justify-content: flex-start;
                                
                                &:hover {

@@ -9,13 +9,19 @@ import { FormEventHandler, useEffect, useState } from "react";
 import { authServices } from "@/app/_services";
 import { toast } from "react-toastify";
 
+interface FormData {
+    email : string;
+    password: string;
+    isRemember: boolean;
+}
+
 const LoginForm = () => {   
-    const initialFormData = {
+    const initialFormData : FormData = {
         email: "",
         password: "",
         isRemember: false,
     }
-    const [formData, setFormData] = useState(initialFormData);
+    const [formData, setFormData] = useState<FormData>(initialFormData);
     const [isRemember, setIsRemember] = useState(false);
 
     useEffect(() => {
@@ -38,6 +44,14 @@ const LoginForm = () => {
 
     const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        Object.keys(formData).forEach((key) => {
+            if(key != "isRemember")
+                if(!formData[key as keyof FormData] || (formData[key as keyof FormData] as string)?.trim().length === 0) {
+                    toast.error(`${key} cannot be a null value`);
+                    return;
+                }
+        });
+
         const response = await authServices.signIn(formData.email, formData.password);
         if(response.status) {            
             if(isRemember) {
@@ -45,7 +59,6 @@ const LoginForm = () => {
                 localStorage.setItem("saved_password", formData.password);
             }
             setFormData(initialFormData);
-            
         }
         else {
             toast.error(response.message, {
@@ -72,11 +85,11 @@ const LoginForm = () => {
                 <form action="" method="get" onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label>Email</label>
-                        <input type="email" name="email" defaultValue={formData.email} placeholder="david.abc@gmail.com" onChange={(e) => handleChange(e.target)} />
+                        <input type="email" name="email" defaultValue={formData.email} placeholder="david.abc@gmail.com" onChange={(e) => handleChange(e.target)}  required/>
                     </div>
                     <div className="input-group">
                         <label>Password</label>
-                        <input type="password" name="password" defaultValue={formData.password} placeholder="Your password" onChange={(e) => handleChange(e.target)} />
+                        <input type="password" name="password" defaultValue={formData.password} placeholder="Your password" onChange={(e) => handleChange(e.target)}  required/>
                     </div>
                     <div className="d-flex">
                         <div className="check-group">

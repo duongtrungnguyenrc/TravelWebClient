@@ -101,7 +101,7 @@ $yellow: #FFCD41;
     animation: weather-icon-move 5s ease-in-out infinite;
     background: $primary; 
     border-radius: 50%; 
-    box-shadow: rgba(255,255,0,0.1) 0 0 0 4px;
+    box-shadow: rgba(255,255,0,0.1) 0 0 3px 4px;
     animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
   }
 
@@ -109,10 +109,10 @@ $yellow: #FFCD41;
 
 @keyframes light {
     from {
-      box-shadow: rgba(255, 200, 0, 0.2) 0 0 0px 10px;
+      box-shadow: rgba(255, 200, 0, 0.2) 0 0 3px 10px;
     }
     to {
-      box-shadow: rgba(255, 221, 0, 0.2) 0 0 0px 25px;
+      box-shadow: rgba(255, 221, 0, 0.2) 0 0 5px 25px;
     }
 }
 

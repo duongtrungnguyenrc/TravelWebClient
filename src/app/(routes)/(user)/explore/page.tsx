@@ -9,7 +9,7 @@ const HomePage = async () => {
   return (
     <>
       {/* <DefaultHero/> */}
-      {/* <ServicesList servicesList={//response.status ? response.data as Tour[] : []}/> */}
+      {/* <ServicesList servicesList={response.status ? response.data as Tour[] : []}/> */}
       <ServicesList servicesList={TourList}/>
       {/* <Benefit/> */}
       <ServicesGroup servicesList={TourList}/>

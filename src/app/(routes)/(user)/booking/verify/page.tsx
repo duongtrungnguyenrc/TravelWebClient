@@ -1,4 +1,9 @@
 const VerifyPage = () => {
-  return (<></>);
+
+  return (
+    <>
+     
+    </>
+  );
 };
 export default VerifyPage;
