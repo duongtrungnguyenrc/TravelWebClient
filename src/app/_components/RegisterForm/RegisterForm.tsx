@@ -18,7 +18,7 @@ interface FormData {
     isRemember: boolean;
 }
 
-const RegisterForm = () => {
+const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
     console.log("render");
     
     const [ formData, setFormData ] = useState<FormData>({
@@ -40,41 +40,29 @@ const RegisterForm = () => {
         
     }, 300)
 
-    const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit : FormEventHandler<HTMLFormElement> = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         Object.keys(formData).forEach((key) => {
-            if(key != "isRemember")
-                if(!formData[key as keyof FormData] || (formData[key as keyof FormData] as string)?.trim().length === 0) {
+            if (key != "isRemember")
+                if (!formData[key as keyof FormData] || (formData[key as keyof FormData] as string)?.trim().length === 0) {
                     toast.error(`${key} cannot be a null value`);
                     return;
                 }
         })
 
-        if(formData.password !== formData.confirmPassword) {
+        if (formData.password !== formData.confirmPassword) {
             toast.error(`Incorrect password confirm!`);
             return;
         }
 
-        if(!formData.password.match("^(?=[a-zA-Z0-9#@$?]{6,}$)(?=.*?[a-z])(?=.*?[A-Z])")) {
+        if (!formData.password.match("^(?=[a-zA-Z0-9#@$?]{6,}$)(?=.*?[a-z])(?=.*?[A-Z])")) {
             toast.error(`Password must have least 6 character and have 1 special character!`);
             return;
         }
 
-        const response = await authServices.signUp(`${formData.firstName} ${formData.lastName}`, formData.email, formData.phone, formData.password);
-        if(response.status) {            
-            if(formData.isRemember) {
-                localStorage.setItem("saved_email", formData.email);
-                localStorage.setItem("saved_password", formData.password);
-            }
-            toast.success(response.message, {
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
-        }
-        else {
-            toast.error(response.message, {
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
-        }
+       if (handleRegister(`${formData.firstName} ${formData.lastName}`, formData.email, formData.phone, formData.password)) {
+            
+       }
     }
 
     

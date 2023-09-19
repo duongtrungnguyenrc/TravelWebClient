@@ -17,3 +17,5 @@ export { default as IntroBlogRight } from "./IntroBlogRight/IntroBlogRight";
 export { default as VideoPlace } from "./VideoPlace/VideoPlace";
 export { default as GalleryHome } from "./GalleryHome/GalleryHome";
 export { default as SkeletonServicesList } from "./SkeletonServicesList/SkeletonServicesList";
+export { default as BookingGroup } from "./BookingGroup/BookingGroup";
+

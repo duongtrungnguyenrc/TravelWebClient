@@ -6,7 +6,6 @@ import "./styles.scss";
 import Link from "next/link";
 import { useDebouncedCallback } from "use-debounce";
 import { FormEventHandler, useEffect, useState } from "react";
-import { authServices } from "@/app/_services";
 import { toast } from "react-toastify";
 
 interface FormData {
@@ -15,20 +14,21 @@ interface FormData {
     isRemember: boolean;
 }
 
-const LoginForm = () => {   
+const LoginForm = ({ signIn } : { signIn: Function }) => {   
+    console.log("render");
+    
     const initialFormData : FormData = {
         email: "",
         password: "",
         isRemember: false,
     }
     const [formData, setFormData] = useState<FormData>(initialFormData);
-    const [isRemember, setIsRemember] = useState(false);
 
     useEffect(() => {
         const savedEmail = localStorage.getItem("saved_email");
         const savedPassword = localStorage.getItem("saved_password");
         if (savedEmail && savedPassword) {
-            setFormData({ email: savedEmail, password: savedPassword, isRemember })
+            setFormData({ email: savedEmail, password: savedPassword, isRemember: formData.isRemember })
         }
     }, []);
     
@@ -40,7 +40,7 @@ const LoginForm = () => {
           [name]: value,
         }));
         
-    }, 300)
+    }, 200)
 
     const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -52,18 +52,8 @@ const LoginForm = () => {
                 }
         });
 
-        const response = await authServices.signIn(formData.email, formData.password);
-        if(response.status) {            
-            if(isRemember) {
-                localStorage.setItem("saved_email", formData.email);
-                localStorage.setItem("saved_password", formData.password);
-            }
-            setFormData(initialFormData);
-        }
-        else {
-            toast.error(response.message, {
-                position: toast.POSITION.BOTTOM_RIGHT,
-              });
+        if(signIn(formData.email, formData.password, formData.isRemember)) {
+            // setFormData(initialFormData);
         }
     };
 
@@ -93,7 +83,7 @@ const LoginForm = () => {
                     </div>
                     <div className="d-flex">
                         <div className="check-group">
-                            <input type="checkbox" name="isRemember" onChange={() => setIsRemember((prevState) => !prevState)}/>
+                            <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
                             <label>Remember me</label>
                         </div>
                         <Link className="line-decor" href="">Forgot password</Link>

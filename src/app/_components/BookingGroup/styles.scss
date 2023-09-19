@@ -1,0 +1,84 @@
+.booking-group-site {
+    padding: 7rem 5rem;
+
+    .booking-group-header {
+        margin-bottom: 5rem;
+
+        .header-title {
+            color:#11142D;
+            font-family: 'Lora';
+            font-size: 62px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 120%; 
+            letter-spacing: 0.186px;
+            margin-bottom: 1rem;
+        }
+
+        .header-sub-title {
+            color:#515151;
+            font-family: 'Mulish';
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 125%; /* 20px */
+            letter-spacing: 0.08px;
+        }
+    }
+
+    .booking-group-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+       .row {
+            .bill-detail {
+                padding: 2rem;
+                border: 1px solid #E1E1E1;
+                border-radius: 0.5rem;
+                
+                .form-title {
+                    font-size: 2rem;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 120%; /* 28.8px */
+                    letter-spacing: 0.12px;
+                    margin-bottom: 2rem;     font-family: 'Lora';
+               
+                }
+            }
+
+            .service-item {
+                width: 100%;
+                height: 100%;
+
+                .service-top {
+                    height: 60%;
+
+                }
+
+                .service-bottom {
+                    justify-content: center;
+                    gap: 1.5rem;
+
+                    .service-name {
+                        font-size: 2rem;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 120%; /* 28.8px */
+                        letter-spacing: 0.12px;
+                        font-family: 'Lora';
+                       
+                    }
+                    .service-detail {
+                        .btn {
+                            display: none;
+                        }
+                    }
+                }
+            }
+       }
+
+
+    }
+}

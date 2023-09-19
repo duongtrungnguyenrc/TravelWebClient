@@ -22,8 +22,8 @@
             gap: 2rem;
 
             .hero-title {
-                font-family: 'Lora';
-                font-size: 5rem;
+                font-family: var(--heading-font);
+                font-size: var(--heading-normal-size);
                 font-style: normal;
                 font-weight: 700;
                 line-height: 110%; /* 74.4px */
