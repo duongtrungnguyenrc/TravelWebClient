@@ -18,4 +18,10 @@ export { default as VideoPlace } from "./VideoPlace/VideoPlace";
 export { default as GalleryHome } from "./GalleryHome/GalleryHome";
 export { default as SkeletonServicesList } from "./SkeletonServicesList/SkeletonServicesList";
 export { default as BookingGroup } from "./BookingGroup/BookingGroup";
+export { default as PopularBlogs } from "./PopularBlogs/PopularBlogs";
+export { default as NormalBlogs } from "./NormalBlogs/NormalBlogs";
+
+// //
+
+export { default as AdminNavBar } from "./AdminNavBar/AdminNavBar";
 

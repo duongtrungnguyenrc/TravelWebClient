@@ -14,7 +14,7 @@ const BookingForm = () => {
         </div>
         <div className="booking-group-body">
             <div className="row">
-                <div className="col-8 bill-detail">
+                <div className="col-lg-8 bill-detail">
                     <h1 className="form-title">Billing Details</h1>
                     <form action="" method="get">
                         <div className="multi-group">
@@ -53,12 +53,12 @@ const BookingForm = () => {
                         </div>
                     </form>
                 </div>
-                <div className="col-4">
+                <div className="col-lg-4">
                     <ServiceItem service={Tour}/>
                 </div>
             </div>
             <div className="row">
-                <div className="col-8 bill-detail">
+                <div className="col-lg-8 bill-detail">
                     <h1 className="form-title">Extra Facilitation</h1>
                     <form action="" method="get">
                         <div className="check-group">
@@ -82,7 +82,7 @@ const BookingForm = () => {
                         <button type="submit" className="btn btn-yellow btn-big">Continue to Payment</button>
                     </form>
                 </div>
-                <div className="col-4">
+                <div className="col-lg-4">
                 </div>
             </div>
         </div>

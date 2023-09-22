@@ -89,7 +89,7 @@ const LoginForm = ({ signIn } : { signIn: Function }) => {
                         <Link className="line-decor" href="">Forgot password</Link>
                     </div>
                     <div className="button-group">
-                        <Link href="/auth/register" className="btn btn-big btn-light btn-shadow">Sign Up</Link>
+                        <Link href="/register" className="btn btn-big btn-light btn-shadow">Sign Up</Link>
                         <button className="btn btn-big btn-yellow btn-shadow" type="submit">Login</button>
                     </div>
                 </form>

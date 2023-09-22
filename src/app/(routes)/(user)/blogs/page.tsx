@@ -1,4 +1,12 @@
+import { DefaultHero, NormalBlogs, PopularBlogs } from "@/app/_components";
+
 const BlogsPage = () => {
-  return (<></>);
+  return (
+  <>
+    <DefaultHero/>
+    <PopularBlogs/>
+    <NormalBlogs/>
+  </>
+  );
 };
 export default BlogsPage;

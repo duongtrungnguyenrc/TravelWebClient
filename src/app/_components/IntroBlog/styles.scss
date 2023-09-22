@@ -46,16 +46,10 @@
       position: relative;
 
       .content-blog {
-        
         color: #515151;
-
-        font-family: Mulish;
+        font-family: var(--content-font);
         font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 125%; 
-        letter-spacing: 0.08px;
-        
+        font-weight: 400;        
       }
 
       .btn-more {

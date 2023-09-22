@@ -23,8 +23,8 @@
         background-image: -o-linear-gradient(left, #ececec 0px, #f4f4f4 40px, #ececec 80px);
         background-image: linear-gradient(90deg, #ececec 0px, #f4f4f4 40px, #ececec 80px);
         background-size: 250px;
-        -webkit-animation: shine-loading-image 2s infinite ease-out;
-                animation: shine-loading-image 2s infinite ease-out;
+        -webkit-animation: shine-loading-image 2s infinite linear;
+                animation: shine-loading-image 2s infinite linear;
       }
       
       .movie--isloading .loading-content {
@@ -56,8 +56,8 @@
         background-image: linear-gradient(90deg, #ececec 0px, #ddd 40px, #ececec 80px);
         background-size: 250px;
         border-radius: 10px;
-        -webkit-animation: shine-loading-container-items 2s infinite ease-out;
-                animation: shine-loading-container-items 2s infinite ease-out;
+        -webkit-animation: shine-loading-container-items 2s infinite linear;
+                animation: shine-loading-container-items 2s infinite linear;
       }
       
       .movie--isloading .loading-content .loading-sub-text {
@@ -69,8 +69,8 @@
         background-image: linear-gradient(90deg, #ececec 0px, #ddd 40px, #ececec 80px);
         background-size: 250px;
         border-radius: 10px;
-        -webkit-animation: shine-loading-container-items 2s infinite ease-out;
-                animation: shine-loading-container-items 2s infinite ease-out;
+        -webkit-animation: shine-loading-container-items 2s infinite linear;
+                animation: shine-loading-container-items 2s infinite linear;
       }
       
       .movie--isloading .loading-content .loading-btn {
@@ -82,8 +82,8 @@
         background-image: linear-gradient(90deg, #ececec 0px, #ddd 40px, #ececec 80px);
         background-size: 250px;
         border-radius: 3px;
-        -webkit-animation: shine-loading-container-items 2s infinite ease-out;
-                animation: shine-loading-container-items 2s infinite ease-out;
+        -webkit-animation: shine-loading-container-items 2s infinite linear;
+                animation: shine-loading-container-items 2s infinite linear;
       }
     }
       
@@ -124,4 +124,48 @@
           background-position: 140px;
         }
       }
+}
+
+// MOBILE RESPONSIVE
+
+@media only screen and (max-width: 767px) {
+
+  .skeleton-list-site {   
+    padding: 1rem; 
+
+    .list-row {
+      flex-direction: column;
+    }
+  }
+}
+
+
+// TABLET RESPONSIVE
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+  
+  .skeleton-list-site {   
+    padding: 1rem; 
+    
+    .list-row {
+        .skeleton-service-item:nth-child(n+3) {
+          display: none;
+        }
+    }
+  }
+}
+
+// MINI PC RESPONSIVE
+
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  .skeleton-list-site {   
+    padding: 1rem; 
+    
+    .list-row {
+        .skeleton-service-item:nth-child(n+4) {
+          display: none;
+        }
+    }
+  }
 }

@@ -1,11 +1,10 @@
 // Produced by Duong Trung Nguyen
 'use client'
 
+import "./styles.scss";
 import Link from "next/link";
-import "./styles.scss"
 import { FormEventHandler, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { authServices } from "@/app/_services";
 import { toast } from 'react-toastify';
 
 interface FormData {
@@ -121,16 +120,16 @@ const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
                     <Link className='line-decor' href="">Forgot password</Link>
                 </div>
                 <div className="check-group">
-                        <input type="checkbox" />
-                        <label>I agree to all the <Link href="">Terms</Link> and <Link href="">Privacy policy</Link> </label>
-                    </div>
+                    <input type="checkbox" />
+                    <label>I agree to all the <Link href="">Terms</Link> and <Link href="">Privacy policy</Link> </label>
+                </div>
                 <div className="button-group">
                     <button className="btn btn-big btn-light btn-shadow">Join with Google</button>
                     <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Create an account</button>
                 </div>
             </form>
             <div className="register-form-bottom">
-                <label>Already have account? <Link href="/auth/login">Login</Link></label>
+                <label>Already have account? <Link href="/login">Login</Link></label>
             </div>
         </div>
     </div>

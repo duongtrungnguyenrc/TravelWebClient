@@ -56,6 +56,7 @@ body {
     transition: 0.5s;
     border: none;
     cursor: pointer;
+    gap: 5px;
 
     &:hover {
         box-shadow: 0 0 0 1px var(--dark);
@@ -102,6 +103,10 @@ body {
         background-color: var(--primary-yellow);
         color: var(--light);
         transition: 0.5s;
+
+        svg {
+            fill: var(--light);
+        }
 
         &:hover {
             background: var(--light);
@@ -267,11 +272,11 @@ form {
     svg {
         width: 40px;
         height: 40px;
-
+        fill: #000;
     }
 
     .brand-name {
-        font-family: 'Inter';
+        font-family: 'Lora';
         font-size: 32px;
         font-style: normal;
         font-weight: 600;
@@ -288,16 +293,52 @@ form {
     gap: 1rem;
 }
 
-.col-3 {
-    width: 40%;
+.col-sm-1 {
+    width: 8.33333%!important
 }
 
-.col-4 {
-    width: calc(100% / 3);
+.col-sm-2 {
+    width: 16.66667%!important
 }
 
-.col-8 {
-    width: 66.66666%;
+.col-lg-3 {
+    width: 25%;
+}
+
+.col-lg-4 {
+    width: 33.33333%;
+}
+
+.col-lg-5 {
+    width: 41.66667%;
+}
+
+.col-lg-6 {
+    width: 50%;
+}
+
+.col-lg-7 {
+    width: 58.33333%;
+}
+
+.col-lg-8 {
+    width: 66.66667%;
+}
+
+.col-lg-9 {
+    width: 75%;
+}
+
+.col-lg-10 {
+    width: 83.33333%;
+}
+
+.col-lg-11 {
+    width: 91.66667%;
+}
+
+.col-lg-12 {
+    width: 100%;
 }
 
 // 
@@ -314,3 +355,163 @@ form {
 .p-2 {
     padding: 2rem;
 }
+
+.h-100 {
+    height: 100%;
+}
+
+/* MOBILE RESPONSIVE */
+@media only screen and (max-width: 1024px) {
+    .col-sm-1 {
+        width: 8.33333%!important
+    }
+    
+    .col-sm-2 {
+        width: 16.66667%!important
+    }
+    
+    .col-sm-3 {
+        width: 25%!important
+    }
+    
+    .col-sm-4 {
+        width: 33.33333%!important
+    }
+    
+    .col-sm-5 {
+        width: 41.66667%!important
+    }
+    
+    .col-sm-6 {
+        width: 50%!important
+    }
+    
+    .col-sm-7 {
+        width: 58.33333%!important
+    }
+    
+    .col-sm-8 {
+        width: 66.66667%!important
+    }
+    
+    .col-sm-9 {
+        width: 75%!important
+    }
+    
+    .col-sm-10 {
+        width: 83.33333%!important
+    }
+    
+    .col-sm-11 {
+        width: 91.66667%!important
+    }
+    
+    .col-sm-12 {
+        width: 100%!important
+    }
+}
+
+
+/* TABLET RESPONSIVE */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .col-1 {
+        width: 8.33333%!important
+    }
+    
+    .col-2 {
+        width: 16.66667%!important
+    }
+    
+    .col-3 {
+        width: 25%!important
+    }
+    
+    .col-4 {
+        width: 33.33333%!important
+    }
+    
+    .col-5 {
+        width: 41.66667%!important
+    }
+    
+    .col-6 {
+        width: 50%!important
+    }
+    
+    .col-7 {
+        width: 58.33333%!important
+    }
+    
+    .col-8 {
+        width: 66.66667%!important
+    }
+    
+    .col-9 {
+        width: 75%!important
+    }
+    
+    .col-10 {
+        width: 83.33333%!important
+    }
+    
+    .col-11 {
+        width: 91.66667%!important
+    }
+    
+    .col-12 {
+        width: 100%!important
+    }
+}
+
+
+/* MINI PC RESPONSIVE */
+@media only screen and (min-width: 1024px) and (max-width: 1400px) {
+    .col-md-1 {
+        width: 8.33333%!important
+    }
+    
+    .col-md-2 {
+        width: 16.66667%!important
+    }
+    
+    .col-md-3 {
+        width: 25%!important
+    }
+    
+    .col-md-4 {
+        width: 33.33333%!important
+    }
+    
+    .col-md-5 {
+        width: 41.66667%!important
+    }
+    
+    .col-md-6 {
+        width: 50%!important
+    }
+    
+    .col-md-7 {
+        width: 58.33333%!important
+    }
+    
+    .col-md-8 {
+        width: 66.66667%!important
+    }
+    
+    .col-md-9 {
+        width: 75%!important
+    }
+    
+    .col-md-10 {
+        width: 83.33333%!important
+    }
+    
+    .col-md-11 {
+        width: 91.66667%!important
+    }
+    
+    .col-md-12 {
+        width: 100%!important
+    }
+}
+  

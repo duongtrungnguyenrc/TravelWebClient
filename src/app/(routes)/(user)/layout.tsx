@@ -7,8 +7,8 @@ const HomeLayout = ({ children } : { children: ReactNode }) => {
     { routeName: "Explore", routePath: "/explore" },  
     { routeName: "Room & Suites", routePath: "/explore" },
     { routeName: "Restaurant & Bar", routePath: "/explore" },
-    { routeName: "Blog", routePath: "/explore" },
-    { routeName: "Login", routePath: "auth/login" }
+    { routeName: "Blog", routePath: "/blogs" },
+    { routeName: "Login", routePath: "/login" }
   ]
   return (
     <>

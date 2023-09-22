@@ -10,14 +10,12 @@ const Clock = () => {
   useEffect(() => {
    const timeout = setTimeout(() => {
       setTime(new Date());
-    }, 10000);
+    }, 100);
 
     return () => {
       clearTimeout(timeout);
     }
   }, []);
-
-
   
   return (
     <div className="clock-site">

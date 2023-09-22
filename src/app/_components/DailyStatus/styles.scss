@@ -4,7 +4,7 @@ $primary: #C7923E;
 
 
 .container-weather{
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     width: 100% ;
     .container-item{
         width: 70%;
@@ -23,7 +23,7 @@ $primary: #C7923E;
 // MOBILE RESPONSIVE
 @media only screen and (max-width: 1024px) {
     .container-weather{
-        
+        margin-bottom: 50px;
         .container-item{
             
             flex-direction: column;
