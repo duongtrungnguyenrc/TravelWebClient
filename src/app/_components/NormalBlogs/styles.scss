@@ -94,6 +94,20 @@
 
         .normal-blogs-body {
             grid-template-columns: 100%;
+
+            .blog {
+                .blog-content {
+                    gap: 5px;
+                    
+                    .blog-title {
+                        font-size: 1rem;
+                     }
+
+                     .blog-type, .upload-info * {
+                        font-size: 0.8rem;
+                     }
+                }
+            }
         }
     }
 }

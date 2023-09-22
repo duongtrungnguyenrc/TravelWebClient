@@ -4,7 +4,7 @@ import "./styles.scss"
 
 const Loading = () => {    
     return (
-      <Backdrop sx={{ color: '#fff', zIndex: 999 }} open={true}>
+      <Backdrop sx={{ color: '#fff', zIndex: 1 }} open={true}>
         <div className="loading-container">
           <div className="item item-1"></div>
           <div className="item item-2"></div>

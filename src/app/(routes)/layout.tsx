@@ -1,4 +1,4 @@
-import '../_assets/globalStyles.scss';
+import './global.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ToastContainer, toast } from 'react-toastify';

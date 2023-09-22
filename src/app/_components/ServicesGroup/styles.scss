@@ -78,7 +78,7 @@ $primary: #C7923E;
 
 
         .services-group-body {
-            gap: 0.5rem;
+            gap: 1rem;
 
             .service-item:nth-child(n+2) {
                 display: none;
@@ -106,8 +106,7 @@ $primary: #C7923E;
         }
 
         .services-group-body {
-            // justify-content: left;
-            gap: 0.5rem!important;
+            gap: 1rem;
 
             .service-item:nth-child(n+3) {
                 display: none;
