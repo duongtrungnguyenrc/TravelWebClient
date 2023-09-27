@@ -1,8 +1,12 @@
 // Produced by Duong Trung Nguyen
 
-import Tour from "@/app/_data/Tour";
 import ServiceItem from "../ServiceItem/ServiceItem";
 import "./styles.scss";
+import * as React from 'react';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+
 
 const BookingForm = () => {
   return (
@@ -54,25 +58,18 @@ const BookingForm = () => {
                     </form>
                 </div>
                 <div className="col-lg-4">
-                    <ServiceItem service={Tour}/>
+                    {/* <ServiceItem service={}/> */}
                 </div>
             </div>
             <div className="row">
                 <div className="col-lg-8 bill-detail">
                     <h1 className="form-title">Extra Facilitation</h1>
                     <form action="" method="get">
-                        <div className="check-group">
-                            <input type="checkbox" name="email" required/>
-                            <label>Airport Pickup</label>
-                        </div>
-                        <div className="check-group">
-                            <input type="checkbox" name="phone" required/>
-                            <label>Activity</label>
-                        </div>
-                        <div className="check-group">
-                            <input type="checkbox" name="passport" required/>
-                            <label>Massage and Spa</label>
-                        </div>
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                            <FormControlLabel required control={<Checkbox />} label="Required" />
+                            <FormControlLabel disabled control={<Checkbox />} label="Disabled" />
+                        </FormGroup>
                         <div className="input-group">
                             <label>Special Request</label>
                             <textarea name="" id="" cols={30} rows={10}>

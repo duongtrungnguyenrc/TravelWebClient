@@ -4,25 +4,28 @@ import { AxiosError, AxiosResponse } from "axios";
 
 
 const tourServies = {
-    getAllTours: async () => {        
+    getAllTours: async (page: number, limit: number) => {        
         try {
-            const response: AxiosResponse = await request.get("/tour/all");                        
+            const response: AxiosResponse = await request.get(`/tour/all?page=${[page]}&limit=${limit}`);                                    
             return {
                 code: response.status, 
                 status: true, 
                 message: response.data.message, 
                 data: response.data.data
             } as Response;
-        } catch (error) {
-            const response: AxiosError = (error as AxiosError);
+        } catch (err) {
+            const error: AxiosError = (err as AxiosError);
             
             return {
-                code: response.response?.status, 
+                code: error.response?.status, 
                 status: false, 
-                message: (response.response?.data as Response).message, 
-                data: (response.response?.data as Response).data
+                message: (error.response?.data as Response)?.message, 
+                data: (error.response?.data as Response)?.data
             } as Response;
         }
+    },
+    getToursByType: async (type: string) => {
+        
     }
 }
 export default tourServies;

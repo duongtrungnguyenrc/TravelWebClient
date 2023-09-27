@@ -8,6 +8,7 @@ import { useInView } from 'react-intersection-observer';
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 import variants from '@/app/_variants';
+import { Typography } from '@mui/material';
 
 interface LayoutProps {
   title?: string;
@@ -41,9 +42,9 @@ const IntroBlog = ({title , content}: LayoutProps) => {
           </h1>
         </motion.div>
         <motion.div className="content-intro-blog" variants={variants.toBottomVariant} initial="hidden" animate={control}>
-          <p className="content-blog">
+          <Typography variant='body2'>
             {content}
-          </p>
+          </Typography>
           <div className="btn-more">
             <button className=" btn btn-big btn-yellow">Learn More</button>
           </div>

@@ -6,7 +6,7 @@ const Layout = ({ children } : { children: ReactNode }) => {
     <>
         <DefaultHero/>
         {children}
-        <Benefit/>
+        {/* <Benefit/> */}
     </>
   );
 };

@@ -2,65 +2,69 @@
 
 'use client'
 import "./styles.scss";
-import Link from "next/link";
 import { Tour } from "@/app/_types";
-
-
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Stack, Rating } from '@mui/material';
+import BedIcon from '@mui/icons-material/Bed';
+import PersonIcon from '@mui/icons-material/Person';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import Link from "next/link";
 
 const ServiceItem = ({ service } : { service : Tour }) => {
 
   return (
-    <div className="service-item">
-      <div className="service-top">
-        <img src={ service.img } alt="" className="service-image" />
-        <div className="tags">
-          <div className="rated">
-            <div className="rated-star">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M11.9446 9.54675C11.7719 9.71408 11.6926 9.95608 11.7319 10.1934L12.3246 13.4734C12.3746 13.7514 12.2573 14.0328 12.0246 14.1934C11.7966 14.3601 11.4933 14.3801 11.2446 14.2468L8.29195 12.7067C8.18928 12.6521 8.07528 12.6228 7.95862 12.6194H7.77795C7.71528 12.6288 7.65395 12.6487 7.59795 12.6794L4.64462 14.2268C4.49862 14.3001 4.33328 14.3261 4.17128 14.3001C3.77662 14.2254 3.51328 13.8494 3.57795 13.4528L4.17128 10.1727C4.21062 9.93342 4.13128 9.69008 3.95862 9.52008L1.55128 7.18675C1.34995 6.99142 1.27995 6.69808 1.37195 6.43342C1.46128 6.16942 1.68928 5.97675 1.96462 5.93342L5.27795 5.45275C5.52995 5.42675 5.75128 5.27342 5.86462 5.04675L7.32462 2.05341C7.35928 1.98675 7.40395 1.92541 7.45795 1.87341L7.51795 1.82675C7.54928 1.79208 7.58528 1.76341 7.62528 1.74008L7.69795 1.71341L7.81128 1.66675H8.09195C8.34262 1.69275 8.56328 1.84275 8.67862 2.06675L10.1579 5.04675C10.2646 5.26475 10.4719 5.41608 10.7113 5.45275L14.0246 5.93342C14.3046 5.97342 14.5386 6.16675 14.6313 6.43342C14.7186 6.70075 14.6433 6.99408 14.4379 7.18675L11.9446 9.54675Z" fill="white"/>
-              </svg>
-            </div>
-            <label>{ service.ratedStar }</label>
-          </div>
-          <div className="location">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 1.25073C11.9891 1.25073 13.8968 2.04091 15.3033 3.44743C16.7098 4.85395 17.5 6.76161 17.5 8.75073C17.5 12.3345 15.0812 15.6332 10.335 18.6532C10.2348 18.7168 10.1186 18.7506 10 18.7506C9.88135 18.7506 9.76516 18.7168 9.665 18.6532C4.91875 15.6332 2.5 12.3345 2.5 8.75073C2.5 6.76161 3.29018 4.85395 4.6967 3.44743C6.10322 2.04091 8.01087 1.25073 10 1.25073ZM10 6.25073C9.33696 6.25073 8.70107 6.51412 8.23223 6.98296C7.76339 7.45181 7.5 8.08769 7.5 8.75073C7.5 9.41377 7.76339 10.0497 8.23223 10.5185C8.70107 10.9873 9.33696 11.2507 10 11.2507C10.663 11.2507 11.2989 10.9873 11.7678 10.5185C12.2366 10.0497 12.5 9.41377 12.5 8.75073C12.5 8.08769 12.2366 7.45181 11.7678 6.98296C11.2989 6.51412 10.663 6.25073 10 6.25073Z" fill="white"/>
-            </svg>
-            <label>{ service.location }</label>
-          </div>
-        </div>
-      </div>
-      <div className="service-bottom">
-        <h3 className="service-name">{ service.name }</h3>
-        <ul className="service-info">
-          <li>
-          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-            </svg>
-            <label>{ service.maxPeople + " Guest" }</label>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
-              <path d="M32 32c17.7 0 32 14.3 32 32V320H288V160c0-17.7 14.3-32 32-32H544c53 0 96 43 96 96V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V416H352 320 64v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V64C0 46.3 14.3 32 32 32zm144 96a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/>
-            </svg>
-            <label>2 Bed</label>
-          </li>
-          <li>
-          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-            <path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"/>
-          </svg>
-            <label>{ service.time + " Day" }</label>
-          </li>
-        </ul>
-        <div className="service-detail">
-          <div className="price-detail">
-            <label>Start from</label>
-            <p><b>{ "$" + service.price }</b> /Night</p>
-          </div>
-          <Link href="" className="btn btn-sm btn-yellow">Learn More</Link>
-        </div>
-      </div>
-    </div>
+    <Link href={`explore/tour?id=${service.id}`}>
+      <Card className="service-item">
+        <Stack maxHeight="150" overflow="hidden" >
+          <CardMedia
+            className="card-media"
+            component="img"
+            image={service.img}
+            height="150"
+            alt={service.name}
+          />
+        </Stack>
+        <CardContent style={{padding: "1rem"}}>
+          <Stack direction="column" spacing={1}>
+            <Rating name="read-only" value={5} readOnly size="small" />
+            <Typography gutterBottom variant="h4" component="h4" fontSize="18px" noWrap textOverflow="ellipsis">
+              {service.name}
+            </Typography>
+            <Stack direction="row" justifyContent="space-between">
+              <Stack direction="row" spacing={1} alignItems="center">
+                <PersonIcon fontSize="small"/>
+                <Typography variant="body2" color="text.secondary">
+                  {service.maxPeople} guest
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <BedIcon fontSize="small"/>
+                <Typography variant="body2" color="text.secondary">
+                  {service.duration} days
+                </Typography>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <EditCalendarIcon fontSize="small"/>
+                <Typography variant="body2" color="text.secondary">
+                  2 people
+                </Typography>
+              </Stack>
+            </Stack>
+            <Stack direction="row" justifyContent="space-between">
+              <Typography variant="body2" color="text.secondary">
+                {service.location}
+              </Typography>
+              <Typography variant="body2" color="red">
+                {service.price} VNĐ
+              </Typography>
+            </Stack>
+          </Stack>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 export default ServiceItem;

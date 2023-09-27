@@ -1,10 +1,11 @@
 
 .skeleton-list-site {
+  width: 100%;
   padding: 5rem;
   
   .list-row {
       display: flex;
-      gap: 10px;
+      gap: 1rem;
       
       .col-md-3 {
         width: 25%;

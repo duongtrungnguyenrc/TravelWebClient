@@ -7,6 +7,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 import variants from '@/app/_variants';
 import { useInView } from 'react-intersection-observer';
+import { Typography } from '@mui/material';
 
 interface LayoutProps {
   title?: string;
@@ -35,9 +36,9 @@ const IntroBlogRight = ({title , content , myList}: LayoutProps) => {
           </h1>
         </motion.div>
         <motion.div className="content-intro-blog" variants={variants.toTopVariant} initial="hidden" animate={control}>
-          <p className="content-blog">
+          <Typography variant='body2'>
             {content}
-          </p>
+          </Typography>
           <div className="list-container">
             <ul className ="list-content">
             {myList ? (

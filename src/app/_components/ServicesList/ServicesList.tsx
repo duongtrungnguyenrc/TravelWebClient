@@ -1,10 +1,41 @@
-import "./styles.scss";
-import TourType from "@/app/_data/Tour";
-import ServiceItem from "../ServiceItem/ServiceItem";
-import { Suspense } from "react";
-import { SkeletonServicesList } from "..";
+'use client'
 
-const ServicesList = ({ servicesList } : { servicesList : TourType[] }) => {
+import "./styles.scss";
+import "./styles.scss";
+import ServiceItem from "../ServiceItem/ServiceItem";
+import { memo, useCallback, useEffect, useState } from "react";
+import { SkeletonServicesList } from "..";
+import { Grid, Pagination, Stack } from "@mui/material";
+import { Tour } from "@/app/_types";
+import { useRouter, useSearchParams } from "next/navigation";
+import { tourServices } from "@/app/_services";
+
+const ServicesList = () => {
+  const [toursData, setToursData] = useState<{ pages: number; tours: Tour[] }>({ pages: 0, tours: [] });
+  const [loading, setLoading] = useState(true);
+
+  const router = useRouter();
+  const params = useSearchParams();
+  const page = params.get("page") ? parseInt(params.get("page")!, 10) : 1;
+
+  useEffect(() => {
+    const handleFetchTours = async (page: number) => {
+      const response = await tourServices.getAllTours(page, 20);
+      if (response.status) {
+        setLoading(false);
+        setToursData(response.data as { pages: number; tours: Tour[] });
+      }
+    };
+    handleFetchTours(page);
+  }, [page]);
+
+  console.log("render");
+
+  const handleChangePage = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
+    setLoading(true);
+    router.push(`/explore?page=${value}`, {scroll: false});
+  }, []);
+  
   return (
     <section className="services-list-site">
       <div className="services-filter">
@@ -45,17 +76,29 @@ const ServicesList = ({ servicesList } : { servicesList : TourType[] }) => {
           </div>
         </form>
       </div>
+        {
+          loading ? <SkeletonServicesList/> : 
 
-      <Suspense fallback={<SkeletonServicesList/>}>
-        <div className="services-list">
+          <Grid container className="services-list" spacing="1rem">
           {
-            servicesList?.map((value, index) => {
-              return <ServiceItem key={index} service={value}/>
+            toursData?.tours.map((tour) => {
+              return  <Grid  key={tour.id} item xs={12} md={6} lg={4} xl={3}>
+                        <ServiceItem service={tour}/>
+                      </Grid>
+              
             })
           }
-        </div>
-      </Suspense>
+          </Grid>
+        }
+      <Stack  direction="row" justifyContent="center">
+        <Pagination 
+          shape="rounded" variant="outlined" color="primary" size="large"
+          count={toursData?.pages} 
+          page={page}
+          onChange={handleChangePage} 
+        />
+      </Stack>
     </section>
   );
 };
-export default ServicesList;
+export default memo(ServicesList);
