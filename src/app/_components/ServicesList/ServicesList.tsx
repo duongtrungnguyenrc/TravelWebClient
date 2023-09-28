@@ -1,7 +1,6 @@
 'use client'
 
 import "./styles.scss";
-import "./styles.scss";
 import ServiceItem from "../ServiceItem/ServiceItem";
 import { memo, useCallback, useEffect, useState } from "react";
 import { SkeletonServicesList } from "..";
@@ -27,6 +26,7 @@ const ServicesList = () => {
       }
     };
     handleFetchTours(page);
+   
   }, [page]);
 
   console.log("render");

@@ -29,7 +29,7 @@ const ServiceItem = ({ service } : { service : Tour }) => {
         </Stack>
         <CardContent style={{padding: "1rem"}}>
           <Stack direction="column" spacing={1}>
-            <Rating name="read-only" value={5} readOnly size="small" />
+            <Rating name="read-only" value={service.ratedStar} readOnly size="small" />
             <Typography gutterBottom variant="h4" component="h4" fontSize="18px" noWrap textOverflow="ellipsis">
               {service.name}
             </Typography>

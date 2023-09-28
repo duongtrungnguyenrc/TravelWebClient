@@ -4,6 +4,7 @@ const VerifyPage = () => {
   return (
     <>
       <BookingGroup/>
+      
     </>
   );
 };

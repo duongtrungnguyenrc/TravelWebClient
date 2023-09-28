@@ -36,7 +36,7 @@ const IntroBlogRight = ({title , content , myList}: LayoutProps) => {
           </h1>
         </motion.div>
         <motion.div className="content-intro-blog" variants={variants.toTopVariant} initial="hidden" animate={control}>
-          <Typography variant='body2'>
+          <Typography variant='body1'>
             {content}
           </Typography>
           <div className="list-container">

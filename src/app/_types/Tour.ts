@@ -1,5 +1,7 @@
 interface Tour {
     id: string;
+    type?: string;
+    groupTitle?: string;
     img : string;
     name : string;
     price : number;

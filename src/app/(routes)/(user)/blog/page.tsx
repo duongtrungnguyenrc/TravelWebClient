@@ -1,6 +1,6 @@
 import { DefaultHero, NormalBlogs, PopularBlogs } from "@/app/_components";
 import { blogServices } from "@/app/_services";
-import { CardHeader, Grid, Pagination, Stack, Typography } from "@mui/material";
+import { CardHeader, Chip, Grid, Pagination, Stack, Typography } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,27 +13,28 @@ const BlogsPage = async () => {
   console.log("render");
   
   const blogs: Response = await blogServices.getAllblogs();
-  const posts = blogs.data as Blog[]
+  const posts: { pages: number, blogs: Blog[]} = blogs.data as { pages: number, blogs: Blog[]};
   
   return (
   <>
     <Grid container padding="5rem" paddingTop="10rem" style={{background: "#f5f5f3"}}>
-      <Grid item xs={8} direction="row" spacing={2} paddingRight="3rem">
+      <Grid item xs={12} md={5} lg={8} direction="row" spacing={2} paddingRight="3rem">
         <Stack direction="column" gap={4}>
           <Typography variant="h2" component="h2" fontSize="28px">
             Featured this month
           </Typography>
           <Grid container spacing={3}>
             {
-              posts?.slice(0, 2)?.map((post) => {
+              posts?.blogs.slice(0, 2)?.map((post) => {
                 return <Grid key={post.id} item xs={6}>
                         <Link href={`/blog/post?id=${post.id}`}>
                           <Card style={{boxShadow:"none", background: "transparent"}}>
-                            <CardHeader
-                              title={post.title}
-                              subheader={post.type}
-                              style={{padding: "1rem 0"}}
-                            />
+                            <Stack style={{padding: "1rem 0"}} spacing={1}>
+                              <Chip label={post.type} style={{borderRadius: "3px", width: "max-content", fontSize: "12px"}} size="small"/>
+                              <Typography noWrap variant="h2" component="h2" fontSize="28px">
+                                {post.title}
+                              </Typography>
+                            </Stack>
                             <CardMedia
                               component="img"
                               alt="green iguana"
@@ -58,7 +59,7 @@ const BlogsPage = async () => {
           </Grid>
         </Stack>
       </Grid>
-      <Grid item xs={4} direction="row" spacing={2} paddingLeft="3rem">
+      <Grid item xs={12} md={5} lg={4} direction="row" spacing={2} paddingLeft="3rem">
         <Stack direction="column" gap={4}>
           <Typography variant="h2" component="h2" fontSize="28px">
             Popular posted
@@ -115,7 +116,7 @@ const BlogsPage = async () => {
           </Typography>
           <Grid container spacing={3}>
           {
-              posts?.slice(2, posts.length)?.map((post) => {
+              posts?.blogs.slice(2, posts.blogs.length)?.map((post) => {
                 return <Grid item xs={12}>
                         <Card component="a" href="/blog/post?id=" style={{boxShadow:"none", display: "flex", gap: "1rem"}}>
                           <CardMedia
@@ -126,7 +127,8 @@ const BlogsPage = async () => {
                             style={{borderRadius: "7px", maxWidth: "35%"}}
                           />
                           <CardContent style={{padding: "1rem 0", display: "flex", flexDirection: "column", gap: "16px"}}>
-                            <Typography variant="h2" component="h2" fontSize="28px">
+                            <Chip label={post.type} style={{borderRadius: "3px", width: "max-content", fontSize: "12px"}} size="small"/>
+                            <Typography noWrap variant="h2" component="h2" fontSize="28px">
                               {post.title}
                             </Typography>
                             <Typography display="flex" variant="body2" color="text.secondary" marginBottom="10px" fontSize="12px" alignItems="center" gap="5px">
