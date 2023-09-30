@@ -20,6 +20,9 @@ export { default as SkeletonServicesList } from "./SkeletonServicesList/Skeleton
 export { default as BookingGroup } from "./BookingGroup/BookingGroup";
 export { default as PopularBlogs } from "./PopularBlogs/PopularBlogs";
 export { default as NormalBlogs } from "./NormalBlogs/NormalBlogs";
+export { default as BlogDetailHighlight } from "./BlogDetailHighlight/BlogDetailHighlight";
+export { default as BlogContent } from "./BlogContent/BlogContent";
+
 
 // //
 
