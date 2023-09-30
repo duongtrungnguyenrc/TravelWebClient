@@ -1,4 +1,5 @@
-import { DefaultHero, NormalBlogs, PopularBlogs } from "@/app/_components";
+// Produced by Duong Trung Nguyen
+
 import { blogServices } from "@/app/_services";
 import { CardHeader, Chip, Grid, Pagination, Stack, Typography } from "@mui/material";
 import Card from '@mui/material/Card';
