@@ -7,6 +7,7 @@ const HomePage = async () => {
     
   return (
     <>
+      <DefaultHero/>
       <ServicesList/>
       <ServicesGroup servicesList={[]}/>
     </>

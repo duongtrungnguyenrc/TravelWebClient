@@ -47,7 +47,7 @@ const NavBar = ({ routes } : { routes: Route[] }) => {
     }
 
     return (
-        <header className={"navbar-site" + (pathName.includes("explore") ? " light" : "") + (scrollY ? " active" : "")}>
+        <header className={"navbar-site" + (pathName.includes("explore") && !pathName.includes("tour") ? " light" : "") + (scrollY ? " active" : "")}>
             <nav>
                 <div className="brand">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -71,7 +71,7 @@ const NavBar = ({ routes } : { routes: Route[] }) => {
                     </div>
                     <div className="colapse-segment right-segment">
                         <button className="btn btn-yellow">
-                            Booking Tour
+                            Khám phá ngay
                         </button>
                     </div>
                 </div>

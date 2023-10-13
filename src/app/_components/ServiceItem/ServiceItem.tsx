@@ -23,6 +23,7 @@ const ServiceItem = ({ service } : { service : Tour }) => {
             className="card-media"
             component="img"
             image={service.img}
+            loading="lazy"
             height="150"
             alt={service.name}
           />

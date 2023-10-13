@@ -38,6 +38,7 @@ const BlogsPage = async () => {
                             </Stack>
                             <CardMedia
                               component="img"
+                              loading="lazy"
                               alt="green iguana"
                               height="250"
                               image={post.img}
@@ -122,7 +123,8 @@ const BlogsPage = async () => {
                         <Card component="a" href="/blog/post?id=" style={{boxShadow:"none", display: "flex", gap: "1rem"}}>
                           <CardMedia
                             component="img"
-                            alt="green iguana"
+                            loading="lazy"
+                            alt={post.title}
                             height="250"
                             image={post.img}
                             style={{borderRadius: "7px", maxWidth: "35%"}}

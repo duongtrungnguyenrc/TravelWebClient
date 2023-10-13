@@ -29,7 +29,6 @@ const ServicesList = () => {
    
   }, [page]);
 
-  console.log("render");
 
   const handleChangePage = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
     setLoading(true);
@@ -37,7 +36,7 @@ const ServicesList = () => {
   }, []);
   
   return (
-    <section className="services-list-site">
+    <section className="services-list-site container-fluid">
       <div className="services-filter">
         <form action="">
           <div className="search-group">

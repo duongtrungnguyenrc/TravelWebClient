@@ -6,7 +6,7 @@ import "./styles.scss";
 const AuthLayout = ({ children } : { children: ReactNode }) => {
   
   return (
-    <div className="container login-container">
+    <div className="container-fluid h-100 p-0 login-container">
         <section className="left-container">
           <LoginGallery/>
         </section>

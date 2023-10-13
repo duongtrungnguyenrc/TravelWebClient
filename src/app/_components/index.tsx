@@ -20,6 +20,12 @@ export { default as SkeletonServicesList } from "./SkeletonServicesList/Skeleton
 export { default as BookingGroup } from "./BookingGroup/BookingGroup";
 export { default as PopularBlogs } from "./PopularBlogs/PopularBlogs";
 export { default as NormalBlogs } from "./NormalBlogs/NormalBlogs";
+export { default as ServiceDetailGallery } from "./ServiceDetailGallery/ServiceDetailGallery";
+export { default as PopularDestination } from "./PopularDestination/PopularDestination";
+export { default as ForgotPasswordForm } from "./ForgotPasswordForm/ForgotPasswordForm";
+export { default as SuccessChecking } from "./SuccessCheking/SuccessChecking";
+export { default as ResetPasswordForm } from "./ResetPasswordForm/ResetPasswordForm";
+
 
 // //
 

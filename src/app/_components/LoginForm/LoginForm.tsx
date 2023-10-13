@@ -42,7 +42,7 @@ const LoginForm = ({ signIn } : { signIn: Function }) => {
         
     }, 200)
 
-    const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit : FormEventHandler<HTMLFormElement> = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         Object.keys(formData).forEach((key) => {
             if(key != "isRemember")
@@ -67,34 +67,34 @@ const LoginForm = ({ signIn } : { signIn: Function }) => {
                     <h1 className="brand-name">Travel</h1>
                 </div>
                 <p className="description">
-                    A new way to experience real state in the infinite virtual space.
+                    Khám phá vẻ đẹp đa dạng của thế giới cùng những chuyến đi tuyệt vời.
                 </p>
             </div>
             <div className="login-form-frame">
-                <h1 className="login-form-title">Login</h1>
+                <h1 className="login-form-title">Đăng nhập</h1>
                 <form action="" method="get" onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label>Email</label>
                         <input type="email" name="email" defaultValue={formData.email} placeholder="david.abc@gmail.com" onChange={(e) => handleChange(e.target)}  required/>
                     </div>
                     <div className="input-group">
-                        <label>Password</label>
+                        <label>Mật khẩu</label>
                         <input type="password" name="password" defaultValue={formData.password} placeholder="Your password" onChange={(e) => handleChange(e.target)}  required/>
                     </div>
                     <div className="d-flex">
                         <div className="check-group">
                             <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
-                            <label>Remember me</label>
+                            <label>Lưu mật khẩu</label>
                         </div>
-                        <Link className="line-decor" href="">Forgot password</Link>
+                        <Link className="line-decor" href="/auth/forgot-password">Quên mật khẩu</Link>
                     </div>
                     <div className="button-group">
-                        <Link href="/register" className="btn btn-big btn-light btn-shadow">Sign Up</Link>
-                        <button className="btn btn-big btn-yellow btn-shadow" type="submit">Login</button>
+                        <Link href="/auth/register" className="btn btn-big btn-light btn-shadow">Đăng ký</Link>
+                        <button className="btn btn-big btn-yellow btn-shadow" type="submit">Đăng nhập</button>
                     </div>
                 </form>
                 <div className="login-form-bottom">
-                    <label>Or, login with</label>
+                    <label>Hoặc đăng nhập với</label>
                     <ul className="login-options">
                         <li><Link href="">Facebook</Link></li>
                         <li><Link href="">Linked in</Link></li>

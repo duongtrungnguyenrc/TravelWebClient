@@ -4,11 +4,11 @@ import { ReactNode } from "react";
 
 const HomeLayout = ({ children } : { children: ReactNode }) => {
   const testRoutes = [
-    { routeName: "Explore", routePath: "/explore" },  
+    { routeName: "Khám phá", routePath: "/explore" },  
     { routeName: "Room & Suites", routePath: "/explore" },
     { routeName: "Restaurant & Bar", routePath: "/explore" },
-    { routeName: "Blog", routePath: "/blog" },
-    { routeName: "Login", routePath: "/login" }
+    { routeName: "Diễn đàn", routePath: "/blog" },
+    { routeName: "Đăng nhập", routePath: "/auth/login" }
   ]
   return (
     <>

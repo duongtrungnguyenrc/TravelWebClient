@@ -95,6 +95,7 @@ body {
         color: var(--dark);
 
         &:hover {
+            box-shadow: none!important;
             background: var(--primary-yellow);
             color: var(--light);
         }
@@ -148,6 +149,7 @@ form {
         width: 100%;
         display: flex;
         flex-direction: column;
+        position: relative;
         gap: 8px;
 
         label {
@@ -220,13 +222,6 @@ form {
         }
     }
 
-    .button-group {
-        display: flex;
-        align-items: flex-start;
-        gap: 24px;
-        align-self: stretch;
-    }
-
     .check-group {
         display: flex;
         gap: 0.5rem;
@@ -246,6 +241,17 @@ form {
 
 
     }
+}
+
+.button-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+}
+
+.shadow-border {
+    box-shadow: 0 0 0 3px #ededed;
 }
 
 
@@ -278,10 +284,11 @@ form {
 
     .brand-name {
         font-family: 'Lora';
-        font-size: 32px;
+        font-size: 38px;
         font-style: normal;
         font-weight: 600;
         line-height: 100%;
+        margin: 0;
     }
 }
 
@@ -522,5 +529,9 @@ form {
 
 .text-bold {
     font-weight: bold;
+}
+
+.gap-0 {
+    gap: 0!important;
 }
   

@@ -1,7 +1,11 @@
+'use client'
+
 import { Card, CardActionArea, CardContent, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SettingPage = () => {
+    const router = useRouter();
   return (
     <Container sx={{display: "flex", alignItems: "center", height: "100%", padding: "100px 0"}}>
         <Stack direction="column" gap={5}>
@@ -15,14 +19,14 @@ const SettingPage = () => {
             </Stack>
             <Grid container spacing={2}>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {router.push("/setting/personal-info")}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
                                     <path d="M29 5C30.0544 5 30.9182 5.81588 30.9945 6.85074L31 7V25C31 26.0544 30.1841 26.9182 29.1493 26.9945L29 27H3C1.94564 27 1.08183 26.1841 1.00549 25.1493L1 25V7C1 5.94564 1.81588 5.08183 2.85074 5.00549L3 5H29ZM29 7H3V25H29V7ZM26 19V21H18V19H26ZM10 11C11.6569 11 13 12.3431 13 14C13 14.6168 12.8139 15.1901 12.4947 15.6668C13.9919 16.5293 15 18.1469 15 20H13C13 18.6941 12.1656 17.5831 11.0009 17.171L11 14C11 13.4477 10.5523 13 10 13C9.48716 13 9.06449 13.386 9.00673 13.8834L9 14L9.00009 17.1707C7.83485 17.5825 7 18.6937 7 20H5C5 18.1469 6.00806 16.5293 7.50571 15.6656C7.18613 15.1901 7 14.6168 7 14C7 12.3431 8.34315 11 10 11ZM26 15V17H18V15H26ZM26 11V13H18V11H26Z" fill="#222222"/>
                                 </svg>
                                 <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                    Lizard
+                                    Personal info
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
                                     Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -33,7 +37,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -51,7 +55,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -69,7 +73,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -87,7 +91,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -105,7 +109,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -123,7 +127,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -141,7 +145,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -159,7 +163,7 @@ const SettingPage = () => {
                     </Card>
                 </Grid>
                 <Grid item lg={4}>
-                    <Card style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
+                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
                         <CardActionArea>
                             <CardContent>
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
