@@ -62,11 +62,11 @@ const ForgotPasswordForm = ({ submitAction } : { submitAction: Function }) => {
         verifyStatus ? <SuccessChecking/>
         :
         (
-          isVerifyLoading ? 
-          <div className="w-100 h-100 d-flex justify-content-center align-items-center">
-            <CircularProgress color="success" sx={{width: "150px", height: "150px"}}/>
-          </div>
-          : 
+          // isVerifyLoading ? 
+          // <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+          //   <CircularProgress size="80px" sx={{color: "#c7923e"}}/>
+          // </div>
+          // : 
         <>
           <div className="register-site-header">
             <div className="brand">
@@ -106,11 +106,11 @@ const ForgotPasswordForm = ({ submitAction } : { submitAction: Function }) => {
                     <Typography>
                       Your existing account
                     </Typography>
-                    <Typography color="#e62626">
+                    <Typography color="#c7923e">
                       Manage account
                     </Typography>
                   </Stack>
-                  <Stack direction="row" className="shadow-border p-2 align-items-center justify-content-between rounded-lg">
+                  <Stack direction="row" className="shadow-border p-2 align-items-center justify-content-between rounded-lg position-relative">
                     {
                       existingAccount &&
                       <Stack direction="row" alignItems="center">
@@ -122,10 +122,19 @@ const ForgotPasswordForm = ({ submitAction } : { submitAction: Function }) => {
                           <Typography variant="body2" color="#c7923e">
                             {existingAccount.email}
                           </Typography>
+
+                          
                         </div>
                       </Stack>
                     }
-                    <CheckCircleIcon sx={{color: "#c7923e"}}/>
+                    <div className="d-flex align-items-center position-absolute h-100 ms-auto px-3" style={{right: "0"}}>
+                      {
+                        isVerifyLoading ? 
+                        <CircularProgress color="inherit" size="15px"/> 
+                        :
+                        <CheckCircleIcon sx={{color: "#c7923e"}}/>
+                      }
+                    </div>
                   </Stack>
                   <div className="button-group mt-4">
                     <Link href="/auth/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
