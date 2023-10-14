@@ -1,3 +1,5 @@
+// Produced by Duong Trung Nguyen
+
 'use client'
 
 import "./styles.scss";
@@ -10,7 +12,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { tourServices } from "@/app/_services";
 
 const ServicesList = () => {
-  const [toursData, setToursData] = useState<{ pages: number; tours: Tour[] }>({ pages: 0, tours: [] });
+  const [tours, setTours] = useState<Tour[]>([]);
+  const [ pagesNumber, setPagesNumber ] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
@@ -22,7 +25,9 @@ const ServicesList = () => {
       const response = await tourServices.getAllTours(page, 20);
       if (response.status) {
         setLoading(false);
-        setToursData(response.data as { pages: number; tours: Tour[] });
+        const toursData = response.data as { pages: number; tours: Tour[] };
+        setTours(toursData.tours);
+        pagesNumber === 0 ? setPagesNumber(toursData.pages) : undefined;
       }
     };
     handleFetchTours(page);
@@ -80,7 +85,7 @@ const ServicesList = () => {
 
           <Grid container className="services-list" spacing="1rem">
           {
-            toursData?.tours.map((tour) => {
+            tours?.map((tour) => {
               return  <Grid  key={tour.id} item xs={12} md={6} lg={4} xl={3}>
                         <ServiceItem service={tour}/>
                       </Grid>
@@ -92,7 +97,7 @@ const ServicesList = () => {
       <Stack  direction="row" justifyContent="center">
         <Pagination 
           shape="rounded" variant="outlined" color="primary" size="large"
-          count={toursData?.pages} 
+          count={pagesNumber} 
           page={page}
           onChange={handleChangePage} 
         />

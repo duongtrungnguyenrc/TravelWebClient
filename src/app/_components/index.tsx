@@ -25,8 +25,11 @@ export { default as PopularDestination } from "./PopularDestination/PopularDesti
 export { default as ForgotPasswordForm } from "./ForgotPasswordForm/ForgotPasswordForm";
 export { default as SuccessChecking } from "./SuccessCheking/SuccessChecking";
 export { default as ResetPasswordForm } from "./ResetPasswordForm/ResetPasswordForm";
-
-
+export { default as ServiceStepper } from "./ServiceStepper/ServiceStepper";
+export { default as ServiceReview } from "./ServiceReview/ServiceReview";
+export { default as FloatingChat } from "./FloatingChat/FloatingChat";
+export { default as ServiceSummary } from "./ServiceSummary/ServiceSummary";
+export { default as ServiceOverview } from "./ServiceOverview/ServiceOverview";
 // //
 
 export { default as AdminNavBar } from "./AdminNavBar/AdminNavBar";

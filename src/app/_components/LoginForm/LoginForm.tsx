@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useDebouncedCallback } from "use-debounce";
 import { FormEventHandler, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { authServices } from "@/app/_services";
+import { useRouter } from "next/navigation";
 
 interface FormData {
     email : string;
@@ -14,8 +16,10 @@ interface FormData {
     isRemember: boolean;
 }
 
-const LoginForm = ({ signIn } : { signIn: Function }) => {   
+const LoginForm = () => {   
     console.log("render");
+
+    const router = useRouter();
     
     const initialFormData : FormData = {
         email: "",
@@ -42,6 +46,24 @@ const LoginForm = ({ signIn } : { signIn: Function }) => {
         
     }, 200)
 
+    const signIn = async (email: string, password: string, isRemember: boolean) => {
+        const response = await authServices.signIn(email, password);
+        if(response.status) {            
+            if(isRemember) {
+              localStorage.setItem("saved_email", email);
+              localStorage.setItem("saved_password", password);
+            }
+            router.push("/");
+            return true;
+        }
+        else {
+            toast.error(response.message, {
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            return false;
+        }
+      }
+
     const handleSubmit : FormEventHandler<HTMLFormElement> = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         Object.keys(formData).forEach((key) => {
@@ -52,10 +74,10 @@ const LoginForm = ({ signIn } : { signIn: Function }) => {
                 }
         });
 
-        if(signIn(formData.email, formData.password, formData.isRemember)) {
-            // setFormData(initialFormData);
-        }
+        signIn(formData.email, formData.password, formData.isRemember);
     };
+
+    
 
     return  (
         <div className="login-site">

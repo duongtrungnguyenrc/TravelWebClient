@@ -11,7 +11,7 @@ import { FormEventHandler, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { User } from "@/app/_types";
 import { SuccessChecking } from "..";
-import { authServices } from "@/app/_services";
+import { authServices, userServices } from "@/app/_services";
 import { toast } from "react-toastify";
 
 interface existingAccountType {
@@ -19,7 +19,7 @@ interface existingAccountType {
   email: string;
 }
 
-const ForgotPasswordForm = ({ submitAction } : { submitAction: Function }) => {
+const ForgotPasswordForm = () => {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ isVerifyLoading, setIsVerifyLoading ] = useState(false);
   const [ verifyStatus, setVerifyStatus ] = useState(false);
@@ -33,7 +33,7 @@ const ForgotPasswordForm = ({ submitAction } : { submitAction: Function }) => {
   const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const user : User = await submitAction(forgotEmail) as User;    
+    const user : User = await getUserByEmail(forgotEmail) as User;    
     
     if(user) {
       setExistingAccount({name: user.name, email: user.email});
@@ -51,7 +51,21 @@ const ForgotPasswordForm = ({ submitAction } : { submitAction: Function }) => {
     else {
       toast.error(response.message);
     }
-  } 
+  };
+  
+  
+  const getUserByEmail = async (email: string) => {
+    const response = await userServices.getUserByEmail(email);
+    if(response.status) {            
+        return response.data;
+    }
+    else {
+        toast.error(response.message, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+        return null;
+    }
+  };
 
   console.log("render");
   

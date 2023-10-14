@@ -1,4 +1,4 @@
-import { Bottom, NavBar } from "@/app/_components";
+import { Bottom, FloatingChat, NavBar } from "@/app/_components";
 import { ReactNode } from "react";
 
 
@@ -14,6 +14,7 @@ const HomeLayout = ({ children } : { children: ReactNode }) => {
     <>
       <NavBar routes={testRoutes}/>
           { children }
+          <FloatingChat/>
       <Bottom/>
     </>
   );
