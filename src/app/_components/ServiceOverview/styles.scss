@@ -1,0 +1,26 @@
+.paragraph {
+    &:nth-child(even) {
+        .paragraph-image {
+            float: right;
+            margin-left: 1rem;
+        }
+    }
+    
+    &:nth-child(odd) {
+        .paragraph-image {
+            float: left;
+            margin-right: 1rem;
+        }
+    }
+}
+
+// MOBILE RESPONSIVE
+@media only screen and (max-width: 1024px) {
+    .paragraph {
+        .paragraph-image {
+            width: 100%;
+            float: unset;
+            margin: 0;
+        }
+    }
+}

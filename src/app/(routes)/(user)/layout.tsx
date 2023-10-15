@@ -8,7 +8,6 @@ const HomeLayout = ({ children } : { children: ReactNode }) => {
     { routeName: "Room & Suites", routePath: "/explore" },
     { routeName: "Restaurant & Bar", routePath: "/explore" },
     { routeName: "Diễn đàn", routePath: "/blog" },
-    { routeName: "Đăng nhập", routePath: "/auth/login" }
   ]
   return (
     <>

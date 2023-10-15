@@ -40,7 +40,7 @@ const FloatingChat = () => {
                 <TextareaAutosize placeholder="Input here" className="pr-5"/>
                 <IconButton className="position-absolute" onClick={() => handleClose()} sx={{right: "5px", bottom: "5px"}}>
                   <SendIcon fontSize="medium"/>
-                </IconButton>
+                </IconButton> 
               </div>
             </form>
           </Stack>

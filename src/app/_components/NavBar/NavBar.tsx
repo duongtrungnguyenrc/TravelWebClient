@@ -7,14 +7,18 @@ import "./styles.scss";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation';
+import { Typography } from "@mui/material";
+import { authServices } from "@/app/_services";
 
 
 const NavBar = ({ routes } : { routes: Route[] }) => {
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
     const pathName = usePathname();
+    const loginStatus : boolean = (localStorage.getItem("access_token")?.toLowerCase() === "true");
 
     useEffect(() => {
+
         const handleScroll = () => {
             if(window.scrollY <= 70 && scrollY) {
                 setScrollY(false);
@@ -62,11 +66,14 @@ const NavBar = ({ routes } : { routes: Route[] }) => {
                                 routes?.map((link, index) => {
                                     return (
                                         <li key={index} className="nav-item">
-                                            <Link href={link.routePath}>{link.routeName}</Link>
+                                            <Link href={link.routePath}><Typography variant="body1">{link.routeName}</Typography></Link>
                                         </li>
                                     )
                                 })
                             }
+                            <li className="nav-item">
+                                <Link href="/auth/login"><Typography variant="body1">{ loginStatus }</Typography></Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="colapse-segment right-segment">
