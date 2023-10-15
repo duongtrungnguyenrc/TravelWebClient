@@ -9,6 +9,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { authServices } from "@/app/_services";
 import { useRouter } from "next/navigation";
+import { LoginResponse, LoginState } from "@/app/_types";
 
 interface FormData {
     email : string;
@@ -48,7 +49,10 @@ const LoginForm = () => {
 
     const signIn = async (email: string, password: string, isRemember: boolean) => {
         const response = await authServices.signIn(email, password);
-        if(response.status) {            
+        if(response.status) {   
+            console.log(response.data);
+            
+            localStorage.setItem("access_token", (response.data as LoginResponse).accessToken);         
             if(isRemember) {
               localStorage.setItem("saved_email", email);
               localStorage.setItem("saved_password", password);

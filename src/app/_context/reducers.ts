@@ -1,7 +1,7 @@
-import loadingReducer from "./loadingSlice";
+import loginReducer from "./loginSlice";
 
 const rootReducer = {
-    loading: loadingReducer,
+    login: loginReducer,
 }
 
 export default rootReducer;
