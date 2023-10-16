@@ -12,7 +12,8 @@
 
         .table-cell {
             display: grid;
-            min-width: max-content;
+            width: max-content;
+            min-width: 100%;
             grid-template-columns: 0.5fr 1.3fr 1.2fr 1fr;
             padding: 1.3rem 0;
 

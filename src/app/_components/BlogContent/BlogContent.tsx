@@ -166,7 +166,7 @@ const BlogContent = () => {
     <section className="Blog-container">
       <React.Fragment>
         <CssBaseline />
-        <Container maxWidth="sm" className="m-0 m-w-100 container">
+        <Container maxWidth="xl" className="container">
           <Box sx={{ flexGrow: 1 }} className="box-container">
             <Grid container spacing={2} >
               <Grid xs={12} md={6} lg={8} >

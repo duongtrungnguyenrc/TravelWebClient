@@ -78,19 +78,19 @@ const NavBar = () => {
                     <div className="colapse-segment left-segment">
                         <ul className="nav-list">
                             <li className="nav-item">
-                                <Link href="/explore"><Typography variant="body1">Khám phá</Typography></Link>
+                                <Link href="/explore">Khám phá</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href=""><Typography variant="body1">Room & Suites</Typography></Link>
+                                <Link href="">Room & Suites</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href=""><Typography variant="body1">Restaurant & Bar</Typography></Link>
+                                <Link href="">Restaurant & Bar</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/blog"><Typography variant="body1">Diễn đàn</Typography></Link>
+                                <Link href="/blog">Diễn đàn</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href={loginStatus ? "setting" : "/auth/login"}><Typography variant="body1">{ loginStatus ? "Cài đặt" : "Đăng nhập" }</Typography></Link>
+                                <Link href={loginStatus ? "setting" : "/auth/login"}>{ loginStatus ? "Cài đặt" : "Đăng nhập" }</Link>
                             </li>
                         </ul>
                     </div>

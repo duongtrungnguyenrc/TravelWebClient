@@ -145,8 +145,8 @@ const RegisterForm = () => {
                     <label>Tôi đồng ý với <Link href="">điều khoản</Link> và <Link href="">chính sách bảo mật</Link> </label>
                 </div>
                 <div className="button-group">
-                    <button className="btn btn-big btn-light btn-shadow">Đăng nhập với Google</button>
-                    <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Đăng kí tài khoản mới</button>
+                    <button className="btn btn-big btn-light btn-shadow">Google</button>
+                    <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Đăng kí</button>
                 </div>
             </form>
             <div className="register-form-bottom">
