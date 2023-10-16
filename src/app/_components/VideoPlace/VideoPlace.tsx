@@ -21,7 +21,7 @@ const VideoPlace = () => {
     return (
         <section ref={ref} className="video-container">
             <motion.div className="video-play"  variants={variants.scaleUpVariant} initial="hidden" animate={control}>
-                <iframe className= "video" src="https://www.youtube.com/embed/NSnkb1IAjbE?si=iGFNFLu1aKB1hcsV" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"/>
+                <iframe className= "video" frameBorder="none" src="https://www.youtube.com/embed/NSnkb1IAjbE?si=iGFNFLu1aKB1hcsV" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"/>
             </motion.div>
         </section>
     )

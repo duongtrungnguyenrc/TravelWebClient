@@ -20,10 +20,17 @@ export { default as SkeletonServicesList } from "./SkeletonServicesList/Skeleton
 export { default as BookingGroup } from "./BookingGroup/BookingGroup";
 export { default as PopularBlogs } from "./PopularBlogs/PopularBlogs";
 export { default as NormalBlogs } from "./NormalBlogs/NormalBlogs";
-export { default as BlogDetailHighlight } from "./BlogDetailHighlight/BlogDetailHighlight";
 export { default as BlogContent } from "./BlogContent/BlogContent";
-
-
+export { default as ServiceDetailGallery } from "./ServiceDetailGallery/ServiceDetailGallery";
+export { default as PopularDestination } from "./PopularDestination/PopularDestination";
+export { default as ForgotPasswordForm } from "./ForgotPasswordForm/ForgotPasswordForm";
+export { default as SuccessChecking } from "./SuccessCheking/SuccessChecking";
+export { default as ResetPasswordForm } from "./ResetPasswordForm/ResetPasswordForm";
+export { default as ServiceStepper } from "./ServiceStepper/ServiceStepper";
+export { default as ServiceReview } from "./ServiceReview/ServiceReview";
+export { default as FloatingChat } from "./FloatingChat/FloatingChat";
+export { default as ServiceSummary } from "./ServiceSummary/ServiceSummary";
+export { default as ServiceOverview } from "./ServiceOverview/ServiceOverview";
 // //
 
 export { default as AdminNavBar } from "./AdminNavBar/AdminNavBar";

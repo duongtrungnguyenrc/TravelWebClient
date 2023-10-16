@@ -1,4 +1,5 @@
-import { DefaultHero, NormalBlogs, PopularBlogs } from "@/app/_components";
+// Produced by Duong Trung Nguyen
+
 import { blogServices } from "@/app/_services";
 import { CardHeader, Chip, Grid, Pagination, Stack, Typography } from "@mui/material";
 import Card from '@mui/material/Card';
@@ -37,6 +38,7 @@ const BlogsPage = async () => {
                             </Stack>
                             <CardMedia
                               component="img"
+                              loading="lazy"
                               alt="green iguana"
                               height="250"
                               image={post.img}
@@ -121,7 +123,8 @@ const BlogsPage = async () => {
                         <Card component="a" href="/blog/post?id=" style={{boxShadow:"none", display: "flex", gap: "1rem"}}>
                           <CardMedia
                             component="img"
-                            alt="green iguana"
+                            loading="lazy"
+                            alt={post.title}
                             height="250"
                             image={post.img}
                             style={{borderRadius: "7px", maxWidth: "35%"}}

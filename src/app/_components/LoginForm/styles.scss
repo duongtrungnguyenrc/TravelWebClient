@@ -1,7 +1,3 @@
-* {
-    color: #3E334E
-}
-
 .login-site {
     width: 100%;
     height: 100%;
@@ -21,7 +17,7 @@
             width: 347px;
             color: #3E334E;
             font-family: 'Inter', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             font-style: normal;
             font-weight: 400;
             line-height: 150%; /* 30px */
@@ -36,6 +32,7 @@
 
         .login-form-title {
             font-size: 2rem;
+            color: #3E334E;
         }
 
         .login-form-bottom {

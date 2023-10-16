@@ -30,12 +30,12 @@ const IntroBlogRight = ({title , content , myList}: LayoutProps) => {
         <img src="/images/home-slider-3.jpg" alt="" />
       </motion.div>
       <div className="blog-left-site">
-        <motion.div className="heading-blog" variants={variants.toBottomVariant} initial="hidden" animate={control}>
+        <motion.div className="heading-blog" initial="hidden" animate={control}>
           <h1 className="heading-name">
             {title}
           </h1>
         </motion.div>
-        <motion.div className="content-intro-blog" variants={variants.toTopVariant} initial="hidden" animate={control}>
+        <motion.div className="content-intro-blog" initial="hidden" animate={control}>
           <Typography variant='body1'>
             {content}
           </Typography>

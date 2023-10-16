@@ -6,6 +6,8 @@ import Link from "next/link";
 import { FormEventHandler, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { toast } from 'react-toastify';
+import { useRouter } from "next/navigation";
+import { authServices } from "@/app/_services";
 
 interface FormData {
     firstName: string;
@@ -17,8 +19,9 @@ interface FormData {
     isRemember: boolean;
 }
 
-const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
+const RegisterForm = () => {
     console.log("render");
+    const router = useRouter();
     
     const [ formData, setFormData ] = useState<FormData>({
         firstName: "",
@@ -37,7 +40,27 @@ const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
           [name]: value,
         }));
         
-    }, 300)
+    }, 300);
+
+
+    const register = async (fullName: string, email: string, phone: string, password: string, isRemember: boolean) => {
+      const response = await authServices.signUp(fullName, email, phone, password);
+        if(response.status) {            
+            if(isRemember) {
+                localStorage.setItem("saved_email", email);
+                localStorage.setItem("saved_password", password);
+            }
+            toast.success(response.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+            router.push("/auth/login");
+        }
+        else {
+            toast.error(response.message, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+            });
+        }
+    }
 
     const handleSubmit : FormEventHandler<HTMLFormElement> = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -59,9 +82,7 @@ const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
             return;
         }
 
-       if (handleRegister(`${formData.firstName} ${formData.lastName}`, formData.email, formData.phone, formData.password)) {
-            
-       }
+        register(`${formData.firstName} ${formData.lastName}`, formData.email, formData.phone, formData.password, formData.isRemember);
     }
 
     
@@ -75,7 +96,7 @@ const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
                 <h1 className="brand-name">Travel</h1>
             </div>
             <div>
-                <h1 className="form-title">Create account</h1>
+                <h1 className="form-title">Đăng kí tài khoản</h1>
                 <div className="description">
                     For business, band or celebrity.
                 </div>
@@ -86,12 +107,12 @@ const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
             <form action="" onSubmit={(e) => handleSubmit(e)}>
                 <div className="multi-group">
                     <div className="input-group">
-                        <label>First name</label>
-                        <input type="text" placeholder="Nguyen" name="firstName" onChange={(e) => handleChange(e.target)} required/>
+                        <label>Họ</label>
+                        <input type="text" placeholder="Duong Trung" name="lastName" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                     <div className="input-group">
-                        <label>Last name</label>
-                        <input type="text" placeholder="Duong Trung" name="lastName" onChange={(e) => handleChange(e.target)} required/>
+                        <label>Tên</label>
+                        <input type="text" placeholder="Nguyen" name="firstName" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 </div>
                     <div className="input-group">
@@ -99,37 +120,37 @@ const RegisterForm = ({ handleRegister } : { handleRegister: Function }) => {
                         <input type="email" placeholder="david.abc@gmail.com" name="email" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                     <div className="input-group">
-                        <label>Phone</label>
+                        <label>Số điện thoại</label>
                         <input type="text" placeholder="xxxx-xxx-xxx" name="phone" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 <div className="multi-group">
                     <div className="input-group">
-                        <label>Password</label>
-                        <input type="password" placeholder="Your password" name="password" onChange={(e) => handleChange(e.target)} required/>
+                        <label>Mật khẩu</label>
+                        <input type="password" placeholder="" name="password" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                     <div className="input-group">
-                        <label>Confirm password</label>
-                        <input type="text" placeholder="Password confirm" name="confirmPassword" onChange={(e) => handleChange(e.target)} required/>
+                        <label>Xác nhận mật khẩu</label>
+                        <input type="password" placeholder="" name="confirmPassword" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 </div>
                 <div className="d-flex">
                     <div className="check-group">
                         <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
-                        <label>Remember me</label>
+                        <label>Lưu mật khẩu</label>
                     </div>
-                    <Link className='line-decor' href="">Forgot password</Link>
+                    <Link className='line-decor' href="/auth/forgot-password">Quên mật khẩu</Link>
                 </div>
                 <div className="check-group">
                     <input type="checkbox" />
-                    <label>I agree to all the <Link href="">Terms</Link> and <Link href="">Privacy policy</Link> </label>
+                    <label>Tôi đồng ý với <Link href="">điều khoản</Link> và <Link href="">chính sách bảo mật</Link> </label>
                 </div>
                 <div className="button-group">
-                    <button className="btn btn-big btn-light btn-shadow">Join with Google</button>
-                    <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Create an account</button>
+                    <button className="btn btn-big btn-light btn-shadow">Đăng nhập với Google</button>
+                    <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Đăng kí tài khoản mới</button>
                 </div>
             </form>
             <div className="register-form-bottom">
-                <label>Already have account? <Link href="/login">Login</Link></label>
+                <label>Đã có tài khoản? <Link href="/auth/login">Đăng nhập</Link></label>
             </div>
         </div>
     </div>

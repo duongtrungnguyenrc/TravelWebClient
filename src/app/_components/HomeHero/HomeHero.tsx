@@ -7,8 +7,8 @@ const HomeHero = () => {
     <section className="home-hero-site">
         <div className="hero-left-site">
             <div className="hero-content">
-                <h1 className="hero-title">The world's largest <br /> chain of hotels is Best Western</h1>
-                <p className="hero-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat elit sed pretium, egestas sed sit orem ipsum dolor sit amet, </p>
+                <h1 className="hero-title">Khám phá những nơi tuyệt đẹp mọi lúc, mọi nơi!</h1>
+                <p className="hero-description">Khám phá vẻ đẹp đa dạng của Việt Nam cùng những chuyến đi tuyệt vời.</p>
             </div>
             <div className="booking-group">
                 <form action="">

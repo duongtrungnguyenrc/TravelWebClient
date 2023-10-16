@@ -1,7 +1,7 @@
 const LayoutPage = () => {
   return (
     <>
-        <iframe src="/" height="500" width="900" frameBorder={0}/>
+        {/* <iframe src="/" style={{width: "100%", height: "100%"}} frameBorder={0}/> */}
     </>
   );
 };
