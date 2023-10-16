@@ -5,6 +5,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ErrorIcon from "@mui/icons-material/Error";
 import { useState } from "react";
 import { TourDate } from "@/app/_types";
+import "./styles.scss";
 
 
 const ServiceSummary = ({ travelDates } : { travelDates :  TourDate[] }) => {
@@ -38,30 +39,27 @@ const ServiceSummary = ({ travelDates } : { travelDates :  TourDate[] }) => {
             </Select>
             </FormControl>
         </Stack>
-
-        <Table sx={{ minWidth: 650}} aria-label="simple table">
-            <TableHead>
-            <TableRow>
-                <TableCell></TableCell>
-                <TableCell><b>DATES</b></TableCell>
-                <TableCell><b>PRICE</b></TableCell>
-                <TableCell><b>TRIP TYPE</b></TableCell>
-            </TableRow>
-            </TableHead>
-            <TableBody sx={{maxHeight: 400, overflow: "scroll" }}>
-            {travelDates.map((date, index) => (
-                <TableRow
-                key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 }, height: "max-content", "&:nth-child(odd)" : {background: "#f0f1f7"} }}
-                >
-                    <TableCell><input type="radio" name="date" required/></TableCell>
-                    <TableCell><b>{date.departDate}</b></TableCell>
-                    <TableCell>{date.adultPrice} VNĐ</TableCell>
-                    <TableCell>{date.type}</TableCell>
-                </TableRow>
-            ))}
-            </TableBody>
-        </Table>
+        
+        <div className="trip-date-table">
+            <div className="table-head">
+                <Typography></Typography>
+                <Typography><b>DATES</b></Typography>
+                <Typography><b>PRICE</b></Typography>
+                <Typography><b>TRIP TYPE</b></Typography>
+            </div>
+            <ul className="table-body list-unstyled mt-2">
+                {
+                    travelDates?.map((cell) => (
+                        <li className="table-cell">
+                            <span className="flex-center"><input type="radio" name="date" required/></span>
+                            <span><b>{cell.departDate}</b></span>
+                            <span>{cell.adultPrice} VNĐ</span>
+                            <span>{cell.type}</span>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
 
         <div className="d-flex justify-content-end">
             <Typography variant="body2" color="red" className="d-flex align-items-center mr-3">

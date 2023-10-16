@@ -2,19 +2,25 @@
 
 'use client'
 
-import { Route } from "@/app/_types";
+import { LoginState, Route } from "@/app/_types";
 import "./styles.scss";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from 'next/navigation';
+import { Typography } from "@mui/material";
+import { authServices } from "@/app/_services";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleLogin } from "@/app/_context/loginSlice";
 
-
-const NavBar = ({ routes } : { routes: Route[] }) => {
+const NavBar = () => {
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
     const pathName = usePathname();
+    const dispath = useDispatch();
+    const loginStatus = useSelector((state : LoginState) => state.login.login);
 
     useEffect(() => {
+        
         const handleScroll = () => {
             if(window.scrollY <= 70 && scrollY) {
                 setScrollY(false);
@@ -35,6 +41,19 @@ const NavBar = ({ routes } : { routes: Route[] }) => {
           };
         }
       }, [scrollY]);
+
+      useEffect(() => {
+        const checkLogin = async () => {
+            const response = await authServices.checkLogin();
+            if(response.status) {
+                dispath(toggleLogin(true));
+            }
+            else {
+                dispath(toggleLogin(false));
+            }
+        }
+        checkLogin()
+      }, [])
 
 
     const handleShow = () => {
@@ -58,15 +77,21 @@ const NavBar = ({ routes } : { routes: Route[] }) => {
                 <div className={isShow ? "navbar-colapse active" : "navbar-colapse"}>
                     <div className="colapse-segment left-segment">
                         <ul className="nav-list">
-                            {
-                                routes?.map((link, index) => {
-                                    return (
-                                        <li key={index} className="nav-item">
-                                            <Link href={link.routePath}>{link.routeName}</Link>
-                                        </li>
-                                    )
-                                })
-                            }
+                            <li className="nav-item">
+                                <Link href="/explore"><Typography variant="body1">Khám phá</Typography></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link href=""><Typography variant="body1">Room & Suites</Typography></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link href=""><Typography variant="body1">Restaurant & Bar</Typography></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link href="/blog"><Typography variant="body1">Diễn đàn</Typography></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link href={loginStatus ? "setting" : "/auth/login"}><Typography variant="body1">{ loginStatus ? "Cài đặt" : "Đăng nhập" }</Typography></Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="colapse-segment right-segment">

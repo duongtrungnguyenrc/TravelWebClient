@@ -1,0 +1,30 @@
+.trip-date-table {
+    .table-head {
+        display: grid;
+        grid-template-columns: 0.5fr 1.3fr 1.2fr 1fr;
+        border-bottom: 1px solid rgb(234, 233, 233);
+        padding: 5px 0;
+    }
+
+    .table-body {
+        max-height: 300px;
+        overflow: auto;
+
+        .table-cell {
+            display: grid;
+            min-width: max-content;
+            grid-template-columns: 0.5fr 1.3fr 1.2fr 1fr;
+            padding: 1.3rem 0;
+
+            span {
+                min-width: 100px;
+                display: flex;
+                align-items: center;
+            }
+
+            &:nth-child(odd) {
+                background-color: rgb(244, 243, 243);
+            }
+        }
+    }
+}

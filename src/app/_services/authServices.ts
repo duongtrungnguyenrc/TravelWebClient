@@ -83,6 +83,27 @@ const authServices = {
                 data: (response.response?.data as Response).data
             } as Response;
         }
+    },
+    checkLogin: async () => {
+        try {            
+            const token = localStorage.getItem("access_token");   
+            const response: AxiosResponse = await request.post(`/auth/verify`, { token });     
+            return {
+                code: response.status, 
+                status: true, 
+                message: response.data.message, 
+                data: response.data.data
+            } as Response;
+
+        } catch (error) {
+            const response: AxiosError = (error as AxiosError);
+            return {
+                code: response.response?.status, 
+                status: false, 
+                message: (response.response?.data as Response).message, 
+                data: (response.response?.data as Response).data
+            } as Response;
+        }
     }
 }
 
