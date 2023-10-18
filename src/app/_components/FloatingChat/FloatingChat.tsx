@@ -46,7 +46,7 @@ const FloatingChat = () => {
           </Stack>
           :
           <Tooltip title="chat" placement="left">
-              <Fab color="primary" aria-label="add" onClick={() => handleOpen()}>
+              <Fab color="secondary" aria-label="add" onClick={() => handleOpen()}>
                   <ChatRoundedIcon />
               </Fab>
           </Tooltip>

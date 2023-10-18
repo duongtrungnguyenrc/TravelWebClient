@@ -48,7 +48,6 @@
     .services-list {
         width: 100%;
         height: 100%;
-        padding: 0rem 5rem 2rem 5rem;
     }
 }
 
@@ -66,38 +65,12 @@
 // MOBILE RESPONSIVE
 
 @media only screen and (max-width: 767px) {
-    
-    .services-list-site {
-        .services-filter {
-            transform: translate(0, -20%);
-            
-            form {
-                flex-direction: column;
-            }
-        }
-
-        .services-list {
-            padding: 1rem;
-        }
-    }
 }
 
 // TABLET RESPONSIVE
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
-    .services-list-site {
-        .services-filter {
-            transform: translate(0, -20%);
-            
-            form {
-                flex-direction: column;
-            }
-        }
 
-        .services-list {
-            padding: 1rem;
-        }
-    }
 }
 
 // MINI PC RESPONSIVE

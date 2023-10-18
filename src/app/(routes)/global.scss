@@ -4,6 +4,7 @@
     --primary-dark: #3E334E;
     --primary-medium: #27343F;
     --primary-yellow: #C7923E;
+    --primary-background: #f5f5fa;
     // //
     --heading-font: "IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     --heading-normal-size: 5rem; 
@@ -13,8 +14,9 @@
     --content-normal-size: 1.25rem; 
     --content-mobile-size: 1rem;
     // //
-    --light: #FFF;
+    --light: #fff;
     --dark: #000;
+    // //
 }
 
 * {
@@ -22,7 +24,6 @@
     margin: 0;
     box-sizing: border-box;
     font-family: var(--content-font);
-    // color: var(--primary-dark);
     outline: none;
 }
 
@@ -31,10 +32,8 @@ html {
 }
 
 body {
-    width: 100%;
-    height: 100vh;
     position: relative;
-    overflow-x: hidden;
+    background-color: var(--primary-background);
 }
 
 .text-light {
@@ -48,7 +47,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: var(--content-font);
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 100%;
     transition: 0.7s;
     box-shadow: none!important;
@@ -164,10 +163,26 @@ form {
         input, textarea {
             width: 100%;
             padding: 1rem;
+            background-color: #fff;
             border-radius: 8px;
             border: 1px solid #E1E1E1;
-            cursor: pointer;
             transition: 0.5s;
+            
+            &[type="checkbox"], &[type="button"], &[type="submit"], &[type="radio"] {
+                cursor: pointer;
+            }
+
+            &[type="text"], &[type="phone"], &[type="email"], &[type="password"] {
+                &:disabled {
+                    border: none!important;
+                    background-color: #fff;
+
+                    &::placeholder {
+                        color: #000;
+                        font-size: 1rem;
+                    }
+                }
+            }
 
             &:focus {
                 outline: unset;
@@ -301,4 +316,15 @@ form {
 .gap-0 {
     gap: 0!important;
 }
-  
+
+.gap-1 {
+    gap: 0.5rem;
+}
+
+.gap-2 {
+    gap: 1rem;
+}
+
+.bg-white {
+    background-color: var(--light);
+}

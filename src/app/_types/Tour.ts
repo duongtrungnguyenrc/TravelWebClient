@@ -1,6 +1,7 @@
 import TourDate from "./TourDate";
 import Paragraph from "./TourParagraph";
 import TourHotel from "./TourHotel";
+// import Image from "./Image";
 
 interface Tour {
     id: string;
@@ -17,7 +18,7 @@ interface Tour {
     depart?: string;
     tourDate?: TourDate[];
     currentPeople?: number;
-    blog?: {
+    overview?: {
         id: string,
         backgroundImage: string;
         paragraphs: Paragraph[];

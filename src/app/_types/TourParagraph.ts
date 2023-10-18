@@ -1,10 +1,9 @@
+import Image from "./Image";
+
 interface Paragraph{
     id: string;
     content: string;
-    images: {
-        src: string;
-        name: string;
-    };
+    image: Image;
 }
 
 export default Paragraph;

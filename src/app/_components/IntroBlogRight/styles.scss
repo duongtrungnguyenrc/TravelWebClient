@@ -6,9 +6,6 @@
   overflow: hidden;
 
   .blog-right-site {
-    
-    width: 192%;
-    background-color: #909090;
     height: 600px;
 
     img {
@@ -19,16 +16,12 @@
 
   }
   .blog-left-site {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left: 5%;
-    padding-right: 10%;
-    z-index: -1;
+    padding: 0px 150px;
 
     .heading-blog {
-      margin-bottom: 30px;
 
       .heading-name {
         color: #11142d;
@@ -88,24 +81,21 @@
   .container-blog-right {
     margin-bottom: 50px;
     flex-direction: column;
-    .blog-right-site {
-      
-      width: 100%;
-    }
+
     .blog-left-site {
       margin-top: 50px;
       padding: 1rem;
-      .content-intro-blog {
+      
+      .heading-blog {
 
-        z-index: -1;
-        .btn-more {
-
-          position: relative;
-          padding-top: 20px;
-          left: 0;
-          margin-bottom: 20px;
+        .heading-name {
+          font-size: 2rem;
         }
       }
+    }
+
+    .blog-right-site {
+      height: 250px;
     }
   }
 }
@@ -113,22 +103,20 @@
 // TABLET RESPONSIVE
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .container-blog-right {
-
     margin-bottom: 50px;
     flex-direction: row-reverse;
+
     .blog-right-site {
 
       width: 300%;
     }
-    .blog-left-site {
 
+    .blog-left-site {
       margin-top: 50px;
     }
-    .btn-more {
-      position: relative;
-      margin-bottom: 100px;
-      padding-top: 50px;
-      left: 0;
+
+    .blog-right-site {
+      height: 600px;
     }
   }
 }
