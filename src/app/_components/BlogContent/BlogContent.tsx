@@ -1,5 +1,6 @@
 "use client";
 import "./styles.scss";
+import { blogServices } from "@/app/_services";
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -11,7 +12,6 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -21,11 +21,24 @@ import Card from "@mui/material/Card";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Rating from "@mui/material/Rating";
-import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import CardActions from "@mui/material/CardActions";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import { Blog, Response } from "@/app/_types";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import { CardHeader } from "@mui/material";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Popper from "@mui/material/Popper";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import TextField from "@mui/material/TextField";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -89,7 +102,9 @@ function CustomTabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography variant="body1" className="m-20">
+            {children}
+          </Typography>
         </Box>
       )}
     </div>
@@ -151,15 +166,54 @@ function a11yProps(index: number) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+const options = [
+  "Create a merge commit",
+  "Sort by best",
+  "Rebase and merge",
+];
+const BlogContent = async () => {
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef<HTMLDivElement>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-const BlogContent = () => {
+  const handleClick = () => {
+    console.info(`You clicked ${options[selectedIndex]}`);
+  };
+
+  // const handleMenuItemClick = (
+  //   event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+  //   index: number,
+  // ) => {
+  //   setSelectedIndex(index);
+  //   setOpen(false);
+  // };
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event: Event) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    setOpen(false);
+  };
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
+  // const handleClick = () => {
+  //   console.info("You clicked the Chip.");
+  // };
+  const blogs: Response = await blogServices.getAllblogs();
+  const posts: { pages: number; blogs: Blog[] } = blogs.data as {
+    pages: number;
+    blogs: Blog[];
   };
 
   return (
@@ -168,31 +222,40 @@ const BlogContent = () => {
         <CssBaseline />
         <Container maxWidth="xl" className="container">
           <Box sx={{ flexGrow: 1 }} className="box-container">
-            <Grid container spacing={2} >
-              <Grid xs={12} md={6} lg={8} >
+            <Grid container spacing={2}>
+              <Grid xs={12} md={6} lg={8}>
                 <Item className="box-shadow">
                   <div className="blog-contain-left">
-                    <div className="Blog-heading">
-                      <div className="ellipse">
-                        <label htmlFor="inputField" className="ellipse">
-                          Travel
-                        </label>
-                      </div>
+                    <div
+                      className="Blog-heading"
+                      style={{ textAlign: "start" }}
+                    >
+                      <Chip
+                        label="travel"
+                        style={{
+                          borderRadius: "3px",
+                          width: "max-content",
+                          fontSize: "12px",
+                        }}
+                        size="small"
+                      />
                     </div>
                     <div className="heading-content">
-                      <p className="title-heading">
-                        I Created a Developer Rap Video - Here's What I Learned
-                      </p>
+                      <Typography variant="h5">
+                        <b>
+                          I Created a Developer Rap Video - Here's What I
+                          Learned
+                        </b>
+                      </Typography>
                     </div>
                     <div className="post-people">
                       <div className="avartar flex-item-user">
                         <Stack direction="row" spacing={2}>
-                          <Avatar
-                            alt="Remy Sharp"
-                            src="https://mui.com/static/images/avatar/1.jpg"
-                          />
+                          <Avatar alt="Remy Sharp" src="" />
                         </Stack>
-                        <p className="name-of-avatar">Jesica koli</p>
+                        <Typography className="name-of-avatar">
+                          Jesica koli
+                        </Typography>
                       </div>
                       <div className="time-post flex-item-user">
                         <svg
@@ -202,10 +265,12 @@ const BlogContent = () => {
                         >
                           <path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
                         </svg>
-                        <p className="calender-time">02 december 2022</p>
+                        <Typography className="calender-time">
+                          02 december 2022
+                        </Typography>
                       </div>
                     </div>
-                    <div className="image-title-post">
+                    <div className="image-title-post m-20">
                       <img
                         src="https://cdnmedia.baotintuc.vn/Upload/XjfgEPYM30O8z6jY3MHxSw/files/2019/10/310/Anh%201_Cau%20Vang%20-%20Sun%20World%20Ba%20Na%20Hills.jpg"
                         alt=""
@@ -215,7 +280,7 @@ const BlogContent = () => {
                   </div>
                   <div className="content-blog">
                     <div className="sub-detail-img">
-                      <p>
+                      <Typography variant="body1" className="m-20">
                         Did you come here for something in particular or just
                         general Riker-bashing? And blowing into maximum warp
                         speed, you appeared for an instant to be in two places
@@ -224,21 +289,24 @@ const BlogContent = () => {
                         assassination attempt on Lieutenant Worf. Could someone
                         survive inside a transporter buffer for 75 years? Fate.
                         It protects fools, little children, and ships.
-                      </p>
+                      </Typography>
                     </div>
                   </div>
                   <div className="contain-main">
-                    <p className="title-para m-20">
+                    <Typography
+                      variant="h5"
+                      className="title-para m-20 text-start"
+                    >
                       I Created a Developer Rap Video - Here's What I Learned
-                    </p>
-                    <p className="m-20">
+                    </Typography>
+                    <Typography className="m-20">
                       Did you come here for something in particular or just
                       general Riker-bashing? And blowing into maximum warp
                       speed, you appeared for an instant to be in two places at
                       once. We have a saboteur aboard. We know you’re dealing in
                       stolen ore. But I wanna talk about the assassination
                       attempt
-                    </p>
+                    </Typography>
                     <div className="table-first m-40">
                       <TableContainer component={Paper} className="m-40">
                         <Table
@@ -287,12 +355,12 @@ const BlogContent = () => {
                           </TableBody>
                         </Table>
                       </TableContainer>
-                      <p>
+                      <Typography variant="body1" className="m-20">
                         Did you come here for something in particular or just
                         general Riker-bashing? And blowing into maximum warp
                         speed, you appeared for an instant to be in two places
                         at once. We have a saboteur aboard.
-                      </p>
+                      </Typography>
                       <div className="observe">
                         <Card
                           sx={{
@@ -320,21 +388,24 @@ const BlogContent = () => {
                           </CardContent>
                         </Card>
                       </div>
-                      <p>
+                      <Typography variant="body1" className="m-20">
                         Did you come here for something in particular or just
                         general Riker-bashing? And blowing into maximum warp
                         speed, you appeared for an instant to be in two places
                         at once. We have a saboteur aboard.
-                      </p>
-                      <p className="title-para m-20">
+                      </Typography>
+                      <Typography
+                        variant="h5"
+                        className="title-para m-20 text-start"
+                      >
                         I Created a Developer Rap Video - Here's What I Learned
-                      </p>
-                      <p>
+                      </Typography>
+                      <Typography variant="body1" className="m-20">
                         Did you come here for something in particular or just
                         general Riker-bashing? And blowing into maximum warp
                         speed, you appeared for an instant to be in two places
                         at once. We have a saboteur aboard.
-                      </p>
+                      </Typography>
                       <ol className="tight-list">
                         <li>
                           Did you come here for something in particular or just
@@ -346,11 +417,13 @@ const BlogContent = () => {
                         </li>
                         <li>Did you come here for something in particula</li>
                       </ol>
-                      <p>
+                      <Typography variant="body1" className="m-20">
                         Did you come here for something in particular or just
                         general Riker-bashing? And blowing into maximum
-                      </p>
-                      <p>I Created a Developer Rap Video</p>
+                      </Typography>
+                      <Typography variant="body1" className="m-20">
+                        I Created a Developer Rap Video
+                      </Typography>
                       <div className="tab-content m-40">
                         <Box sx={{ width: "100%" }}>
                           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -434,29 +507,29 @@ const BlogContent = () => {
                           <path
                             d="M9 12C9 13.3807 7.88071 14.5 6.5 14.5C5.11929 14.5 4 13.3807 4 12C4 10.6193 5.11929 9.5 6.5 9.5C7.88071 9.5 9 10.6193 9 12Z"
                             stroke="#1C274C"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                           />
                           <path
                             d="M14 6.5L9 10"
                             stroke="#1C274C"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
                           />
                           <path
                             d="M14 17.5L9 14"
                             stroke="#1C274C"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
                           />
                           <path
                             d="M19 18.5C19 19.8807 17.8807 21 16.5 21C15.1193 21 14 19.8807 14 18.5C14 17.1193 15.1193 16 16.5 16C17.8807 16 19 17.1193 19 18.5Z"
                             stroke="#1C274C"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                           />
                           <path
                             d="M19 5.5C19 6.88071 17.8807 8 16.5 8C15.1193 8 14 6.88071 14 5.5C14 4.11929 15.1193 3 16.5 3C17.8807 3 19 4.11929 19 5.5Z"
                             stroke="#1C274C"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                           />
                         </svg>
                       </div>
@@ -464,74 +537,61 @@ const BlogContent = () => {
                   </div>
                   <div className="related-post text-start">
                     <div className="related-heading">
-                      <h1>Related Post</h1>
+                      <Typography variant="h5">
+                        <b>Related Post</b>
+                      </Typography>
                     </div>
                     <div className="post-item">
                       <Box sx={{ flexGrow: 1 }}>
                         <Grid container spacing={2}>
                           <Grid xs={12} md={12} lg={6}>
                             <Item className="box-shadow">
-                              <Card sx={{ maxWidth: 345 }} className="m-w-100">
-                                <CardMedia
-                                  sx={{ height: 140 }}
-                                  image="https://th.bing.com/th/id/OIP.PlvQBR4jZdeJEGvf5ZV0KgHaEx?pid=ImgDet&rs=1"
-                                  title="green iguana"
+                              <Card
+                                component="a"
+                                href="/blog/post?id="
+                                style={{ boxShadow: "none" }}
+                              >
+                                <CardHeader
+                                  title="set video playback speed
+                  with javascript"
+                                  subheader="Travel"
+                                  style={{
+                                    padding: "1rem 0",
+                                    textAlign: "start",
+                                  }}
                                 />
-                                <CardContent>
-                                  <Typography gutterBottom component="div">
-                                    <div className="ellipse">
-                                      <label
-                                        htmlFor="inputField"
-                                        className="ellipse"
-                                      >
-                                        Travel
-                                      </label>
-                                    </div>
-                                  </Typography>
+                                <CardContent
+                                  style={{
+                                    padding: "1rem 0",
+                                    textAlign: "start",
+                                  }}
+                                >
                                   <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="div"
-                                    className="text-start"
-                                  >
-                                    Lizard
-                                  </Typography>
-                                  <Typography
+                                    display="flex"
                                     variant="body2"
                                     color="text.secondary"
+                                    marginBottom="10px"
+                                    fontSize="12px"
+                                    alignItems="center"
+                                    gap="5px"
                                   >
-                                    <div className="post-people">
-                                      <div className="avartar flex-item-user">
-                                        <Stack direction="row" spacing={2}>
-                                          <Avatar
-                                            alt="Remy Sharp"
-                                            src="https://mui.com/static/images/avatar/1.jpg"
-                                          />
-                                        </Stack>
-                                        <p className="name-of-avatar">
-                                          Jesica koli
-                                        </p>
-                                      </div>
-                                      <div className="time-post flex-item-user">
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          height="1em"
-                                          viewBox="0 0 448 512"
-                                        >
-                                          <path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
-                                        </svg>
-                                        <p className="calender-time">
-                                          02 december 2022
-                                        </p>
-                                      </div>
-                                    </div>
+                                    Nguyen |{" "}
+                                    <CalendarTodayIcon
+                                      sx={{ fontSize: "12px" }}
+                                    />{" "}
+                                    02 December 2023 |{" "}
+                                    <AccessAlarmIcon
+                                      sx={{ fontSize: "12px" }}
+                                    />{" "}
+                                    3 Min, to Read
                                   </Typography>
                                   <Typography
-                                    variant="body2"
+                                    variant="body1"
                                     color="text.secondary"
                                   >
-                                    Did you come here for something in
-                                    particular or just general Riker-bashing
+                                    Lizards are a widespread group of squamate
+                                    reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
                                   </Typography>
                                 </CardContent>
                               </Card>
@@ -539,67 +599,52 @@ const BlogContent = () => {
                           </Grid>
                           <Grid xs={12} md={12} lg={6}>
                             <Item className="box-shadow">
-                              <Card sx={{ maxWidth: 345 }} className="m-w-100">
-                                <CardMedia
-                                  sx={{ height: 140 }}
-                                  image="https://th.bing.com/th/id/OIP.PlvQBR4jZdeJEGvf5ZV0KgHaEx?pid=ImgDet&rs=1"
-                                  title="green iguana"
+                              <Card
+                                component="a"
+                                href="/blog/post?id="
+                                style={{ boxShadow: "none" }}
+                              >
+                                <CardHeader
+                                  title="set video playback speed
+                  with javascript"
+                                  subheader="Travel"
+                                  style={{
+                                    padding: "1rem 0",
+                                    textAlign: "start",
+                                  }}
                                 />
-                                <CardContent>
-                                  <Typography gutterBottom component="div">
-                                    <div className="ellipse">
-                                      <label
-                                        htmlFor="inputField"
-                                        className="ellipse"
-                                      >
-                                        Travel
-                                      </label>
-                                    </div>
-                                  </Typography>
+                                <CardContent
+                                  style={{
+                                    padding: "1rem 0",
+                                    textAlign: "start",
+                                  }}
+                                >
                                   <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="div"
-                                    className="text-start"
-                                  >
-                                    Lizard
-                                  </Typography>
-                                  <Typography
+                                    display="flex"
                                     variant="body2"
                                     color="text.secondary"
+                                    marginBottom="10px"
+                                    fontSize="12px"
+                                    alignItems="center"
+                                    gap="5px"
                                   >
-                                    <div className="post-people">
-                                      <div className="avartar flex-item-user">
-                                        <Stack direction="row" spacing={2}>
-                                          <Avatar
-                                            alt="Remy Sharp"
-                                            src="https://mui.com/static/images/avatar/1.jpg"
-                                          />
-                                        </Stack>
-                                        <p className="name-of-avatar">
-                                          Jesica koli
-                                        </p>
-                                      </div>
-                                      <div className="time-post flex-item-user">
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          height="1em"
-                                          viewBox="0 0 448 512"
-                                        >
-                                          <path d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
-                                        </svg>
-                                        <p className="calender-time">
-                                          02 december 2022
-                                        </p>
-                                      </div>
-                                    </div>
+                                    Nguyen |{" "}
+                                    <CalendarTodayIcon
+                                      sx={{ fontSize: "12px" }}
+                                    />{" "}
+                                    02 December 2023 |{" "}
+                                    <AccessAlarmIcon
+                                      sx={{ fontSize: "12px" }}
+                                    />{" "}
+                                    3 Min, to Read
                                   </Typography>
                                   <Typography
-                                    variant="body2"
+                                    variant="body1"
                                     color="text.secondary"
                                   >
-                                    Did you come here for something in
-                                    particular or just general Riker-bashing
+                                    Lizards are a widespread group of squamate
+                                    reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
                                   </Typography>
                                 </CardContent>
                               </Card>
@@ -613,7 +658,9 @@ const BlogContent = () => {
                     <Grid container spacing={2}>
                       <Grid xs={6} md={8} lg={10}>
                         <Item className="box-shadow d-flex-center-h-100">
-                          <p className="total-comment">0 comment</p>
+                          <Typography className="total-comment">
+                            0 comment
+                          </Typography>
                         </Item>
                       </Grid>
                       <Grid xs={6} md={4} lg={2}>
@@ -621,7 +668,7 @@ const BlogContent = () => {
                           <button className="btn btn-yellow">login</button>
                         </Item>
                       </Grid>
-                      <Grid xs={12} md={12} lg={10}>
+                      <Grid xs={12} md={12} lg={9}>
                         <Item className="share box-shadow d-flex-center-h-100">
                           <div className="icon-rating">
                             <Stack spacing={1}>
@@ -665,44 +712,113 @@ const BlogContent = () => {
                           </div>
                         </Item>
                       </Grid>
-                      <Grid xs={12} md={12} lg={2}>
+                      <Grid xs={12} md={12} lg={3}>
                         <Item className="box-shadow d-flex-center-h-100">
-                          <p>
-                            sort by best
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              height="1em"
-                              viewBox="0 0 320 512"
+                            <ButtonGroup
+                              variant="contained"
+                              ref={anchorRef}
+                              aria-label="split button"
                             >
-                              <path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
-                            </svg>
-                          </p>
+                              <Button onClick={handleClick}  className="btn btn-yellow btn-content">
+                                {options[selectedIndex]}
+                              </Button>
+                              <Button
+                                size="small"
+                                aria-controls={
+                                  open ? "split-button-menu" : undefined
+                                }
+                                aria-expanded={open ? "true" : undefined}
+                                aria-label="select merge strategy"
+                                aria-haspopup="menu"
+                                // onClick={handleToggle}
+                                className="btn btn-yellow btn-arrow"
+                              >
+                                <ArrowDropDownIcon />
+                              </Button>
+                            </ButtonGroup>
+                            {/* <Popper
+                              sx={{
+                                zIndex: 1,
+                              }}
+                              open={open}
+                              anchorEl={anchorRef.current}
+                              role={undefined}
+                              transition
+                              disablePortal
+                            >
+                              {({ TransitionProps, placement }) => (
+                                <Grow
+                                  {...TransitionProps}
+                                  style={{
+                                    transformOrigin:
+                                      placement === "top"
+                                        ? "center top"
+                                        : "center bottom",
+                                  }}
+                                >
+                                  <Paper>
+                                    <ClickAwayListener
+                                      onClickAway={handleClose}
+                                    >
+                                      <MenuList
+                                        id="split-button-menu"
+                                        autoFocusItem
+                                      >
+                                        {options.map((option, index) => (
+                                          <MenuItem
+                                            key={option}
+                                            selected={index === selectedIndex}
+                                            onClick={(event) =>
+                                              handleMenuItemClick(event, index)
+                                            }
+                                          >
+                                            {option}
+                                          </MenuItem>
+                                        ))}
+                                      </MenuList>
+                                    </ClickAwayListener>
+                                  </Paper>
+                                </Grow>
+                              )}
+                            </Popper> */}
                         </Item>
                       </Grid>
                       <Grid xs={12} md={2} lg={1}>
                         <Item className="box-shadow d-flex-center-h-100">
                           <div className="comment-place">
                             <div className="comment-input">
-                              <Avatar
-                                alt="Remy Sharp"
-                                src="https://mui.com/static/images/avatar/1.jpg"
-                              />
+                              <Avatar alt="Remy Sharp" src="" />
                             </div>
                           </div>
                         </Item>
                       </Grid>
                       <Grid xs={12} md={10} lg={11}>
                         <Item className="box-shadow d-flex-center-h-100">
-                          <input
+                          {/* <input
                             type="text"
                             className="enter-comment"
                             placeholder="Enter your comment"
-                          />
+                          /> */}
+                          <Box
+                            sx={{
+                              width: "100%",
+                              maxWidth: "100%",
+                            }}
+                          >
+                            <TextField
+                              fullWidth
+                              placeholder="Enter your comment"
+                              className="enter-comment"
+                              id="fullWidth"
+                            />
+                          </Box>
                         </Item>
                       </Grid>
                       <Grid xs={12} md={4} lg={2}>
                         <Item className="text-start box-shadow">
-                          <p>Login in with</p>
+                          <Typography variant="body1" className="m-20">
+                            Login in with
+                          </Typography>
                           <div className="list-icon">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -730,13 +846,29 @@ const BlogContent = () => {
                       </Grid>
                       <Grid xs={12} md={8} lg={10}>
                         <Item className="text-start box-shadow">
-                          <p>OR SIGN UP WITH DISQUS</p>
-                          <input type="text" className="" placeholder="name" />
+                          <Typography variant="body1" className="m-20">
+                            OR SIGN UP WITH DISQUS
+                          </Typography>
+                          <Box
+                            sx={{
+                              width: "100%",
+                              maxWidth: "100%",
+                            }}
+                          >
+                            <TextField
+                              fullWidth
+                              placeholder="Name"
+                              className="enter-comment"
+                              id="fullWidth"
+                            />
+                          </Box>
                         </Item>
                       </Grid>
                       <Grid xs={12} md={6} lg={12}>
                         <div className="contain-comment">
-                          <p>No comment</p>
+                          <Typography variant="body1" className="m-20">
+                            No comment
+                          </Typography>
                         </div>
                       </Grid>
                     </Grid>
@@ -749,7 +881,9 @@ const BlogContent = () => {
                   <div className="blog-container-right">
                     <div className="top-author-contain">
                       <div className="Author-heading">
-                        <h1 className="text-start">Top Author</h1>
+                        <Typography variant="h5" className="text-start">
+                          Top Author
+                        </Typography>
                       </div>
                       <Grid container spacing={2}>
                         <Grid xs={12} md={12} lg={12}>
@@ -757,17 +891,23 @@ const BlogContent = () => {
                             <div className="avatar">
                               <Avatar
                                 alt="Remy Sharp"
-                                src="https://mui.com/static/images/avatar/1.jpg"
+                                src=""
                                 sx={{ width: 56, height: 56 }}
                               />
                             </div>
                             <div className="infor-author">
-                              <h2 className="name-infor text-start">
+                              <Typography
+                                variant="h5"
+                                className="name-infor text-start"
+                              >
                                 Jenny Kia
-                              </h2>
-                              <p className="detail-infor m-0">
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                className="detail-infor m-0"
+                              >
                                 Fashion designer, Blogger, activist
-                              </p>
+                              </Typography>
                               <div className="list-contact-author">
                                 <ul className="d-flex-10">
                                   <li>
@@ -813,17 +953,23 @@ const BlogContent = () => {
                             <div className="avatar">
                               <Avatar
                                 alt="Remy Sharp"
-                                src="https://mui.com/static/images/avatar/1.jpg"
+                                src=""
                                 sx={{ width: 56, height: 56 }}
                               />
                             </div>
                             <div className="infor-author">
-                              <h2 className="name-infor text-start">
+                              <Typography
+                                variant="h5"
+                                className="name-infor text-start"
+                              >
                                 Jenny Kia
-                              </h2>
-                              <p className="detail-infor m-0">
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                className="detail-infor m-0"
+                              >
                                 Fashion designer, Blogger, activist
-                              </p>
+                              </Typography>
                               <div className="list-contact-author">
                                 <ul className="d-flex-10">
                                   <li>
@@ -869,17 +1015,23 @@ const BlogContent = () => {
                             <div className="avatar">
                               <Avatar
                                 alt="Remy Sharp"
-                                src="https://mui.com/static/images/avatar/1.jpg"
+                                src=""
                                 sx={{ width: 56, height: 56 }}
                               />
                             </div>
                             <div className="infor-author">
-                              <h2 className="name-infor text-start">
+                              <Typography
+                                variant="h5"
+                                className="name-infor text-start"
+                              >
                                 Jenny Kia
-                              </h2>
-                              <p className="detail-infor m-0">
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                className="detail-infor m-0"
+                              >
                                 Fashion designer, Blogger, activist
-                              </p>
+                              </Typography>
                               <div className="list-contact-author">
                                 <ul className="d-flex-10">
                                   <li>
@@ -951,59 +1103,81 @@ const BlogContent = () => {
                     </div>
                     <div className="categories m-40">
                       <div className="head-categories">
-                        <h2 className="text-start">Categories</h2>
+                        <Typography variant="h5" className="text-start">
+                          Categories
+                        </Typography>
                       </div>
                       <ul className="catergories-contain">
                         <li className="list-flex-item w-100">
-                          <p>Lifestyle</p>
-                          <p>09</p>
+                          <Typography variant="body1">Lifestyle</Typography>
+                          <Typography variant="body1">09</Typography>
                         </li>
                         <div className="line"></div>
                         <li className="list-flex-item w-100">
-                          <p>Lifestyle</p>
-                          <p>09</p>
+                          <Typography variant="body1">Lifestyle</Typography>
+                          <Typography variant="body1">09</Typography>
                         </li>
                         <div className="line"></div>
                         <li className="list-flex-item w-100">
-                          <p>Lifestyle</p>
-                          <p>09</p>
+                          <Typography variant="body1">Lifestyle</Typography>
+                          <Typography variant="body1">09</Typography>
                         </li>
                       </ul>
                     </div>
                     <div className="today-update m-40">
                       <div className="head-today m-40">
-                        <h2 className="text-start">Today's Update</h2>
+                        <Typography variant="h5" className="text-start">
+                          Today's Update
+                        </Typography>
                       </div>
                       <Grid container spacing={2}>
                         <Grid xs={12} md={12} lg={6}>
                           <Item className="item-update">
-                            <p className="text-center m-20 number-of-post">14</p>
-                            <p className="text-center detail-post">New Post</p>
+                            <Typography className="text-center number-of-post">
+                              14
+                            </Typography>
+                            <Typography className="text-center detail-post">
+                              New Post
+                            </Typography>
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={6}>
                           <Item className="item-update">
-                            <p className="text-center m-20 number-of-post">14</p>
-                            <p className="text-center detail-post">New Post</p>
+                            <Typography className="text-center number-of-post">
+                              14
+                            </Typography>
+                            <Typography className="text-center detail-post">
+                              New Post
+                            </Typography>
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={6}>
                           <Item className="item-update">
-                            <p className="text-center m-20 number-of-post">14</p>
-                            <p className="text-center detail-post">New Post</p>
+                            <Typography className="text-center number-of-post">
+                              14
+                            </Typography>
+                            <Typography className="text-center detail-post">
+                              New Post
+                            </Typography>
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={6}>
                           <Item className="item-update">
-                            <p className="text-center m-20 number-of-post">14</p>
-                            <p className="text-center detail-post">New Post</p>
+                            <Typography className="text-center number-of-post">
+                              14
+                            </Typography>
+                            <Typography className="text-center detail-post">
+                              New Post
+                            </Typography>
                           </Item>
                         </Grid>
                       </Grid>
                     </div>
                     <div className="instagram-post-contain m-40">
                       <div className="head-instagram-post">
-                        <h2 className="text-start m-20">Instagram Post</h2>
+                        <Typography variant="h5" className="text-start m-20">
+                          Instagram Post
+                        </Typography>
                       </div>
                       <ImageList
                         sx={{ width: "100%", height: 450 }}
@@ -1024,37 +1198,39 @@ const BlogContent = () => {
                     </div>
                     <div className="search-with-tag">
                       <div className="search-instagram-post">
-                        <h2 className="text-start m-20">Search With Tag</h2>
+                        <Typography variant="h5" className="text-start m-20">
+                          Search With Tag
+                        </Typography>
                       </div>
                       <Grid container spacing={2}>
                         <Grid xs={6} md={6} lg={4}>
                           <Item className="box-shadow">
-                            <Chip label="Travel" className ="tag-item"/>
+                            <Chip label="Travel" className="tag-item" />
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
                           <Item className="box-shadow">
-                            <Chip label="lifestyle" className ="tag-item"/>
+                            <Chip label="lifestyle" className="tag-item" />
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
                           <Item className="box-shadow">
-                            <Chip label="fashion" className ="tag-item"/>
+                            <Chip label="fashion" className="tag-item" />
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
                           <Item className="box-shadow">
-                            <Chip label="technology" className ="tag-item"/>
+                            <Chip label="technology" className="tag-item" />
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
                           <Item className="box-shadow">
-                            <Chip label="business" className ="tag-item"/>
+                            <Chip label="business" className="tag-item" />
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
                           <Item className="box-shadow">
-                            <Chip label="design" className ="tag-item"/>
+                            <Chip label="design" className="tag-item" />
                           </Item>
                         </Grid>
                       </Grid>

@@ -6,9 +6,16 @@ input[type="text"] {
   width: 100%;
   height: 100%;
 }
-li {
 
-  width: fit-content;
+body{
+  font-family: var(--content-font);
+}
+li {
+    width: fit-content;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
 }
 p {
 
@@ -62,7 +69,6 @@ p {
   text-transform: capitalize;
 }
 .text-start {
-
   text-align: start;
 }
 
@@ -177,6 +183,7 @@ p {
             align-items: center;
             gap: 10px;
           }
+          
         }
       }
       .blog-container-right {
@@ -256,7 +263,17 @@ p {
     }
   }
 }
-
+.list-icon{
+  display:flex;
+  gap:10px;
+}
+.btn-arrow{
+  width:fit-content !important;
+  padding:0px !important;
+}
+.btn-content{
+  border: none !important;
+}
 // MOBILE RESPONSIVE
 @media only screen and (max-width: 600px) {
   .MuiContainer-root.MuiContainer-maxWidthSm.m-0.m-w-100.container.css-cuefkz-MuiContainer-root{
