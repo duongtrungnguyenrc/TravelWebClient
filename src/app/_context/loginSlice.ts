@@ -4,9 +4,7 @@ const loginSlice = createSlice({
     name: 'login',
     initialState: { login : false },
     reducers: {
-        toggleLogin: (state, action) => {
-            console.log(action.payload);
-            
+        toggleLogin: (state, action) => {            
             state.login = action.payload;
         },
     }

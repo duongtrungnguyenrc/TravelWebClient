@@ -8,7 +8,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import{ Tour } from "@/app/_types";
-import { IconButton } from "@mui/material";
+import { Container, IconButton } from "@mui/material";
 
 
 const ServicesGroup = ({ servicesList } : { servicesList : Tour[] }) => {
@@ -28,7 +28,7 @@ const ServicesGroup = ({ servicesList } : { servicesList : Tour[] }) => {
   }
 
   return (
-    <section className="services-group-site">
+    <Container maxWidth="xl" component="section" className="services-group-site px-3">
         <div className="services-group-top">
             <h1 className="services-group-title">Destinations Most Popular</h1>
             <h1 className="services-group-description">Some of the most popular destinations for you visit with a view the beautiful one.</h1>
@@ -48,7 +48,7 @@ const ServicesGroup = ({ servicesList } : { servicesList : Tour[] }) => {
           })
         }
         </div>
-    </section>
+    </Container>
   );
 };
 export default ServicesGroup;

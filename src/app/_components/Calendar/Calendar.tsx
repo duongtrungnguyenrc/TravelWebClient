@@ -19,7 +19,7 @@ const Calendar = () => {
                             <li className="year anim04c">
                                 <span>{newDate.getFullYear()}</span>
                             </li>
-                            <ul className="calendarMain anim04c">
+                            <ul className="calendarMain anim04c flex-center flex-column">
                                 <li className="month anim04c">
                                     <span>{monthNames[newDate.getMonth()]}</span>
                                 </li>

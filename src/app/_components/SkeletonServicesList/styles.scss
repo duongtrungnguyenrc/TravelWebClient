@@ -1,14 +1,10 @@
 
 .skeleton-list-site {
   width: 100%;
-  padding: 0 5rem;
-  
+
   .list-row {
+      width: 100%;
       display: flex;
-            
-      .col-lg-3 {
-        width: 25%;
-      }
 
       .skeleton-service-item {
         padding: 0 8px!important;
@@ -153,7 +149,7 @@
     padding: 1rem; 
     
     .list-row {
-        .skeleton-service-item:nth-child(n+3) {
+        .skeleton-service-item:nth-child(n+2) {
           display: none;
         }
     }

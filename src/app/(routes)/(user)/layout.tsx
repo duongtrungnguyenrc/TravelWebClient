@@ -7,8 +7,8 @@ const HomeLayout = ({ children } : { children: ReactNode }) => {
     <>
       <NavBar/>
           { children }
-          <FloatingChat/>
       <Bottom/>
+      <FloatingChat/>
     </>
   );
 };

@@ -70,7 +70,7 @@ const TourPage = () => {
     ];
     
     return (
-      <Container maxWidth="xl" sx={{paddingTop: "100px", paddingBottom: "20px"}}>
+      <Container className="bg-white" maxWidth="xl" sx={{paddingTop: "100px", paddingBottom: "20px"}}>
 
         {/* Service detail gallery */}
 

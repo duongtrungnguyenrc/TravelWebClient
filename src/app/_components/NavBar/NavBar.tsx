@@ -5,7 +5,7 @@
 import { LoginState, Route } from "@/app/_types";
 import "./styles.scss";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { usePathname } from 'next/navigation';
 import { Typography } from "@mui/material";
 import { authServices } from "@/app/_services";
@@ -52,7 +52,7 @@ const NavBar = () => {
                 dispath(toggleLogin(false));
             }
         }
-        checkLogin()
+        checkLogin();
       }, [])
 
 
@@ -64,9 +64,9 @@ const NavBar = () => {
             setIsShow(true);
         }
     }
-
+    // (pathName.includes("explore") && !pathName.includes("tour") ? " light" : "") +
     return (
-        <header className={"navbar-site" + (pathName.includes("explore") && !pathName.includes("tour") ? " light" : "") + (scrollY ? " active" : "")}>
+        <header className={"navbar-site" + (scrollY ? " active" : "")}>
             <nav>
                 <div className="brand">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -116,4 +116,4 @@ const NavBar = () => {
         </header>
     );
 };
-export default NavBar;
+export default memo(NavBar);
