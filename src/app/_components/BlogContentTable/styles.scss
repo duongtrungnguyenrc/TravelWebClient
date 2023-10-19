@@ -25,9 +25,7 @@ p {
 
   margin: 0px;
 }
-.p-1rem{
-  padding:1rem;
-}
+
 .m-40 {
 
   margin-bottom: 40px;
@@ -98,9 +96,8 @@ p {
   background-color: black;
 }
 
-.Blog-container {
+.table-conatainer-right {
 
-  padding-top: 150px;
   .container {
 
     max-width: 1400px !important;
@@ -188,80 +185,6 @@ p {
           
         }
       }
-      .blog-container-right {
-
-        .categories {
-
-          .catergories-contain {
-
-            li {
-
-              padding: 20px 0px 20px;
-            }
-
-            .list-flex-item {
-
-              display: flex;
-              justify-content: space-between;
-            }
-          }
-        }
-
-        .today-update {
-
-          .item-update {
-
-            background-color: #f9d7a2;
-            .detail-post {
-
-              color: #222;
-              text-align: center;
-              font-size: 15px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 150%;
-              text-transform: capitalize;
-            }
-            .number-of-post {
-
-              color: #00aaa1;
-              text-align: center;
-              font-size: 24px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: 140%;
-              text-transform: capitalize;
-            }
-          }
-        }
-      }
-    }
-  }
-  .blog-contain-left {
-
-    .heading-content {
-
-      color: #222;
-      font-size: 27px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 140%;
-      text-transform: capitalize;
-      text-align: start;
-    }
-    .post-people {
-
-      margin-top: 20px;
-      display: flex;
-      gap: 20px;
-    }
-    .image-title-post {
-
-      margin-top: 20px;
-      .img-post {
-
-        width: 100%;
-      }
     }
   }
 }
@@ -269,12 +192,8 @@ p {
   display:flex;
   gap:10px;
 }
-.btn-arrow{
-  width:fit-content !important;
-  padding:0px !important;
-}
-.btn-content{
-  border: none !important;
+.p-1rem{
+  padding:1rem;
 }
 // MOBILE RESPONSIVE
 @media only screen and (max-width: 600px) {

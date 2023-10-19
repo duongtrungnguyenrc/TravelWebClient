@@ -25,9 +25,7 @@ p {
 
   margin: 0px;
 }
-.p-1rem{
-  padding:1rem;
-}
+
 .m-40 {
 
   margin-bottom: 40px;
@@ -61,15 +59,6 @@ p {
   align-items: center;
   gap: 10px;
 }
-.title-para {
-
-  color: #333;
-  font-size: 21px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 140%;
-  text-transform: capitalize;
-}
 .text-start {
   text-align: start;
 }
@@ -85,7 +74,9 @@ p {
   display: flex;
   align-items: center;
 }
-
+.p-1rem{
+    padding:1rem;
+  }
 .d-flex-10 {
 
   display: flex;
@@ -98,9 +89,9 @@ p {
   background-color: black;
 }
 
-.Blog-container {
+.blog-content-comment{
 
-  padding-top: 150px;
+  padding-top: 0px;
   .container {
 
     max-width: 1400px !important;
@@ -108,61 +99,6 @@ p {
     .box-container {
 
       min-width: 100%;
-      .contain-main {
-
-        .table-first {
-
-          .line-container {
-
-            display: flex;
-            align-items: center;
-
-            .icon-list {
-
-              display: flex;
-              list-style: none;
-              padding: 0;
-              margin-right: 10px;
-            }
-            .icon-list li {
-
-              margin-right: 10px;
-              margin-left: 20px;
-            }
-          }
-          .tight-list {
-
-            margin: 0;
-            padding: 0;
-            list-style-position: inside;
-          }
-          .tight-list li:not(:last-child) {
-
-            margin-bottom: 20px;
-          }
-          .tight-list li {
-
-            margin-bottom: 0;
-          }
-
-          .share-sort {
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .icon-share {
-
-              display: flex;
-              gap: 10px;
-            }
-          }
-
-          .share-contain {
-
-            text-align: start;
-          }
-        }
-      }
       .comment-section {
 
         .contain-comment {
@@ -186,53 +122,6 @@ p {
             gap: 10px;
           }
           
-        }
-      }
-      .blog-container-right {
-
-        .categories {
-
-          .catergories-contain {
-
-            li {
-
-              padding: 20px 0px 20px;
-            }
-
-            .list-flex-item {
-
-              display: flex;
-              justify-content: space-between;
-            }
-          }
-        }
-
-        .today-update {
-
-          .item-update {
-
-            background-color: #f9d7a2;
-            .detail-post {
-
-              color: #222;
-              text-align: center;
-              font-size: 15px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: 150%;
-              text-transform: capitalize;
-            }
-            .number-of-post {
-
-              color: #00aaa1;
-              text-align: center;
-              font-size: 24px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: 140%;
-              text-transform: capitalize;
-            }
-          }
         }
       }
     }

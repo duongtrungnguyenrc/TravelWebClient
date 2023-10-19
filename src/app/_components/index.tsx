@@ -31,6 +31,10 @@ export { default as ServiceReview } from "./ServiceReview/ServiceReview";
 export { default as FloatingChat } from "./FloatingChat/FloatingChat";
 export { default as ServiceSummary } from "./ServiceSummary/ServiceSummary";
 export { default as ServiceOverview } from "./ServiceOverview/ServiceOverview";
+export { default as BlogContentTable} from "./BlogContentTable/BlogContentTable";
+export { default as BlogContentRight} from "./BlogContentRight/BlogContentRight";
+export { default as BlogContentRelated} from "./BlogContentRelated/BlogContentRelated";
+export { default as BlogContentComment } from "./BlogContentComment/BlogContentComment";
 // //
 
 export { default as AdminNavBar } from "./AdminNavBar/AdminNavBar";
