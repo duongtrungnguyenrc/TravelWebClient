@@ -179,41 +179,11 @@ const BlogContent = async () => {
   const handleClick = () => {
     console.info(`You clicked ${options[selectedIndex]}`);
   };
-
-  // const handleMenuItemClick = (
-  //   event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-  //   index: number,
-  // ) => {
-  //   setSelectedIndex(index);
-  //   setOpen(false);
-  // };
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event: Event) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
-  };
+  
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-  };
-  // const handleClick = () => {
-  //   console.info("You clicked the Chip.");
-  // };
-  const blogs: Response = await blogServices.getAllblogs();
-  const posts: { pages: number; blogs: Blog[] } = blogs.data as {
-    pages: number;
-    blogs: Blog[];
   };
 
   return (

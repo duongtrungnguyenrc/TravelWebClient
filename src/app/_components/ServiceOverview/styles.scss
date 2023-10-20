@@ -1,15 +1,17 @@
-.paragraph {
-    &:nth-child(even) {
-        .paragraph-image {
-            float: right;
-            margin-left: 1rem;
+.paragraphs {
+    .paragraph {
+        &:nth-child(even) {
+            .paragraph-image {
+                float: right;
+                margin-left: 1rem;
+            }
         }
-    }
-    
-    &:nth-child(odd) {
-        .paragraph-image {
-            float: left;
-            margin-right: 1rem;
+        
+        &:nth-child(odd) {
+            .paragraph-image {
+                float: left;
+                margin-right: 1rem;
+            }
         }
     }
 }
@@ -18,7 +20,7 @@
 @media only screen and (max-width: 1024px) {
     .paragraph {
         .paragraph-image {
-            width: 100%;
+            width: 100%!important;
             float: unset;
             margin: 0;
             margin-bottom: 1rem;

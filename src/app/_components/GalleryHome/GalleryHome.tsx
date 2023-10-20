@@ -10,7 +10,7 @@ const GalleryHome = () => {
   return (
     <section className="container-gallery">
       <div className="gallery-site">
-        <div className="content-gallery d-flex">
+        <div className="content-gallery flex-between">
           <div className="content">
             <h1 className="heading-name">Our Gallery</h1>
             <p className="detail-content text-light">

@@ -12,31 +12,29 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { tourServices } from "@/app/_services";
 
 const ServicesList = () => {
-  const [tours, setTours] = useState<Tour[]>([]);
-  const [ pagesNumber, setPagesNumber ] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [tours, setTours] = useState<Tour[] | null>(null);
+  const [ pagesNumber, setPagesNumber ] = useState<number>(0);
 
   const router = useRouter();
   const params = useSearchParams();
   const page = params.get("page") ? parseInt(params.get("page")!, 10) : 1;
 
   useEffect(() => {
-    const handleFetchTours = async (page: number) => {
+    const fetchAllTours = async (page: number) => {
       const response = await tourServices.getAllTours(page, 21);
       if (response.status) {
-        setLoading(false);
         const toursData = response.data as { pages: number; tours: Tour[] };
         setTours(toursData.tours);
         pagesNumber === 0 ? setPagesNumber(toursData.pages) : undefined;
       }
     };
-    handleFetchTours(page);
-   
+    
+    fetchAllTours(page);
   }, [page]);
 
 
+
   const handleChangePage = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
-    setLoading(true);
     router.push(`/explore?page=${value}`, {scroll: false});
   }, []);
   
@@ -55,27 +53,27 @@ const ServicesList = () => {
               <Typography variant="h6" className="mb-3">
                 <b>Đánh giá</b>
               </Typography>
-              <div className="d-flex py-2 ju">
+              <div className="d-flex py-2 justify-content-between">
                 <input type="radio" name="ratingPoint" id="" />
                 <Rating readOnly size="small" value={5}/>
                 <Typography variant="body2">5 sao</Typography>
               </div>
-              <div className="d-flex py-2 ju">
+              <div className="d-flex py-2 justify-content-between">
                 <input type="radio" name="ratingPoint" id="" />
                 <Rating readOnly size="small" value={4}/>
                 <Typography variant="body2">4 sao</Typography>
               </div>
-              <div className="d-flex py-2 ju">
+              <div className="d-flex py-2 justify-content-between">
                 <input type="radio" name="ratingPoint" id="" />
                 <Rating readOnly size="small" value={3}/>
                 <Typography variant="body2">3 sao</Typography>
               </div>
-              <div className="d-flex py-2 ju">
+              <div className="d-flex py-2 justify-content-between">
                 <input type="radio" name="ratingPoint" id="" />
                 <Rating readOnly size="small" value={2}/>
                 <Typography variant="body2">2 sao</Typography>
               </div>
-              <div className="d-flex py-2 ju">
+              <div className="d-flex py-2 justify-content-between">
                 <input type="radio" name="ratingPoint" id="" />
                 <Rating readOnly size="small" value={1}/>
                 <Typography variant="body2">1 sao</Typography>
@@ -90,7 +88,7 @@ const ServicesList = () => {
         </Grid>
         <Grid item className="col-md-8 col-lg-9 p-0">
           {
-            loading ? <SkeletonServicesList/> : 
+            tours ?  
 
             <Grid container className="services-list m-0 p-0">
             {
@@ -101,7 +99,7 @@ const ServicesList = () => {
                 
               })
             }
-            </Grid>
+            </Grid> : <SkeletonServicesList/>
           }
         </Grid>
       </Grid>

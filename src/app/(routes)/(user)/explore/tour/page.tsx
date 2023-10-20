@@ -2,70 +2,45 @@
 
 "use client"
 
-import { ServiceDetailGallery, ServiceOverview, ServiceReview, ServiceStepper, ServiceSummary } from "@/app/_components";
-import { Box, Breadcrumbs, Button, Container, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Rating, Select, SelectChangeEvent, Stack, Tab, Table, TableBody, TableCell, TableHead, TableRow, Tabs, Typography } from "@mui/material";
+import { ServiceDetailGallery, ServiceOverview, ServiceReview, ServiceStepper, ServiceSummary, Skeleton } from "@/app/_components";
+import { Box, Breadcrumbs, Button, Container, Grid, Rating,  Stack, Tab, Tabs, Typography } from "@mui/material";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import KingBedOutlinedIcon from "@mui/icons-material/KingBedOutlined";
+import { useSearchParams } from "next/navigation";
+import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import { useState } from "react";
-import { TourDate } from "@/app/_types";
+import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
+import { useEffect, useState } from "react";
+import { Tour, TourDate } from "@/app/_types";
+import { tourServices } from "@/app/_services";
 
 const TourPage = () => {
-    const params = useParams();
-    const [ travelDate, setTravelDate ] = useState<TourDate[]>([{
-        "departDate": "14-01-2023",
-        "endDate": "17-01-2023",
-        "type": "Plus",
-        "duration": 3,
-        "adultPrice": 300000.0,
-        "childPrice": 150000.0
-    },{
-      "departDate": "14-01-2023",
-      "endDate": "17-01-2023",
-      "type": "Plus",
-      "duration": 3,
-      "adultPrice": 300000.0,
-      "childPrice": 150000.0
-  },{
-    "departDate": "14-01-2023",
-    "endDate": "17-01-2023",
-    "type": "Plus",
-    "duration": 3,
-    "adultPrice": 300000.0,
-    "childPrice": 150000.0
-},{
-  "departDate": "14-01-2023",
-  "endDate": "17-01-2023",
-  "type": "Plus",
-  "duration": 3,
-  "adultPrice": 300000.0,
-  "childPrice": 150000.0
-},{
-  "departDate": "14-01-2023",
-  "endDate": "17-01-2023",
-  "type": "Plus",
-  "duration": 3,
-  "adultPrice": 300000.0,
-  "childPrice": 150000.0
-}
-  ]);
+    const [ tourData, setTourData ] = useState<Tour>();
+    const params = useSearchParams();
+
+    useEffect(() => {
+        const id : string = params.get("id") as string | "";
+        fetchTour(id);
+    }, [])
+    
+    const fetchTour = async (id: string) => {
+      const response = await tourServices.getTourById(id);
+      if(response.status) {
+        setTourData(response.data as Tour);
+      }
+    }
 
 
     const breadcrumbs = [
-      <Link key="1" color="inherit" href="/">
-        MUI
-      </Link>,
       <Link 
         key="2"
         color="inherit"
         href="/material-ui/getting-started/installation/"
       >
-        Core
+        Explore
       </Link>,
       <Typography key="3" color="text.primary">
-        Breadcrumb
+        Tour
       </Typography>,
     ];
     
@@ -76,32 +51,40 @@ const TourPage = () => {
 
         <Stack direction="column" spacing={2}>
           <Breadcrumbs separator="›" aria-label="breadcrumb">
-            {breadcrumbs}
+            <Link key="2" color="inherit" href="/explore">
+              Khám phá
+            </Link>,
+            <Typography key="3" color="text.primary">
+              { tourData?.name }
+            </Typography>,
           </Breadcrumbs>
           <Stack direction="row" justifyContent="space-between">
             <div>
               <Typography variant="h2" component="h1" sx={{fontWeight: 900, fontSize: "2rem"}}>
-                <b>Germany, Italy & Switzerland</b>
+                {
+                  tourData ? <b>{ tourData?.name }</b> : <Skeleton variant="text"/>
+                }
               </Typography>
               <Stack direction="row" alignItems="center" spacing={1} marginTop="10px">
                 <Typography variant="body1">
-                  10 days, 4 cities
+                  {tourData?.duration} days, 4 cities
                 </Typography>
                 <Rating
-                  value={5}
+                  value={parseFloat("0" + tourData?.ratedStar)}
                   size="small"
+                  readOnly
                 />
                 <Typography variant="body1">
-                  765 votes
+                  765 lượt đánh giá
                 </Typography>
               </Stack>
             </div>
-            <Button variant="outlined" sx={{color: "#000", borderColor: "#000", borderRadius: 0, height: "max-content", padding: "15px", display: {xs: "none", md: "block", lg: "block"}}}>See dates and prices</Button>
+            <Button variant="outlined" sx={{color: "#000", borderColor: "#000", borderRadius: 0, height: "max-content", padding: "15px", display: {xs: "none", md: "block", lg: "block"}}}>Xem tất cả ngày và giá</Button>
           </Stack>
 
           {/* Service detail gallery */}
 
-          <ServiceDetailGallery/>
+          <ServiceDetailGallery mainImg={tourData?.img} sideImgs={tourData?.overview?.paragraphs} startingPrice={tourData?.startFrom}/>
 
         </Stack>
 
@@ -113,21 +96,27 @@ const TourPage = () => {
               <div className="mb-3">
                 <Stack direction="row" justifyContent="space-between">
                   <div className="d-flex align-items-center">
-                    <KingBedOutlinedIcon sx={{fontSize: {xs: "1rem", md: "1.3rem", lg: "1.5rem"}, fontWeight: "300"}} className="mr-2"/>
+                    <FmdGoodOutlinedIcon sx={{fontSize: {xs: "1rem", md: "1.3rem", lg: "1.5rem"}, fontWeight: "300"}} className="mr-2"/>
                     <Typography variant="body1">
-                      King size room
+                      { tourData?.location }
                     </Typography>
                   </div>
                   <div className="d-flex align-items-center">
                     <PeopleAltOutlinedIcon sx={{fontSize: {xs: "1rem", md: "1.3rem", lg: "1.5rem"}, fontWeight: "300"}} className="mr-2"/>
                     <Typography variant="body1">
-                      King size room
+                      { tourData?.maxPeople } Người
                     </Typography>
                   </div>
                   <div className="d-flex align-items-center">
                     <CalendarMonthOutlinedIcon sx={{fontSize: {xs: "1rem", md: "1.3rem", lg: "1.5rem"}, fontWeight: "300"}} className="mr-2"/>
                     <Typography variant="body1">
-                      King size room
+                      3 Ngày
+                    </Typography>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <DirectionsCarFilledOutlinedIcon sx={{fontSize: {xs: "1rem", md: "1.3rem", lg: "1.5rem"}, fontWeight: "300"}} className="mr-2"/>
+                    <Typography variant="body1">
+                      { tourData?.vehicle }
                     </Typography>
                   </div>
                 </Stack>
@@ -136,6 +125,9 @@ const TourPage = () => {
                 <Typography>
                   <b>Special Departures:</b>  
                 </Typography>
+                <ul>
+
+                </ul>
               </div>
             </div>
 
@@ -143,20 +135,20 @@ const TourPage = () => {
 
             <Box className="mt-3 position-sticky" sx={{ borderBottom: 1, borderColor: "divider", top: 70, zIndex: 1, background: "#fff" }}>
               <Tabs value={1}>
-                <Tab label={<b>Overview</b>}/>
-                <Tab label={<b>Itinerary</b>}/>
-                <Tab label={<b>Traveler photos</b>}/>
-                <Tab label={<b>Reviews</b>}/>
+                <Tab label={<b>TỔNG QUAN</b>}/>
+                <Tab label={<b>LỊCH TRÌNH</b>}/>
+                <Tab label={<b>TOUR LIÊN QUAN</b>}/>
+                <Tab label={<b>ĐÁNH GIÁ</b>}/>
               </Tabs>
             </Box>
 
             {/* Over view */}
 
-            <ServiceOverview/>
+            <ServiceOverview paragraphs={ tourData?.overview?.paragraphs }/>
 
             {/* Service stepper */}
 
-            <ServiceStepper/>
+            <ServiceStepper steps={ tourData?.schedules }/>
             
             {/* Customer review */}
 
@@ -164,9 +156,10 @@ const TourPage = () => {
             
           </Grid>
           <Grid item xs={12} lg={6}>
-            <ServiceSummary travelDates={travelDate}/>
+            <ServiceSummary travelDates={tourData?.tourDate}/>
           </Grid>
         </Grid>
+        
       </Container>
     );
 };

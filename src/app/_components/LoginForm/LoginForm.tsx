@@ -107,7 +107,7 @@ const LoginForm = () => {
                         <label>Mật khẩu</label>
                         <input type="password" name="password" defaultValue={formData.password} placeholder="Your password" onChange={(e) => handleChange(e.target)}  required/>
                     </div>
-                    <div className="d-flex">
+                    <div className="flex-between">
                         <div className="check-group">
                             <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
                             <label>Lưu mật khẩu</label>
