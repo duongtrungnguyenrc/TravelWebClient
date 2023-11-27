@@ -33,6 +33,7 @@ export { default as ServiceSummary } from "./ServiceSummary/ServiceSummary";
 export { default as ServiceOverview } from "./ServiceOverview/ServiceOverview";
 export { default as Skeleton } from "./Skeleton/Skeleton";
 export { default as BlogList } from "./BlogList/BlogList";
+export { default as ThemeRegistry } from "./ThemeRegistry/ThemeRegistry";
 
 // //
 

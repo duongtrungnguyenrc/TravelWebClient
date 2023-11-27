@@ -7,5 +7,8 @@ export type { default as Blog } from "./Blog";
 export type { default as User } from "./User";
 export type { default as TourSchedule } from "./TourSchedule";
 export type { default as LoginResponse } from "./response/LoginResponse";
-export type { default as LoginState } from "./state/LoginState";
+export type { default as UserState } from "./state/UserState";
 export type { default as TourRating } from "./TourRating";
+export type { default as CreateRatingResponse } from "./response/CreateTourRatingResponse";
+export { default as TourRatingsResponse } from "./response/TourRatingsResponse";
+export { default as RatingRequest } from "./request/RatingRequest"

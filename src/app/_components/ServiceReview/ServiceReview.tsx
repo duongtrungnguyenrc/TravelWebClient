@@ -6,64 +6,143 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { IconButton, Pagination, Rating, Stack, TextField } from '@mui/material';
+import { Button, IconButton, Pagination, Rating, Stack, TextField } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { tourServices } from '@/app/_services';
-import { Response, TourRating } from '@/app/_types';
-import { useEffect, useState } from 'react';
+import { RatingRequest, Response, TourRatingsResponse } from '@/app/_types';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { Skeleton } from '..';
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/_context/store";
+import { useDebouncedCallback } from 'use-debounce';
+import CreateTourRatingResponse from '@/app/_types/response/CreateTourRatingResponse';
 
 const ServiceReview = ({ id } : { id : string }) => {
-    const [ ratings, setRatings ] = useState<TourRating[]>();
+    const [ ratingData , setRatingData ] = useState<TourRatingsResponse>(new TourRatingsResponse());
+    const [ page, setPage ] = useState<number>(1);
+    const [ newRating, setNewRating ] = useState<RatingRequest>(new RatingRequest(parseInt(id), "", 5));
+    
+    const currentUser = useSelector(state => (state as RootState).user);
+    const formRef = useRef<HTMLFormElement>(null);
+
+    
     useEffect(() => {
-        const fetchRatings = async () => {
-            const response : Response = await tourServices.getTourRating(id);
+        const fetchRatingData = async () => {
+            const response : Response = await tourServices.getTourRating(id, page, 10, (currentUser && { accessToken: currentUser.accessToken, tokenType: currentUser.tokenType }));
             if(response.status) {
-                setRatings(response.data as TourRating[]);
+                setRatingData(response.data as TourRatingsResponse);
             }
         }
-        fetchRatings();
-    }, []);
+        fetchRatingData();
+    }, [ page ]);    
 
+    const handleCommentChange = useDebouncedCallback((e : ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setNewRating((prevState) => {
+            return {
+                ...prevState,
+                comment: e.target.value
+            };
+        });
+    }, 300);
+
+    const handleCommentSubmit = async (e : FormEvent) => {
+        e.preventDefault();
+        
+        const response = await tourServices.addRating(currentUser.accessToken, currentUser.tokenType, newRating);
+
+        if(response.status) {
+            setRatingData((prevState) => {
+                return {
+                    ...prevState,
+                    rates: [
+                        (response.data as CreateTourRatingResponse).rateAdded,
+                        ...prevState?.rates
+                    ]
+                }
+            });
+            clearNewRatingData();
+            formRef.current && formRef?.current.reset();
+        }
+    };
+
+    const clearNewRatingData = () => {
+        setNewRating((prevState) => {
+            return {
+                ...prevState,
+                star: 5,
+                comment: ""
+            }
+        })
+    }
 
     return (
         <div className="w-100 my-5">
             <Typography variant='h5'>
                 <b>Đánh giá</b>
             </Typography>
-            <div className='py-4 d-flex flex-column align-items-end'>
-                <Rating
-                    name="simple-controlled"
-                    value={5}
-                    placeholder='Nhập đánh giá...'
-                    // onChange={(event, newValue) => {
-                    // setValue(newValue);
-                    // }}
-                />
-                <TextField
-                    id="standard-search"
-                    type="text"
-                    variant="standard"
-                    className='w-100 mt-2'
-                />
-                <div className='d-flex justify-content-end w-100 mt-3'>
-                    <div className='w-50 d-flex gap-2'>
-                        <button className="btn btn-secondary">Hủy</button>
-                        <button className="btn btn-yellow">Đánh giá</button>
-                    </div>
+            {
+                currentUser.user && 
+                <div className='my-4'>
+                    <form className='gap-0' ref={formRef} method='post' onSubmit={(e) => handleCommentSubmit(e)}>
+                        <div className='d-flex justify-content-between'>
+                            <span><b>{ currentUser.user.fullName }</b></span>
+                            <Rating
+                                name="simple-controlled"
+                                value={ newRating.star }
+                                onChange={(_event, newValue) => {
+                                    setNewRating((prevState) => {
+                                        return {
+                                            ...prevState,
+                                            star: newValue as number
+                                        };
+                                    });
+                                }}
+                            />
+                        </div>
+                        <TextField
+                            id="standard-search"
+                            type="text"
+                            variant="standard"
+                            className='w-100 mt-3'
+                            placeholder='Nhập đánh giá...'
+                            onChange={(e) => {
+                                handleCommentChange(e)
+                            }}
+                        />
+                        <div className='d-flex justify-content-end w-100 mt-3'>
+                            <div className='d-flex gap-2'>
+                                <Button 
+                                    type='reset'
+                                    disabled={ newRating.comment.trim() === "" }
+                                    variant='outlined'>
+                                    Hủy
+                                </Button>
+                                <Button 
+                                    type='submit'
+                                    disabled={ newRating.comment.trim() === "" }
+                                    variant='contained'>
+                                    Đánh giá
+                                </Button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
+            }
+            <hr/>
             <List>
                 {
-                    ratings ? ratings?.map((rating) => {
+                    ratingData ? ratingData?.rates?.map((rating) => {
                         return  <ListItem alignItems="flex-start" className='px-0'>
                                     <ListItemText
                                         primary={
                                             <div className='d-flex justify-content-between'>
-                                                <b>{ rating.username }</b>
-                                                <IconButton>
-                                                    <MoreHorizIcon/>
-                                                </IconButton>
+                                                <span><b>{ rating.username }</b></span>
+                                                {
+                                                    rating.active &&  
+                                                    <IconButton>
+                                                        <MoreHorizIcon/>
+                                                    </IconButton>
+                                                }
                                             </div>
                                         }
                                         secondary={
@@ -95,10 +174,11 @@ const ServiceReview = ({ id } : { id : string }) => {
             </List>
             <Stack className='mt-3' direction="row" justifyContent="center">
                 <Pagination 
-                shape="rounded" variant="outlined" color="primary" size="large"
-                count={3} 
+                    shape="rounded" variant="outlined" color="primary" size="large"
+                    count={ratingData?.pages} 
+                    onChange={(_e, value) => setPage(value)}
                 />
-        </Stack>
+            </Stack>
         </div>
     );
 };

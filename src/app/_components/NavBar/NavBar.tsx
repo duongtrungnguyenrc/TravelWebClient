@@ -2,22 +2,19 @@
 
 'use client'
 
-import { LoginState, Route } from "@/app/_types";
+import { RootState } from "@/app/_context/store";
 import "./styles.scss";
 import Link from "next/link";
 import { useState, useEffect, memo } from "react";
-import { usePathname } from 'next/navigation';
-import { Typography } from "@mui/material";
-import { authServices } from "@/app/_services";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleLogin } from "@/app/_context/loginSlice";
+import { useSelector } from "react-redux";
+import { Avatar, IconButton } from "@mui/material";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const NavBar = () => {
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
-    const pathName = usePathname();
-    const dispath = useDispatch();
-    const loginStatus = useSelector((state : LoginState) => state.login.login);
+
+    const currentUser = useSelector(state => (state as RootState).user);
 
     useEffect(() => {
         
@@ -40,20 +37,8 @@ const NavBar = () => {
             window.removeEventListener('scroll', handleScroll);
           };
         }
-      }, [scrollY]);
+    }, [scrollY]);
 
-      useEffect(() => {
-        const checkLogin = async () => {
-            const response = await authServices.checkLogin();
-            if(response.status) {
-                dispath(toggleLogin(true));
-            }
-            else {
-                dispath(toggleLogin(false));
-            }
-        }
-        checkLogin();
-      }, [])
 
 
     const handleShow = () => {
@@ -64,7 +49,7 @@ const NavBar = () => {
             setIsShow(true);
         }
     }
-    // (pathName.includes("explore") && !pathName.includes("tour") ? " light" : "") +
+
     return (
         <header className={"navbar-site" + (scrollY ? " active" : "")}>
             <nav>
@@ -90,14 +75,12 @@ const NavBar = () => {
                                 <Link href="/blog">Diễn đàn</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href={loginStatus ? "setting" : "/auth/login"}>{ loginStatus ? "Cài đặt" : "Đăng nhập" }</Link>
+                                <Link href={currentUser.user ? "/setting" : "/auth/login"}>{currentUser.user ? "Cài đặt" : "Đăng nhập" }</Link>
                             </li>
                         </ul>
                     </div>
-                    <div className="colapse-segment right-segment">
-                        <button className="btn btn-yellow">
-                            Khám phá ngay
-                        </button>
+                    <div className="colapse-segment right-segment d-flex gap-2">
+                        <Avatar src="https://avatars.githubusercontent.com/u/111481047?v=4">OP</Avatar>
                     </div>
                 </div>
                 <button className="btn btn-yellow btn-normal colapse-btn flex-center" onClick={() => handleShow()}>

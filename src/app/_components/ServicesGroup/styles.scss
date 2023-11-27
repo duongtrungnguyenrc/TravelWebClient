@@ -39,8 +39,7 @@ $primary: #C7923E;
     .services-group-body {
         display: flex;
         overflow: hidden;
-        // grid-template-columns: auto auto auto auto;
-        // grid-wr
+        padding: 10px 0;
         gap: 1rem;
 
         .service-item {

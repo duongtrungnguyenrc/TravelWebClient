@@ -1,9 +1,11 @@
 interface User {
-    name: string;
+    id: number;
     email: string;
-    password: string;
     address: string;
-    role: string;
+    fullName: string;
+    phone: string;
+    roles: string[];
+    active: boolean;
 }
 
 export default User;

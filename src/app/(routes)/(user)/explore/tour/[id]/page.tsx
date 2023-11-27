@@ -15,11 +15,12 @@ import { Tour} from "@/app/_types";
 import { tourServices } from "@/app/_services";
 
 const TourPage = ({ params }: { params: { id: string } }) => {
-    const [ tourData, setTourData ] = useState<Tour>();
+    const [ tourData, setTourData ] = useState<Tour>();    
+    const [ activeTab, setActiveTab ] = useState<number>(0);
 
     useEffect(() => {
         fetchTour(params.id);
-    }, [])
+    }, []);
     
     const fetchTour = async (id: string) => {
       const response = await tourServices.getTourById(id);
@@ -118,8 +119,9 @@ const TourPage = ({ params }: { params: { id: string } }) => {
             {/* Tabs display */}
 
             <Box className="mt-3 position-sticky" sx={{ borderBottom: 1, borderColor: "divider", top: 70, zIndex: 1, background: "#fff" }}>
-              <Tabs value={1}>
+              <Tabs value={ activeTab }>
                 <Tab label={<b>TỔNG QUAN</b>}/>
+                <Tab label={<b>ĐỊA ĐIỂM</b>}/>
                 <Tab label={<b>LỊCH TRÌNH</b>}/>
                 <Tab label={<b>TOUR LIÊN QUAN</b>}/>
                 <Tab label={<b>ĐÁNH GIÁ</b>}/>
