@@ -1,30 +1,42 @@
 // produced by Duong Trung Nguyen
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ServiceItem from "../ServiceItem/ServiceItem";
 import "./styles.scss";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-import{ Tour } from "@/app/_types";
+import{ Response, Tour } from "@/app/_types";
 import { Container, IconButton } from "@mui/material";
 
+import requestService from "../../_services/requestServices";
+import { AxiosResponse } from "axios";
 
-const ServicesGroup = ({ servicesList } : { servicesList : Tour[] }) => {
-  const [ currList, setCurrList ] = useState<Tour[]>(servicesList);
+
+const ServicesGroup = () => {
+  const [ serviceList, setServiceList ] = useState<Tour[]>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response : AxiosResponse = await requestService.get("tour/type?type=popular");
+      setServiceList(response?.data?.data);
+    }
+
+    fetchData()
+  }, []);
 
   const handleNext = () => {
-    const chagedValue = currList[0];
-    setCurrList(currList.slice(1).concat(chagedValue));
+    // const chagedValue = currList[0];
+    // setCurrList(currList.slice(1).concat(chagedValue));
   }
 
   const handlePrev = () => {
-    const reversedList = [...currList].reverse();
-    const changedValue = reversedList[0];
-    const updatedList = reversedList.slice(1).concat(changedValue).reverse();
+    // const reversedList = [...currList].reverse();
+    // const changedValue = reversedList[0];
+    // const updatedList = reversedList.slice(1).concat(changedValue).reverse();
   
-    setCurrList(updatedList);
+    // setCurrList(updatedList);
   }
 
   return (
@@ -43,7 +55,7 @@ const ServicesGroup = ({ servicesList } : { servicesList : Tour[] }) => {
         </div>
         <div className="services-group-body">
         {
-          currList?.map((value, index) => {
+          serviceList?.map((value, index) => {
             return <ServiceItem key={index} service={value}/>
           })
         }

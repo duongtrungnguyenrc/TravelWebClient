@@ -16,7 +16,7 @@ import Link from "next/link";
 const ServiceItem = ({ service } : { service : Tour }) => {
 
   return (
-    <Link href={`explore/tour?id=${service.id}`}>
+    <Link href={`explore/tour/${service.id}`}>
       <Card className="service-item">
         <Stack maxHeight="150" overflow="hidden" >
           <CardMedia

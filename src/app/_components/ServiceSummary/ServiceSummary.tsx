@@ -55,7 +55,7 @@ const ServiceSummary = ({ travelDates } : { travelDates :  TourDate[] | undefine
                             <li key={ cell.departDate } className="table-cell">
                                 <span className="flex-center"><input type="radio" name="date" required/></span>
                                 <span><b>{cell.departDate}</b></span>
-                                <span>{cell.adultPrice} VNĐ</span>
+                                <span>{cell.adultPrice.toLocaleString("en")} VNĐ</span>
                                 <span>{cell.type}</span>
                             </li>
                         ))

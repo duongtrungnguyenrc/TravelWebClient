@@ -5,22 +5,20 @@
 import { ServiceDetailGallery, ServiceOverview, ServiceReview, ServiceStepper, ServiceSummary, Skeleton } from "@/app/_components";
 import { Box, Breadcrumbs, Button, Container, Grid, Rating,  Stack, Tab, Tabs, Typography } from "@mui/material";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import DirectionsCarFilledOutlinedIcon from '@mui/icons-material/DirectionsCarFilledOutlined';
+import { GoogleMapsEmbed } from '@next/third-parties/google'
 import { useEffect, useState } from "react";
-import { Tour, TourDate } from "@/app/_types";
+import { Tour} from "@/app/_types";
 import { tourServices } from "@/app/_services";
 
-const TourPage = () => {
+const TourPage = ({ params }: { params: { id: string } }) => {
     const [ tourData, setTourData ] = useState<Tour>();
-    const params = useSearchParams();
 
     useEffect(() => {
-        const id : string = params.get("id") as string | "";
-        fetchTour(id);
+        fetchTour(params.id);
     }, [])
     
     const fetchTour = async (id: string) => {
@@ -29,20 +27,6 @@ const TourPage = () => {
         setTourData(response.data as Tour);
       }
     }
-
-
-    const breadcrumbs = [
-      <Link 
-        key="2"
-        color="inherit"
-        href="/material-ui/getting-started/installation/"
-      >
-        Explore
-      </Link>,
-      <Typography key="3" color="text.primary">
-        Tour
-      </Typography>,
-    ];
     
     return (
       <Container className="bg-white" maxWidth="xl" sx={{paddingTop: "100px", paddingBottom: "20px"}}>
@@ -146,13 +130,33 @@ const TourPage = () => {
 
             <ServiceOverview paragraphs={ tourData?.overview?.paragraphs }/>
 
+            {/* Location */}
+
+            {
+              tourData ?
+              <section className="w-100 my-5">
+                <GoogleMapsEmbed
+                  apiKey="AIzaSyDc7PnOq3Hxzq6dxeUVaY8WGLHIePl0swY"
+                  mode="place"
+                  q={tourData?.location}
+                  allowfullscreen
+                  style="width: 100%; height: 400px"
+                  language="vi"
+                  loading="lazy"
+                  maptype="satellite"
+                />
+              </section>
+              :
+              <Skeleton variant="rectangular" className="w-100 my-5" height={400}/>
+            }
+
             {/* Service stepper */}
 
             <ServiceStepper steps={ tourData?.schedules }/>
             
             {/* Customer review */}
 
-            <ServiceReview/>
+            <ServiceReview id={params.id}/>
             
           </Grid>
           <Grid item xs={12} lg={6}>

@@ -27,6 +27,15 @@ const tourServies = {
         } catch (error) {
             return responseServices.error(error as AxiosError);
         }
+    },
+    getTourRating: async (id: string) => {
+        try {
+            const response = await request.get(`/rate/${id}`);
+            return responseServices.success(response);
+        }
+        catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
     }
 }
 export default tourServies;

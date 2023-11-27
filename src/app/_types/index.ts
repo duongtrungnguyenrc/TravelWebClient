@@ -8,3 +8,4 @@ export type { default as User } from "./User";
 export type { default as TourSchedule } from "./TourSchedule";
 export type { default as LoginResponse } from "./response/LoginResponse";
 export type { default as LoginState } from "./state/LoginState";
+export type { default as TourRating } from "./TourRating";
