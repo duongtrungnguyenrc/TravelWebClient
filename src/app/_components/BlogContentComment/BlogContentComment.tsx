@@ -22,16 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-
-const options = ["Create a merge commit", "Sort by best", "Rebase and merge"];
 const BlogContentTable = async () => {
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
   return (
     <section className="blog-content-comment">
       <React.Fragment>
@@ -101,18 +92,13 @@ const BlogContentTable = async () => {
                         <Item className="box-shadow d-flex-center-h-100">
                           <ButtonGroup
                             variant="contained"
-                            ref={anchorRef}
                             aria-label="split button"
                           >
                             <Button className="btn btn-yellow btn-content">
-                              {options[selectedIndex]}
+                              sort by best
                             </Button>
                             <Button
                               size="small"
-                              aria-controls={
-                                open ? "split-button-menu" : undefined
-                              }
-                              aria-expanded={open ? "true" : undefined}
                               aria-label="select merge strategy"
                               aria-haspopup="menu"
                               className="btn btn-yellow btn-arrow"

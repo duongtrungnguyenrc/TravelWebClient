@@ -34,63 +34,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-const rows = [createData("Frozen yoghurt", 159, 6.0, 24, 4.0)];
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography variant="body1" className="m-20">
-            {children}
-          </Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
 const BlogContentTable = async () => {
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
   return (
     <section className="table-conatainer-right">
       <React.Fragment>
@@ -145,25 +89,7 @@ const BlogContentTable = async () => {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {rows.map((row) => (
-                              <StyledTableRow key={row.name}>
-                                <StyledTableCell component="th" scope="row">
-                                  {row.name}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                  {row.calories}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                  {row.fat}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                  {row.carbs}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">
-                                  {row.protein}
-                                </StyledTableCell>
-                              </StyledTableRow>
-                            ))}
+                            
                           </TableBody>
                         </Table>
                       </TableContainer>
@@ -245,39 +171,21 @@ const BlogContentTable = async () => {
                         <Box sx={{ width: "100%" }}>
                           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                             <Tabs
-                              value={value}
-                              onChange={handleChange}
                               aria-label="basic tabs example"
                             >
-                              <Tab label="Step 1" {...a11yProps(0)} />
-                              <Tab label="Step 2" {...a11yProps(1)} />
-                              <Tab label="Step 3" {...a11yProps(2)} />
+                              <Tab label="Step 1"  />
+                              <Tab label="Step 2"  />
+                              <Tab label="Step 3" />
                             </Tabs>
                           </Box>
-                          <CustomTabPanel value={value} index={0}>
+                          <Typography variant="body1" className="m-20">
                             Did you come here for something in particular or
                             just general Riker-bashing? And blowing into maximum
                             warp speed, you appeared for an instant to be in two
                             places at once. We have a saboteur aboard. We know
                             you’re dealing in stolen ore. But I wanna talk about
                             the assassination attempt on Lieutenant Worf.
-                          </CustomTabPanel>
-                          <CustomTabPanel value={value} index={1}>
-                            Did you come here for something in particular or
-                            just general Riker-bashing? And blowing into maximum
-                            warp speed, you appeared for an instant to be in two
-                            places at once. We have a saboteur aboard. We know
-                            you’re dealing in stolen ore. But I wanna talk about
-                            the assassination attempt on Lieutenant Worf.
-                          </CustomTabPanel>
-                          <CustomTabPanel value={value} index={2}>
-                            Did you come here for something in particular or
-                            just general Riker-bashing? And blowing into maximum
-                            warp speed, you appeared for an instant to be in two
-                            places at once. We have a saboteur aboard. We know
-                            you’re dealing in stolen ore. But I wanna talk about
-                            the assassination attempt on Lieutenant Worf.
-                          </CustomTabPanel>
+                          </Typography>
                         </Box>
                       </div>
                       <div className="line-container m-40">
