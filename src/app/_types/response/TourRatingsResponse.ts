@@ -6,6 +6,6 @@ export default class TourRatingsResponse {
 
     constructor() {
         this.pages = 0;
-        this.rates = [];
+        this.rates = []
     }
 }

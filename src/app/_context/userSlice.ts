@@ -4,7 +4,6 @@ import { UserState } from "../_types";
 const initialState : UserState = {
     user: null,
     accessToken: "",
-    tokenType: ""
 }
 
 const userSlice = createSlice({

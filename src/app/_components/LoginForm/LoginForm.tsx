@@ -55,8 +55,7 @@ const LoginForm = () => {
             const signInResponse : LoginResponse = (response.data as LoginResponse);        
             dispath(
                 set({
-                        accessToken: signInResponse?.accessToken,
-                        tokenType: signInResponse?.tokenType,
+                        accessToken: signInResponse?.tokenType + " " + signInResponse?.accessToken,
                         user: {
                             id: signInResponse?.id,
                             email: signInResponse?.email,

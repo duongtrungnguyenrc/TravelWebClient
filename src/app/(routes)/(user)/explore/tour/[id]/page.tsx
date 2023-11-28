@@ -158,7 +158,7 @@ const TourPage = ({ params }: { params: { id: string } }) => {
             
             {/* Customer review */}
 
-            <ServiceReview id={params.id}/>
+            <ServiceReview ratingAcceptance={tourData?.ratingAcceptance} id={params.id}/>
             
           </Grid>
           <Grid item xs={12} lg={6}>

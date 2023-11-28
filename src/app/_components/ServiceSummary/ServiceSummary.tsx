@@ -49,7 +49,7 @@ const ServiceSummary = ({ travelDates } : { travelDates :  TourDate[] | undefine
                 <Typography variant="body2" color="red" className="d-none align-items-center mr-3">
                     <ErrorIcon fontSize="small" className="mr-1"/> Vui lòng chọn ngày khởi hành
                 </Typography>
-                <Button disabled={!(travelDates && travelDates?.length > 0)} endIcon={<ChevronRightIcon/>} type="submit">Đặt ngay</Button>
+                <Button href="/booking/verify" disabled={!(travelDates && travelDates?.length > 0)} endIcon={<ChevronRightIcon/>} type="submit">Đặt ngay</Button>
             </div>
         </form>
     </div>

@@ -26,5 +26,6 @@ interface Tour {
     };
     hotel?: TourHotel[];
     schedules?: TourSchedule[];
+    ratingAcceptance: boolean;
 }
 export default Tour;

@@ -1,7 +1,7 @@
 import request from "./requestServices";
 import { AxiosError, AxiosResponse } from "axios";
 import responseServices from "./responseServices";
-import { RatingRequest } from "../_types";
+import { RatingRequest, UpdateRatingRequest } from "../_types";
 
 
 const tourServies = {
@@ -29,11 +29,11 @@ const tourServies = {
             return responseServices.error(error as AxiosError);
         }
     },
-    getTourRating: async (id: string, page: number, limit: number, authorizeData ?: { accessToken: string, tokenType: string }) => {
+    getTourRating: async (id: string, page: number, limit: number, accessToken?: string) => {
         try {
             const response = await request.get(`/rate/${id}?page=${page}&limit=${limit}`, {
                 headers: {
-                    Authorization: authorizeData && (authorizeData?.tokenType + " " + authorizeData?.accessToken),
+                    Authorization: accessToken,
                 }
             });
             return responseServices.success(response);
@@ -42,11 +42,37 @@ const tourServies = {
             return responseServices.error(error as AxiosError);
         }
     },
-    addRating: async (accessToken: string, tokenType: string, payload: RatingRequest) => {
+    addRating: async (accessToken: string, payload: RatingRequest) => {
         try {
             const response = await request.post(`/rate`, payload, {
                 headers: {
-                    Authorization: tokenType + " " + accessToken,
+                    Authorization: accessToken,
+                }
+            });
+            return responseServices.success(response);
+        }
+        catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    updateRating: async (accessToken: string, payload: UpdateRatingRequest) => {
+        try {
+            const response = await request.post(`/rate/update`, payload, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });
+            return responseServices.success(response);
+        }
+        catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    removeRating: async (accessToken: string, id: number) => {
+        try {
+            const response = await request.post(`/rate/delete/${id}` , null, {
+                headers: {
+                    Authorization: accessToken,
                 }
             });
             return responseServices.success(response);
