@@ -161,10 +161,10 @@ const LoginForm = () => {
                             <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
                             <label>Lưu mật khẩu</label>
                         </div>
-                        <Link className="line-decor" href="/auth/forgot-password">Quên mật khẩu</Link>
+                        <Link className="line-decor" href="/forgot-password">Quên mật khẩu</Link>
                     </div>
                     <div className="button-group">
-                        <Link href="/auth/register" className="btn btn-big btn-light btn-shadow">Đăng ký</Link>
+                        <Link href="/register" className="btn btn-big btn-light btn-shadow">Đăng ký</Link>
                         <button className="btn btn-big btn-yellow btn-shadow" type="submit">Đăng nhập</button>
                     </div>
                 </form>

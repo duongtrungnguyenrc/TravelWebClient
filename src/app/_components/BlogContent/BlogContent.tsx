@@ -171,7 +171,7 @@ const options = [
   "Sort by best",
   "Rebase and merge",
 ];
-const BlogContent = async () => {
+const BlogContent = () => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);

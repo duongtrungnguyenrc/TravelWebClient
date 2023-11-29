@@ -6,6 +6,7 @@ import './styles.scss';
 import { useEffect, useState } from 'react';
 import { weatherServices } from '@/app/_services';
 import { Weather as WeatherType } from '@/app/_types';
+import { Skeleton } from '..';
 
 
 const Weather = () => {    
@@ -79,7 +80,9 @@ const Weather = () => {
             <p>Weather</p>
         </div>
         <div className="detail-value">
-            <p>{(weather?.main.temp)} ° C </p>
+            {
+                weather ? <p>{(weather?.main.temp)} ° C </p> : <Skeleton width={200} height={40} variant='text'/>
+            }
         </div>
     </div>
   );

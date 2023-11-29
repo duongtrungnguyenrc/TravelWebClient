@@ -97,7 +97,7 @@ const NavBar = () => {
         dispath(set(
             initialState
         ));
-        router.push("/auth/login")
+        router.push("/login")
     }
 
     return (
@@ -176,7 +176,7 @@ const NavBar = () => {
                                         </ListItemIcon>
                                         Add another account
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem onClick={() => router.push("/setting")}>
                                         <ListItemIcon>
                                             <Settings fontSize="small" />
                                         </ListItemIcon>
@@ -191,7 +191,7 @@ const NavBar = () => {
                                             Logout
                                         </MenuItem>
                                         :
-                                        <MenuItem onClick={() => router.push("/auth/login")}>
+                                        <MenuItem onClick={() => router.push("/login")}>
                                             <ListItemIcon>
                                                 <Login fontSize="small" />
                                             </ListItemIcon>

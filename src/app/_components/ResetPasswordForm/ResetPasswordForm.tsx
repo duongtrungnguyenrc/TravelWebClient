@@ -27,7 +27,7 @@ const ResetPassword = () => {
             toast.error("invalid token!", {
                 position: toast.POSITION.BOTTOM_RIGHT,
             });
-            router.push("/auth/login");
+            router.push("/login");
         }
     }, [])
 
@@ -45,7 +45,7 @@ const ResetPassword = () => {
             toast.success(message, {
                 position: toast.POSITION.BOTTOM_RIGHT,
             })
-            router.push("/auth/login");
+            router.push("/login");
     }
 
     const handleSubmit : FormEventHandler<HTMLFormElement> = async (e : React.FormEvent<HTMLFormElement>) => {
@@ -103,7 +103,7 @@ const ResetPassword = () => {
                 }
             </div>
             <div className="button-group mt-2">
-                <Link href="/auth/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
+                <Link href="/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
                 <button className="btn btn-big btn-yellow btn-shadow">Khôi phục</button>
             </div>
         </form>

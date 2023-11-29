@@ -6,9 +6,10 @@ export { default as Blog } from "./Blog";
 export { default as User } from "./User";
 export { default as TourSchedule } from "./TourSchedule";
 export { default as TourRating } from "./TourRating";
+export { default as Address } from "./Address";
+
 export type { default as UserState } from "./state/UserState";
 export type { default as Response } from "./Response";
-
 
 export { default as RatingRequest } from "./request/RatingRequest";
 export { default as UpdateRatingRequest } from "./request/UpdateRatingRequest";
@@ -19,3 +20,5 @@ export { default as TourRatingsResponse } from "./response/TourRatingsResponse";
 export type { default as CreateTourRatingResponse } from "./response/CreateTourRatingResponse";
 export type { default as UpdateTourRatingResponse } from "./response/UpdateTourRatingResponse";
 export { default as DeleteTourRatingResponse } from "./response/DeleteTourRatingResponse";
+export { default as AllBlogsResponse } from "./response/AllBlogsResponse";
+export { default as AllToursResponse } from "./response/AllToursResponse";

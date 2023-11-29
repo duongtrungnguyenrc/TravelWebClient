@@ -164,52 +164,7 @@ form {
                 line-height: 125%; /* 20px */
                 letter-spacing: 0.08px;
             }
-
-            & ~ input:required, & ~ textarea:required, & ~ select:required {
-                &::after {
-                    content: "*";
-                    position: absolute;
-                }
-            }
         }
-
-        // input, textarea, select {
-        //     width: 100%;
-        //     padding: 1rem;
-        //     background-color: #fff;
-        //     border-radius: 8px;
-        //     border: 1px solid #E1E1E1;
-        //     transition: 0.5s;
-
-        //     &:disabled {
-        //         background-color: #f1f3f4;
-        //     }
-            
-        //     &[type="checkbox"], &[type="button"], &[type="submit"], &[type="radio"] {
-        //         cursor: pointer;
-        //     }
-
-        //     &[type="text"], &[type="phone"], &[type="email"], &[type="password"] {
-        //         &:disabled {
-        //             border: none!important;
-        //             background-color: #f1f3f4;
-
-        //             &::placeholder {
-        //                 color: #000;
-        //                 font-size: 1rem;
-        //             }
-        //         }
-        //     }
-
-        //     &:focus {
-        //         outline: unset;
-        //         border: 1px solid var(--primary-dark);
-        //     }
-
-        //     &::placeholder {
-        //         color: #9A9AB0;
-        //     }
-        // }
     }
 
     .select-group {

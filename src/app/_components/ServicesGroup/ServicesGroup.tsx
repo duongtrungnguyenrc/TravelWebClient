@@ -42,7 +42,7 @@ const ServicesGroup = () => {
   return (
     <Container maxWidth="xl" component="section" className="services-group-site px-3">
         <div className="services-group-top">
-            <h1 className="services-group-title">Destinations Most Popular</h1>
+            <h1 className="services-group-title">Điểm đến phổ biến</h1>
             <h1 className="services-group-description">Some of the most popular destinations for you visit with a view the beautiful one.</h1>
             <div className="services-group-control gap-0">
               <IconButton onClick={() => handlePrev()}>

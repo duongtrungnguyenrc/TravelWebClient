@@ -39,9 +39,7 @@ export default class NewOrderRequest {
         )
     }
 
-    static checkRequireInformation(instance: NewOrderRequest): boolean {        
-        console.log(instance);
-        
+    static checkRequireInformation(instance: NewOrderRequest): boolean {                
         for (const key in instance) {
             if (instance.hasOwnProperty(key) && key != "hotelId" && key != "roomType" && key != "children" && key != "specialRequest" && key != "amount") {                
                 const value = instance[key as keyof NewOrderRequest];
@@ -53,6 +51,19 @@ export default class NewOrderRequest {
                 }
             }
         }
+
+        for(const nestedKey in instance.contactInfo) {
+            if(instance.contactInfo.hasOwnProperty(nestedKey)) {
+                const contactInfo = instance.contactInfo[nestedKey as keyof ContactInfo];                
+                if (typeof contactInfo === 'string' && (!contactInfo || contactInfo.trim().length === 0)) {
+                    return false;
+                }
+                else if(typeof contactInfo === "number" && (!contactInfo || contactInfo === 0)) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }    
 }

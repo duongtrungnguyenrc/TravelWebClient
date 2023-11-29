@@ -110,7 +110,7 @@ const ForgotPasswordForm = () => {
                     }
                   </div>
                   <div className="button-group">
-                    <Link href="/auth/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
+                    <Link href="/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
                     <button className="btn btn-big btn-yellow btn-shadow" type="submit">Tìm kiếm</button>
                   </div>
                 </form>
@@ -151,7 +151,7 @@ const ForgotPasswordForm = () => {
                     </div>
                   </Stack>
                   <div className="button-group mt-4">
-                    <Link href="/auth/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
+                    <Link href="/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
                     <button className="btn btn-big btn-yellow btn-shadow" onClick={() => restorePassword()}>Khôi phục</button>
                   </div>
                 </Stack>
