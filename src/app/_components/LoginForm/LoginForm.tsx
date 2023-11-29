@@ -12,6 +12,9 @@ import { useRouter } from "next/navigation";
 import { LoginResponse, User } from "@/app/_types";
 import { useDispatch } from "react-redux";
 import { set } from "@/app/_context/userSlice";
+import { IconButton, InputAdornment, OutlinedInput, TextField } from "@mui/material";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 interface FormData {
     email : string;
@@ -21,7 +24,15 @@ interface FormData {
 
 const LoginForm = () => {   
     const router = useRouter();
-    const dispath = useDispatch()
+    const dispath = useDispatch();
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+    };
     
     const initialFormData : FormData = {
         email: "",
@@ -116,11 +127,34 @@ const LoginForm = () => {
                 <form action="" method="get" onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label>Email</label>
-                        <input type="email" name="email" defaultValue={formData.email} placeholder="david.abc@gmail.com" onChange={(e) => handleChange(e.target)}  required/>
+                        <TextField
+                            type="email" 
+                            name="email"
+                            defaultValue={formData.email}
+                            onChange={(e) => handleChange(e.target)}
+                            placeholder="david.abc@gmail.com"
+                            required
+                        />
                     </div>
                     <div className="input-group">
                         <label>Mật khẩu</label>
-                        <input type="password" name="password" defaultValue={formData.password} placeholder="Your password" onChange={(e) => handleChange(e.target)}  required/>
+                        <TextField
+                            name="password" defaultValue={formData.password}
+                            type={showPassword ? 'text' : 'password'}
+                            onChange={(e) => handleChange(e.target)}
+                            InputProps={{
+                            endAdornment:   <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                >
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                </IconButton>
+                                            </InputAdornment>
+                         }}
+                        
+                        />
                     </div>
                     <div className="flex-between">
                         <div className="check-group">

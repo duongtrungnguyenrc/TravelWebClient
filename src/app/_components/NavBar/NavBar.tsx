@@ -5,27 +5,60 @@
 import { RootState } from "@/app/_context/store";
 import "./styles.scss";
 import Link from "next/link";
-import { useState, useEffect, memo } from "react";
-import { useSelector } from "react-redux";
-import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
-import SettingsIcon from '@mui/icons-material/Settings';
+import { useState, useEffect, memo, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Avatar, ClickAwayListener, Divider, Grow, IconButton, ListItemIcon, Menu, MenuItem, MenuList, Paper, Popper, Tooltip } from "@mui/material";
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import Login from '@mui/icons-material/Login';
+import PersonIcon from '@mui/icons-material/Person';
+import { set, initialState } from "@/app/_context/userSlice";
+import { useRouter } from "next/navigation";
 
 const NavBar = () => {
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
-    const [ dropdownShow, setDropdownShow ] = useState(false);
     const currentUser = useSelector(state => (state as RootState).user);
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-      setAnchorEl(event.currentTarget);
+    const dispath = useDispatch();
+    const router = useRouter();
+
+    const [open, setOpen] = useState(false);
+    const anchorRef = useRef<HTMLButtonElement>(null);
+  
+    const handleToggle = () => {
+      setOpen((prevOpen) => !prevOpen);
     };
-    const handleClose = () => {
-      setAnchorEl(null);
+  
+    const handleClose = (event: Event | React.SyntheticEvent) => {
+      if (
+        anchorRef.current &&
+        anchorRef.current.contains(event.target as HTMLElement)
+      ) {
+        return;
+      }
+  
+      setOpen(false);
     };
+  
+    function handleListKeyDown(event: React.KeyboardEvent) {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        setOpen(false);
+      } else if (event.key === 'Escape') {
+        setOpen(false);
+      }
+    }
+  
+    // return focus to the button when we transitioned from !open -> open
+    const prevOpen = useRef(open);
+    useEffect(() => {
+      if (prevOpen.current === true && open === false) {
+        anchorRef.current!.focus();
+      }
+  
+      prevOpen.current = open;
+    }, [open]);
 
     useEffect(() => {
         
@@ -51,7 +84,6 @@ const NavBar = () => {
     }, [scrollY]);
 
 
-
     const handleShow = () => {
         if(isShow) {
             setIsShow(false);
@@ -59,6 +91,13 @@ const NavBar = () => {
         else {
             setIsShow(true);
         }
+    }
+
+    const handleLogOut = () => {
+        dispath(set(
+            initialState
+        ));
+        router.push("/auth/login")
     }
 
     return (
@@ -85,84 +124,87 @@ const NavBar = () => {
                             <li className="nav-item">
                                 <Link href="/blog">Diễn đàn</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link href={currentUser.user ? "/setting" : "/auth/login"}>{currentUser.user ? "Cài đặt" : "Đăng nhập" }</Link>
-                            </li>
                         </ul>
                     </div>
                     <div className="colapse-segment right-segment d-flex gap-2">
-                    <Tooltip title="Account settings">
-                        <IconButton
-                            onClick={handleClick}
-                            size="small"
-                            sx={{ ml: 2 }}
-                            aria-controls={open ? 'account-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={open ? 'true' : undefined}>
-                            <Avatar/>
-                        </IconButton>
-                    </Tooltip>
-                    <Menu
-                        anchorEl={anchorEl}
-                        id="account-menu"
+                        <Tooltip title="Account settings">
+                            <IconButton
+                                ref={anchorRef}
+                                id="composition-button"
+                                aria-controls={open ? 'composition-menu' : undefined}
+                                aria-expanded={open ? 'true' : undefined}
+                                aria-haspopup="true"
+                                onClick={handleToggle}>
+                                <Avatar/>
+                            </IconButton>
+                        </Tooltip>
+                    <Popper
                         open={open}
-                        onClose={handleClose}
-                        onClick={handleClose}
-                        PaperProps={{
-                            elevation: 0,
-                            sx: {
-                                overflow: 'visible',
-                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                mt: 1.5,
-                                '& .MuiAvatar-root': {
-                                width: 32,
-                                height: 32,
-                                ml: -0.5,
-                                mr: 1,
-                                },
-                                '&:before': {
-                                content: '""',
-                                display: 'block',
-                                position: 'absolute',
-                                top: 0,
-                                right: 14,
-                                width: 10,
-                                height: 10,
-                                bgcolor: 'background.paper',
-                                transform: 'translateY(-50%) rotate(45deg)',
-                                zIndex: 2,
-                            },
-                        },
-                        }}
-                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                        anchorEl={anchorRef.current}
+                        role={undefined}
+                        placement="bottom-start"
+                        transition
+                        className="mt-2"
+                        sx={{zIndex: 11}}
                     >
-                        <MenuItem onClick={handleClose}>
-                        <Avatar /> Profile
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                        <Avatar /> My account
-                        </MenuItem>
-                        <Divider />
-                        <MenuItem onClick={handleClose}>
-                        <ListItemIcon>
-                            <PersonAdd fontSize="small" />
-                        </ListItemIcon>
-                        Add another account
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                        <ListItemIcon>
-                            <Settings fontSize="small" />
-                        </ListItemIcon>
-                        Settings
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                        <ListItemIcon>
-                            <Logout fontSize="small" />
-                        </ListItemIcon>
-                        Logout
-                        </MenuItem>
-                    </Menu>
+                        {({ TransitionProps, placement }) => (
+                            <Grow
+                                {...TransitionProps}
+                                style={{
+                                    transformOrigin:
+                                    placement === 'bottom-start' ? 'left top' : 'left bottom',
+                                }}
+                            >
+                            <Paper>
+                                <ClickAwayListener onClickAway={handleClose}>
+                                <MenuList
+                                    autoFocusItem={open}
+                                    id="composition-menu"
+                                    aria-labelledby="composition-button"
+                                    onKeyDown={handleListKeyDown}
+                                >
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <PersonIcon fontSize="small"/>
+                                        </ListItemIcon>
+                                        My account
+                                    </MenuItem>
+                                    <Divider />
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <PersonAdd fontSize="small" />
+                                        </ListItemIcon>
+                                        Add another account
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <Settings fontSize="small" />
+                                        </ListItemIcon>
+                                        Settings
+                                    </MenuItem>
+                                    {
+                                        currentUser.user ? 
+                                        <MenuItem onClick={handleLogOut}>
+                                            <ListItemIcon>
+                                                <Logout fontSize="small" />
+                                            </ListItemIcon>
+                                            Logout
+                                        </MenuItem>
+                                        :
+                                        <MenuItem onClick={() => router.push("/auth/login")}>
+                                            <ListItemIcon>
+                                                <Login fontSize="small" />
+                                            </ListItemIcon>
+                                            Login
+                                        </MenuItem>
+                                    }
+                                </MenuList>
+                                </ClickAwayListener>
+                            </Paper>
+                            </Grow>
+                        )}
+                    </Popper>
+                 
                     </div>
                 </div>
                 <button className="btn btn-yellow btn-normal colapse-btn flex-center" onClick={() => handleShow()}>

@@ -8,6 +8,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
 import { authServices } from "@/app/_services";
+import { TextField } from "@mui/material";
 
 interface FormData {
     firstName: string;
@@ -108,34 +109,56 @@ const RegisterForm = () => {
                 <div className="multi-group">
                     <div className="input-group">
                         <label>Họ</label>
-                        <input type="text" placeholder="Duong Trung" name="lastName" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField type="text" placeholder="Duong Trung" name="lastName" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                     <div className="input-group">
                         <label>Tên</label>
-                        <input type="text" placeholder="Nguyen" name="firstName" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField type="text" placeholder="Nguyen" name="firstName" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 </div>
                     <div className="input-group">
                         <label>Email</label>
-                        <input type="email" placeholder="david.abc@gmail.com" name="email" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField 
+                            type="email" 
+                            placeholder="david.abc@gmail.com" 
+                            name="email" 
+                            onChange={(e) => handleChange(e.target)} 
+                            required/>
                     </div>
                     <div className="input-group">
                         <label>Số điện thoại</label>
-                        <input type="text" placeholder="xxxx-xxx-xxx" name="phone" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField 
+                        type="text" 
+                        placeholder="xxxx-xxx-xxx" 
+                        name="phone" 
+                        onChange={(e) => handleChange(e.target)} 
+                        required/>
                     </div>
                 <div className="multi-group">
                     <div className="input-group">
                         <label>Mật khẩu</label>
-                        <input type="password" placeholder="" name="password" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField 
+                        type="password" 
+                        placeholder="" name="password" 
+                        onChange={(e) => handleChange(e.target)} 
+                        required/>
                     </div>
                     <div className="input-group">
                         <label>Xác nhận mật khẩu</label>
-                        <input type="password" placeholder="" name="confirmPassword" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField 
+                        type="password" 
+                        placeholder="" 
+                        name="confirmPassword" 
+                        onChange={(e) => handleChange(e.target)} 
+                        required/>
                     </div>
                 </div>
                 <div className="flex-between">
                     <div className="check-group">
-                        <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
+                        <input 
+                        type="checkbox" 
+                        name="isRemember" 
+                        onChange={(e) => handleChange(e.target)}/>
                         <label>Lưu mật khẩu</label>
                     </div>
                     <Link className='line-decor' href="/auth/forgot-password">Quên mật khẩu</Link>

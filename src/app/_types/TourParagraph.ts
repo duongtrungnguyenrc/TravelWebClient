@@ -1,9 +1,18 @@
 import Image from "./Image";
 
-interface Paragraph{
+export default class Paragraph{
     id: string;
     content: string;
     image: Image;
+    
+    constructor(id: string, content: string, image: Image){
+        this.id = id;
+        this.content = content;
+        this.image = image;
+    }
+
+    static getEmptyInstance(){
+        return new Paragraph("", "", new Image("", ""))
+    }
 }
 
-export default Paragraph;

@@ -1,7 +1,7 @@
 'use client'
 
 import { authServices } from "@/app/_services";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -90,14 +90,14 @@ const ResetPassword = () => {
         <form className="mt-5" method="post" action="" onSubmit={(e) => handleSubmit(e)}>
             <div className="input-group">
                 <label>Mật khẩu mới</label>
-                <input type="password" placeholder="nguyendeptraivc@gmail.com" name="password" onChange={(e) => handleChange(e.target)} required/>
+                <TextField type="password" placeholder="nguyendeptraivc@gmail.com" name="password" onChange={(e) => handleChange(e.target)} required/>
                 {
                     isLoading && <CircularProgress color="inherit" size="15px" sx={{position: "absolute", right: "15px", bottom: "18px"}}/>
                 }
             </div>
             <div className="input-group">
                 <label>Xác nhận mật khẩu mới</label>
-                <input type="password" placeholder="nguyendeptraivc@gmail.com" name="confirmPassword" onChange={(e) => handleChange(e.target)} required/>
+                <TextField type="password" placeholder="nguyendeptraivc@gmail.com" name="confirmPassword" onChange={(e) => handleChange(e.target)} required/>
                 {
                     isLoading && <CircularProgress color="inherit" size="15px" sx={{position: "absolute", right: "15px", bottom: "18px"}}/>
                 }

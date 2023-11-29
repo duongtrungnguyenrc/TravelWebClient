@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { Button, IconButton, Menu, MenuItem, MenuProps, Pagination, Rating, Stack, TextField, alpha, styled } from '@mui/material';
+import { Button, IconButton, Menu, MenuItem, Pagination, Rating, Stack, TextField } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { tourServices } from '@/app/_services';
 import { DeleteTourRatingResponse, RatingRequest, Response, TourRating, TourRatingsResponse, UpdateRatingRequest } from '@/app/_types';
@@ -30,9 +30,7 @@ const ServiceReview = ({ id, ratingAcceptance } : { id : string, ratingAcceptanc
     const [ editingRating, setEditingRating ] = useState<UpdateRatingRequest>(new UpdateRatingRequest(0, "", 5));
     
     const currentUser = useSelector(state => (state as RootState).user);
-    const formRef = useRef<HTMLFormElement>(null);
-    console.log(currentUser.accessToken);
-    
+    const formRef = useRef<HTMLFormElement>(null);    
     
     useEffect(() => {
         const fetchRatingData = async () => {
@@ -153,7 +151,7 @@ const ServiceReview = ({ id, ratingAcceptance } : { id : string, ratingAcceptanc
                 <b>Đánh giá</b>
             </Typography>
             {
-                currentUser.user && 
+                currentUser.user && ratingAcceptance &&
                 <div className='my-4'>
                     <form className='gap-0' ref={formRef} method='post' onSubmit={(e) => handleCommentSubmit(e)}>
                         <div className='d-flex justify-content-between'>
@@ -257,7 +255,7 @@ const ServiceReview = ({ id, ratingAcceptance } : { id : string, ratingAcceptanc
                                         secondary={
                                             <>
                                                 <Stack direction="row" alignItems="center">
-                                                    <Rating name="read-only" value={5} readOnly sx={{fontSize: "16px"}} className='mr-2'/>
+                                                    <Rating name="read-only" value={rating.star} readOnly sx={{fontSize: "16px"}} className='mr-2'/>
                                                     <Typography variant='body2'>
                                                         { rating.username }, { rating.ratedDate }
                                                     </Typography>
