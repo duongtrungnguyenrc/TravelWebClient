@@ -1,10 +1,10 @@
 import './global.scss';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { StateProvider } from '../_components';
+import { StateProvider, ThemeRegistry } from '../_components';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ToastContainer/>
-        <StateProvider>
-          { children }
-        </StateProvider>
+        <ThemeRegistry options={{ key: 'mui' }}>
+          <ToastContainer position='bottom-left'/>
+            <StateProvider>
+              { children }
+            </StateProvider>
+        </ThemeRegistry>
       </body>
     </html>
   )

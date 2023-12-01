@@ -15,13 +15,14 @@
         }
 
         .gallery-item {
+            min-height: 500px;
             height: 100%;
             margin-top: 16px;
            
             img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
            }
            
         }
@@ -32,11 +33,9 @@
         grid-template-columns: 300fr 178fr;
         grid-template-rows: auto;
         grid-gap: 16px;
-        box-sizing: border-box;
         position: relative;
 
         .gallery-item {
-
             img {
                 width: 100%;
                 height: 100%;
@@ -91,6 +90,19 @@
     .service-gallery-site {
         display: grid;
         grid-template-columns: 1fr;
+
+        .gallery-left {
+            .gallery-item {
+                min-height: 300px;
+            }
+        }
+
+        .gallery-right {
+
+            .gallery-item:first-child {
+                min-height: 300px;
+            }
+        }
     }
 }
 

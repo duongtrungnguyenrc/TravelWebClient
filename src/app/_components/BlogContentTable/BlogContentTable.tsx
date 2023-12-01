@@ -34,7 +34,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 14,
   },
 }));
-const BlogContentTable = async () => {
+const BlogContentTable = () => {
   return (
     <section className="table-conatainer-right">
       <React.Fragment>
@@ -43,7 +43,7 @@ const BlogContentTable = async () => {
           <Box sx={{ flexGrow: 1 }} className="box-container">
             <Grid container spacing={2}>
               <Grid xs={12} sm={6} md={6} lg={8}>
-                <Item className="box-shadow p-1rem">
+                <Item className="box-shadow p-1rem" style={{boxShadow:"none"}}>
                   <div className="contain-main">
                     <Typography
                       variant="h2"
@@ -55,14 +55,16 @@ const BlogContentTable = async () => {
                         I Created a Developer Rap Video - Here's What I Learned
                       </b>
                     </Typography>
-                    <Typography className="m-20">
-                      Did you come here for something in particular or just
-                      general Riker-bashing? And blowing into maximum warp
-                      speed, you appeared for an instant to be in two places at
-                      once. We have a saboteur aboard. We know you’re dealing in
-                      stolen ore. But I wanna talk about the assassination
-                      attempt
-                    </Typography>
+                    <Typography variant="body1" className="m-40">
+                        Did you come here for something in particular or just
+                        general Riker-bashing? And blowing into maximum warp
+                        speed, you appeared for an instant to be in two places
+                        at once. We have a saboteur aboard. We know you’re
+                        dealing in stolen ore. But I wanna talk about the
+                        assassination attempt on Lieutenant Worf. Could someone
+                        survive inside a transporter buffer for 75 years? Fate.
+                        It protects fools, little children, and ships.
+                      </Typography>
                     <div className="table-first m-40">
                       <TableContainer component={Paper} className="m-40">
                         <Table

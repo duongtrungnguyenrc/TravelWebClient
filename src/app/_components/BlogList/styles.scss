@@ -1,0 +1,28 @@
+.post {
+    box-shadow: none;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    background: transparent;
+
+    .post-image {
+        height: 200px;
+        width: 35%;
+        min-width: 35%;
+        border-radius: 7px;
+    }
+}
+
+// MOBILE RESPONSIVE
+@media only screen and (max-width: 1024px) {
+    .post {
+        .post-image {
+            height: 160px;
+        }
+    }
+}
+
+// TABLET RESPONSIVE
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+}

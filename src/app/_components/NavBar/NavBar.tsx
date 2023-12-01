@@ -2,22 +2,30 @@
 
 'use client'
 
-import { LoginState, Route } from "@/app/_types";
+import { RootState } from "@/app/_context/store";
 import "./styles.scss";
 import Link from "next/link";
 import { useState, useEffect, memo } from "react";
-import { usePathname } from 'next/navigation';
-import { Typography } from "@mui/material";
-import { authServices } from "@/app/_services";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleLogin } from "@/app/_context/loginSlice";
+import { useSelector } from "react-redux";
+import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from "@mui/material";
+import SettingsIcon from '@mui/icons-material/Settings';
+import PersonAdd from '@mui/icons-material/PersonAdd';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 
 const NavBar = () => {
     const [ isShow, setIsShow ] = useState(false);
     const [ scrollY, setScrollY ] = useState(false);
-    const pathName = usePathname();
-    const dispath = useDispatch();
-    const loginStatus = useSelector((state : LoginState) => state.login.login);
+    const [ dropdownShow, setDropdownShow ] = useState(false);
+    const currentUser = useSelector(state => (state as RootState).user);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     useEffect(() => {
         
@@ -40,20 +48,8 @@ const NavBar = () => {
             window.removeEventListener('scroll', handleScroll);
           };
         }
-      }, [scrollY]);
+    }, [scrollY]);
 
-      useEffect(() => {
-        const checkLogin = async () => {
-            const response = await authServices.checkLogin();
-            if(response.status) {
-                dispath(toggleLogin(true));
-            }
-            else {
-                dispath(toggleLogin(false));
-            }
-        }
-        checkLogin();
-      }, [])
 
 
     const handleShow = () => {
@@ -64,7 +60,7 @@ const NavBar = () => {
             setIsShow(true);
         }
     }
-    // (pathName.includes("explore") && !pathName.includes("tour") ? " light" : "") +
+
     return (
         <header className={"navbar-site" + (scrollY ? " active" : "")}>
             <nav>
@@ -90,14 +86,83 @@ const NavBar = () => {
                                 <Link href="/blog">Diễn đàn</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href={loginStatus ? "setting" : "/auth/login"}>{ loginStatus ? "Cài đặt" : "Đăng nhập" }</Link>
+                                <Link href={currentUser.user ? "/setting" : "/auth/login"}>{currentUser.user ? "Cài đặt" : "Đăng nhập" }</Link>
                             </li>
                         </ul>
                     </div>
-                    <div className="colapse-segment right-segment">
-                        <button className="btn btn-yellow">
-                            Khám phá ngay
-                        </button>
+                    <div className="colapse-segment right-segment d-flex gap-2">
+                    <Tooltip title="Account settings">
+                        <IconButton
+                            onClick={handleClick}
+                            size="small"
+                            sx={{ ml: 2 }}
+                            aria-controls={open ? 'account-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined}>
+                            <Avatar/>
+                        </IconButton>
+                    </Tooltip>
+                    <Menu
+                        anchorEl={anchorEl}
+                        id="account-menu"
+                        open={open}
+                        onClose={handleClose}
+                        onClick={handleClose}
+                        PaperProps={{
+                            elevation: 0,
+                            sx: {
+                                overflow: 'visible',
+                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                mt: 1.5,
+                                '& .MuiAvatar-root': {
+                                width: 32,
+                                height: 32,
+                                ml: -0.5,
+                                mr: 1,
+                                },
+                                '&:before': {
+                                content: '""',
+                                display: 'block',
+                                position: 'absolute',
+                                top: 0,
+                                right: 14,
+                                width: 10,
+                                height: 10,
+                                bgcolor: 'background.paper',
+                                transform: 'translateY(-50%) rotate(45deg)',
+                                zIndex: 2,
+                            },
+                        },
+                        }}
+                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                    >
+                        <MenuItem onClick={handleClose}>
+                        <Avatar /> Profile
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                        <Avatar /> My account
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <PersonAdd fontSize="small" />
+                        </ListItemIcon>
+                        Add another account
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <Settings fontSize="small" />
+                        </ListItemIcon>
+                        Settings
+                        </MenuItem>
+                        <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <Logout fontSize="small" />
+                        </ListItemIcon>
+                        Logout
+                        </MenuItem>
+                    </Menu>
                     </div>
                 </div>
                 <button className="btn btn-yellow btn-normal colapse-btn flex-center" onClick={() => handleShow()}>

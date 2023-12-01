@@ -9,7 +9,9 @@ import { FormEventHandler, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { authServices } from "@/app/_services";
 import { useRouter } from "next/navigation";
-import { LoginResponse, LoginState } from "@/app/_types";
+import { LoginResponse, User } from "@/app/_types";
+import { useDispatch } from "react-redux";
+import { set } from "@/app/_context/userSlice";
 
 interface FormData {
     email : string;
@@ -18,15 +20,15 @@ interface FormData {
 }
 
 const LoginForm = () => {   
-    console.log("render");
-
     const router = useRouter();
+    const dispath = useDispatch()
     
     const initialFormData : FormData = {
         email: "",
         password: "",
         isRemember: false,
     }
+    
     const [formData, setFormData] = useState<FormData>(initialFormData);
 
     useEffect(() => {
@@ -45,14 +47,27 @@ const LoginForm = () => {
           [name]: value,
         }));
         
-    }, 200)
+    }, 200);
 
     const signIn = async (email: string, password: string, isRemember: boolean) => {
         const response = await authServices.signIn(email, password);
-        if(response.status) {   
-            console.log(response.data);
-            
-            localStorage.setItem("access_token", (response.data as LoginResponse).accessToken);         
+        if(response.status) {       
+            const signInResponse : LoginResponse = (response.data as LoginResponse);        
+            dispath(
+                set({
+                        accessToken: signInResponse?.tokenType + " " + signInResponse?.accessToken,
+                        user: {
+                            id: signInResponse?.id,
+                            email: signInResponse?.email,
+                            address: signInResponse?.address,
+                            fullName: signInResponse?.fullName,
+                            phone: signInResponse?.phone,
+                            roles: signInResponse?.roles,
+                            active: signInResponse?.active,
+                        } as User
+                    })
+            );
+
             if(isRemember) {
               localStorage.setItem("saved_email", email);
               localStorage.setItem("saved_password", password);
@@ -66,7 +81,7 @@ const LoginForm = () => {
             });
             return false;
         }
-      }
+    }
 
     const handleSubmit : FormEventHandler<HTMLFormElement> = (e : React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -107,7 +122,7 @@ const LoginForm = () => {
                         <label>Mật khẩu</label>
                         <input type="password" name="password" defaultValue={formData.password} placeholder="Your password" onChange={(e) => handleChange(e.target)}  required/>
                     </div>
-                    <div className="d-flex">
+                    <div className="flex-between">
                         <div className="check-group">
                             <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
                             <label>Lưu mật khẩu</label>

@@ -1,29 +1,18 @@
 import { AxiosError, AxiosResponse } from "axios";
 import request from "./requestServices";
-import { Response } from "../_types";
+import responseServices from "./responseServices";
 
 const blogServices = {
-    getAllblogs: async () => {
+    getAllPosts: async (page: number, limit: number) => {
         try {
-            const response: AxiosResponse = await request.get("/blog/all");
-            return {
-                code: response.status,
-                status: true,
-                message: response.data.message,
-                data: response.data.data
-            } as Response;
+            const response: AxiosResponse = await request.get(`/blog/all?page=${page}&limit=${limit}`);
+            return responseServices.success(response);
 
-        } catch (err) {
-            const error: AxiosError = (err as AxiosError);
-            
-            return {
-                code: error.response?.status, 
-                status: false, 
-                message: (error.response?.data as Response)?.message, 
-                data: (error.response?.data as Response)?.data
-            } as Response;
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
         }
-    } 
+    },
+
 }
 
 export default blogServices;

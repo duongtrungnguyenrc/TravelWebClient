@@ -15,6 +15,13 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import TextField from "@mui/material/TextField";
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -22,7 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const BlogContentTable = async () => {
+const BlogContentTable = () => {
   return (
     <section className="blog-content-comment">
       <React.Fragment>
@@ -31,23 +38,23 @@ const BlogContentTable = async () => {
           <Box sx={{ flexGrow: 1 }} className="box-container">
             <Grid container spacing={2}>
               <Grid xs={12} sm={6} md={6} lg={8}>
-                <Item className="box-shadow p-1rem">
+                <Item className="box-shadow p-1rem" style={{boxShadow:"none"}}>
                   <div className="comment-section">
                     <Grid container spacing={2}>
                       <Grid xs={6} md={8} lg={10}>
-                        <Item className="box-shadow d-flex-center-h-100">
+                        <Item className="box-shadow d-flex-center-h-100" style={{boxShadow:"none"}}>
                           <Typography className="total-comment">
                             0 comment
                           </Typography>
                         </Item>
                       </Grid>
                       <Grid xs={6} md={4} lg={2}>
-                        <Item className="box-shadow d-flex-center-h-100">
+                        <Item className="box-shadow d-flex-center-h-100" style={{boxShadow:"none"}}>
                           <button className="btn btn-yellow">login</button>
                         </Item>
                       </Grid>
                       <Grid xs={12} md={12} lg={9}>
-                        <Item className="share box-shadow d-flex-center-h-100">
+                        <Item className="share box-shadow d-flex-center-h-100" style={{boxShadow:"none"}}>
                           <div className="icon-rating">
                             <Stack spacing={1}>
                               <Rating
@@ -89,7 +96,7 @@ const BlogContentTable = async () => {
                         </Item>
                       </Grid>
                       <Grid xs={12} md={12} lg={3}>
-                        <Item className="box-shadow d-flex-center-h-100">
+                        <Item className="box-shadow d-flex-center-h-100" style={{boxShadow:"none"}}>
                           <ButtonGroup
                             variant="contained"
                             aria-label="split button"
@@ -109,14 +116,14 @@ const BlogContentTable = async () => {
                         </Item>
                       </Grid>
                       <Grid xs={12} md={2} lg={1}>
-                        <Item className="box-shadow d-flex-center-h-100">
+                        <Item className="box-shadow d-flex-center-h-100" style={{boxShadow:"none"}}>
                           <div className="comment-place">
                             <div className="comment-input"></div>
                           </div>
                         </Item>
                       </Grid>
                       <Grid xs={12} md={10} lg={11}>
-                        <Item className="box-shadow d-flex-center-h-100">
+                        <Item className="box-shadow d-flex-center-h-100" style={{boxShadow:"none"}}>
                           <Box
                             sx={{
                               width: "100%",
@@ -133,7 +140,7 @@ const BlogContentTable = async () => {
                         </Item>
                       </Grid>
                       <Grid xs={12} md={4} lg={2}>
-                        <Item className="text-start box-shadow">
+                        <Item className="text-start box-shadow" style={{boxShadow:"none"}}>
                           <Typography variant="body1" className="m-20">
                             Login in with
                           </Typography>
@@ -163,7 +170,7 @@ const BlogContentTable = async () => {
                         </Item>
                       </Grid>
                       <Grid xs={12} md={8} lg={10}>
-                        <Item className="text-start box-shadow">
+                        <Item className="text-start box-shadow" style={{boxShadow:"none"}}>
                           <Typography variant="body1" className="m-20">
                             OR SIGN UP WITH DISQUS
                           </Typography>
@@ -182,11 +189,46 @@ const BlogContentTable = async () => {
                           </Box>
                         </Item>
                       </Grid>
-                      <Grid xs={12} md={6} lg={12}>
-                        <div className="contain-comment">
-                          <Typography variant="body1" className="m-20">
-                            No comment
-                          </Typography>
+                      <Grid xs={12} md={6} lg={6}>
+                        <div className="contain-blog">
+                          <Card component="a" href="/blog/post?id=">
+                            <CardHeader
+                              title="set video playback speed
+                              with javascript"
+                              subheader="Travel"
+                              style={{padding: "1rem 0"}}
+                            />
+                            <CardContent style={{padding: "1rem 0"}}>
+                              <Typography display="flex" variant="body2" color="text.secondary" marginBottom="10px" fontSize="12px" alignItems="center" gap="5px">
+                                Nguyen | <CalendarTodayIcon sx={{fontSize: "12px"}}/>  02 December 2023 | <AccessAlarmIcon sx={{fontSize: "12px"}}/>  3 Min, to Read
+                              </Typography>
+                              <Typography variant="body1" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                              </Typography>
+                            </CardContent>
+                          </Card>
+                        </div>
+                      </Grid>
+                      <Grid xs={12} md={6} lg={6}>
+                        <div className="contain-blog">
+                          <Card component="a" href="/blog/post?id=">
+                            <CardHeader
+                              title="set video playback speed
+                              with javascript"
+                              subheader="Travel"
+                              style={{padding: "1rem 0"}}
+                            />
+                            <CardContent style={{padding: "1rem 0"}}>
+                              <Typography display="flex" variant="body2" color="text.secondary" marginBottom="10px" fontSize="12px" alignItems="center" gap="5px">
+                                Nguyen | <CalendarTodayIcon sx={{fontSize: "12px"}}/>  02 December 2023 | <AccessAlarmIcon sx={{fontSize: "12px"}}/>  3 Min, to Read
+                              </Typography>
+                              <Typography variant="body1" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                              </Typography>
+                            </CardContent>
+                          </Card>
                         </div>
                       </Grid>
                     </Grid>

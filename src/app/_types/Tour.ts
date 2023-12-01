@@ -1,7 +1,7 @@
 import TourDate from "./TourDate";
 import Paragraph from "./TourParagraph";
 import TourHotel from "./TourHotel";
-// import Image from "./Image";
+import TourSchedule from "./TourSchedule";
 
 interface Tour {
     id: string;
@@ -11,6 +11,7 @@ interface Tour {
     name : string;
     price : number;
     ratedStar : number;
+    startFrom: number;
     location : string;
     maxPeople : number;
     duration : number;
@@ -24,5 +25,7 @@ interface Tour {
         paragraphs: Paragraph[];
     };
     hotel?: TourHotel[];
+    schedules?: TourSchedule[];
+    ratingAcceptance: boolean;
 }
 export default Tour;

@@ -35,7 +35,11 @@ export { default as BlogContentTable} from "./BlogContentTable/BlogContentTable"
 export { default as BlogContentRight} from "./BlogContentRight/BlogContentRight";
 export { default as BlogContentRelated} from "./BlogContentRelated/BlogContentRelated";
 export { default as BlogContentComment } from "./BlogContentComment/BlogContentComment";
+export { default as Skeleton } from "./Skeleton/Skeleton";
+export { default as BlogList } from "./BlogList/BlogList";
+export { default as ThemeRegistry } from "./ThemeRegistry/ThemeRegistry";
 // //
 
 export { default as AdminNavBar } from "./AdminNavBar/AdminNavBar";
+export { default as AdminHotel } from "./AdminHotel/AdminHotel";
 

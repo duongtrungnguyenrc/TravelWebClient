@@ -16,13 +16,13 @@ const Bottom = () => {
                     <div className="row m-0 w-100">
                         <div className="col-lg-3 col-md-6 col-12 pt-3">
                             <div className="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s" style={{visibility: "visible", animationDelay: "0.2s", animationName: "fadeInLeft"}}>
-                                <h3 className="f-title f_600 t_color f_size_18">Get in Touch</h3>
+                                <h3 className="f-title f_600 t_color f_size_18">Về chúng tôi</h3>
                                 <p>Travel VN - Mang chuyến đi tới cạnh giường bạn</p>
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-6 col-12 pt-3">
                             <div className="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.4s" style={{visibility: "visible", animationDelay: "0.4s", animationName: "fadeInLeft"}}>
-                                <h3 className="f-title f_600 t_color f_size_18">Download</h3>
+                                <h3 className="f-title f_600 t_color f_size_18">Liên kết nhanh</h3>
                                 <ul className="list-unstyled f_list">
                                     <li><a href="#">Company</a></li>
                                     <li><a href="#">Android App</a></li>
@@ -35,7 +35,7 @@ const Bottom = () => {
                         </div>
                         <div className="col-lg-3 col-md-6 col-12 pt-3">
                             <div className="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.6s" style={{visibility: "visible", animationDelay: "0.6s", animationName: "fadeInLeft"}}>
-                                <h3 className="f-title f_600 t_color f_size_18">Help</h3>
+                                <h3 className="f-title f_600 t_color f_size_18">Trợ giúp</h3>
                                 <ul className="list-unstyled f_list">
                                     <li><a href="#">FAQ</a></li>
                                     <li><a href="#">Term &amp; conditions</a></li>
@@ -48,7 +48,7 @@ const Bottom = () => {
                         </div>
                         <div className="col-lg-3 col-md-6 col-12 pt-3">
                             <div className="f_widget social-widget pl_70 wow fadeInLeft" data-wow-delay="0.8s" style={{visibility: "visible", animationDelay: "0.8s", animationName: "fadeInLeft"}}>
-                                <h3 className="f-title f_600 t_color f_size_18">Team Solutions</h3>
+                                <h3 className="f-title f_600 t_color f_size_18">Mạng xã hội</h3>
                                 <div className="f_social_icon">
                                     <IconButton size='large'><FacebookIcon fontSize='large'/></IconButton>
                                     <IconButton size='large'><LinkedInIcon fontSize='large'/></IconButton>

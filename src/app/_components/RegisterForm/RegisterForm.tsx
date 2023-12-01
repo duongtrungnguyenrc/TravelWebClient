@@ -133,7 +133,7 @@ const RegisterForm = () => {
                         <input type="password" placeholder="" name="confirmPassword" onChange={(e) => handleChange(e.target)} required/>
                     </div>
                 </div>
-                <div className="d-flex">
+                <div className="flex-between">
                     <div className="check-group">
                         <input type="checkbox" name="isRemember" onChange={(e) => handleChange(e.target)}/>
                         <label>Lưu mật khẩu</label>
@@ -146,7 +146,7 @@ const RegisterForm = () => {
                 </div>
                 <div className="button-group">
                     <button className="btn btn-big btn-light btn-shadow">Google</button>
-                    <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Đăng kí</button>
+                    <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Đăng ký</button>
                 </div>
             </form>
             <div className="register-form-bottom">

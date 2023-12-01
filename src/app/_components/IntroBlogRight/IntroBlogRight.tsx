@@ -24,6 +24,7 @@ const IntroBlogRight = ({title , content , myList}: LayoutProps) => {
       control.start("visible");
     } 
   }, [control, inView]);
+  
   return (
     <section ref={ref} className="container-blog-right">
       <motion.div className="blog-right-site col-12 col-md-5 col-lg-5 px-0" variants={variants.toLeftVariant} initial="hidden" animate={control}>

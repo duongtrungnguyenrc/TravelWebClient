@@ -26,13 +26,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const BlogContentRelated = async () => {
+const BlogContentRelated = () => {
   console.log("render");
 
-  const blogs: Response = await blogServices.getAllblogs();
-  const posts: { pages: number; blogs: Blog[] } = blogs.data as {
-    pages: number;
-    blogs: Blog[];
+  const posts: { pages: number; blogs: Blog[] } = {
+    pages: 0,
+    blogs: []
   };
   return (
     <section className="blog-content-related">
@@ -42,7 +41,7 @@ const BlogContentRelated = async () => {
           <Box sx={{ flexGrow: 1 }} className="box-container">
             <Grid container spacing={2}>
               <Grid xs={12} sm={6} md={6} lg={8}>
-                <Item className="box-shadow p-1rem">
+                <Item className="box-shadow p-1rem" style={{boxShadow:"none"}}>
                   <div className="related-post text-start">
                     <div className="related-heading">
                       <Typography variant="h5">

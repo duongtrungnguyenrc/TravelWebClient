@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const BlogContent = async () => {
+const BlogContent = () => {
   return (
     <section className="Blog-container">
       <React.Fragment>
@@ -26,7 +26,7 @@ const BlogContent = async () => {
           <Box sx={{ flexGrow: 1 }} className="box-container">
             <Grid container spacing={2}>
               <Grid xs={12} sm={6} md={6} lg={8}>
-                <Item className="box-shadow p-1rem">
+                <Item className="box-shadow p-1rem" style={{boxShadow:"none"}}>
                   <div className="blog-contain-left">
                     <div
                       className="Blog-heading"

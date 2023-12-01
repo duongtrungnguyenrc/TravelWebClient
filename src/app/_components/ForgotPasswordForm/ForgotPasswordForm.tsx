@@ -36,7 +36,7 @@ const ForgotPasswordForm = () => {
     const user : User = await getUserByEmail(forgotEmail) as User;    
     
     if(user) {
-      setExistingAccount({name: user.name, email: user.email});
+      setExistingAccount({name: user.fullName, email: user.email});
     }
     setIsLoading(false);
   }

@@ -37,9 +37,14 @@ $primary: #C7923E;
     }
     
     .services-group-body {
-        display: grid;
-        grid-template-columns: auto auto auto auto;
+        display: flex;
+        overflow: hidden;
+        padding: 10px 0;
         gap: 1rem;
+
+        .service-item {
+            min-width: 363px;
+        }
 
         .service-item:nth-child(n+5) {
             display: none;

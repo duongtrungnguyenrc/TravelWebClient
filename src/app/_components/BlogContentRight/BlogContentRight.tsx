@@ -59,7 +59,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const BlogContentRight = async () => {
+const BlogContentRight =  () => {
   return (
     <section className="blog-content-right">
       <React.Fragment>
@@ -69,7 +69,7 @@ const BlogContentRight = async () => {
             <Grid container spacing={2}>
               <Grid xs={12} sm={6} md={6} lg={8}></Grid>
               <Grid xs={12} sm={6} md={6} lg={4}>
-                <Item className="box-shadow p-1rem">
+                <Item className="box-shadow p-1rem" style={{boxShadow:"none"}}>
                   <div className="blog-container-right">
                     <div className="top-author-contain">
                       <div className="Author-heading">
@@ -79,7 +79,7 @@ const BlogContentRight = async () => {
                       </div>
                       <Grid container spacing={2}>
                         <Grid xs={12} md={12} lg={12}>
-                          <Item className="d-flex-10">
+                          <Item className="d-flex-10" style={{boxShadow:"none"}}>
                             <div className="avatar"></div>
                             <div className="infor-author">
                               <Typography
@@ -135,7 +135,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={12}>
-                          <Item className="d-flex-10">
+                          <Item className="d-flex-10" style={{boxShadow:"none"}}>
                             <div className="avatar"></div>
                             <div className="infor-author">
                               <Typography
@@ -191,7 +191,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={12}>
-                          <Item className="d-flex-10">
+                          <Item className="d-flex-10" style={{boxShadow:"none"}}>
                             <div className="avatar"></div>
                             <div className="infor-author">
                               <Typography
@@ -306,7 +306,7 @@ const BlogContentRight = async () => {
                       </div>
                       <Grid container spacing={2}>
                         <Grid xs={12} md={12} lg={6}>
-                          <Item className="item-update">
+                          <Item className="item-update" style={{boxShadow:"none"}}>
                             <Typography className="text-center number-of-post">
                               14
                             </Typography>
@@ -316,7 +316,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={6}>
-                          <Item className="item-update">
+                          <Item className="item-update" style={{boxShadow:"none"}}>
                             <Typography className="text-center number-of-post">
                               14
                             </Typography>
@@ -326,7 +326,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={6}>
-                          <Item className="item-update">
+                          <Item className="item-update" style={{boxShadow:"none"}}>
                             <Typography className="text-center number-of-post">
                               14
                             </Typography>
@@ -336,7 +336,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={12} md={12} lg={6}>
-                          <Item className="item-update">
+                          <Item className="item-update" style={{boxShadow:"none"}}>
                             <Typography className="text-center number-of-post">
                               14
                             </Typography>
@@ -378,7 +378,7 @@ const BlogContentRight = async () => {
                       </div>
                       <Grid container spacing={2}>
                         <Grid xs={6} md={6} lg={4}>
-                          <Item className="box-shadow">
+                          <Item className="box-shadow" style={{boxShadow:"none"}}>
                             <Chip
                               label="travel"
                               style={{
@@ -391,7 +391,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
-                          <Item className="box-shadow">
+                          <Item className="box-shadow" style={{boxShadow:"none"}}>
                             <Chip
                               label="travel"
                               style={{
@@ -404,7 +404,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
-                          <Item className="box-shadow">
+                          <Item className="box-shadow" style={{boxShadow:"none"}}>
                             <Chip
                               label="travel"
                               style={{
@@ -417,7 +417,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
-                          <Item className="box-shadow">
+                          <Item className="box-shadow" style={{boxShadow:"none"}}>
                             <Chip
                               label="travel"
                               style={{
@@ -430,7 +430,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
-                          <Item className="box-shadow">
+                          <Item className="box-shadow" style={{boxShadow:"none"}}>
                             <Chip
                               label="travel"
                               style={{
@@ -443,7 +443,7 @@ const BlogContentRight = async () => {
                           </Item>
                         </Grid>
                         <Grid xs={6} md={6} lg={4}>
-                          <Item className="box-shadow">
+                          <Item className="box-shadow" style={{boxShadow:"none"}}>
                             <Chip
                               label="travel"
                               style={{

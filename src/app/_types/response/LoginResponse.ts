@@ -1,7 +1,7 @@
-interface LoginResponse {
+import { User } from "..";
+
+interface LoginResponse extends User {
     accessToken: string;
-    email: string;
-    role: string[];
     tokenType: string;
 }
 

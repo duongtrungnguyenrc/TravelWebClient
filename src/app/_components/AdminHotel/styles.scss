@@ -1,0 +1,71 @@
+.container-admin{
+    margin-top: 2.5rem;
+}
+.MuiContainer-root.MuiContainer-maxWidthSm.mui-cuefkz-MuiContainer-root {
+    width: 100%;
+    margin: 0px;
+}
+.btn-add-hotel{
+    width:fit-content;
+}
+.table-container {
+    max-height: 70vh; /* Độ cao tối đa của bảng */
+    overflow-y: auto; /* Tạo thanh cuộn dọc khi nội dung vượt quá độ cao */
+  }
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding:10px;
+    width:100%;
+  }
+  
+  .table thead th {
+    background-color: #f8f9fa;
+    border-bottom: none;
+    font-weight: bold;
+  }
+  
+//   .table tbody tr:nth-child(even) {
+//     background-color: #f8f9fa;
+//   }
+  div#demo-simple-select-autowidth {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+td{
+    padding: 10px;
+    height: 90%;
+}
+tr{
+    font-size: 15px;
+}
+.mui-14s5rfu-MuiFormLabel-root-MuiInputLabel-root,.mui-1oib39-MuiFormLabel-root-MuiInputLabel-root,.mui-1fk82qy-MuiFormLabel-root-MuiInputLabel-root{
+    font-size: 15px !important;
+    top: -10px !important;
+}
+
+
+  // MOBILE RESPONSIVE
+@media only screen and (max-width: 600px) {
+    .contain-section-hotel{
+        width: 100%;
+    }
+    
+  }
+  
+  // TABLET RESPONSIVE
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .MuiContainer-root.MuiContainer-maxWidthSm.m-0.m-w-100.container.css-cuefkz-MuiContainer-root{
+      padding: 0px 10px 0px 10px !important;
+    }
+  
+  }
+  
+  // MINI PC RESPONSIVE
+  
+  @media only screen and (min-width: 1024px) and (max-width: 1400px) {
+  
+  
+  }
