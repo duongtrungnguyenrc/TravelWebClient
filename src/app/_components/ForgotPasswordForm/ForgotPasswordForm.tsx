@@ -73,14 +73,8 @@ const ForgotPasswordForm = () => {
   return (
     <div className="register-site d-flex flex-column justify-content-center" >
       {
-        verifyStatus ? <SuccessChecking/>
+        verifyStatus ? <SuccessChecking title="Vui lòng kiểm tra email"/>
         :
-        (
-          // isVerifyLoading ? 
-          // <div className="w-100 h-100 d-flex justify-content-center align-items-center">
-          //   <CircularProgress size="80px" sx={{color: "#c7923e"}}/>
-          // </div>
-          // : 
         <>
           <div className="register-site-header">
             <div className="brand">
@@ -158,7 +152,6 @@ const ForgotPasswordForm = () => {
               }
           </div>
         </>
-        )
       }
     </div>
   );

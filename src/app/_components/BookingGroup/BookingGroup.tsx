@@ -450,7 +450,7 @@ const BookingForm = ({ tourDateId, tour } : { tourDateId: number, tour: Tour }) 
                     </form>
                 </Grid>
                 <Grid item xs={12} md={6} lg={4}>
-                    <div className="order rounded">
+                    <div className="ticket rounded">
                         <table className="w-100">
                             <tr>
                                 <td colSpan={2} className="w-100">
