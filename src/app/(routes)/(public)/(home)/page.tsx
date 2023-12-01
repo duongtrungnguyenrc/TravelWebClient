@@ -1,4 +1,4 @@
-import { DailyStatus, HomeHero, ServicesGroup, IntroBlog, IntroBlogRight, GalleryHome, PopularDestination } from "@/app/_components";
+import {HomeHero,IntroBlog,DailyStatus,ServicesGroup,IntroBlogRight,PopularDestination,GalleryHome} from "@/app/_components";
 
 export default function Home() {
   const content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat elit sed pretium, egestas sed sit. Fames tincidunt rhoncus viverra eu ut scelerisque. Erat orci scelerisque adipiscing potenti sollicitudin semper aliquam in ultricies. Sem vitae amet, egestas aliquam mi a arcu. Feugiat at dignissim massa ornare. Platea eu orci enim est egestas fusce cras. Purus diam est vitae faucibus enim. Ultricies nunc vel magnis gravida quis sodales. Lacus, elit pellentesque massa odio. Sed dictumst condimentum sit quis "
