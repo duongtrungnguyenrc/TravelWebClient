@@ -1,6 +1,13 @@
-interface Image {
+export default class Image {
     src: string;
     name: string;
-}
 
-export default Image;
+    constructor(src: string, name: string){
+        this.src = src;
+        this.name = name;
+    }
+    
+    static getEmptyInstance(){
+        return new Image("", "")
+    }
+}

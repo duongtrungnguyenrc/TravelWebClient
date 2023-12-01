@@ -2,7 +2,7 @@
 
 'use client'
 
-import { Stack, Typography } from "@mui/material";
+import { Stack, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -102,7 +102,7 @@ const ForgotPasswordForm = () => {
                 <form action="" method="post" onSubmit={(e) => handleSubmit(e)}>
                   <div className="input-group">
                     <label>Email của bạn</label>
-                    <input type="text" placeholder="nguyendeptraivc@gmail.com" name="email"  onChange={(e) => handleChange(e.target)} required/>
+                    <TextField type="text" placeholder="nguyendeptraivc@gmail.com" name="email"  onChange={(e) => handleChange(e.target)} required/>
                     {
                       isLoading ? 
                         <CircularProgress color="inherit" size="15px" sx={{position: "absolute", right: "15px", bottom: "18px"}}/>
@@ -110,7 +110,7 @@ const ForgotPasswordForm = () => {
                     }
                   </div>
                   <div className="button-group">
-                    <Link href="/auth/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
+                    <Link href="/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
                     <button className="btn btn-big btn-yellow btn-shadow" type="submit">Tìm kiếm</button>
                   </div>
                 </form>
@@ -151,7 +151,7 @@ const ForgotPasswordForm = () => {
                     </div>
                   </Stack>
                   <div className="button-group mt-4">
-                    <Link href="/auth/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
+                    <Link href="/login" className="btn btn-big btn-light btn-shadow">Hủy</Link>
                     <button className="btn btn-big btn-yellow btn-shadow" onClick={() => restorePassword()}>Khôi phục</button>
                   </div>
                 </Stack>

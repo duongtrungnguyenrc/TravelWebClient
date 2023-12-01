@@ -1,10 +1,9 @@
 'use client'
 
-import { Fab, Icon, IconButton, Menu, MenuItem, Stack, Tooltip, Typography } from "@mui/material";
+import { Fab, IconButton, InputAdornment, Menu, MenuItem, Stack, TextField, Tooltip, Typography } from "@mui/material";
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
-import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 import SendIcon from '@mui/icons-material/Send';
 
 const FloatingChat = () => {
@@ -19,7 +18,7 @@ const FloatingChat = () => {
   }
 
   return (
-    <div className="position-fixed" style={{bottom: "30px", right: "30px"}}>
+    <div className="position-fixed rounded" style={{bottom: "30px", right: "30px"}}>
         {
           isDisplay ? 
           <Stack sx={{width: "350px", height: "600px", background: "#fff", transition: "1s", boxShadow: "rgba(0, 0, 0, 0.4) 0px 2px 4px 0px", justifyContent: "space-between"}}>
@@ -28,7 +27,7 @@ const FloatingChat = () => {
                 <b>Hỗ trợ</b>
               </Typography>
               <IconButton onClick={() => handleClose()}>
-                <CloseIcon/>
+                <CloseIcon sx={{color: "#fff"}}/>
               </IconButton>
             </Stack>
             <Stack className="h-100">
@@ -37,10 +36,15 @@ const FloatingChat = () => {
 
             <form className="d-flex flex-row p-2">
               <div className="input-group">
-                <TextareaAutosize placeholder="Input here" className="pr-5"/>
-                <IconButton className="position-absolute" onClick={() => handleClose()} sx={{right: "5px", bottom: "5px"}}>
-                  <SendIcon fontSize="medium"/>
-                </IconButton> 
+                <TextField placeholder="Input here"
+                  InputProps={{
+                    endAdornment: 
+                    <InputAdornment position="start">
+                      <IconButton className="position-absolute" onClick={() => handleClose()} sx={{right: "5px", bottom: "5px"}}>
+                        <SendIcon fontSize="medium"/>
+                      </IconButton> 
+                    </InputAdornment>,
+                  }}/>
               </div>
             </form>
           </Stack>

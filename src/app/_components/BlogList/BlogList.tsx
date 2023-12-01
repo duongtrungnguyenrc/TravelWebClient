@@ -5,48 +5,29 @@
 import { Card, CardContent, CardMedia, Chip, Grid, Pagination, Stack, Typography } from "@mui/material";
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import { Blog, Response } from "@/app/_types";
-import { blogServices } from "@/app/_services";
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { AllBlogsResponse } from "@/app/_types";
+import { useRouter} from "next/navigation";
 import "./styles.scss";
 import { Skeleton } from "..";
 
-const BlogList = () => {
-    const [ allPosts, setAllPosts ] = useState<Blog[] | null>(null);
-    const [ pagesNumber, setPagesNumber ] = useState(0);
+const BlogList = ({ data } : { data: AllBlogsResponse }) => {
 
     const router = useRouter();
-    const params = useSearchParams();
-    const page = params.get("page") ? parseInt(params.get("page")!, 10) : 1;
-    
-    useEffect(() => {
-        const fetchAllPosts = async (page: number) => {
-        const response: Response = await blogServices.getAllPosts(page, 10);
-        if (response.status) {
-            const blogData = response.data as { pages: number, posts: Blog[] };
-            setAllPosts(blogData.posts);
-            pagesNumber === 0 ? setPagesNumber(blogData.pages) : undefined;
-        }
-        }
 
-        fetchAllPosts(page);
-    }, [page])
-
-    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
         router.push(`/blog?page=${value}`, {scroll: false});
     };
 
     return (
         <Stack direction="column" gap={4}>
             <Typography variant="h2" component="h2" fontSize="28px">
-            Featured this month
+                Bài viết liên quan
             </Typography>
             <Grid container spacing={3}>
             {
-                allPosts ? allPosts.map((post) => {
-                    return  <Grid key={post.id} item xs={12}>
-                                <Card component="a" href="/blog/post?id=" className="post">
+                data ? data.posts.slice(4).map((post) => {
+                    return  <Grid key={post.id + post.author} item xs={12}>
+                                <Card component="a" href={`/blog/post?id=${post.id}`} className="post" sx={{boxShadow: "none"}}>
                                     <CardMedia
                                     component="img"
                                     loading="lazy"
@@ -197,7 +178,7 @@ const BlogList = () => {
 
             </Grid>
             <Stack  direction="row" justifyContent="center">
-            <Pagination shape="rounded" variant="outlined" color="primary" size="large" count={pagesNumber} onChange={handleChangePage} />
+                <Pagination shape="rounded" variant="outlined" color="primary" size="large" count={data.pages} onChange={handleChangePage} />
             </Stack>
         </Stack>
     );

@@ -59,6 +59,11 @@ body {
     &.btn-shadow {
         box-shadow: 0 0 0 3px #ededed;
     }
+
+    &:disabled {
+        color: var(--dark)!important;
+        background-color: #f1f3f4!important;
+    }
     
     &.btn-normal {
         width: max-content;
@@ -160,40 +165,6 @@ form {
                 letter-spacing: 0.08px;
             }
         }
-
-        input, textarea {
-            width: 100%;
-            padding: 1rem;
-            background-color: #fff;
-            border-radius: 8px;
-            border: 1px solid #E1E1E1;
-            transition: 0.5s;
-            
-            &[type="checkbox"], &[type="button"], &[type="submit"], &[type="radio"] {
-                cursor: pointer;
-            }
-
-            &[type="text"], &[type="phone"], &[type="email"], &[type="password"] {
-                &:disabled {
-                    border: none!important;
-                    background-color: #fff;
-
-                    &::placeholder {
-                        color: #000;
-                        font-size: 1rem;
-                    }
-                }
-            }
-
-            &:focus {
-                outline: unset;
-                border: 1px solid var(--primary-dark);
-            }
-
-            &::placeholder {
-                color: #9A9AB0;
-            }
-        }
     }
 
     .select-group {
@@ -287,6 +258,10 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.text-primary-yellow {
+    color: var(--primary-yellow)!important;
 }
 
 .brand {

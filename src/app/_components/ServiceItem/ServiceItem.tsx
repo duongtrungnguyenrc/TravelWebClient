@@ -50,16 +50,16 @@ const ServiceItem = ({ service } : { service : Tour }) => {
               <Stack direction="row" spacing={1} alignItems="center">
                 <EditCalendarIcon fontSize="small"/>
                 <Typography variant="body2" color="text.secondary">
-                  2 people
+                  { service.maxPeople } people
                 </Typography>
               </Stack>
             </Stack>
             <Stack direction="row" justifyContent="space-between">
               <Typography variant="body2" color="text.secondary">
-                {service.location}
+                { service.location }
               </Typography>
               <Typography variant="body2" color="red">
-                {service.price} VNĐ
+                { service.price.toLocaleString("en") } VNĐ
               </Typography>
             </Stack>
           </Stack>

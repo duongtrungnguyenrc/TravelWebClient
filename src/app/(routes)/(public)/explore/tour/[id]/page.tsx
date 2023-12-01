@@ -13,17 +13,21 @@ import { GoogleMapsEmbed } from '@next/third-parties/google'
 import { useEffect, useState } from "react";
 import { Tour} from "@/app/_types";
 import { tourServices } from "@/app/_services";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/_context/store";
 
 const TourPage = ({ params }: { params: { id: string } }) => {
     const [ tourData, setTourData ] = useState<Tour>();    
     const [ activeTab, setActiveTab ] = useState<number>(0);
+
+    const currentUser = useSelector(state => (state as RootState).user);
 
     useEffect(() => {
         fetchTour(params.id);
     }, []);
     
     const fetchTour = async (id: string) => {
-      const response = await tourServices.getTourById(id);
+      const response = await tourServices.getTourById(id, currentUser?.accessToken);
       if(response.status) {
         setTourData(response.data as Tour);
       }
@@ -162,7 +166,7 @@ const TourPage = ({ params }: { params: { id: string } }) => {
             
           </Grid>
           <Grid item xs={12} lg={6}>
-            <ServiceSummary travelDates={tourData?.tourDate}/>
+            <ServiceSummary tourId={tourData?.id} travelDates={tourData?.tourDate}/>
           </Grid>
         </Grid>
         

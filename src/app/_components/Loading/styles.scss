@@ -1,15 +1,26 @@
 // Produced by Duong Trung Nguyen
+
 .loading-container {
-    position: absolute;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #fff;
+  display: flex;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+
+  .loading-animation-wrapper {
     width: 50px;
     height: 50px;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+    position: relative;
 
-  
     .item {
       width: 20px;
       height: 20px;
@@ -22,28 +33,30 @@
       top: 0;
       left: 0;
       z-index: 1;
-      animation: item-1_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+      animation: item-1_move 1.5s linear infinite;
     }
     
     .item-2 {
       top: 0;
       right: 0;
-      animation: item-2_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+      animation: item-2_move 1.5s linear infinite;
     }
     
     .item-3 {
       bottom: 0;
       right: 0;
       z-index: 1;
-      animation: item-3_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+      animation: item-3_move 1.5s linear infinite;
     }
     
     .item-4 {
       bottom: 0;
       left: 0;
-      animation: item-4_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
+      animation: item-4_move 1.5s linear infinite;
     }
   }
+}
+
   
   
   

@@ -21,9 +21,13 @@ const tourServies = {
             return responseServices.error(error as AxiosError);
         }
     },
-    getTourById: async (id: string) => {
+    getTourById: async (id: string, accessToken?: string) => {
         try {
-            const response = await request.get(`/tour/detail?id=${id}`);
+            const response = await request.get(`/tour/detail?id=${id}`, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });
             return responseServices.success(response);
         } catch (error) {
             return responseServices.error(error as AxiosError);
