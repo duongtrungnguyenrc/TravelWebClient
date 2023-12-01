@@ -42,4 +42,4 @@ export { default as ThemeRegistry } from "./ThemeRegistry/ThemeRegistry";
 
 export { default as AdminNavBar } from "./AdminNavBar/AdminNavBar";
 export { default as AdminHotel } from "./AdminHotel/AdminHotel";
-
+export { default as TermAndCondition } from "./TermAndCondition/TermAndCondition";
