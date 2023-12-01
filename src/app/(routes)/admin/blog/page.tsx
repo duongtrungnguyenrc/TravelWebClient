@@ -1,12 +1,16 @@
-'use client'
 
 import { BlogEditor } from '@/app/_components';
-import 'react-quill/dist/quill.snow.css';
+import { blogServices } from '@/app/_services';
+import { AllBlogsResponse } from '@/app/_types';
 
-const AdminBlogPage = () => {
+const AdminBlogPage = async () => {
 
+  const response = await blogServices.get(1, 20);
+  const posts = (response.data as AllBlogsResponse);
+  console.log(posts);
+  
   return (
-    <BlogEditor/>
+    <BlogEditor data={posts}/>
   )
 };
 export default AdminBlogPage;

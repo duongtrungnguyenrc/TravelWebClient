@@ -4,10 +4,16 @@ import responseServices from "./responseServices";
 import { CreateBlogPostRequest } from "../_types";
 
 const blogServices = {
-    getAllPosts: async (page: number, limit: number) => {
+    get: async (page?: number, limit?: number, id?: number) => {
         try {
-            const response: AxiosResponse = await request.get(`/blog/all?page=${page}&limit=${limit}`);
-            return responseServices.success(response);
+            if(id) {
+                const response: AxiosResponse = await request.get(`/blog/${id}`);
+                return responseServices.success(response)
+            }
+            else {
+                const response: AxiosResponse = await request.get(`/blog/all` + ((page && limit) ? `?page=${page}&limit=${limit}` : ""));
+                return responseServices.success(response)
+            }
 
         } catch (error) {
             return responseServices.error(error as AxiosError);

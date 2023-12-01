@@ -49,6 +49,15 @@ const authServices = {
         } catch (error) {
            return responseServices.error(error as AxiosError);
         }
+    },
+    activate: async (token: string, activateCode : string) => {
+        try {            
+            const response: AxiosResponse = await request.post(`/auth/activate`, { token, activateCode });     
+            return responseServices.success(response);
+
+        } catch (error) {
+           return responseServices.error(error as AxiosError);
+        }
     }
 }
 

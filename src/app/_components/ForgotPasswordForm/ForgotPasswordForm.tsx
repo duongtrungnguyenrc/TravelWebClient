@@ -73,7 +73,7 @@ const ForgotPasswordForm = () => {
   return (
     <div className="register-site d-flex flex-column justify-content-center" >
       {
-        verifyStatus ? <SuccessChecking title="Vui lòng kiểm tra email"/>
+        verifyStatus ? <SuccessChecking title="Vui lòng kiểm tra email" size={2}/>
         :
         <>
           <div className="register-site-header">

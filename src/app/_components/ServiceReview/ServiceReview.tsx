@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { Button, IconButton, Menu, MenuItem, Pagination, Rating, Stack, TextField } from '@mui/material';
+import { Avatar, Button, IconButton, ListItemAvatar, Menu, MenuItem, Pagination, Rating, Stack, TextField } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { tourServices } from '@/app/_services';
 import { DeleteTourRatingResponse, RatingRequest, Response, TourRating, TourRatingsResponse, UpdateRatingRequest } from '@/app/_types';
@@ -215,7 +215,10 @@ const ServiceReview = ({ id, ratingAcceptance } : { id : string, ratingAcceptanc
             <List>
                 {
                     ratingData ? ratingData?.rates?.map((rating) => {
-                        return  <ListItem alignItems="flex-start" className='px-0'>
+                        return  <ListItem alignItems="center" className='px-0'>
+                                    <ListItemAvatar>
+                                        <Avatar/>
+                                    </ListItemAvatar>
                                     <ListItemText
                                         primary={
                                             <div className='d-flex justify-content-between'>

@@ -1,59 +1,81 @@
-.paragraph-preview-img {
-    width: 100%;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f1f3f4;
-    border-radius: 5px;
-}
 
-.preview-paragraph-float {
+.paragraph-layout-wrapper {
+    position: relative;
     cursor: pointer;
-}
 
-.paragraph-text {
-    height: 1em;
-    width: 100%;
-    background-color: #f1f3f4;
-    border-radius: 5px;
-}
-
-.paragraph-float-right {
-    .paragraph-float-image {
-        float: right;
-        margin-left: 1rem;
-        height: 250px;
-        width: 50%;
-        object-fit: cover;
+    .paragraph-modify-actions {
+        position: absolute;
+        top: 60%;
+        left: 0;
+        z-index: 1;
+        width: 100px;
+        opacity: 0;
+        transition: 0.5s;
     }
-}
-
-.paragraph-float-left {
-    .paragraph-float-image {
-        float: left;
-        margin-right: 1rem;
-        height: 250px;
-        width: 50%;
-        clear: right;
-        border-radius: 5px;
-        object-fit: cover;
+    
+    &:hover {
+        .paragraph-modify-actions {
+            opacity: 1;
+        }
     }
-}
 
-.paragraph-float-center {
-    .paragraph-center-image {
-        height: 250px;
+    .paragraph-preview-img {
         width: 100%;
-        margin-bottom: 10px;
-        object-fit: cover;
+        height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f3f4;
+        border-radius: 5px;
     }
-}
+    
+    .paragraph-text {
+        height: 1em;
+        width: 100%;
+        background-color: #f1f3f4;
+        border-radius: 5px;
+    }
+    
+    .paragraph-float-right {
+        .paragraph-float-image {
+            float: right;
+            margin-left: 1rem;
+            height: 300px;
+            width: 50%;
+            object-fit: cover;
+        }
+    }
+    
+    .paragraph-float-left {
+        .paragraph-float-image {
+            float: left;
+            margin-right: 1rem;
+            height: 300px;
+            width: 50%;
+            clear: right;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+    }
+    
+    .paragraph-float-center {
+        .paragraph-center-image {
+            height: 330px;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+    }
+    
+    .paragraph-preview {
+        word-wrap: break-word;
+        height: max-content;
+        overflow: hidden;
+        clear: both;
 
-.paragraph-preview {
-   word-wrap: break-word;
-
-   a {
-    text-decoration: underline;
-   }
+       a {
+        text-decoration: underline;
+       }
+    }
 }

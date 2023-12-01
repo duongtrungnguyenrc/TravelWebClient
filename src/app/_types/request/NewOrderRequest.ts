@@ -15,8 +15,9 @@ export default class NewOrderRequest {
    roomType?: string;
    contactInfo: ContactInfo;
    specialRequest?: string;
+   sessionToken: string;
 
-    constructor(ammount: number, adults: number, children: number, paymentMethod: string, tourDateId: number, specialRequest: string, contactInfo: ContactInfo, hotelId?: number, roomType?: string) {
+    constructor(ammount: number, adults: number, children: number, paymentMethod: string, tourDateId: number, specialRequest: string, contactInfo: ContactInfo, sessionToken: string, hotelId?: number, roomType?: string) {
         this.amount = ammount;
         this.adults = adults;
         this.children = children;
@@ -26,6 +27,7 @@ export default class NewOrderRequest {
         this.contactInfo = contactInfo;
         this.hotelId = hotelId;
         this.roomType = roomType;
+        this.sessionToken = sessionToken;
     }
 
     static getEmptyInstance() {
@@ -35,13 +37,13 @@ export default class NewOrderRequest {
                 customerPhone: "",
                 customerEmail: "",
                 customerAddress: "",
-            }, 
+            }, "", -1, ""
         )
     }
 
     static checkRequireInformation(instance: NewOrderRequest): boolean {                
         for (const key in instance) {
-            if (instance.hasOwnProperty(key) && key != "hotelId" && key != "roomType" && key != "children" && key != "specialRequest" && key != "amount") {                
+            if (instance.hasOwnProperty(key) && key != "hotelId" && key != "roomType" && key != "children" && key != "specialRequest" && key != "amount" && key != "sessionToken") {                
                 const value = instance[key as keyof NewOrderRequest];
                 if (typeof value === 'string' && (!value || value.trim().length === 0)) {
                     return false;

@@ -1,0 +1,83 @@
+.activate-account-site {
+    transition: 0.5s;
+    padding: 2rem;
+    animation: slowVisible 0.5s linear;
+
+    &.ring {
+        .activate-account-form {
+            animation: ring 0.5s ease-in-out;
+        }
+    }
+
+    .activate-account-form {
+        display: flex;
+        gap: 10px;
+    
+        & > input {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid #cdcece;
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+    
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            &:disabled {
+                background-color: #f1f3f4;
+                color: gray;
+            }
+        }
+    }
+}
+
+@keyframes slowVisible {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes ring {
+    0% {
+        transform: translate(-10px);
+    }
+    10% {
+        transform: translate(10px);
+    }
+    20% {
+        transform: translate(-10px);
+    }
+    30% {
+        transform: translate(10px);
+    }
+    40% {
+        transform: translate(-10px);
+    }
+    50% {
+        transform: translate(10px);
+    }
+    60% {
+        transform: translate(-10px);
+    }
+    70% {
+        transform: translate(5px);
+    }
+    80% {
+        transform: translate(-5px);
+    }
+    90% {
+        transform: translate(5px);
+    }
+    100% {
+        transform: none;
+    }
+}

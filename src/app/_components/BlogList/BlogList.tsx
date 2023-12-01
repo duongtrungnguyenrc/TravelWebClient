@@ -27,7 +27,7 @@ const BlogList = ({ data } : { data: AllBlogsResponse }) => {
             {
                 data ? data.posts.slice(4).map((post) => {
                     return  <Grid key={post.id + post.author} item xs={12}>
-                                <Card component="a" href={`/blog/post?id=${post.id}`} className="post" sx={{boxShadow: "none"}}>
+                                <Card component="a" href={`/blog/post/${post.id}`} className="post" sx={{boxShadow: "none"}}>
                                     <CardMedia
                                     component="img"
                                     loading="lazy"

@@ -39,6 +39,7 @@
     "server-only": "^0.0.1",
     "styled-components": "^5.3.11",
     "typescript": "5.2.2",
-    "use-debounce": "^9.0.4"
+    "use-debounce": "^9.0.4",
+    "uuid": "^9.0.1"
   }
 }

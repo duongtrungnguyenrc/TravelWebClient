@@ -13,7 +13,7 @@ import Link from "next/link";
 
 
 const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) => {  
-  const response = await blogServices.getAllPosts(+searchParams?.page || 1, 10);
+  const response = await blogServices.get(+searchParams?.page || 1, 10);
   const data = response.data as AllBlogsResponse;
 
   return (
@@ -30,7 +30,7 @@ const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) 
                 {
                   data.posts.slice(0, 2).map((post) => {
                     return <Grid key={post.id + post.author} item xs={12} lg={6}>
-                            <Link href={`/blog/post?id=${post.id}`}>
+                            <Link href={`/blog/post/${post.id}`}>
                               <Card style={{boxShadow:"none", background: "transparent"}}>
                                 <Stack style={{padding: "1rem 0"}} spacing={1}>
                                   <Chip label={post.type} style={{borderRadius: "3px", width: "max-content", fontSize: "12px"}} size="small"/>
@@ -51,8 +51,9 @@ const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) 
                                     {post.author} | <CalendarTodayIcon sx={{fontSize: "12px"}}/>  { post.time.split(" ")[0] } | <AccessAlarmIcon sx={{fontSize: "12px"}}/>  { post.time.split(" ")[1] }
                                   </Typography>
                                   <Typography variant="body1" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                  {
+                                    post.description.substring(0, 40)
+                                  }
                                   </Typography>
                                 </CardContent>
                               </Card>
@@ -72,7 +73,7 @@ const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) 
                 {
                   data?.posts.slice(2, 4).map((post) => {
                     return <Grid key={post.id + post.author} item xs={12}>
-                            <Card component="a" href="/blog/post?id=" style={{boxShadow:"none"}}>
+                            <Card component="a" href={`/blog/post/${post.id}`} style={{boxShadow:"none"}}>
                               <CardHeader
                                 title={ post.title }
                                 subheader="Travel"
@@ -83,8 +84,9 @@ const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) 
                                   { post.author } | <CalendarTodayIcon sx={{fontSize: "12px"}}/> { post.time.split(" ")[0] } | <AccessAlarmIcon sx={{fontSize: "12px"}}/>  { post.time.split(" ")[1] }
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
-                                  Lizards are a widespread group of squamate reptiles, with over 6,000
-                                  species, ranging across all continents except Antarctica
+                                {
+                                  post.description.substring(0, 40)
+                                }
                                 </Typography>
                               </CardContent>
                             </Card>

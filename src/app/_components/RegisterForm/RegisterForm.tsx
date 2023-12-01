@@ -6,9 +6,10 @@ import Link from "next/link";
 import { FormEventHandler, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { toast } from 'react-toastify';
-import { useRouter } from "next/navigation";
 import { authServices } from "@/app/_services";
 import { TextField } from "@mui/material";
+import { ActivateAccountForm } from "..";
+import { RegisterResponse } from "@/app/_types";
 
 interface FormData {
     firstName: string;
@@ -20,10 +21,7 @@ interface FormData {
     isRemember: boolean;
 }
 
-const RegisterForm = () => {
-    console.log("render");
-    const router = useRouter();
-    
+const RegisterForm = () => {    
     const [ formData, setFormData ] = useState<FormData>({
         firstName: "",
         lastName: "",
@@ -33,6 +31,8 @@ const RegisterForm = () => {
         confirmPassword: "",
         isRemember: false,
     });
+
+    const [ createdUser, setCreatedUser ] = useState<RegisterResponse | null>(null);
 
     const handleChange = useDebouncedCallback((payload) => {
         const { name, value } = payload;
@@ -45,21 +45,20 @@ const RegisterForm = () => {
 
 
     const register = async (fullName: string, email: string, phone: string, password: string, isRemember: boolean) => {
-      const response = await authServices.signUp(fullName, email, phone, password);
+      const response = await toast.promise(authServices.signUp(fullName, email, phone, password), {
+        pending: "Đang xử lý...",
+      });
+      
         if(response.status) {            
             if(isRemember) {
                 localStorage.setItem("saved_email", email);
                 localStorage.setItem("saved_password", password);
             }
-            toast.success(response.message, {
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
-            router.push("/auth/login");
+            toast.success(response.message);
+            setCreatedUser(response.data as RegisterResponse);
         }
         else {
-            toast.error(response.message, {
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
+            toast.error(response.message);
         }
     }
 
@@ -86,9 +85,22 @@ const RegisterForm = () => {
         register(`${formData.firstName} ${formData.lastName}`, formData.email, formData.phone, formData.password, formData.isRemember);
     }
 
+    const handleActivateAccount = async (activateCode: string) => {        
+        if(createdUser) {
+            const response = await authServices.activate(createdUser?.confirmToken, activateCode);
+            if(response.status) {
+                return true;
+            }
+        }
+        return false;
+    }   
+
     
   return (
     <div className="register-site">
+        {
+            createdUser && !createdUser.user.active && <ActivateAccountForm onFilled={handleActivateAccount}/>
+        }
         <div className="register-site-header">
             <div className="brand">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -109,11 +121,11 @@ const RegisterForm = () => {
                 <div className="multi-group">
                     <div className="input-group">
                         <label>Họ</label>
-                        <TextField type="text" placeholder="Duong Trung" name="lastName" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField type="text" placeholder="Duong Trung" name="lastName" onChange={(e) => handleChange(e.target)} required autoComplete="false"/>
                     </div>
                     <div className="input-group">
                         <label>Tên</label>
-                        <TextField type="text" placeholder="Nguyen" name="firstName" onChange={(e) => handleChange(e.target)} required/>
+                        <TextField type="text" placeholder="Nguyen" name="firstName" onChange={(e) => handleChange(e.target)} required autoComplete="false"/>
                     </div>
                 </div>
                     <div className="input-group">
@@ -123,7 +135,7 @@ const RegisterForm = () => {
                             placeholder="david.abc@gmail.com" 
                             name="email" 
                             onChange={(e) => handleChange(e.target)} 
-                            required/>
+                            required autoComplete="false"/>
                     </div>
                     <div className="input-group">
                         <label>Số điện thoại</label>
@@ -132,25 +144,25 @@ const RegisterForm = () => {
                         placeholder="xxxx-xxx-xxx" 
                         name="phone" 
                         onChange={(e) => handleChange(e.target)} 
-                        required/>
+                        required autoComplete="false"/>
                     </div>
                 <div className="multi-group">
                     <div className="input-group">
                         <label>Mật khẩu</label>
                         <TextField 
                         type="password" 
-                        placeholder="" name="password" 
+                        placeholder="abc@123" name="password" 
                         onChange={(e) => handleChange(e.target)} 
-                        required/>
+                        required autoComplete="false"/>
                     </div>
                     <div className="input-group">
                         <label>Xác nhận mật khẩu</label>
                         <TextField 
                         type="password" 
-                        placeholder="" 
+                        placeholder="abc@123" 
                         name="confirmPassword" 
                         onChange={(e) => handleChange(e.target)} 
-                        required/>
+                        required autoComplete="false"/>
                     </div>
                 </div>
                 <div className="flex-between">
@@ -161,7 +173,7 @@ const RegisterForm = () => {
                         onChange={(e) => handleChange(e.target)}/>
                         <label>Lưu mật khẩu</label>
                     </div>
-                    <Link className='line-decor' href="/auth/forgot-password">Quên mật khẩu</Link>
+                    <Link className='line-decor' href="/forgot-password">Quên mật khẩu</Link>
                 </div>
                 <div className="check-group">
                     <input type="checkbox" />
@@ -173,7 +185,7 @@ const RegisterForm = () => {
                 </div>
             </form>
             <div className="register-form-bottom">
-                <label>Đã có tài khoản? <Link href="/auth/login">Đăng nhập</Link></label>
+                <label>Đã có tài khoản? <Link href="/login">Đăng nhập</Link></label>
             </div>
         </div>
     </div>

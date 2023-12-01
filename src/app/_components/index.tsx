@@ -26,15 +26,13 @@ export { default as PopularDestination } from "./PopularDestination/PopularDesti
 export { default as ForgotPasswordForm } from "./ForgotPasswordForm/ForgotPasswordForm";
 export { default as SuccessChecking } from "./SuccessCheking/SuccessChecking";
 export { default as ResetPasswordForm } from "./ResetPasswordForm/ResetPasswordForm";
+export { default as ActivateAccountForm } from "./ActivateAccountForm/ActivateAccountForm";
 export { default as ServiceStepper } from "./ServiceStepper/ServiceStepper";
 export { default as ServiceReview } from "./ServiceReview/ServiceReview";
 export { default as FloatingChat } from "./FloatingChat/FloatingChat";
 export { default as ServiceSummary } from "./ServiceSummary/ServiceSummary";
 export { default as ServiceOverview } from "./ServiceOverview/ServiceOverview";
-export { default as BlogContentTable} from "./BlogContentTable/BlogContentTable";
 export { default as BlogContentRight} from "./BlogContentRight/BlogContentRight";
-export { default as BlogContentRelated} from "./BlogContentRelated/BlogContentRelated";
-export { default as BlogContentComment } from "./BlogContentComment/BlogContentComment";
 export { default as Skeleton } from "./Skeleton/Skeleton";
 export { default as BlogList } from "./BlogList/BlogList";
 export { default as Ticket } from "./Ticket/Ticket";

@@ -3,18 +3,34 @@
 "use client"
 
 import "./styles.scss";
-import Link from "next/link";
 import { useDebouncedCallback } from "use-debounce";
 import { FormEventHandler, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { authServices } from "@/app/_services";
 import { useRouter } from "next/navigation";
-import { LoginResponse, User } from "@/app/_types";
-import { useDispatch } from "react-redux";
+import { LoginResponse, LoginUnActiveResponse, User } from "@/app/_types";
+import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/app/_context/userSlice";
-import { IconButton, InputAdornment, OutlinedInput, TextField } from "@mui/material";
+import { IconButton, InputAdornment, MenuItem, MenuList, TextField, Typography } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Link from "next/link";
+import { RootState } from "@/app/_context/store";
+import { ActivateAccountForm } from "..";
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  borderRadius: 3,
+  bgcolor: 'background.paper',
+  p: 4,
+};
+  
 
 interface FormData {
     email : string;
@@ -22,12 +38,15 @@ interface FormData {
     isRemember: boolean;
 }
 
-const LoginForm = () => {   
+const LoginForm = () => { 
+
     const router = useRouter();
     const dispath = useDispatch();
+    const currentUser = useSelector((state) => (state as RootState).user);
 
+    const [open, setOpen] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState(false);
-
+    const [ activateToken, setActivateToken ] = useState<null | string>(null);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
   
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -43,6 +62,11 @@ const LoginForm = () => {
     const [formData, setFormData] = useState<FormData>(initialFormData);
 
     useEffect(() => {
+        if(currentUser && currentUser.user && currentUser.user.roles.length > 0) {
+            checkRoleForNavigation(currentUser.user.roles);
+            return;
+        }
+
         const savedEmail = localStorage.getItem("saved_email");
         const savedPassword = localStorage.getItem("saved_password");
         if (savedEmail && savedPassword) {
@@ -83,13 +107,14 @@ const LoginForm = () => {
               localStorage.setItem("saved_email", email);
               localStorage.setItem("saved_password", password);
             }
-            router.push("/");
+            checkRoleForNavigation(signInResponse.roles);
             return true;
         }
         else {
-            toast.error(response.message, {
-              position: toast.POSITION.BOTTOM_RIGHT,
-            });
+            if (response.code === 406) {
+               setActivateToken((response.data as LoginUnActiveResponse).activateToken);
+            }
+            toast.error(response.message);
             return false;
         }
     }
@@ -107,10 +132,50 @@ const LoginForm = () => {
         signIn(formData.email, formData.password, formData.isRemember);
     };
 
-    
+    const checkRoleForNavigation = (roles: string[]) => {
+        if (roles.includes("ROLE_ADMIN")) {
+            setOpen(true);
+        }
+        else {
+            router.push("/");
+        }
+    }
+
+    const handleActivateAccount = async (activateCode: string) => {        
+        if(currentUser && activateToken) {
+            const response = await authServices.activate(activateToken, activateCode);
+            if(response.status) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     return  (
         <div className="login-site">
+            <Modal
+                open={open}
+                onClose={() => setOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Chọn giao diện:
+                </Typography>
+                <MenuList>
+                    <MenuItem className="w-100">
+                        <Link className="w-100" href="/">Người dùng</Link>
+                    </MenuItem>
+                    <MenuItem className="w-100">
+                        <Link className="w-100" href="/admin">Quản trị viên</Link>
+                    </MenuItem>
+                </MenuList>
+                </Box>
+            </Modal>
+            {
+                activateToken && <ActivateAccountForm onFilled={handleActivateAccount}/>
+            }
             <div className="login-site-header">
                 <div className="brand">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -119,7 +184,7 @@ const LoginForm = () => {
                     <h1 className="brand-name">Travel</h1>
                 </div>
                 <p className="description">
-                    Khám phá vẻ đẹp đa dạng của thế giới cùng những chuyến đi tuyệt vời.
+                    Khám phá vẻ đẹp đa dạng của đất nước hình chữ S cùng những chuyến đi tuyệt vời.
                 </p>
             </div>
             <div className="login-form-frame">
@@ -173,7 +238,7 @@ const LoginForm = () => {
                     <ul className="login-options">
                         <li><Link href="">Facebook</Link></li>
                         <li><Link href="">Linked in</Link></li>
-                        <li><Link href="">Google</Link></li>
+                        <li><Link href="http://localhost:8080/api/auth/sign-with-google">Google</Link></li>
                     </ul>
                 </div>
             </div>

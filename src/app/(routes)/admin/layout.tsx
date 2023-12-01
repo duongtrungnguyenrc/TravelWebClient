@@ -9,7 +9,9 @@ const AdminLayout = ({ children } : { children: ReactNode }) => {
         </div>
         <div className="col-10 px-0 d-flex flex-column bg-light">
           <AdminNavBar/>
-          { children }
+          <div style={{height: "calc(100vh - 69px)"}}>
+            { children }
+          </div>
         </div>
     </div>
   );

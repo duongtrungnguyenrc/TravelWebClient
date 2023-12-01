@@ -8,15 +8,29 @@ import Checkbox from '@mui/material/Checkbox';
 import { Address, NewOrderRequest, Tour } from "@/app/_types";
 import { useDebouncedCallback } from "use-debounce";
 import axios from "axios";
-import { Container, FormControl, FormLabel, Grid, IconButton, IconButtonProps, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
+import { Box, Container, FormControl, FormLabel, Grid, IconButton, IconButtonProps, MenuItem, Modal, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { toast } from "react-toastify";
 import { orderServices } from "@/app/_services";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/_context/store";
+import { SuccessChecking } from "..";
+import { set } from "@/app/_context/CreateOrderSessionSlice";
 
-const BookingForm = ({ tourDateId, tour } : { tourDateId: number, tour: Tour }) => {
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 450,
+    borderRadius: 3,
+    bgcolor: 'background.paper',
+    p: 5,
+    pt: 7
+};
+
+const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: number, tour: Tour, sessionResultInfo?: { sessionToken: string, status: string, orderId: string } }) => {
 
     const [ addressData , setAddressData ] = useState<{ 
         cities: { ProvinceID: number, ProvinceName: string }[], 
@@ -26,11 +40,13 @@ const BookingForm = ({ tourDateId, tour } : { tourDateId: number, tour: Tour }) 
     const [ newOrder, setNewOrder ] = useState<NewOrderRequest>(NewOrderRequest.getEmptyInstance());
     const [ isIncludeHotel, setIsIncludeHotel ] = useState<boolean>(false);    
     const [ ticketExpanded,  setTicketExpanded ] = useState<boolean>(false);
+    const [ createOrderStatus, setCreateOrderStatus ] = useState<boolean | null>(null);    
+
+    const existingSessionToken = useSelector((state) => (state as RootState).createOrderSession);
+    const dispath = useDispatch();
 
     const formRef = useRef<HTMLFormElement | null>(null);
     const router = useRouter();
-
-    console.log(tour);
     
     const currentTourDate = tour?.tourDate?.find((date) => date.id == tourDateId);
     const chosenHotel = tour.hotels.find((hotel) => hotel.id == newOrder.hotelId);
@@ -87,7 +103,15 @@ const BookingForm = ({ tourDateId, tour } : { tourDateId: number, tour: Tour }) 
         }
     };
 
-    useEffect(() => {        
+    useEffect(() => {   
+        
+        if(existingSessionToken && existingSessionToken != "" && existingSessionToken === sessionResultInfo?.sessionToken) {
+            if(sessionResultInfo?.status) {
+                dispath(set(""));
+                setCreateOrderStatus(JSON.parse(sessionResultInfo.status));
+            }
+        }
+
         fetchCities();        
     }, []);
 
@@ -215,14 +239,17 @@ const BookingForm = ({ tourDateId, tour } : { tourDateId: number, tour: Tour }) 
         const newOrderI = newOrder;
         currentTourDate && (newOrderI.tourDateId = currentTourDate?.id);
         newOrderI.amount = calculateTotalPrice();
+        newOrderI.sessionToken = generateSessionToken();
         
         const response = await toast.promise(orderServices.createOrder(newOrderI, currentUser?.accessToken), {
             pending: "Đang xử lý",
-            error: "Có lỗi đã xảy ra!"
+            error: "Có lỗi đã xảy ra!",
+            success: "Tạo đơn hàng thành công!"
         });
 
         if(response.status) {
             if(response.data) {
+                dispath(set(newOrderI.sessionToken))
                 router.replace(response.data as string);
             }
             else {
@@ -254,9 +281,26 @@ const BookingForm = ({ tourDateId, tour } : { tourDateId: number, tour: Tour }) 
         return totalPrice;
     }
     
+    const generateSessionToken = () => {
+        let dt = new Date().getTime();
+        const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            const r = (dt + Math.random() * 16) % 16 | 0;
+            dt = Math.floor(dt / 16);
+            return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+        });
+        return uuid;
+    }    
 
     return (
        <Container maxWidth="xl" className="booking-group-site">
+            <Modal
+                open={createOrderStatus !== null}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description">
+                <Box sx={style}>
+                    <SuccessChecking title={ createOrderStatus === true ? "Giao dịch thành công! vui lòng kiểm tra email" : "Giao dịch thất bại" } size={1.5}/>
+                </Box>
+            </Modal>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={6} lg={8}>
                     <form ref={formRef} action="" method="post" onSubmit={handleCreateOrder}>
@@ -453,7 +497,7 @@ const BookingForm = ({ tourDateId, tour } : { tourDateId: number, tour: Tour }) 
                     <div className="ticket rounded">
                         <table className="w-100">
                             <tr>
-                                <td colSpan={2} className="w-100">
+                                <td colSpan={2} className="w-100 p-0">
                                     <div className="tour-img w-100">
                                         <img className="w-100" src={ tour?.img } alt="image"/>
                                     </div>
