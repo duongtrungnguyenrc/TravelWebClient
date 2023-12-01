@@ -39,7 +39,7 @@ const ServicesList = () => {
   }, []);
   
   return (
-    <Container style={{paddingTop: "150px"}} maxWidth="xl" className="services-list-site container-fluid">
+    <Container style={{paddingTop: "150px"}} maxWidth="xl" className="services-list-site">
       <Grid container direction="row" className="m-0">
         <Grid className="rounded position-relative col-md-4 col-lg-3 p-2" item>
           <form action="" style={{ position: "sticky", top: "90px" }}>

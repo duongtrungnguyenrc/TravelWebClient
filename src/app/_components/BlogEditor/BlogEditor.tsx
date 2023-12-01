@@ -1,0 +1,290 @@
+
+'use client'
+
+import { Avatar, Box, Button, Chip, Divider, Modal, Stack, TextField, Typography, styled } from '@mui/material';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import "./styles.scss";
+import { useDebouncedCallback } from 'use-debounce';
+import { ChangeEvent, ReactEventHandler, useRef, useState } from 'react';
+import { CreateBlogPostRequest } from '@/app/_types';
+import { Paragraph } from '@/app/_types/request/CreateBlogPostRequest';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/_context/store';
+import ImageIcon from '@mui/icons-material/Image';
+import { CircularProgress } from '..';
+import paragraphLayouts, { BlogParagraphLayoutTextOnly } from '../BlogParagraphLayout/BlogParagraphLayout';
+import { toast } from 'react-toastify';
+import { blogServices } from '@/app/_services';
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+});
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius: "5px",
+    height: 600,
+    p: 4,
+};
+
+const BlogEditor = () => {   
+
+    const currentUser = useSelector((state) => (state as RootState).user);    
+    const [ post, setPost ] = useState<CreateBlogPostRequest>(CreateBlogPostRequest.getEmptyInstance(currentUser.user?.fullName));
+    const [ postImages, setPostImages ] = useState<{src: string, name: string, resource: File | null}[]>([]);
+    const [progress, setProgress] = useState(0);
+
+    const quillRef = useRef<ReactQuill | null>(null);
+    const formRef = useRef<HTMLFormElement>(null);
+
+
+    const handleContentChange = useDebouncedCallback((e) => {
+        const name : string = e.target.name;
+        const value : string = e.target.value;
+
+        setPost((prevState) => {
+            return {
+                ...prevState,
+                [name] : value
+            }
+    })
+    }, 300);
+
+    const handleParagraphContentChange = useDebouncedCallback((value) => {
+        setPost((prevState) => {
+            const lastParagraphIndex = prevState.paragraphs.length - 1;
+            const updatedParagraphs = [...prevState.paragraphs];
+    
+            if (lastParagraphIndex >= 0) {
+                const lastParagraph = updatedParagraphs[lastParagraphIndex];
+
+                updatedParagraphs[lastParagraphIndex] = {
+                    ...lastParagraph,
+                    content: value,
+                };
+            }
+    
+            return {
+                ...prevState,
+                paragraphs: updatedParagraphs,
+            };
+        });
+    }, 300);
+    
+
+    const handleAddParagraph = (newParagraph: Paragraph) => {        
+        setPost((prevState) => {
+            return {
+                ...prevState,
+                paragraphs: [
+                    ...prevState.paragraphs,
+                    newParagraph
+                ]
+            }
+        });
+        quillRef?.current?.getEditor().setText("");
+        setPostImages((prevState) => ([...prevState, { src: "", name: "", resource: null }]));   
+    };    
+
+
+    const handleFileChange = (e : ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        const file = files?.[0];        
+        
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onprogress = (event) => {
+                const percent = (event.loaded / event.total) * 100;
+                setProgress(percent);
+            };
+            
+            reader.onload = (event: ProgressEvent<FileReader>) => {
+                setProgress(100);
+                setPostImages((prevState) => {   
+                                                         
+                   if(prevState.length <= 1) {
+                    return [
+                        ...prevState, {
+                            src: event.target?.result + "",
+                            name: file.name,
+                            resource: file
+                        }
+                    ]
+                   }
+                   else {
+                        const updatingPostImagesIndex = post.paragraphs.length;
+                        const updatedPostImages = [ ...prevState ];
+                
+                        if ( post.paragraphs[updatingPostImagesIndex - 1].hasImage ) {                            
+                            updatedPostImages[ updatingPostImagesIndex ] = {
+                                src: event.target?.result + "",
+                                name: file.name,
+                                resource: file
+                            };
+                        }
+    
+                        return updatedPostImages;
+                    }
+                });
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleCreatePost : ReactEventHandler = async (e) => {
+        e.preventDefault();
+        
+        const response = await toast.promise(blogServices.create(post, postImages, currentUser.accessToken), {
+            pending: "Đang xử lý...",
+            success: "Thêm bài viết thành công",
+            error: "Có lỗi đã xảy ra"
+        });
+
+        if(response.status) {
+            setPost(CreateBlogPostRequest.getEmptyInstance());
+            setPostImages([]);
+            formRef?.current?.reset();
+            quillRef?.current?.getEditor().setText("");
+        }
+    }
+
+    const [ open, setOpen ] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    
+    return (
+    <>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description">
+        <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+                <b>CHỌN BỐ CỤC:</b>
+            </Typography>
+           <div className="paragraph-layout-list py-3">
+            {
+                paragraphLayouts.map((LayoutComponent, index) => {
+                    return (
+                        <>
+                            <Typography variant='h6' className='mt-3 mb-2'><b>Bố cục {index + 1}</b></Typography>
+                            <LayoutComponent onClick={() => {
+                                LayoutComponent === BlogParagraphLayoutTextOnly ?
+                                handleAddParagraph(new Paragraph(post.paragraphs.length, "", "", index, false)) :
+                                handleAddParagraph(new Paragraph(post.paragraphs.length, "", "", index, true))
+                            }}/>
+                            <hr />
+                        </>
+                    );
+                })
+            }
+           </div>
+        </Box>
+        </Modal>
+        <Stack direction="row" className='h-100 p-3 blog-editor-site'>
+            <div className="col-6 p-0">
+                <section className='blog-editor'>
+                    <form ref={ formRef } method='post' onSubmit={ handleCreatePost }>
+                        <div className="input-group">
+                            <label>Tên tác giả:</label>
+                            <TextField
+                                name='author'
+                                onChange={handleContentChange}
+                                defaultValue={currentUser?.user?.fullName}
+                                placeholder="Tên tác giả"/>
+                        </div>
+                        <div className="input-group">
+                            <label>Danh mục bài viết:</label>
+                            <TextField
+                                name='type'
+                                onChange={handleContentChange}
+                                placeholder="Danh mục"/>
+                        </div>
+                        <div className="input-group">
+                            <label>Tiêu đề bài viết:</label>
+                            <TextField
+                                name='title'
+                                onChange={handleContentChange}
+                                placeholder="Tiêu đề"/>
+                        </div>
+                        <div className="input-group">
+                            <label>Nội dung bài viết:</label>
+                            <ReactQuill ref={quillRef} className='content-editor' theme="snow" onChange={handleParagraphContentChange} />
+                        </div>
+                        <div className="d-flex justify-content-center gap-1 mt-5">
+                            <Button type='reset' color='error' variant="contained">HỦY</Button>
+                            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+                                Chèn ảnh
+                                <VisuallyHiddenInput type="file" accept='.png,.jpg,.jpeg,.JPEG' onChange={handleFileChange}/>
+                            </Button>
+                            <Button type='button' color='primary' variant="contained" onClick={handleOpen} disabled={postImages.length === 0}>THÊM NỘI DUNG</Button>
+                            <Button type='submit' color='primary' variant="contained" disabled={ post.paragraphs.length == 0 || !postImages?.[0] }>LƯU</Button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div className="col-6 pr-0">
+                <div className='h-100 p-3' style={{background: "#fff"}}>
+                    <h3>Xem trước:</h3>
+                    <Divider/>
+                    <div className="preview">
+                        <div className='default-preview'>
+                    
+                            {
+                                post?.type == "" ?  <div className="default-preview-tag"></div> : <Chip label={post.type} size="small" className='rounded'/>
+                            }
+
+                            {
+                                post?.title == "" ? <div className='default-preview-title mt-2'></div> : <Typography variant="h5" className='mt-2'><b>{ post.title }</b></Typography>
+                            }
+
+                            <div className='default-preview-author mt-3'>
+                                <Avatar/>
+                                <div className='author-name'>{ post.author } { (new Date()).toLocaleString("vn") }</div>
+                            </div>
+
+
+                            <div className='default-preview-thumnail mt-3'>
+                            {   
+                                postImages[0] ? <img src={postImages[0].src} alt="Uploaded" /> : 
+                                (
+                                    progress > 0 && progress < 100 ? <CircularProgress value={progress}/> : <ImageIcon sx={{fontSize: "150px", color: "#e6e6e7"}}/>
+                                )
+                            }
+                            </div>
+
+                            {
+                                post.paragraphs.map((paragraph, index) => {                                
+                                    const Element = paragraphLayouts[paragraph.layout];
+                                    return <Element key={index} paragraph={paragraph} image={ paragraph.hasImage ? postImages[index + 1].src : "" } />;
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </Stack>
+    </>
+       
+    )
+};
+export default BlogEditor;

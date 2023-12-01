@@ -2,13 +2,12 @@
 
 'use client'
 
-import { Stack, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Image from "next/image";
 import "./styles.scss"
 import Paragraph from "@/app/_types/TourParagraph";
 import { Skeleton } from "..";
-import { memo, useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { memo } from "react";
 
 const ServiceOverview = ( { paragraphs } : { paragraphs : Paragraph[] | undefined } ) => {
 
