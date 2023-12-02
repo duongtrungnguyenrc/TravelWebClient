@@ -116,7 +116,7 @@ const NavBar = () => {
                                 <Link href="/explore">Khám phá</Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="">Room & Suites</Link>
+                                <Link href="/term&condition">Điều khoản & chính sách</Link>
                             </li>
                             <li className="nav-item">
                                 <Link href="">Restaurant & Bar</Link>

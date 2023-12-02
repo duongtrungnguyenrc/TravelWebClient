@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { LoginResponse, LoginUnActiveResponse, User } from "@/app/_types";
 import { useDispatch, useSelector } from "react-redux";
 import { set } from "@/app/_context/userSlice";
-import { IconButton, InputAdornment, MenuItem, MenuList, TextField, Typography } from "@mui/material";
+import { Avatar, Divider, IconButton, InputAdornment, ListItemAvatar, MenuItem, MenuList, TextField, Typography } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Box from '@mui/material/Box';
@@ -85,7 +85,9 @@ const LoginForm = () => {
     }, 200);
 
     const signIn = async (email: string, password: string, isRemember: boolean) => {
-        const response = await authServices.signIn(email, password);
+        const response = await toast.promise(authServices.signIn(email, password), {
+            pending: "Đang đăng nhập..."
+        });
         if(response.status) {       
             const signInResponse : LoginResponse = (response.data as LoginResponse);        
             dispath(
@@ -108,6 +110,7 @@ const LoginForm = () => {
               localStorage.setItem("saved_password", password);
             }
             checkRoleForNavigation(signInResponse.roles);
+            setFormData(initialFormData);
             return true;
         }
         else {
@@ -145,6 +148,9 @@ const LoginForm = () => {
         if(currentUser && activateToken) {
             const response = await authServices.activate(activateToken, activateCode);
             if(response.status) {
+                setTimeout(() => {
+                    signIn(formData.email, formData.password, formData.isRemember);
+                }, 500);
                 return true;
             }
         }
@@ -155,19 +161,25 @@ const LoginForm = () => {
         <div className="login-site">
             <Modal
                 open={open}
-                onClose={() => setOpen(false)}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+                <Typography id="modal-modal-title" className="mb-2" variant="h6" component="h2">
                     Chọn giao diện:
                 </Typography>
+                <Divider/>
                 <MenuList>
                     <MenuItem className="w-100">
+                        <ListItemAvatar>
+                            <Avatar sizes="sm"/>
+                        </ListItemAvatar>
                         <Link className="w-100" href="/">Người dùng</Link>
                     </MenuItem>
                     <MenuItem className="w-100">
+                        <ListItemAvatar>
+                            <Avatar sizes="sm"/>
+                        </ListItemAvatar>
                         <Link className="w-100" href="/admin">Quản trị viên</Link>
                     </MenuItem>
                 </MenuList>

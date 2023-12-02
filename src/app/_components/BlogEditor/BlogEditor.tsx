@@ -8,7 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import "./styles.scss";
 import { useDebouncedCallback } from 'use-debounce';
 import { ChangeEvent, ReactEventHandler, useRef, useState } from 'react';
-import { AllBlogsResponse, Blog, CreateBlogPostRequest } from '@/app/_types';
+import { AllBlogsResponse, CreateBlogPostRequest } from '@/app/_types';
 import { Paragraph } from '@/app/_types/request/CreateBlogPostRequest';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/_context/store';
@@ -56,6 +56,18 @@ const BlogEditor = ({ data } : { data: AllBlogsResponse }) => {
 
     const quillRef = useRef<ReactQuill | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+    const previewRef = useRef<HTMLDivElement>(null);
+
+    const handleContentChange = useDebouncedCallback((e : ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        setPost((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            }
+        })
+    }, 300)
 
     const handleParagraphContentChange = useDebouncedCallback((value) => {
         setPost((prevState) => {
@@ -89,9 +101,15 @@ const BlogEditor = ({ data } : { data: AllBlogsResponse }) => {
                 ]
             }
         });
+
         setModifyParagraph(post.paragraphs.length);
         setOpen(false);
         quillRef?.current?.getEditor().setText("");
+
+        if (previewRef.current) {
+            previewRef.current.scrollTop = previewRef.current.scrollHeight;
+        }
+
         setPostImages((prevState) => ([...prevState, { src: "", name: "", resource: null }]));   
     };    
 
@@ -196,7 +214,7 @@ const BlogEditor = ({ data } : { data: AllBlogsResponse }) => {
             </Box>
         </Modal>
         <Stack direction="row" className='h-100 p-3 blog-editor-site'>
-            <List className="col-4 p-0 h-100" style={{overflow: "scroll"}}>
+            <List className="col-4 p-0 h-100 blog-post-list" style={{overflowY: "scroll"}}>
                 {
                     data?.posts.map((post) => {
                         return (
@@ -229,25 +247,16 @@ const BlogEditor = ({ data } : { data: AllBlogsResponse }) => {
                 <div className='h-100 p-3' style={{background: "#fff"}}>
                     <h3>Xem trước:</h3>
                     <Divider/>
-                    <div className="preview">
+                    <div ref={previewRef} className="preview">
                         <div className='default-preview'>
                     
-                            <div className="d-flex align-items-center gap-2">
-                                {
-                                    post?.type == "" ?  <div className="default-preview-tag"/> : <Chip label={post.type} size="small" className='rounded'/>
-                                }
-                                <IconButton size='small'>
-                                    <EditIcon/>
-                                </IconButton>
-                            </div>
-                            <div className="d-flex align-items-center gap-2">
-                                {
-                                    post?.title == "" ? <div className='default-preview-title mt-2'></div> : <Typography variant="h5" className='mt-2'><b>{ post.title }</b></Typography>
-                                }
-                                <IconButton size='small'>
-                                    <EditIcon/>
-                                </IconButton>
-                            </div>
+                            {
+                                post?.type == "" ?  <div className="default-preview-tag"/> : <Chip label={post.type} size="small" className='rounded'/>
+                            }
+
+                            {
+                                post?.title == "" ? <div className='default-preview-title mt-2'></div> : <Typography variant="h5" className='mt-2'><b>{ post.title }</b></Typography>
+                            }
 
                             <div className='default-preview-author mt-3'>
                                 <Avatar/>
@@ -267,42 +276,49 @@ const BlogEditor = ({ data } : { data: AllBlogsResponse }) => {
                             {
                                 post.paragraphs.map((paragraph, index) => {                                
                                     const Element = paragraphLayouts[paragraph.layout];
-                                    return <Element key={index} paragraph={paragraph} image={ paragraph.hasImage ? postImages[index + 1].src : "" } acceptModify/>;
+                                    return <Element key={index} paragraph={paragraph as Paragraph} image={ paragraph.hasImage ? postImages[index + 1]?.src : "" } acceptModify/>;
                                 })
                             }
                             {
                                 postImages[0] ? (
                                     <section className='blog-editor'>
                                         <form ref={ formRef } method='post' onSubmit={ handleCreatePost }>
-                                            {/* <div className="input-group">
-                                                <label>Tên tác giả:</label>
-                                                <TextField
-                                                    name='author'
-                                                    onChange={handleContentChange}
-                                                    defaultValue={currentUser?.user?.fullName}
-                                                    placeholder="Tên tác giả"/>
-                                            </div>
-                                            <div className="input-group">
-                                                <label>Danh mục bài viết:</label>
-                                                <TextField
-                                                    name='type'
-                                                    onChange={handleContentChange}
-                                                    placeholder="Danh mục"/>
-                                            </div>
-                                            <div className="input-group">
-                                                <label>Tiêu đề bài viết:</label>
-                                                <TextField
-                                                    name='title'
-                                                    onChange={handleContentChange}
-                                                    placeholder="Tiêu đề"/>
-                                            </div> */}
-                                           {
-                                            post.paragraphs.length > 0 && (
-                                                <div className="input-group">
-                                                    <label>Nội dung bài viết:</label>
-                                                    <ReactQuill ref={quillRef} className='content-editor' theme="snow" onChange={handleParagraphContentChange} />
+                                            {
+                                                 post.paragraphs.length > 0 ? (
+                                                    <div className="input-group">
+                                                        <label>Nội dung bài viết:</label>
+                                                        <ReactQuill ref={quillRef} className='content-editor' theme="snow" onChange={handleParagraphContentChange} />
+                                                    </div>
+                                                ) :
+                                                <div className="heading-editor">
+                                                    <div className="input-group">
+                                                        <label>Tiêu đề bài viết:</label>
+                                                        <TextField
+                                                            name='title'
+                                                            onChange={handleContentChange}
+                                                            placeholder="Tiêu đề"/>
+                                                    </div>
+                                                    <div className="multi-group">
+                                                        <div className="input-group">
+                                                            <label>Tên tác giả:</label>
+                                                            <TextField
+                                                                name='author'
+                                                                onChange={handleContentChange}
+                                                                defaultValue={currentUser?.user?.fullName}
+                                                                placeholder="Tên tác giả"/>
+                                                        </div>
+                                                        <div className="input-group">
+                                                            <label>Danh mục bài viết:</label>
+                                                            <TextField
+                                                                name='type'
+                                                                onChange={handleContentChange}
+                                                                placeholder="Danh mục"/>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            )
+                                            }
+                                            {
+                                           
                                            }
                                             <div className="d-flex justify-content-center gap-1 mt-5">
                                                 <Button type='reset' color='error' variant="contained">HỦY</Button>

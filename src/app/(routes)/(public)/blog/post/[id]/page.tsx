@@ -1,8 +1,8 @@
 
 'use client'
 
-import {BlogContent, BlogContentTable , BlogContentRight, BlogContentRelated,BlogContentComment, ServiceReview} from "@/app/_components";
-import { Container, Grid } from "@mui/material";
+import {BlogContent, BlogContentRight, ServiceReview} from "@/app/_components";
+import { Container } from "@mui/material";
 
 const BlogPage = ({ params } : { params: { id: string } }) => {
 

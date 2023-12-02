@@ -48,14 +48,14 @@ const ParagraphLayoutWrapper = ({ acceptModify, children } :
     )
 }
 
-export const BlogParagraphLayoutFloatLeft = ({ paragraph, image, onClick, acceptModify } : { paragraph?: Paragraph | TourParagraph, image?: string, onClick?: Function, acceptModify?: boolean }) => {        
+export const BlogParagraphLayoutFloatLeft = ({ paragraph, image, onClick, acceptModify } : { paragraph?: Paragraph | TourParagraph, image?: string, onClick?: Function, acceptModify?: boolean }) => {            
     return (
         <ParagraphLayoutWrapper acceptModify={acceptModify}>
             {paragraph ? 
             (
                     <div className="mt-4 paragraph-preview paragraph-float-left">
                     {
-                        (image && image != "") && <img loading='lazy' className="paragraph-float-image" src={paragraph instanceof Paragraph ? image : paragraph.image.src} alt={paragraph instanceof Paragraph ? paragraph.imageName : paragraph.image.name}/>
+                        (image && image != "") && <img loading='lazy' className="paragraph-float-image" src={image} alt={(paragraph as Paragraph)?.imageName || (paragraph as TourParagraph)?.image?.name}/>
                     }
                     {
                         (!image || !paragraph.content) && (
@@ -135,7 +135,7 @@ export const BlogParagraphLayoutFloatRight = ({ paragraph, image, onClick, accep
                 (
                     <div className="mt-4 paragraph-preview paragraph-float-right">
                     {
-                        (image && image != "") && <img loading='lazy' className="paragraph-float-image" src={paragraph instanceof Paragraph ? image : paragraph.image.src} alt={paragraph instanceof Paragraph ? paragraph.imageName : paragraph.image.name}/>
+                        (image && image != "") && <img loading='lazy' className="paragraph-float-image" src={image} alt={(paragraph as Paragraph)?.imageName || (paragraph as TourParagraph)?.image?.name}/>
                     }
                     {
                         (!image || !paragraph.content) && (
@@ -218,7 +218,7 @@ export const BlogParagraphLayoutCenter = ({ paragraph, image, onClick, acceptMod
                 (
                     <div className="mt-4 paragraph-preview paragraph-float-center">
                     {
-                        (image && image != "") ? <img loading='lazy' className="paragraph-center-image" src={paragraph instanceof Paragraph ? image : paragraph.image.src} alt={paragraph instanceof Paragraph ? paragraph.imageName : paragraph.image.name}/> :
+                        (image && image != "") ? <img loading='lazy' className="paragraph-center-image" src={image} alt={(paragraph as Paragraph)?.imageName || (paragraph as TourParagraph)?.image?.name}/> :
                         <div className="d-flex">
                             <div className="paragraph-preview-img col-12">
                                 <ImageIcon sx={{fontSize: "100px", color: "#e6e6e7"}}/>

@@ -5,17 +5,17 @@ import "./styles.scss";
 import { useState, useEffect, ChangeEvent, FormEventHandler, FormEvent, useRef } from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Address, NewOrderRequest, Tour } from "@/app/_types";
+import { Address, NewOrderRequest, Response, Tour } from "@/app/_types";
 import { useDebouncedCallback } from "use-debounce";
 import axios from "axios";
-import { Box, Container, FormControl, FormLabel, Grid, IconButton, IconButtonProps, MenuItem, Modal, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
+import { Box, Container, FormControl, FormLabel, Grid, IconButton, MenuItem, Modal, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { toast } from "react-toastify";
 import { orderServices } from "@/app/_services";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/_context/store";
-import { SuccessChecking } from "..";
+import { FailedStatus, SuccessChecking } from "..";
 import { set } from "@/app/_context/CreateOrderSessionSlice";
 
 const style = {
@@ -103,8 +103,7 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
         }
     };
 
-    useEffect(() => {   
-        
+    useEffect(() => {         
         if(existingSessionToken && existingSessionToken != "" && existingSessionToken === sessionResultInfo?.sessionToken) {
             if(sessionResultInfo?.status) {
                 dispath(set(""));
@@ -243,8 +242,6 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
         
         const response = await toast.promise(orderServices.createOrder(newOrderI, currentUser?.accessToken), {
             pending: "Đang xử lý",
-            error: "Có lỗi đã xảy ra!",
-            success: "Tạo đơn hàng thành công!"
         });
 
         if(response.status) {
@@ -257,7 +254,10 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
             }
             setNewOrder(NewOrderRequest.getEmptyInstance);
             formRef.current?.reset();
-        } 
+        }
+        else {
+            toast.error((response.data as Response).message);
+        }
     }
 
     function calculateTotalPrice(): number {
@@ -298,9 +298,16 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description">
                 <Box sx={style}>
-                    <SuccessChecking title={ createOrderStatus === true ? "Giao dịch thành công! vui lòng kiểm tra email" : "Giao dịch thất bại" } size={1.5}/>
+                    {
+                        createOrderStatus !== null && (
+                        createOrderStatus === true ?
+                            <SuccessChecking title="Giao dịch thành công! vui lòng kiểm tra email" size={1.5}/> :
+                            <FailedStatus title="Giao dịch thất bại"/>
+                        )
+                    }
                 </Box>
             </Modal>
+            
             <Grid container spacing={3}>
                 <Grid item xs={12} md={6} lg={8}>
                     <form ref={formRef} action="" method="post" onSubmit={handleCreateOrder}>

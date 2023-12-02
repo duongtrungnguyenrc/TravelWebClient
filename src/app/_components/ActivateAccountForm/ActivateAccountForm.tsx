@@ -40,6 +40,7 @@ const ActivateAccount = ({ onFilled } : { onFilled : Function }) => {
             setOnProgress(false);
 
             if(result) {
+                setResultStatus(true);
                 timeoutRef.current = setTimeout(() => {
                     setOpen(false);
                     router.push("/login");

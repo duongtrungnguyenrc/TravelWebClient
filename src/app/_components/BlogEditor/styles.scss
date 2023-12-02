@@ -5,16 +5,34 @@
         height: 100%;
         margin-top: 2rem;
         background-color: #fff;
+        animation: slowVisible 0.5s;
+
+        .heading-editor {
+            animation: slowVisible 0.5s;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
     
         .content-editor {
             width: 100%;
             height: 300px;
+            animation: slowVisible 0.5s;
+        }
+
+        @keyframes slowVisible {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     }
 
     .preview {
         margin-top: 10px;
-        max-height: 770px;
+        height: 770px;
         overflow-y: scroll;
         padding: 1rem;
         
@@ -24,7 +42,7 @@
         }
 
         &::-webkit-scrollbar {
-            width: 6px;
+            width: 3px;
         }
         
         &::-webkit-scrollbar-track {
@@ -88,4 +106,24 @@
     width: 100%;
     max-height: 500px;
     overflow-y: scroll;
+}
+
+.blog-post-list {
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
 }
