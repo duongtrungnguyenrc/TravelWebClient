@@ -30,10 +30,10 @@ const ServiceDetailGallery = ({ mainImg, sideImgs, startingPrice } : { mainImg :
         <div className="gallery-right">
             {
                 sideImgs ? sideImgs.map((paragraph) => {
-                    return  <div key={ paragraph.image.name } className="gallery-item">
+                    return  <div key={ paragraph.image?.name } className="gallery-item">
                                 <div className="w-100 h-100 image-holder">
                                     <ImageIcon sx={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 0, fontSize: "100px", color: "#e6e6e7"}}/>
-                                    <img src={paragraph.image.src} alt={ paragraph.image.name } />
+                                    <img src={paragraph.image?.src} alt={ paragraph.image?.name } />
                                 </div>
                             </div>
                 }) :
