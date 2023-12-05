@@ -4,7 +4,7 @@ import WysiwygIcon from '@mui/icons-material/Wysiwyg';
 
 const navigations = [
     {
-        name: "Dashboard",
+        name: "Bảng điều khiển",
         path: "/admin",
         icon: () => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -13,17 +13,17 @@ const navigations = [
         )
     },
     {
-        name: "All trips",
+        name: "Quản lý tour",
         path: "/admin/trip",
         icon: CalendarMonthOutlinedIcon
     },
     {
-        name: "Blog",
+        name: "Diễn đàn",
         path: "/admin/blog",
         icon: WysiwygIcon
     },
     {
-        name: "Layout",
+        name: "Bố cục",
         path: "/admin/layout",
         icon: () => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
@@ -32,7 +32,7 @@ const navigations = [
         )
     },
     {
-        name: "Chat",
+        name: "Hỗ trợ",
         path: "/admin/chat",
         icon: () => (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

@@ -11,8 +11,8 @@ import { useRouter } from "next/navigation";
 
 const AdminTourList = ({ tours, pages } : { tours: Tour[], pages: number } ) => {
 
-    const [ selectedItem, setSelectedItem ] = useState(0);
     const router = useRouter();
+    const [ selectedItem, setSelectedItem ] = useState(0);
 
     return (
         <div className="row dashboard-container px-3">

@@ -1,6 +1,5 @@
 // Produced by Duong Trung Nguyen
 
-
 import { CardHeader, CardMedia, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -10,7 +9,6 @@ import { BlogList } from "@/app/_components";
 import { blogServices } from "@/app/_services";
 import { AllBlogsResponse } from "@/app/_types";
 import Link from "next/link";
-
 
 const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) => {  
   const response = await blogServices.get(+searchParams?.page || 1, 10);
@@ -52,8 +50,8 @@ const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) 
                                   </Typography>
                                   <Typography variant="body1" color="text.secondary">
                                   {
-                                    post.description.substring(0, 40)
-                                  }
+                                    post.description.substring(0, 100)
+                                  }...
                                   </Typography>
                                 </CardContent>
                               </Card>
@@ -85,7 +83,7 @@ const BlogsPage = async ({ searchParams } : { searchParams: { page: string } }) 
                                 </Typography>
                                 <Typography variant="body1" color="text.secondary">
                                 {
-                                  post.description.substring(0, 40)
+                                  post.description.substring(0, 100)
                                 }
                                 </Typography>
                               </CardContent>

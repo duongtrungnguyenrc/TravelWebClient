@@ -5,7 +5,6 @@
 import { useEffect, useState } from 'react';
 import './styles.scss';
 import { Order } from '@/app/_types';
-import { Avatar, Radio } from '@mui/material';
 import { userServices } from '@/app/_services';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/_context/store';

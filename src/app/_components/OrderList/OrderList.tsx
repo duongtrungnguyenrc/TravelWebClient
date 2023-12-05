@@ -158,7 +158,6 @@ const OrderList = () => {
                 <Button variant="outlined" onClick={() => setOpenStatistic(true)}>
                     Xem thống kê chi tiết
                 </Button>
-                <Button variant="outlined">Hủy</Button>
             </div>
         </div>
     );

@@ -1,13 +1,10 @@
 // Produced by Duong Trung Nguyen
-'use client'
 
 import "./styles.scss";
 import Link from "next/link";
 import { AdminSidebarConstant } from "@/app/_constants";
 
 const AdminSideBar = () => {
-
-
     return (
         <header className="admin-sidebar-site">
             <div className="admin-sidebar-top">
@@ -18,12 +15,13 @@ const AdminSideBar = () => {
                     <Link href="/" className="brand-name">Travel</Link>
                 </div>
             </div>
-            <div className="admin-sidebar-body">
+            <hr/>
+            <div className="admin-sidebar-body py-5">
                 <ul className="admin-nav-list">
                     {
                         AdminSidebarConstant.map((nav) => {
                             return (
-                                <li key={nav.name} className={ "admin-sidebar-item " + (location.href.includes(nav.path) && !location.href.includes(nav.path + "/") ? "active" : "") }>
+                                <li key={nav.name} className={"admin-sidebar-item"}>
                                     <Link href={ nav.path }>
                                         <nav.icon/>
                                         { nav.name }

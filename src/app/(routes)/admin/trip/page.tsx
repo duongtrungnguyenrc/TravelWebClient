@@ -13,7 +13,6 @@ const AdminTripPage = ({ searchParams } : { searchParams: { page: number } }) =>
 
     useEffect(() => {
         const fetchTours = async () => {
-            
             const response = await tourServices.adminGetAll(searchParams?.page || 1, 20, currentUser.accessToken);
             if(response.status) {
                 setData(response.data as AllToursResponse);

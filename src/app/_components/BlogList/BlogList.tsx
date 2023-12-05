@@ -44,8 +44,7 @@ const BlogList = ({ data } : { data: AllBlogsResponse }) => {
                                             {post.author} | <CalendarTodayIcon sx={{fontSize: "12px"}}/>  { post.time.split(" ")[0] } | <AccessAlarmIcon sx={{fontSize: "12px"}}/>  { post.time.split(" ")[1] }
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
-                                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                                            species, ranging across all continents except Antarctica
+                                            { post.description.substring(0, 150) }...
                                         </Typography>
                                     </CardContent>
                                 </Card>

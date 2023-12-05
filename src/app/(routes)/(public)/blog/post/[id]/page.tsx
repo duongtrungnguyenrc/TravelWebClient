@@ -1,23 +1,28 @@
 
-'use client'
 
 import {BlogContent, BlogContentRight, ServiceReview} from "@/app/_components";
-import { Container } from "@mui/material";
+import { blogServices } from "@/app/_services";
+import { BlogDetailResponse } from "@/app/_types";
 
-const BlogPage = ({ params } : { params: { id: string } }) => {
+const BlogPage = async ({ params } : { params: { id: string } }) => {
+
+  const response = await blogServices.get(undefined, undefined, +params.id);
 
   return (
-    <Container maxWidth="xl" className="wrapper">
+    <div className="wrapper container d-flex flex-column pb-5">
       <div className="row">
-        <div className="col-8">
-          <BlogContent id={+params.id} />
+        <div className="col-12">
+          <BlogContent post={(response.data as BlogDetailResponse)?.post} />
           <ServiceReview id={"1"}/>
         </div>
-        <div className="col-4">
-          <BlogContentRight/>
-        </div>
       </div>
-    </Container>
+      <div className="row">
+        <h3 className="mb-4">
+          <strong>Bài viết liên quan:</strong>
+        </h3>
+        <BlogContentRight posts={(response.data as BlogDetailResponse)?.relevantPosts || []}/>
+      </div>
+    </div>
   );
 }
 export default BlogPage;

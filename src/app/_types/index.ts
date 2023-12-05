@@ -34,6 +34,7 @@ export { default as AllToursResponse } from "./response/AllToursResponse";
 export { default as RegisterResponse } from "./response/RegisterResponse";
 export { default as ProfitStatisticResponse } from "./response/ProfitStatisticResponse";
 export { default as AccessHistoryResponse } from "./response/AccessHistoryResponse";
+export { default as BlogDetailResponse } from "./response/BlogDetailResponse";
 export { default as TourParagraph } from "./TourParagraph";
 
 

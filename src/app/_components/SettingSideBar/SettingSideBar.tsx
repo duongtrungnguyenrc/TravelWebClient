@@ -20,9 +20,6 @@ const SettingSideBar = () => {
         setCurrentURL(route);
     }
 
-
-    
-
     return (
         <>
             <DeActiveAccountModal isOpen={isRemoveAccount} dismiss={setIsRemoveAccount}/>

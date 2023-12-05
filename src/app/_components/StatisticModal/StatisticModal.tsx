@@ -5,7 +5,7 @@
 import { RootState } from '@/app/_context/store';
 import { statisticServices } from '@/app/_services';
 import { ProfitStatisticResponse } from '@/app/_types';
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Divider, Modal, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -21,7 +21,6 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 800,
-    height: 700,
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
@@ -119,12 +118,12 @@ const StatisticModal = ({ isOpen, setClose }: { isOpen: boolean; setClose: Funct
             aria-describedby="modal-modal-description">
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <strong>
                     Thống kê doanh thu:
+                    </strong>
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    <Bar height="100%" data={data} options={options} />
-                </Typography>
-                <ul className="list-unstyled mt-5">
+                <Divider/>
+                <ul className="list-unstyled mt-3">
                     <li className="d-flex justify-content-between py-2">
                         <strong>
                             Tổng doanh thu đạt được:
@@ -150,6 +149,9 @@ const StatisticModal = ({ isOpen, setClose }: { isOpen: boolean; setClose: Funct
                         { statisticsData?.orderQuantity }
                     </li>
                 </ul>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Bar height="100%" data={data} options={options} />
+                </Typography>
             </Box>
         </Modal>
     );
