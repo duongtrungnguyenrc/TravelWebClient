@@ -180,7 +180,7 @@ const RegisterForm = () => {
                     <label>Tôi đồng ý với <Link href="">điều khoản</Link> và <Link href="">chính sách bảo mật</Link> </label>
                 </div>
                 <div className="button-group">
-                    <button className="btn btn-big btn-light btn-shadow">Google</button>
+                    <Link href="http://localhost:8080/api/auth/sign-with-google" className="btn btn-big btn-light btn-shadow">Google</Link>
                     <button className="btn btn-big btn-yellow btn-shadow" type='submit'>Đăng ký</button>
                 </div>
             </form>

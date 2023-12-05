@@ -1,7 +1,5 @@
 // Produced by Duong Trung Nguyen
 
-'use client';
-
 import './styles.scss';
 
 const Loading = () => {
