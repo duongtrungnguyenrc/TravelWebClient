@@ -223,11 +223,11 @@ const PersonalInfoPage = () => {
         e.preventDefault();
         const response = await toast.promise(authServices.updatePassword(changingPassword, currentUser.accessToken), {
             pending: 'Đang xử lý...',
-            success: 'Đổi mật khẩu thành công',
         });
 
         if (response.status) {
             setIsEditingPassword(false);
+            toast.success("Đổi mật khẩu thành công!");
         } else {
             toast.error(response.message);
         }

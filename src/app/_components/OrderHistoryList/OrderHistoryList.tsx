@@ -42,12 +42,16 @@ const OrderHistory = () => {
                             <tr key={order.id + order.tour.name} className="data-row">
                                 <td>{order.id} </td>
                                 <td className="d-flex align-items-center gap-1">
-                                    <img className='rounded' src={order.tour.img} alt={order.tour.name} width={80} height={50} />
+                                    <img
+                                        className="rounded"
+                                        src={order.tour.img}
+                                        alt={order.tour.name}
+                                        width={80}
+                                        height={50}
+                                    />
                                     {order.tour.name}
                                 </td>
-                                <td>
-                                    { order.orderDate }
-                                </td>
+                                <td>{order.orderDate}</td>
                                 <td>{order.totalPrice.toLocaleString('vn')} VNĐ</td>
                                 <td>
                                     <span

@@ -114,20 +114,21 @@ const DatePicker = ({ onChange, displayDate, title, valueKey } : { onChange: Fun
               <span className={cx("day")}>Fr</span>
               <span className={cx("day")}>Sa</span>
               <span className={cx("day")}>Su</span>
-              {getMonth(date.year, date.month).map((week, index) => (
-                  <React.Fragment key={index}>
+              {getMonth(date.year, date.month).map((week) => (
+                  <>
                       {week.map((day) => (
-                      <button 
-                          className={cx(
-                            "date", 
-                            "faded", 
-                            { "current-day": currentDate.getDate() === day && currentDate.getMonth() === date.month }, 
-                            { "selected": selectedDate[0] === day && selectedDate[1] === date.month && selectedDate[2] === date.year })}
-                          onClick={() => handleSelectedDate(date.year, date.month, day)}>
-                          {day}
-                      </button>
+                        <button 
+                            key={day}
+                            className={cx(
+                              "date", 
+                              "faded", 
+                              { "current-day": currentDate.getDate() === day && currentDate.getMonth() === date.month }, 
+                              { "selected": selectedDate[0] === day && selectedDate[1] === date.month && selectedDate[2] === date.year })}
+                            onClick={() => handleSelectedDate(date.year, date.month, day)}>
+                            {day}
+                        </button>
                       ))}
-                  </React.Fragment>
+                  </>
               ))}
           </div>
       </div>

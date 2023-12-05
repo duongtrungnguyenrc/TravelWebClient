@@ -9,8 +9,6 @@ import {
     CardMedia,
     Chip,
     Divider,
-    Grid,
-    IconButton,
     List,
     ListItem,
     Modal,

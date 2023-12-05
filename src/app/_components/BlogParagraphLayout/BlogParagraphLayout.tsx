@@ -3,7 +3,7 @@
 import ImageIcon from '@mui/icons-material/Image';
 import "./styles.scss";
 import { Paragraph } from '@/app/_types/request/CreateBlogPostRequest';
-import { ComponentType, ReactElement, ReactNode, cloneElement } from 'react';
+import { ComponentType, ReactElement } from 'react';
 import parse from "html-react-parser";
 import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';

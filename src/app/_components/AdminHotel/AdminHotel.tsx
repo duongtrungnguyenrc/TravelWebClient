@@ -1,21 +1,18 @@
+// Produced by Duong Trung Nguyen
+
 'use client'
 
 import './styles.scss';
-import CssBaseline from '@mui/material/CssBaseline';;
 import Container from '@mui/material/Container';
 import Typography from "@mui/material/Typography";
-import * as React from 'react';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 const AdminHotel = () => {
   return (
     <section className="container-admin container-fluid p-0" >
-      <React.Fragment>
-        <CssBaseline />
-            <Container maxWidth="sm" sx={{ maxWidth:'100% !important' }}>
+        <Container maxWidth="sm" sx={{ maxWidth:'100% !important' }}>
             <div className="add-hotel-btn">
                 <button className="btn btn-yellow btn-add-hotel">
                     Thêm Khách Sạn
@@ -235,9 +232,7 @@ const AdminHotel = () => {
                     </div>
                 </div>
             </div>
-            
-            </Container>
-        </React.Fragment>
+        </Container>
     </section>
   );
 };

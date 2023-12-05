@@ -22,8 +22,6 @@ import {
     TextField,
     Tooltip,
 } from '@mui/material';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import Login from '@mui/icons-material/Login';
 import PersonIcon from '@mui/icons-material/Person';
