@@ -2,26 +2,28 @@
 
 'use client'
 
+import { ReactNode } from "react";
 import "./styles.scss";
+import ImageIcon from '@mui/icons-material/Image';
 
-const Skeleton = ({ variant, className, width, height } : { variant : string, className ?: string, width ?: number, height ?: number }) => {
-  const dimensions = { width: `${width}px`, height: `${height}px` };
+const Skeleton = ({ variant, className, width, height, borderRadius, children } : { variant : string, className ?: string, width ?: number | string, height ?: number | string, borderRadius?: number | string, children?: ReactNode }) => {
 
-  let skeletonClassName = "skeleton-item";
+    width && (width += "px");
+    height && (height += "px");
+    borderRadius && (borderRadius += "px");
 
-  if (variant === "rectangular") {
-    skeletonClassName += " rectangular";
-  } else if (variant === "text") {
-    skeletonClassName += " text";
-  } else if (variant === "round") {
-    skeletonClassName += " round";
-  }
+    let skeletonClassName = "skeleton-item " + variant;
 
-  if (className) {
-    skeletonClassName += " " + className;
-  }
+    if (className) {
+      skeletonClassName += " " + className;
+    }
 
-  return <div className={skeletonClassName} style={dimensions} />;
+    return  <div className={skeletonClassName} style={{ width, height, borderRadius }}>
+              {
+                variant === "image" && <ImageIcon sx={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: -1, fontSize: "100px", color: "#ededdd"}}/>
+              }
+              { children }
+            </div>;
 };
 
 export default Skeleton;

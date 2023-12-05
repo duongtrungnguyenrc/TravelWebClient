@@ -6,16 +6,21 @@ import "./styles.scss";
 import { useState, useEffect } from "react";
 
 const Clock = () => {
-  const [time, setTime] = useState(new Date());
-  useEffect(() => {
-   const timeout = setTimeout(() => {
-      setTime(new Date());
-    }, 100);
+    const [time, setTime] = useState(new Date());
 
-    return () => {
-      clearTimeout(timeout);
-    }
-  }, []);
+    useEffect(() => {
+        const intervalID = setInterval(() => {
+        setTime(new Date());
+        }, 1000);
+
+        return () => {
+        clearInterval(intervalID);
+        };
+    }, []); 
+
+    const formatTime = (time: Date) => {
+        return time.toLocaleTimeString();
+    };
   
   return (
     <div className="clock-site">
@@ -26,7 +31,7 @@ const Clock = () => {
             <p>Time</p>
         </div>
         <div className="detail-value">
-            <p>{time.getHours() + ":" + time.getMinutes() + (time.getHours() > 12 ? " PM" : " AM")}</p>
+            <p>{ formatTime(time) }</p>
         </div>
     </div>
   );

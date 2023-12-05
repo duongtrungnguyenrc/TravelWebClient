@@ -1,10 +1,8 @@
 'use client'
 
 import "./styles.scss";
-import { AppBar, Avatar, Badge, Box, Button, Container, Grid, IconButton, Menu, MenuItem, Stack, Toolbar, Tooltip, Typography, alpha, styled } from "@mui/material";
+import { AppBar, Badge, Box, Button, IconButton, Menu, MenuItem, Stack, Toolbar, Tooltip, Typography} from "@mui/material";
 import React from "react";
-import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';

@@ -1,0 +1,133 @@
+
+.side-bar {
+    height: max-content;
+    position: sticky;
+    top: 90px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+
+    ul {
+        list-style: none;
+
+        li {
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f6f7f8;
+
+            p {
+                display: flex;
+                justify-content: space-between;
+                color: var(--dark);
+                font-weight: 400;
+                
+                &.active {
+                    & ~ .sub-list-side {
+                        opacity: 1;
+                        display: flex;
+                    }
+
+                    .show-icon {
+                        display: none;
+                    }
+
+                    .hide-icon {
+                        display: block;
+                    }
+                }
+
+                button {
+                    background-color: transparent;
+                    border: none;
+                    span {
+                        padding: 7px;
+                        line-height: 10px;
+                        cursor: pointer;
+        
+                        &.hide-icon {
+                            display: none;
+                        }
+        
+                        svg {
+                            font-size: 0.875rem;
+                            fill: #ddd;
+                        }
+                    }
+                }
+            }
+
+            .sub-list-side {
+                display: none;
+                flex-wrap: wrap;
+                gap: 10px;
+                opacity: 0;
+                transition: opacity 0.3s ease; 
+                margin-top: 10px;
+
+                .item-sub-list {
+                    display: flex;
+                    text-align: center;
+                    min-width: 47px;
+
+                    input {
+                        display: none;
+
+                        &:checked ~ span {
+                            border-color: var(--primary-yellow);
+                            color: var(--dark);
+                        }
+                    }
+
+                    span {
+                        width: 100%;
+                        padding: 5px 13px;
+                        border-radius: 10px;
+                        border: 1px solid #f1f3f4;
+                        color: #848383;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        cursor: pointer;
+
+                        svg {
+                            fill:  var(--primary-yellow);
+                        }
+                    }
+
+                }
+
+                .date-group {
+                    background-color: #f1f3f4;
+                    border-radius: 10px;
+                    padding: 10px;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    color: #000;
+                }
+
+                .range-price {
+                    width: 100%;
+                    
+                    input[type="range"] {
+                        color: #000;
+                        &:nth-child(even) {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+}
+.schedule-picker {
+    display: flex;
+    gap: 1rem; 
+}

@@ -21,7 +21,7 @@
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(256, 256, 256, 0.5);
     transition: .5s;
-    z-index: 1;
+    z-index: 0;
 }
 
 .destination-overlay > * {color: #fff;}

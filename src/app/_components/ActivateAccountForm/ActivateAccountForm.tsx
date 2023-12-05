@@ -1,10 +1,9 @@
+'use client';
 
-'use client'
-
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import "./styles.scss";
-import { Box, LinearProgress, Modal, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import './styles.scss';
+import { Box, LinearProgress, Modal, Typography } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -14,14 +13,14 @@ const style = {
     width: 450,
     borderRadius: 3,
     bgcolor: 'background.paper',
-    overflow: "hidden"
+    overflow: 'hidden',
 };
 
-const ActivateAccount = ({ onFilled } : { onFilled : Function }) => {
-    const [ activateCode, setActivateCode ] = useState<string>('');
-    const [ open, setOpen ] = useState<boolean>(true);
-    const [ resultStatus, setResultStatus ] = useState<boolean | null>(null);
-    const [ onProgress, setOnProgress ] = useState<boolean>(false);
+const ActivateAccount = ({ onFilled }: { onFilled: Function }) => {
+    const [activateCode, setActivateCode] = useState<string>('');
+    const [open, setOpen] = useState<boolean>(true);
+    const [resultStatus, setResultStatus] = useState<boolean | null>(null);
+    const [onProgress, setOnProgress] = useState<boolean>(false);
     const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(6).fill(null));
 
     const router = useRouter();
@@ -39,38 +38,39 @@ const ActivateAccount = ({ onFilled } : { onFilled : Function }) => {
 
             setOnProgress(false);
 
-            if(result) {
+            if (result) {
                 setResultStatus(true);
                 timeoutRef.current = setTimeout(() => {
                     setOpen(false);
-                    router.push("/login");
+                    router.push('/login');
                 }, 600);
-            }
-            else {
+            } else {
                 setResultStatus(false);
                 timeoutRef.current = setTimeout(() => {
-                    setActivateCode("");
+                    setActivateCode('');
                     setResultStatus(null);
                 }, 600);
             }
-        }
+        };
 
         activateCode.length >= 6 && handleActivateAccount();
 
         return () => {
             clearTimeout(timeoutRef.current);
-        }
-        
-    }, [ activateCode ])
+        };
+    }, [activateCode]);
 
-    const handleChange = async (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const handleChange = async (
+        e: ChangeEvent<HTMLInputElement>,
+        index: number
+    ) => {
         const { value } = e.target;
 
-        if(activateCode.length < 6) {
+        if (activateCode.length < 6) {
             setActivateCode((prevState) => {
                 return prevState + value;
             });
-    
+
             if (value !== '' && index < 5) {
                 inputRefs.current[index + 1]?.focus();
             }
@@ -83,7 +83,11 @@ const ActivateAccount = ({ onFilled } : { onFilled : Function }) => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description">
             <Box sx={style}>
-                <div className={"activate-account-site flex-column flex-center " + (resultStatus === false ? "ring" : "")}>
+                <div
+                    className={
+                        'activate-account-site flex-column flex-center ' +
+                        (resultStatus === false ? 'ring' : '')
+                    }>
                     <div className="d-flex activate-account-form">
                         {Array.from({ length: 6 }, (_, index) => (
                             <input
@@ -97,17 +101,25 @@ const ActivateAccount = ({ onFilled } : { onFilled : Function }) => {
                             />
                         ))}
                     </div>
-                    {
-                        resultStatus === null ? 
-                            <Typography variant="body2" className="mt-4">VUI LÒNG NHẬP MÃ XÁC NHẬN ĐƯỢC GỬI VỀ EMAIL</Typography> :
-                        (resultStatus === false ?
-                        <Typography variant="body2" className="mt-4 text-danger">MÃ XÁC NHẬN KHÔNG CHÍNH XÁC!</Typography> :
-                        <Typography variant="body2" className="mt-4 text-success">XÁC THỰC THÀNH CÔNG!</Typography>)
-                    }
+                    {resultStatus === null ? (
+                        <Typography variant="body2" className="mt-4">
+                            VUI LÒNG NHẬP MÃ XÁC NHẬN ĐƯỢC GỬI VỀ EMAIL
+                        </Typography>
+                    ) : resultStatus === false ? (
+                        <Typography
+                            variant="body2"
+                            className="mt-4 text-danger">
+                            MÃ XÁC NHẬN KHÔNG CHÍNH XÁC!
+                        </Typography>
+                    ) : (
+                        <Typography
+                            variant="body2"
+                            className="mt-4 text-success">
+                            XÁC THỰC THÀNH CÔNG!
+                        </Typography>
+                    )}
                 </div>
-                {
-                    onProgress && <LinearProgress />
-                }
+                {onProgress && <LinearProgress />}
             </Box>
         </Modal>
     );

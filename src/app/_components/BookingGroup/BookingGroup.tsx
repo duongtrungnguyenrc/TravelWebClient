@@ -235,10 +235,14 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
 
     const handleCreateOrder : FormEventHandler = async (e : FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const { contactInfo } : NewOrderRequest = newOrder;
+        const { customerFirstName, customerLastName } = contactInfo;
+
         const newOrderI = newOrder;
         currentTourDate && (newOrderI.tourDateId = currentTourDate?.id);
         newOrderI.amount = calculateTotalPrice();
         newOrderI.sessionToken = generateSessionToken();
+        newOrderI.contactInfo.customerFullName = customerFirstName + customerLastName;
         
         const response = await toast.promise(orderServices.createOrder(newOrderI, currentUser?.accessToken), {
             pending: "Đang xử lý",
@@ -272,7 +276,7 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
                     const selectedRoom = selectedHotel.rooms.find((room: any) => room.type === newOrder?.roomType);
                     
                     if (selectedRoom) {
-                        totalPrice += selectedRoom.price;
+                        totalPrice += (selectedRoom.price * (+newOrder?.adults || 0)) + (selectedRoom.price / 2 * (+newOrder?.children || 0));
                     }
                 }
             }
@@ -295,6 +299,7 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
        <Container maxWidth="xl" className="booking-group-site">
             <Modal
                 open={createOrderStatus !== null}
+                onClose={() => router.push("/")}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description">
                 <Box sx={style}>
@@ -462,7 +467,7 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
                                                 </MenuItem>
                                                 {
                                                     newOrder.hotelId &&
-                                                    tour.hotels.find((hotel) => hotel.id == newOrder.hotelId)?.rooms.map((room) => {
+                                                    tour?.hotels?.find((hotel) => hotel.id == newOrder.hotelId)?.rooms.map((room) => {
                                                         return <MenuItem value={room.type}>{ room.type + " - " + room.price }</MenuItem>
                                                     })
                                                 }
@@ -481,7 +486,8 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
                                         aria-required
                                     >
                                         <FormControlLabel value="cash" control={<Radio required/>} label="Tiền mặt (Vé sẽ được kích hoạt khi thanh toán)" />
-                                        <FormControlLabel value="vnpay" control={<Radio required/>} label="Chuyển khoản (Mọi giao dịch đều được bảo mật và mã hóa. Thông tin tài khoản sẽ không bao giờ được lưu lại.)" />
+                                        <FormControlLabel value="vnpay" control={<Radio required/>} label="Chuyển khoản qua VNpay (Mọi thông tin về giao dịch đều được bảo mật và mã hóa.)" />
+                                        <FormControlLabel value="paypal" control={<Radio required/>} label="Chuyển khoản qua Paypal (Mọi thông tin về giao dịch đều được bảo mật và mã hóa.)" />
                                     </RadioGroup>
                                 </FormControl>
                                 <div className="input-group">
@@ -605,7 +611,7 @@ const BookingForm = ({ tourDateId, tour, sessionResultInfo } : { tourDateId: num
                                     </tr>
                                     <tr>
                                         <td><Typography className="title">Họ và tên:</Typography></td>
-                                        <td className="text-end">{ newOrder?.contactInfo?.customerFullName || "---" }</td>
+                                        <td className="text-end">{ newOrder?.contactInfo?.customerFirstName + newOrder?.contactInfo?.customerLastName || "---" }</td>
                                     </tr>
                                     <tr>
                                         <td><Typography className="title">Điện thoại:</Typography></td>

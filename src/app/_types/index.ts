@@ -8,6 +8,8 @@ export { default as TourSchedule } from "./TourSchedule";
 export { default as TourRating } from "./TourRating";
 export { default as Address } from "./Address";
 export { default as TourHotel } from "./TourHotel";
+export { default as Order } from "./Order";
+export { default as TourFilter } from "./TourFilter";
 
 export type { default as UserState } from "./state/UserState";
 export type { default as CreateOrderState } from "./state/CreateOrderState";
@@ -17,14 +19,21 @@ export { default as RatingRequest } from "./request/RatingRequest";
 export { default as UpdateRatingRequest } from "./request/UpdateRatingRequest";
 export { default as NewOrderRequest } from "./request/NewOrderRequest";
 export { default as CreateBlogPostRequest } from "./request/CreateBlogPostRequest";
+export { default as UpdatePasswordRequest } from "./request/UpdatePasswordRequest";
+export { default as UpdateUserProfileRequest } from "./request/UpdateUserProfileRequest";
 
 export type { default as LoginResponse } from "./response/LoginResponse";
 export type { default as UpdateTourRatingResponse } from "./response/UpdateTourRatingResponse";
 export type { default as CreateTourRatingResponse } from "./response/CreateTourRatingResponse";
 export type { default as LoginUnActiveResponse } from "./response/LoginUnActiveResponse";
+export type { default as AllOrdersResponse } from "./response/AllOrdersResponse";
 export { default as TourRatingsResponse } from "./response/TourRatingsResponse";
 export { default as DeleteTourRatingResponse } from "./response/DeleteTourRatingResponse";
 export { default as AllBlogsResponse } from "./response/AllBlogsResponse";
 export { default as AllToursResponse } from "./response/AllToursResponse";
 export { default as RegisterResponse } from "./response/RegisterResponse";
+export { default as ProfitStatisticResponse } from "./response/ProfitStatisticResponse";
+export { default as AccessHistoryResponse } from "./response/AccessHistoryResponse";
 export { default as TourParagraph } from "./TourParagraph";
+
+

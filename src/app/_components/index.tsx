@@ -39,11 +39,22 @@ export { default as Ticket } from "./Ticket/Ticket";
 export { default as ThemeRegistry } from "./ThemeRegistry/ThemeRegistry";
 export { default as CircularProgress } from "./CicularProgress/CicularProgress";
 export { default as FailedStatus } from "./FailedStatus/FailedStatus";
+export { default as SettingSideBar } from "./SettingSideBar/SettingSideBar";
+export { default as AccessHistoryList } from "./AccessHistoryList/AccessHistoryList";
+export { default as OrderHistoryList } from "./OrderHistoryList/OrderHistoryList";
 // //
 
 export { default as AdminSideBar } from "./AdminSideBar/AdminSideBar";
 export { default as AdminNavBar } from "./AdminNavBar/AdminNavBar";
 export { default as AdminHotel } from "./AdminHotel/AdminHotel";
 export { default as TermAndCondition } from "./TermAndCondition/TermAndCondition";
-
+export { default as AdminTourList } from "./AdminTourList/AdminTourList";
 export { default as BlogEditor } from "./BlogEditor/BlogEditor";
+export { default as StatisticModal } from "./StatisticModal/StatisticModal";
+
+export { default as AdminHero } from "./AdminHero/AdminHero";
+export { default as OrderList } from "./OrderList/OrderList";
+
+export { default as ProfitChart } from "./ProfitChart/ProfitChart";
+
+export { default as DatePicker } from "./DatePicker/DatePicker";

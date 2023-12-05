@@ -8,4 +8,8 @@ export default class AllToursResponse {
         this.pages = pages;
         this.tours = tours;
     }
+
+    static getEmptyInstance() {
+        return new AllToursResponse(0, [])
+    }
 }

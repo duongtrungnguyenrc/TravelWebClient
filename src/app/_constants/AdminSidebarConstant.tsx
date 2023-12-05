@@ -14,7 +14,7 @@ const navigations = [
     },
     {
         name: "All trips",
-        path: "/admin/all-trip",
+        path: "/admin/trip",
         icon: CalendarMonthOutlinedIcon
     },
     {

@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import request from "./requestServices";
 import { Response } from "../_types";
+import responseServices from "./responseServices";
 
 
 const userServices = {
@@ -22,6 +23,32 @@ const userServices = {
                 message: (error.response?.data as Response)?.message, 
                 data: (error.response?.data as Response)?.data
             } as Response;
+        }
+    },
+    getAccessHistory: async (accessToken: string) => {
+        try {
+            const response : AxiosResponse = await request.get("user/login-history", {
+                headers: {
+                    Authorization: accessToken
+                }
+            });            
+            return responseServices.success(response);
+
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    getBookingHistory: async (accessToken: string) => {
+        try {
+            const response : AxiosResponse = await request.get("/order", {
+                headers: {
+                    Authorization: accessToken
+                }
+            });            
+            return responseServices.success(response);
+
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
         }
     }
 }

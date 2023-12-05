@@ -1,5 +1,5 @@
-.admin-navbar-site {
-    height: 100%;
+.admin-sidebar-site {
+    height: 100vh;
     position: sticky;
     width: 100%;
     left: 0;
@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
 
-    .admin-navbar-top {
+    .admin-sidebar-top {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -17,7 +17,7 @@
 
     }
 
-    .admin-navbar-body {
+    .admin-sidebar-body {
         height: 100%;
 
         .admin-nav-list {
@@ -25,8 +25,9 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            list-style: none;
             
-            .admin-navbar-item {
+            .admin-sidebar-item {
                 width: 100%;
                 border-radius: 10px;
                 

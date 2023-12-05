@@ -1,0 +1,41 @@
+.statistic-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .chart-wrapper {
+        border-radius: 20px;
+        background-color: #fff;
+        padding: 10px;
+    }
+
+    .statistic-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 15px;
+        height: 100%;
+
+    }
+    .statistic-item {
+        height: 100%;
+        width: 50%;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 20px;
+        
+        .statistic-value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 32px;
+
+            span {
+                margin-left: 7px;
+                margin-top: 13px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+        }
+    }
+}

@@ -1,194 +1,578 @@
-'use client'
+// Produced by Duong Trung Nguyen
 
-import { Card, CardActionArea, CardContent, Container, Grid, Stack, Typography } from "@mui/material";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+'use client';
 
-const SettingPage = () => {
-    const router = useRouter();
-  return (
-    <Container sx={{display: "flex", alignItems: "center", height: "100%", padding: "100px 0"}}>
-        <Stack direction="column" gap={5}>
-            <Stack direction="column">
-                <Typography variant="h4" component="h1">
-                    Account
-                </Typography>
-                <Typography variant="body1" component="p">
-                    Peter griffin, hello@designdrops.io · <Link href="" className="text-underline text-bold">Go to profile</Link>
-                </Typography>
-            </Stack>
-            <Grid container spacing={2}>
-                <Grid item lg={4}>
-                    <Card onClick={() => {router.push("/setting/personal-info")}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                    <path d="M29 5C30.0544 5 30.9182 5.81588 30.9945 6.85074L31 7V25C31 26.0544 30.1841 26.9182 29.1493 26.9945L29 27H3C1.94564 27 1.08183 26.1841 1.00549 25.1493L1 25V7C1 5.94564 1.81588 5.08183 2.85074 5.00549L3 5H29ZM29 7H3V25H29V7ZM26 19V21H18V19H26ZM10 11C11.6569 11 13 12.3431 13 14C13 14.6168 12.8139 15.1901 12.4947 15.6668C13.9919 16.5293 15 18.1469 15 20H13C13 18.6941 12.1656 17.5831 11.0009 17.171L11 14C11 13.4477 10.5523 13 10 13C9.48716 13 9.06449 13.386 9.00673 13.8834L9 14L9.00009 17.1707C7.83485 17.5825 7 18.6937 7 20H5C5 18.1469 6.00806 16.5293 7.50571 15.6656C7.18613 15.1901 7 14.6168 7 14C7 12.3431 8.34315 11 10 11ZM26 15V17H18V15H26ZM26 11V13H18V11H26Z" fill="#222222"/>
-                                </svg>
-                                <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                    Personal info
-                                </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
-                                </Typography>
-                                </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M16 0.798096L16.555 1.1681C20.398 3.7301 24.208 5.0001 28 5.0001H29V17.5001C29 25.5741 23.21 31.0001 16 31.0001C8.79 31.0001 3 25.5741 3 17.5001V5.0001H4C7.792 5.0001 11.602 3.7301 15.445 1.1681L16 0.798096ZM15 3.8031C11.8 5.6691 8.582 6.7231 5.352 6.9521L5 6.9721V17.5001C5 24.0581 9.347 28.4911 15 28.9591V3.8031ZM17 3.8031V28.9601C22.654 28.4921 27 24.0591 27 17.5011V6.9721L26.648 6.9521C23.418 6.7221 20.2 5.6701 17.001 3.8041L17 3.8031Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Login & security
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M25 4C25.5046 3.99984 25.9906 4.19041 26.3605 4.5335C26.7305 4.87659 26.9572 5.34684 26.995 5.85L27 6V8H29.04C30.082 8 30.92 8.824 30.995 9.852L31 10V26C31 27.046 30.209 27.917 29.187 27.994L29.04 28H6.96C5.918 28 5.08 27.176 5.005 26.148L5 26V24H3C2.49542 24.0002 2.00943 23.8096 1.63945 23.4665C1.26947 23.1234 1.04284 22.6532 1.005 22.15L1 22V6C0.99984 5.49542 1.19041 5.00943 1.5335 4.63945C1.87659 4.26947 2.34684 4.04284 2.85 4.005L3 4H25ZM27 22C27.0002 22.5046 26.8096 22.9906 26.4665 23.3605C26.1234 23.7305 25.6532 23.9572 25.15 23.995L25 24H7V26H29V10H27V22ZM25 6H3V22H25V6ZM22 18C22.2652 18 22.5196 18.1054 22.7071 18.2929C22.8946 18.4804 23 18.7348 23 19C23 19.2652 22.8946 19.5196 22.7071 19.7071C22.5196 19.8946 22.2652 20 22 20C21.7348 20 21.4804 19.8946 21.2929 19.7071C21.1054 19.5196 21 19.2652 21 19C21 18.7348 21.1054 18.4804 21.2929 18.2929C21.4804 18.1054 21.7348 18 22 18ZM14 10C15.0609 10 16.0783 10.4214 16.8284 11.1716C17.5786 11.9217 18 12.9391 18 14C18 15.0609 17.5786 16.0783 16.8284 16.8284C16.0783 17.5786 15.0609 18 14 18C12.9391 18 11.9217 17.5786 11.1716 16.8284C10.4214 16.0783 10 15.0609 10 14C10 12.9391 10.4214 11.9217 11.1716 11.1716C11.9217 10.4214 12.9391 10 14 10ZM14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14C12 14.5304 12.2107 15.0391 12.5858 15.4142C12.9609 15.7893 13.4696 16 14 16C14.5304 16 15.0391 15.7893 15.4142 15.4142C15.7893 15.0391 16 14.5304 16 14C16 13.4696 15.7893 12.9609 15.4142 12.5858C15.0391 12.2107 14.5304 12 14 12ZM6 8C6.26522 8 6.51957 8.10536 6.70711 8.29289C6.89464 8.48043 7 8.73478 7 9C7 9.26522 6.89464 9.51957 6.70711 9.70711C6.51957 9.89464 6.26522 10 6 10C5.73478 10 5.48043 9.89464 5.29289 9.70711C5.10536 9.51957 5 9.26522 5 9C5 8.73478 5.10536 8.48043 5.29289 8.29289C5.48043 8.10536 5.73478 8 6 8Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Payment & payouts
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M25 4C25.5046 3.99984 25.9906 4.19041 26.3605 4.5335C26.7305 4.87659 26.9572 5.34684 26.995 5.85L27 6V8H29.04C30.082 8 30.92 8.824 30.995 9.852L31 10V26C31 27.046 30.209 27.917 29.187 27.994L29.04 28H6.96C5.918 28 5.08 27.176 5.005 26.148L5 26V24H3C2.49542 24.0002 2.00943 23.8096 1.63945 23.4665C1.26947 23.1234 1.04284 22.6532 1.005 22.15L1 22V6C0.99984 5.49542 1.19041 5.00943 1.5335 4.63945C1.87659 4.26947 2.34684 4.04284 2.85 4.005L3 4H25ZM27 22C27.0002 22.5046 26.8096 22.9906 26.4665 23.3605C26.1234 23.7305 25.6532 23.9572 25.15 23.995L25 24H7V26H29V10H27V22ZM25 6H3V22H25V6ZM22 18C22.2652 18 22.5196 18.1054 22.7071 18.2929C22.8946 18.4804 23 18.7348 23 19C23 19.2652 22.8946 19.5196 22.7071 19.7071C22.5196 19.8946 22.2652 20 22 20C21.7348 20 21.4804 19.8946 21.2929 19.7071C21.1054 19.5196 21 19.2652 21 19C21 18.7348 21.1054 18.4804 21.2929 18.2929C21.4804 18.1054 21.7348 18 22 18ZM14 10C15.0609 10 16.0783 10.4214 16.8284 11.1716C17.5786 11.9217 18 12.9391 18 14C18 15.0609 17.5786 16.0783 16.8284 16.8284C16.0783 17.5786 15.0609 18 14 18C12.9391 18 11.9217 17.5786 11.1716 16.8284C10.4214 16.0783 10 15.0609 10 14C10 12.9391 10.4214 11.9217 11.1716 11.1716C11.9217 10.4214 12.9391 10 14 10ZM14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14C12 14.5304 12.2107 15.0391 12.5858 15.4142C12.9609 15.7893 13.4696 16 14 16C14.5304 16 15.0391 15.7893 15.4142 15.4142C15.7893 15.0391 16 14.5304 16 14C16 13.4696 15.7893 12.9609 15.4142 12.5858C15.0391 12.2107 14.5304 12 14 12ZM6 8C6.26522 8 6.51957 8.10536 6.70711 8.29289C6.89464 8.48043 7 8.73478 7 9C7 9.26522 6.89464 9.51957 6.70711 9.70711C6.51957 9.89464 6.26522 10 6 10C5.73478 10 5.48043 9.89464 5.29289 9.70711C5.10536 9.51957 5 9.26522 5 9C5 8.73478 5.10536 8.48043 5.29289 8.29289C5.48043 8.10536 5.73478 8 6 8Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Payment & payouts
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M25 4C25.5046 3.99984 25.9906 4.19041 26.3605 4.5335C26.7305 4.87659 26.9572 5.34684 26.995 5.85L27 6V8H29.04C30.082 8 30.92 8.824 30.995 9.852L31 10V26C31 27.046 30.209 27.917 29.187 27.994L29.04 28H6.96C5.918 28 5.08 27.176 5.005 26.148L5 26V24H3C2.49542 24.0002 2.00943 23.8096 1.63945 23.4665C1.26947 23.1234 1.04284 22.6532 1.005 22.15L1 22V6C0.99984 5.49542 1.19041 5.00943 1.5335 4.63945C1.87659 4.26947 2.34684 4.04284 2.85 4.005L3 4H25ZM27 22C27.0002 22.5046 26.8096 22.9906 26.4665 23.3605C26.1234 23.7305 25.6532 23.9572 25.15 23.995L25 24H7V26H29V10H27V22ZM25 6H3V22H25V6ZM22 18C22.2652 18 22.5196 18.1054 22.7071 18.2929C22.8946 18.4804 23 18.7348 23 19C23 19.2652 22.8946 19.5196 22.7071 19.7071C22.5196 19.8946 22.2652 20 22 20C21.7348 20 21.4804 19.8946 21.2929 19.7071C21.1054 19.5196 21 19.2652 21 19C21 18.7348 21.1054 18.4804 21.2929 18.2929C21.4804 18.1054 21.7348 18 22 18ZM14 10C15.0609 10 16.0783 10.4214 16.8284 11.1716C17.5786 11.9217 18 12.9391 18 14C18 15.0609 17.5786 16.0783 16.8284 16.8284C16.0783 17.5786 15.0609 18 14 18C12.9391 18 11.9217 17.5786 11.1716 16.8284C10.4214 16.0783 10 15.0609 10 14C10 12.9391 10.4214 11.9217 11.1716 11.1716C11.9217 10.4214 12.9391 10 14 10ZM14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14C12 14.5304 12.2107 15.0391 12.5858 15.4142C12.9609 15.7893 13.4696 16 14 16C14.5304 16 15.0391 15.7893 15.4142 15.4142C15.7893 15.0391 16 14.5304 16 14C16 13.4696 15.7893 12.9609 15.4142 12.5858C15.0391 12.2107 14.5304 12 14 12ZM6 8C6.26522 8 6.51957 8.10536 6.70711 8.29289C6.89464 8.48043 7 8.73478 7 9C7 9.26522 6.89464 9.51957 6.70711 9.70711C6.51957 9.89464 6.26522 10 6 10C5.73478 10 5.48043 9.89464 5.29289 9.70711C5.10536 9.51957 5 9.26522 5 9C5 8.73478 5.10536 8.48043 5.29289 8.29289C5.48043 8.10536 5.73478 8 6 8Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Payment & payouts
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M25 4C25.5046 3.99984 25.9906 4.19041 26.3605 4.5335C26.7305 4.87659 26.9572 5.34684 26.995 5.85L27 6V8H29.04C30.082 8 30.92 8.824 30.995 9.852L31 10V26C31 27.046 30.209 27.917 29.187 27.994L29.04 28H6.96C5.918 28 5.08 27.176 5.005 26.148L5 26V24H3C2.49542 24.0002 2.00943 23.8096 1.63945 23.4665C1.26947 23.1234 1.04284 22.6532 1.005 22.15L1 22V6C0.99984 5.49542 1.19041 5.00943 1.5335 4.63945C1.87659 4.26947 2.34684 4.04284 2.85 4.005L3 4H25ZM27 22C27.0002 22.5046 26.8096 22.9906 26.4665 23.3605C26.1234 23.7305 25.6532 23.9572 25.15 23.995L25 24H7V26H29V10H27V22ZM25 6H3V22H25V6ZM22 18C22.2652 18 22.5196 18.1054 22.7071 18.2929C22.8946 18.4804 23 18.7348 23 19C23 19.2652 22.8946 19.5196 22.7071 19.7071C22.5196 19.8946 22.2652 20 22 20C21.7348 20 21.4804 19.8946 21.2929 19.7071C21.1054 19.5196 21 19.2652 21 19C21 18.7348 21.1054 18.4804 21.2929 18.2929C21.4804 18.1054 21.7348 18 22 18ZM14 10C15.0609 10 16.0783 10.4214 16.8284 11.1716C17.5786 11.9217 18 12.9391 18 14C18 15.0609 17.5786 16.0783 16.8284 16.8284C16.0783 17.5786 15.0609 18 14 18C12.9391 18 11.9217 17.5786 11.1716 16.8284C10.4214 16.0783 10 15.0609 10 14C10 12.9391 10.4214 11.9217 11.1716 11.1716C11.9217 10.4214 12.9391 10 14 10ZM14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14C12 14.5304 12.2107 15.0391 12.5858 15.4142C12.9609 15.7893 13.4696 16 14 16C14.5304 16 15.0391 15.7893 15.4142 15.4142C15.7893 15.0391 16 14.5304 16 14C16 13.4696 15.7893 12.9609 15.4142 12.5858C15.0391 12.2107 14.5304 12 14 12ZM6 8C6.26522 8 6.51957 8.10536 6.70711 8.29289C6.89464 8.48043 7 8.73478 7 9C7 9.26522 6.89464 9.51957 6.70711 9.70711C6.51957 9.89464 6.26522 10 6 10C5.73478 10 5.48043 9.89464 5.29289 9.70711C5.10536 9.51957 5 9.26522 5 9C5 8.73478 5.10536 8.48043 5.29289 8.29289C5.48043 8.10536 5.73478 8 6 8Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Payment & payouts
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M25 4C25.5046 3.99984 25.9906 4.19041 26.3605 4.5335C26.7305 4.87659 26.9572 5.34684 26.995 5.85L27 6V8H29.04C30.082 8 30.92 8.824 30.995 9.852L31 10V26C31 27.046 30.209 27.917 29.187 27.994L29.04 28H6.96C5.918 28 5.08 27.176 5.005 26.148L5 26V24H3C2.49542 24.0002 2.00943 23.8096 1.63945 23.4665C1.26947 23.1234 1.04284 22.6532 1.005 22.15L1 22V6C0.99984 5.49542 1.19041 5.00943 1.5335 4.63945C1.87659 4.26947 2.34684 4.04284 2.85 4.005L3 4H25ZM27 22C27.0002 22.5046 26.8096 22.9906 26.4665 23.3605C26.1234 23.7305 25.6532 23.9572 25.15 23.995L25 24H7V26H29V10H27V22ZM25 6H3V22H25V6ZM22 18C22.2652 18 22.5196 18.1054 22.7071 18.2929C22.8946 18.4804 23 18.7348 23 19C23 19.2652 22.8946 19.5196 22.7071 19.7071C22.5196 19.8946 22.2652 20 22 20C21.7348 20 21.4804 19.8946 21.2929 19.7071C21.1054 19.5196 21 19.2652 21 19C21 18.7348 21.1054 18.4804 21.2929 18.2929C21.4804 18.1054 21.7348 18 22 18ZM14 10C15.0609 10 16.0783 10.4214 16.8284 11.1716C17.5786 11.9217 18 12.9391 18 14C18 15.0609 17.5786 16.0783 16.8284 16.8284C16.0783 17.5786 15.0609 18 14 18C12.9391 18 11.9217 17.5786 11.1716 16.8284C10.4214 16.0783 10 15.0609 10 14C10 12.9391 10.4214 11.9217 11.1716 11.1716C11.9217 10.4214 12.9391 10 14 10ZM14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14C12 14.5304 12.2107 15.0391 12.5858 15.4142C12.9609 15.7893 13.4696 16 14 16C14.5304 16 15.0391 15.7893 15.4142 15.4142C15.7893 15.0391 16 14.5304 16 14C16 13.4696 15.7893 12.9609 15.4142 12.5858C15.0391 12.2107 14.5304 12 14 12ZM6 8C6.26522 8 6.51957 8.10536 6.70711 8.29289C6.89464 8.48043 7 8.73478 7 9C7 9.26522 6.89464 9.51957 6.70711 9.70711C6.51957 9.89464 6.26522 10 6 10C5.73478 10 5.48043 9.89464 5.29289 9.70711C5.10536 9.51957 5 9.26522 5 9C5 8.73478 5.10536 8.48043 5.29289 8.29289C5.48043 8.10536 5.73478 8 6 8Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Payment & payouts
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M25 4C25.5046 3.99984 25.9906 4.19041 26.3605 4.5335C26.7305 4.87659 26.9572 5.34684 26.995 5.85L27 6V8H29.04C30.082 8 30.92 8.824 30.995 9.852L31 10V26C31 27.046 30.209 27.917 29.187 27.994L29.04 28H6.96C5.918 28 5.08 27.176 5.005 26.148L5 26V24H3C2.49542 24.0002 2.00943 23.8096 1.63945 23.4665C1.26947 23.1234 1.04284 22.6532 1.005 22.15L1 22V6C0.99984 5.49542 1.19041 5.00943 1.5335 4.63945C1.87659 4.26947 2.34684 4.04284 2.85 4.005L3 4H25ZM27 22C27.0002 22.5046 26.8096 22.9906 26.4665 23.3605C26.1234 23.7305 25.6532 23.9572 25.15 23.995L25 24H7V26H29V10H27V22ZM25 6H3V22H25V6ZM22 18C22.2652 18 22.5196 18.1054 22.7071 18.2929C22.8946 18.4804 23 18.7348 23 19C23 19.2652 22.8946 19.5196 22.7071 19.7071C22.5196 19.8946 22.2652 20 22 20C21.7348 20 21.4804 19.8946 21.2929 19.7071C21.1054 19.5196 21 19.2652 21 19C21 18.7348 21.1054 18.4804 21.2929 18.2929C21.4804 18.1054 21.7348 18 22 18ZM14 10C15.0609 10 16.0783 10.4214 16.8284 11.1716C17.5786 11.9217 18 12.9391 18 14C18 15.0609 17.5786 16.0783 16.8284 16.8284C16.0783 17.5786 15.0609 18 14 18C12.9391 18 11.9217 17.5786 11.1716 16.8284C10.4214 16.0783 10 15.0609 10 14C10 12.9391 10.4214 11.9217 11.1716 11.1716C11.9217 10.4214 12.9391 10 14 10ZM14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14C12 14.5304 12.2107 15.0391 12.5858 15.4142C12.9609 15.7893 13.4696 16 14 16C14.5304 16 15.0391 15.7893 15.4142 15.4142C15.7893 15.0391 16 14.5304 16 14C16 13.4696 15.7893 12.9609 15.4142 12.5858C15.0391 12.2107 14.5304 12 14 12ZM6 8C6.26522 8 6.51957 8.10536 6.70711 8.29289C6.89464 8.48043 7 8.73478 7 9C7 9.26522 6.89464 9.51957 6.70711 9.70711C6.51957 9.89464 6.26522 10 6 10C5.73478 10 5.48043 9.89464 5.29289 9.70711C5.10536 9.51957 5 9.26522 5 9C5 8.73478 5.10536 8.48043 5.29289 8.29289C5.48043 8.10536 5.73478 8 6 8Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Payment & payouts
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-                <Grid item lg={4}>
-                    <Card onClick={() => {}} style={{boxShadow: "0px 6px 16px 0px rgba(0, 0, 0, 0.12)"}}>
-                        <CardActionArea>
-                            <CardContent>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M25 4C25.5046 3.99984 25.9906 4.19041 26.3605 4.5335C26.7305 4.87659 26.9572 5.34684 26.995 5.85L27 6V8H29.04C30.082 8 30.92 8.824 30.995 9.852L31 10V26C31 27.046 30.209 27.917 29.187 27.994L29.04 28H6.96C5.918 28 5.08 27.176 5.005 26.148L5 26V24H3C2.49542 24.0002 2.00943 23.8096 1.63945 23.4665C1.26947 23.1234 1.04284 22.6532 1.005 22.15L1 22V6C0.99984 5.49542 1.19041 5.00943 1.5335 4.63945C1.87659 4.26947 2.34684 4.04284 2.85 4.005L3 4H25ZM27 22C27.0002 22.5046 26.8096 22.9906 26.4665 23.3605C26.1234 23.7305 25.6532 23.9572 25.15 23.995L25 24H7V26H29V10H27V22ZM25 6H3V22H25V6ZM22 18C22.2652 18 22.5196 18.1054 22.7071 18.2929C22.8946 18.4804 23 18.7348 23 19C23 19.2652 22.8946 19.5196 22.7071 19.7071C22.5196 19.8946 22.2652 20 22 20C21.7348 20 21.4804 19.8946 21.2929 19.7071C21.1054 19.5196 21 19.2652 21 19C21 18.7348 21.1054 18.4804 21.2929 18.2929C21.4804 18.1054 21.7348 18 22 18ZM14 10C15.0609 10 16.0783 10.4214 16.8284 11.1716C17.5786 11.9217 18 12.9391 18 14C18 15.0609 17.5786 16.0783 16.8284 16.8284C16.0783 17.5786 15.0609 18 14 18C12.9391 18 11.9217 17.5786 11.1716 16.8284C10.4214 16.0783 10 15.0609 10 14C10 12.9391 10.4214 11.9217 11.1716 11.1716C11.9217 10.4214 12.9391 10 14 10ZM14 12C13.4696 12 12.9609 12.2107 12.5858 12.5858C12.2107 12.9609 12 13.4696 12 14C12 14.5304 12.2107 15.0391 12.5858 15.4142C12.9609 15.7893 13.4696 16 14 16C14.5304 16 15.0391 15.7893 15.4142 15.4142C15.7893 15.0391 16 14.5304 16 14C16 13.4696 15.7893 12.9609 15.4142 12.5858C15.0391 12.2107 14.5304 12 14 12ZM6 8C6.26522 8 6.51957 8.10536 6.70711 8.29289C6.89464 8.48043 7 8.73478 7 9C7 9.26522 6.89464 9.51957 6.70711 9.70711C6.51957 9.89464 6.26522 10 6 10C5.73478 10 5.48043 9.89464 5.29289 9.70711C5.10536 9.51957 5 9.26522 5 9C5 8.73478 5.10536 8.48043 5.29289 8.29289C5.48043 8.10536 5.73478 8 6 8Z" fill="#222222"/>
-                            </svg>
-                            <Typography gutterBottom variant="h5" component="div" sx={{fontSize: "18px", marginTop: "10px"}}>
-                                Payment & payouts
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                Lizards are a widespread group of squamate reptiles, with over 6,000
-                                species, ranging across all continents except Antarctica
-                            </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Grid>
-            </Grid>
-            <Stack direction="column" alignItems="center" spacing={1}>
-                <Typography variant="body2" component="p">
-                    Need to deactivate your account?
-                </Typography>
-                <Link href=""><Typography variant="body2" className="text-underline">Take care of that now</Typography></Link>
-            </Stack>
-        </Stack>
-    </Container>
-  );
+import { RootState } from '@/app/_context/store';
+import { set } from '@/app/_context/userSlice';
+import { authServices } from '@/app/_services';
+import { Address, LoginResponse, UpdatePasswordRequest, UpdateUserProfileRequest, User } from '@/app/_types';
+import {
+    Avatar,
+    Box,
+    Button,
+    Chip,
+    FormControl,
+    Grid,
+    MenuItem,
+    Modal,
+    Select,
+    TextField,
+    Tooltip,
+    Typography,
+    styled,
+} from '@mui/material';
+import axios from 'axios';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useDebouncedCallback } from 'use-debounce';
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    borderRadius: 3,
+    bgcolor: 'background.paper',
+    p: 4,
 };
-export default SettingPage;
+
+const VisuallyHiddenInput = styled('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+});
+
+const PersonalInfoPage = () => {
+    const currentUser = useSelector((state) => (state as RootState).user);
+    const [addressData, setAddressData] = useState<{
+        cities: { ProvinceID: number; ProvinceName: string }[];
+        districts: { DistrictID: number; DistrictName: string }[];
+        wards: { WardID: number; WardName: string }[];
+    }>({ cities: [], districts: [], wards: [] });
+    const [address, setAddress] = useState<Address>(Address.getEmptyInstance());
+    const [isEditingProfile, setIsEditingProfile] = useState<boolean>(false);
+    const [isEditingPassword, setIsEditingPassword] = useState<boolean>(false);
+    const [changingPassword, setChangingPassword] = useState<UpdatePasswordRequest>(
+        UpdatePasswordRequest.getEmptyInstance()
+    );
+    const [changingProfile, setChangingProfile] = useState<UpdateUserProfileRequest>(
+        UpdateUserProfileRequest.getEmptyInstance(
+            currentUser.user?.fullName,
+            currentUser.user?.address,
+            currentUser.user?.phone
+        )
+    );
+    const [changingAvatar, setChangingAvatar] = useState<{ src: string; resource: File } | null>(null);
+
+    const dispath = useDispatch();
+
+    // Generate address field with GHN API
+
+    const fetchCities = async () => {
+        const response = await axios.get('https://online-gateway.ghn.vn/shiip/public-api/master-data/province', {
+            headers: {
+                Token: 'c3ccf572-dd29-11ed-921c-de4829400020',
+            },
+        });
+        if (response.status === 200) {
+            setAddressData((prevState) => {
+                return {
+                    ...prevState,
+                    cities: response.data.data,
+                };
+            });
+        }
+    };
+
+    const fetchDistricts = async () => {
+        const response = await axios.get(
+            `https://online-gateway.ghn.vn/shiip/public-api/master-data/district?province_id=${address.city.id}`,
+            {
+                headers: {
+                    Token: 'c3ccf572-dd29-11ed-921c-de4829400020',
+                },
+            }
+        );
+        if (response.status === 200) {
+            setAddressData((prevState) => {
+                return {
+                    ...prevState,
+                    districts: response.data.data,
+                };
+            });
+        }
+    };
+
+    const fetchWards = async () => {
+        const response = await axios.get(
+            `https://online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=${address.district.id}`,
+            {
+                headers: {
+                    Token: 'c3ccf572-dd29-11ed-921c-de4829400020',
+                },
+            }
+        );
+        if (response.status === 200) {
+            setAddressData((prevState) => {
+                return {
+                    ...prevState,
+                    wards: response.data.data,
+                };
+            });
+        }
+    };
+
+    useEffect(() => {
+        fetchCities();
+    }, []);
+
+    useEffect(() => {
+        setAddressData((prevState) => {
+            return {
+                ...prevState,
+                districts: [],
+                wards: [],
+            };
+        });
+        setAddress((prevState) => {
+            return {
+                ...prevState,
+                district: { id: -1, name: '' },
+                ward: { id: -1, name: '' },
+            };
+        });
+
+        if (address.city.name != '') {
+            fetchDistricts();
+        }
+    }, [address.city.name]);
+
+    useEffect(() => {
+        setAddressData((prevState) => {
+            return {
+                ...prevState,
+                wards: [],
+            };
+        });
+        setAddress((prevState) => {
+            return {
+                ...prevState,
+                ward: { id: -1, name: '' },
+            };
+        });
+        if (address.district.name != '') {
+            fetchWards();
+        }
+    }, [address.district.name]);
+
+    const handleAddressChange = useDebouncedCallback((e) => {
+        const name = e.target.name;
+        const value: string = e.target.value;
+
+        if (name.trim() === 'addressDetail') {
+            setAddress((prevState) => {
+                return {
+                    ...prevState,
+                    [name]: value,
+                };
+            });
+        } else {
+            setAddress((prevState) => {
+                return {
+                    ...prevState,
+                    [name]: {
+                        id: value.split('-')[0],
+                        name: value.split('-')[1],
+                    },
+                };
+            });
+        }
+    }, 300);
+
+    const handlePasswordChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+        const { value, name } = e.target;
+
+        setChangingPassword((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            };
+        });
+    }, 300);
+
+    const handleProfileChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
+        const { value, name } = e.target;
+
+        setChangingProfile((prevState) => {
+            return {
+                ...prevState,
+                [name]: value,
+            };
+        });
+    }, 300);
+
+    const handleSubmitPassword = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const response = await toast.promise(authServices.updatePassword(changingPassword, currentUser.accessToken), {
+            pending: 'Đang xử lý...',
+            success: 'Đổi mật khẩu thành công',
+        });
+
+        if (response.status) {
+            setIsEditingPassword(false);
+        } else {
+            toast.error(response.message);
+        }
+    };
+
+    const handleSubmitProfile = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        let payload: UpdateUserProfileRequest = {...changingProfile};
+
+        if(address.addressDetail && address.city && address.district && address.ward) {
+            payload = {
+                ...changingProfile,
+                address: address.addressDetail +
+                ' - ' +
+                address.ward.name +
+                ' - ' +
+                address.district.name +
+                ' - ' +
+                address.city.name,
+            };
+        }
+
+        const response = await toast.promise(authServices.updateProfile(payload, currentUser.accessToken), {
+            pending: 'Đang xử lý...',
+            success: 'Đổi thông tin người dùng thành công',
+        });
+
+        if (response.status) {
+            dispath(
+                set({
+                    accessToken: currentUser.accessToken,
+                    user: {
+                        id: (response.data as LoginResponse)?.id,
+                        email: (response.data as LoginResponse)?.email,
+                        address: (response.data as LoginResponse)?.address,
+                        fullName: (response.data as LoginResponse)?.fullName,
+                        phone: (response.data as LoginResponse)?.phone,
+                        roles: (response.data as LoginResponse)?.roles,
+                        avatar: (response.data as LoginResponse)?.avatar,
+                        active: (response.data as LoginResponse)?.active,
+                    } as User,
+                })
+            );
+            UpdateUserProfileRequest.getEmptyInstance(
+                currentUser.user?.fullName,
+                currentUser.user?.address,
+                currentUser.user?.phone
+            );
+            setIsEditingProfile(false);
+        } else {
+            toast.error(response.message);
+        }
+    };
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        const file = files?.[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = (event: ProgressEvent<FileReader>) => {
+                setChangingAvatar({
+                    src: event.target?.result + '',
+                    resource: file,
+                });
+
+                handleSubmitAvatar(file);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleSubmitAvatar = async (newAvatar: File) => {
+        const response = await toast.promise(authServices.updateAvatar(newAvatar, currentUser.accessToken), {
+            pending: 'Đang xử lý...',
+        });
+
+        if (response.status) {
+            toast.success('Đổi ảnh đại diện thành công');
+            dispath(
+                set({
+                    accessToken: currentUser.accessToken,
+                    user: {
+                        id: (response.data as LoginResponse)?.id,
+                        email: (response.data as LoginResponse)?.email,
+                        address: (response.data as LoginResponse)?.address,
+                        fullName: (response.data as LoginResponse)?.fullName,
+                        phone: (response.data as LoginResponse)?.phone,
+                        roles: (response.data as LoginResponse)?.roles,
+                        avatar: (response.data as LoginResponse)?.avatar,
+                        active: (response.data as LoginResponse)?.active,
+                    } as User,
+                })
+            );
+        } else {
+            toast.error(response.message);
+        }
+    };
+
+    return (
+        <Grid container spacing={5} className="py-5">
+            <Modal
+                open={isEditingPassword}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description">
+                <Box sx={style}>
+                    <form method="post" onSubmit={handleSubmitPassword}>
+                        <div className="input-group">
+                            <label htmlFor="">Mật khẩu cũ</label>
+                            <TextField
+                                type="password"
+                                name="oldPassword"
+                                placeholder="Mật khẩu cũ"
+                                onChange={handlePasswordChange}
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="">Mật khẩu mới</label>
+                            <TextField
+                                type="password"
+                                name="newPassword"
+                                placeholder="Mật khẩu mới"
+                                onChange={handlePasswordChange}
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="">Xác nhận mật khẩu mới</label>
+                            <TextField
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Xác nhận khẩu mới"
+                                onChange={handlePasswordChange}
+                            />
+                        </div>
+                        <div className="d-flex justify-content-end gap-1">
+                            <Button variant="outlined" type="reset" onClick={() => setIsEditingPassword(false)}>
+                                Hủy
+                            </Button>
+                            <Button variant="outlined" type="submit">
+                                Lưu
+                            </Button>
+                        </div>
+                    </form>
+                </Box>
+            </Modal>
+            <div className="d-flex align-items-center gap-2 mb-4 w-100 px-4">
+                <div className="position-relative">
+                    <Tooltip title="Thay đổi ảnh đại diện">
+                        <label className="cursor-pointer">
+                            <Avatar
+                                sx={{ width: 100, height: 100 }}
+                                src={changingAvatar ? changingAvatar.src : currentUser?.user?.avatar}
+                            />
+                            <VisuallyHiddenInput
+                                type="file"
+                                onChange={handleFileChange}
+                                accept=".png,.jpg,.jpeg,.JPEG"
+                            />
+                        </label>
+                    </Tooltip>
+                </div>
+                <ul className="list-unstyled ml-3">
+                    <li className="d-flex align-items-center gap-2">
+                        <Typography variant="h4">
+                            <strong>{currentUser?.user?.fullName}</strong>
+                        </Typography>
+                    </li>
+                    <li>
+                        <Typography variant="body1">{currentUser?.user?.email}</Typography>
+                    </li>
+                </ul>
+            </div>
+            <Grid item xs={12} md={7} lg={9} className="pr-5">
+                <div>
+                    <Typography variant="h5">
+                        <strong>Thông tin cá nhân</strong>
+                    </Typography>
+                    <form method="post" className="mt-5" onSubmit={handleSubmitProfile}>
+                        <div className="multi-group">
+                            <div className="input-group">
+                                <label htmlFor="name">Họ và tên</label>
+                                <TextField
+                                    type="text"
+                                    name="fullName"
+                                    defaultValue={currentUser?.user?.fullName}
+                                    disabled={!isEditingProfile}
+                                    onChange={handleProfileChange}
+                                />
+                            </div>
+                            <div className="input-group">
+                                <label htmlFor="phone">Số điện thoại</label>
+                                <TextField
+                                    type="text"
+                                    name="phone"
+                                    defaultValue={currentUser?.user?.phone}
+                                    placeholder={currentUser?.user?.phone || 'Thiếu thông tin số điện thoại'}
+                                    disabled={!isEditingProfile}
+                                    onChange={handleProfileChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="w-100 d-flex mt-3">
+                            <div className="input-group col-6 p-0 pr-2">
+                                <label htmlFor="">
+                                    Tỉnh/Thành phố <span>*</span>
+                                </label>
+                                <FormControl>
+                                    <Select
+                                        disabled={!isEditingProfile}
+                                        displayEmpty
+                                        name="city"
+                                        onChange={handleAddressChange}>
+                                        <MenuItem disabled defaultChecked>
+                                            {currentUser?.user?.address
+                                                ? currentUser.user?.address.split(' - ')[3]
+                                                : 'Thiếu thông tin Tỉnh / Thành phố'}
+                                        </MenuItem>
+                                        {addressData?.cities &&
+                                            addressData?.cities.map((city) => {
+                                                return (
+                                                    <MenuItem
+                                                        key={city.ProvinceID}
+                                                        value={city.ProvinceID + '-' + city.ProvinceName}>
+                                                        {city.ProvinceName}
+                                                    </MenuItem>
+                                                );
+                                            })}
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div className="input-group col-6 p-0 pl-2">
+                                <label htmlFor="">
+                                    Quận/Huyện <span>*</span>
+                                </label>
+                                <FormControl>
+                                    <Select
+                                        disabled={!isEditingProfile}
+                                        displayEmpty
+                                        name="district"
+                                        onChange={handleAddressChange}>
+                                        <MenuItem defaultChecked>
+                                            {currentUser?.user?.address
+                                                ? currentUser.user?.address.split(' - ')[2]
+                                                : 'Thiếu thông tin Quận / Huyện'}
+                                        </MenuItem>
+                                        {addressData?.districts &&
+                                            addressData?.districts.map((district) => {
+                                                return (
+                                                    <MenuItem
+                                                        key={district.DistrictID}
+                                                        value={district.DistrictID + '-' + district.DistrictName}>
+                                                        {district.DistrictName}
+                                                    </MenuItem>
+                                                );
+                                            })}
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        </div>
+                        <div className="input-group mt-3">
+                            <label htmlFor="">
+                                Phường/Xã <span>*</span>
+                            </label>
+                            <FormControl>
+                                <Select
+                                    disabled={!isEditingProfile}
+                                    displayEmpty
+                                    inputProps={{
+                                        'aria-label': 'Without label',
+                                    }}
+                                    name="ward"
+                                    onChange={handleAddressChange}>
+                                    <MenuItem>
+                                        {currentUser?.user?.address
+                                            ? currentUser.user?.address.split(' - ')[1]
+                                            : 'Thiếu thông tin Phường / Xã'}
+                                    </MenuItem>
+                                    {addressData?.wards &&
+                                        addressData?.wards.map((ward) => {
+                                            return (
+                                                <MenuItem key={ward.WardID} value={ward.WardID + '-' + ward.WardName}>
+                                                    {ward.WardName}
+                                                </MenuItem>
+                                            );
+                                        })}
+                                </Select>
+                            </FormControl>
+                        </div>
+                        <div className="input-group mt-3">
+                            <label htmlFor="">
+                                Địa chỉ <span>*</span>
+                            </label>
+                            <TextField
+                                placeholder={
+                                    currentUser?.user?.address
+                                        ? currentUser.user?.address.split(' - ')[0]
+                                        : 'Thiếu thông tin địa chỉ'
+                                }
+                                maxRows={10}
+                                name="addressDetail"
+                                onChange={handleAddressChange}
+                                disabled={!isEditingProfile}
+                            />
+                        </div>
+                        <div className="button-group d-flex flex-end">
+                            <Button variant="outlined" onClick={() => setIsEditingProfile((prevState) => !prevState)} type="button">
+                                {
+                                    isEditingProfile ? "Hủy" : "Cập nhật"
+                                }
+                            </Button>
+                            {isEditingProfile && (
+                                <Button variant="outlined" type="submit">
+                                    Lưu
+                                </Button>
+                            )}
+                            <Button variant="outlined" onClick={() => setIsEditingPassword(true)} type="button">
+                                Đổi mật khẩu
+                            </Button>
+                        </div>
+                    </form>
+                </div>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+                <Typography variant="h5" className="mb-4">
+                    <strong>Trạng thái tài khoản</strong>
+                </Typography>
+                <form action="" className="mt-5">
+                    <div className="input-group">
+                        <label>Trạng thái kích hoạt</label>
+                        <Chip label="Đã kích hoạt" variant="outlined" className="mt-2 bg-success text-light" />
+                    </div>
+                    <div className="input-group">
+                        <label>Quyền hạn</label>
+                        <Chip
+                            label={currentUser?.user?.roles}
+                            variant="outlined"
+                            className="mt-2 bg-primary text-light"
+                        />
+                    </div>
+                </form>
+            </Grid>
+        </Grid>
+    );
+};
+export default PersonalInfoPage;

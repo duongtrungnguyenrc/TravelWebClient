@@ -138,23 +138,18 @@ const TourPage = ({ params }: { params: { id: string } }) => {
 
             {/* Location */}
 
-            {
-              tourData ?
-              <section className="w-100 my-5">
-                <GoogleMapsEmbed
-                  apiKey="AIzaSyDc7PnOq3Hxzq6dxeUVaY8WGLHIePl0swY"
-                  mode="place"
-                  q={tourData?.location}
-                  allowfullscreen
-                  style="width: 100%; height: 400px"
-                  language="vi"
-                  loading="lazy"
-                  maptype="satellite"
-                />
-              </section>
-              :
-              <Skeleton variant="rectangular" className="w-100 my-5" height={400}/>
-            }
+            <Skeleton variant="rectangular" className="w-100 my-5" height={400}>
+              <GoogleMapsEmbed
+                apiKey="AIzaSyDc7PnOq3Hxzq6dxeUVaY8WGLHIePl0swY"
+                mode="place"
+                q={tourData?.location}
+                allowfullscreen
+                style="width: 100%; height: 400px"
+                language="vi"
+                loading="lazy"
+                maptype="satellite"
+              />
+            </Skeleton>
 
             {/* Service stepper */}
 

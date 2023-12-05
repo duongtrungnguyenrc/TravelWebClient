@@ -73,12 +73,12 @@ const RegisterForm = () => {
         })
 
         if (formData.password !== formData.confirmPassword) {
-            toast.error(`Incorrect password confirm!`);
+            toast.error(`Mật khẩu xác nhận không khớp!`);
             return;
         }
 
         if (!formData.password.match("^(?=[a-zA-Z0-9#@$?]{6,}$)(?=.*?[a-z])(?=.*?[A-Z])")) {
-            toast.error(`Password must have least 6 character and have 1 special character!`);
+            toast.error(`Mật khẩu phải có ít nhất 6 kí tự và 1 kí tự đặc biệt`);
             return;
         }
 

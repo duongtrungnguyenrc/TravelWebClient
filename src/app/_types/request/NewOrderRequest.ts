@@ -1,5 +1,7 @@
- export interface ContactInfo {
+export interface ContactInfo {
     customerFullName: string;
+    customerFirstName: string;
+    customerLastName: string;
     customerPhone: string;
     customerEmail: string;
     customerAddress: string;
@@ -8,7 +10,7 @@
 export default class NewOrderRequest {
    amount: number;
    adults: number;
-   children?: number;
+   children: number;
    paymentMethod: string;
    tourDateId: number;
    hotelId?: number;
@@ -34,6 +36,8 @@ export default class NewOrderRequest {
         return new NewOrderRequest(0, 0, 0, "", -1, "",
             {
                 customerFullName: "",
+                customerFirstName: "",
+                customerLastName: "",
                 customerPhone: "",
                 customerEmail: "",
                 customerAddress: "",

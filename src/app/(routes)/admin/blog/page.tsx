@@ -7,7 +7,6 @@ const AdminBlogPage = async () => {
 
   const response = await blogServices.get(1, 20);
   const posts = (response.data as AllBlogsResponse);
-  console.log(posts);
   
   return (
     <BlogEditor data={posts}/>

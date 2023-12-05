@@ -1,3 +1,4 @@
+import { UpdatePasswordRequest, UpdateUserProfileRequest } from "../_types";
 import request from "./requestServices";
 import responseServices from "./responseServices";
 import { AxiosError, AxiosResponse } from "axios";
@@ -40,6 +41,48 @@ const authServices = {
            return responseServices.error(error as AxiosError);
         }
     },
+    updatePassword: async (payload: UpdatePasswordRequest, accessToken: string) => {
+        try {            
+            const response: AxiosResponse = await request.post(`/auth/change-password`, payload, {
+                headers: {
+                    Authorization: accessToken
+                }
+            });            
+            return responseServices.success(response);
+
+        } catch (error) {
+           return responseServices.error(error as AxiosError);
+        }
+    },
+    updateProfile: async (payload: UpdateUserProfileRequest, accessToken: string) => {
+        try {            
+            const response: AxiosResponse = await request.post(`/user/update`, payload, {
+                headers: {
+                    Authorization: accessToken
+                }
+            });            
+            return responseServices.success(response);
+
+        } catch (error) {
+           return responseServices.error(error as AxiosError);
+        }
+    },
+    updateAvatar: async (newAvatar: File, accessToken: string) => {
+        try {            
+            const payload = new FormData();
+            payload.append("avatar", newAvatar);
+
+            const response: AxiosResponse = await request.post(`/user/avatar`, payload, {
+                headers: {
+                    Authorization: accessToken
+                }
+            });            
+            return responseServices.success(response);
+            
+        } catch (error) {
+           return responseServices.error(error as AxiosError);
+        }
+    },
     checkLogin: async () => {
         try {            
             const token = localStorage.getItem("access_token");   
@@ -53,6 +96,19 @@ const authServices = {
     activate: async (token: string, activateCode : string) => {
         try {            
             const response: AxiosResponse = await request.post(`/auth/activate`, { token, activateCode });     
+            return responseServices.success(response);
+
+        } catch (error) {
+           return responseServices.error(error as AxiosError);
+        }
+    },
+    deactive: async (password: string, accessToken: string) => {
+        try {            
+            const response: AxiosResponse = await request.post(`/user/status`, { password }, {
+                headers: {
+                    Authorization: accessToken
+                }
+            });     
             return responseServices.success(response);
 
         } catch (error) {

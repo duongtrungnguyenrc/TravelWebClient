@@ -1,0 +1,70 @@
+.access-history-container {
+    width: 100%;
+
+    table {
+        width: 100%;
+        margin: auto;
+
+        thead {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            border-bottom: none;
+        }
+        th {
+            text-align: left;
+            padding: 12px 24px;
+            background: transparent;
+            box-shadow: none;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.25;
+            letter-spacing: 0.035em;
+            text-wrap: nowrap;
+            border-bottom: 1px solid #f1f3f4;
+        }
+        tbody {
+            display: table-row-group;
+        }
+        tr, thead {
+            color: inherit;
+            display: table-row;
+            vertical-align: middle;
+            outline: 0px;
+            cursor: pointer;
+            text-align: center;
+        }
+        td {
+            text-align: left;
+            padding: 12px 24px;
+            background: transparent;
+            box-shadow: none;
+            border-bottom: 1px solid #f1f3f4;
+            font-size: 1rem;
+        }
+
+        tr {
+            opacity: 0;
+            @for $i from 1 through 100 {
+                transition: linear $i * 0.1s;
+        
+                &:nth-child(#{$i}) {
+                    animation: fadeIn $i * 0.05s linear;
+                    opacity: 1;
+                }
+            }
+        }
+        
+        @keyframes fadeIn{
+            from {
+                opacity: 0;
+                transform: translate(-50px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: unset;
+            }
+        }
+    }
+}

@@ -1,13 +1,25 @@
 import request from "./requestServices";
 import { AxiosError, AxiosResponse } from "axios";
 import responseServices from "./responseServices";
-import { RatingRequest, UpdateRatingRequest } from "../_types";
+import { RatingRequest, TourFilter, UpdateRatingRequest } from "../_types";
 
 
 const tourServies = {
     getAllTours: async (page: number, limit: number) => {        
         try {
             const response: AxiosResponse = await request.get(`/tour/all?page=${[page]}&limit=${limit}`);                                    
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    adminGetAll: async (page: number, limit: number, accessToken?: string) => {        
+        try {
+            const response: AxiosResponse = await request.get(`admin/tour/all?page=${[page]}&limit=${limit}`, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });                                    
             return responseServices.success(response);
         } catch (error) {
             return responseServices.error(error as AxiosError);
@@ -84,6 +96,22 @@ const tourServies = {
         catch (error) {
             return responseServices.error(error as AxiosError);
         }
-    }
+    },
+    search: async (page: number, limit: number, query: string) => {
+        try {
+            const response = await request.get(`/tour/search?page=${page}&limit=${limit}&key=${query}`);
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    filter: async (page: number, limit: number, filter: TourFilter) => {        
+        try {
+            const response: AxiosResponse = await request.post(`/tour/filter`, { page, limit, ...filter });                                    
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
 }
 export default tourServies;

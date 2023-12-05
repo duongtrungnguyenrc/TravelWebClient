@@ -25,13 +25,14 @@ const AuthRedirectPage = ({ searchParams } : { searchParams: { token: string } }
                     fullName: authResult.fullName,
                     phone: authResult.phone,
                     roles: authResult.roles,
+                    avatar: authResult.avatar,
                     active: authResult.active,
                 } as User
             })
     );
-    
-    router.push("/login");
 
+    authResult.roles.includes("ROLE_ADMIN") ? router.push("/login") : router.push("/");
+    
     return <Loading/>;
 };
 export default AuthRedirectPage;

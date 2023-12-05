@@ -1,117 +1,111 @@
 // Produced by Duong Trung Nguyen
 
-'use client'
+'use client';
 
-import "./styles.scss";
-import ServiceItem from "../ServiceItem/ServiceItem";
-import { memo, useCallback, useEffect, useState } from "react";
-import { SkeletonServicesList } from "..";
-import { Container, Grid, Pagination, Rating, Stack, Typography } from "@mui/material";
-import { Tour } from "@/app/_types";
-import { useRouter, useSearchParams } from "next/navigation";
-import { tourServices } from "@/app/_services";
+import './styles.scss';
+import ServiceItem from '../ServiceItem/ServiceItem';
+import { memo, useCallback, useEffect, useState } from 'react';
+import { SkeletonServicesList } from '..';
+import { Container, Grid, Pagination, Stack } from '@mui/material';
+import { AllToursResponse } from '@/app/_types';
+import { useRouter } from 'next/navigation';
+import { tourServices } from '@/app/_services';
+import ServiceFilter from '../ServiceFilter/ServiceFilter';
+import { toast } from 'react-toastify';
 
-const ServicesList = () => {
-  const [tours, setTours] = useState<Tour[] | null>(null);
-  const [ pagesNumber, setPagesNumber ] = useState<number>(0);
+const ServicesList = ({
+    page,
+    destination,
+}: {
+    page: number;
+    destination?: string;
+}) => {
+    const [tourData, setTourData] = useState<AllToursResponse>();
 
-  const router = useRouter();
-  const params = useSearchParams();
-  const page = params.get("page") ? parseInt(params.get("page")!, 10) : 1;
+    const router = useRouter();
 
-  useEffect(() => {
-    const fetchAllTours = async (page: number) => {
-      const response = await tourServices.getAllTours(page, 21);
-      if (response.status) {
-        const toursData = response.data as { pages: number; tours: Tour[] };
-        setTours(toursData.tours);
-        pagesNumber === 0 ? setPagesNumber(toursData.pages) : undefined;
-      }
+    const fetchAllTours = async () => {
+        const response = await tourServices.getAllTours(page, 21);
+
+        if (response.status) {
+            setTourData(response.data as AllToursResponse);
+        } else {
+            toast.error(response.message);
+        }
     };
-    
-    fetchAllTours(page);
-  }, [page]);
 
+    const fetchToursByDestination = async (query: string) => {
+        const response = await tourServices.search(page, 12, query);
 
+        if (response.status) {
+            setTourData(response.data as AllToursResponse);
+        } else {
+            toast.error(response.message);
+        }
+    };
 
-  const handleChangePage = useCallback((event: React.ChangeEvent<unknown>, value: number) => {
-    router.push(`/explore?page=${value}`, {scroll: false});
-  }, []);
-  
-  return (
-    <Container style={{paddingTop: "150px"}} maxWidth="xl" className="services-list-site">
-      <Grid container direction="row" className="m-0">
-        <Grid className="rounded position-relative col-md-4 col-lg-3 p-2" item>
-          <form action="" style={{ position: "sticky", top: "90px" }}>
-            <div className="p-3 rounded" style={{background: "#fff"}}>
-              <Typography variant="h6">
-                <b>Khoảng giá</b>
-              </Typography>
-              <button className="btn btn-yellow mt-3">0 - 40000000</button>
-            </div>
-            <div className="p-3 rounded" style={{background: "#fff"}}>
-              <Typography variant="h6" className="mb-3">
-                <b>Đánh giá</b>
-              </Typography>
-              <div className="d-flex py-2 justify-content-between">
-                <input type="radio" name="ratingPoint" id="" />
-                <Rating readOnly size="small" value={5}/>
-                <Typography variant="body2">5 sao</Typography>
-              </div>
-              <div className="d-flex py-2 justify-content-between">
-                <input type="radio" name="ratingPoint" id="" />
-                <Rating readOnly size="small" value={4}/>
-                <Typography variant="body2">4 sao</Typography>
-              </div>
-              <div className="d-flex py-2 justify-content-between">
-                <input type="radio" name="ratingPoint" id="" />
-                <Rating readOnly size="small" value={3}/>
-                <Typography variant="body2">3 sao</Typography>
-              </div>
-              <div className="d-flex py-2 justify-content-between">
-                <input type="radio" name="ratingPoint" id="" />
-                <Rating readOnly size="small" value={2}/>
-                <Typography variant="body2">2 sao</Typography>
-              </div>
-              <div className="d-flex py-2 justify-content-between">
-                <input type="radio" name="ratingPoint" id="" />
-                <Rating readOnly size="small" value={1}/>
-                <Typography variant="body2">1 sao</Typography>
-              </div>
-            </div>
-            <div className="p-3 rounded" style={{background: "#fff"}}>
-              <Typography variant="h6" className="mb-3">
-                <b>Tiện ích</b>
-              </Typography>
-            </div>
-          </form>
-        </Grid>
-        <Grid item className="col-md-8 col-lg-9 p-0">
-          {
-            tours ?  
+    useEffect(() => {
+        destination ? fetchToursByDestination(destination) : fetchAllTours();
+    }, [page]);
 
-            <Grid container className="services-list m-0 p-0">
-            {
-              tours?.map((tour) => {
-                return  <Grid  key={tour.id} item xs={12} md={6} lg={4} className="p-2">
-                          <ServiceItem service={tour}/>
-                        </Grid>
-                
-              })
-            }
-            </Grid> : <SkeletonServicesList/>
-          }
-        </Grid>
-      </Grid>
-      <Stack className="mt-5" direction="row" justifyContent="center">
-        <Pagination 
-          shape="rounded" variant="outlined" color="primary" size="large"
-          count={pagesNumber} 
-          page={page}
-          onChange={handleChangePage} 
-        />
-      </Stack>
-    </Container>
-  );
+    const handleChangePage = useCallback(
+        (_event: React.ChangeEvent<unknown>, value: number) => {
+            router.push(`/explore?page=${value}`, { scroll: false });
+        },
+        []
+    );
+
+    return (
+        <Container
+            style={{ paddingTop: '150px' }}
+            maxWidth="xl"
+            className="services-list-site">
+            <Grid container direction="row" className="m-0">
+                <Grid className="rounded position-relative col-lg-2 p-2" item>
+                    <ServiceFilter
+                        page={page}
+                        limit={21}
+                        onFilter={setTourData}
+                    />
+                </Grid>
+                <Grid item className="col-lg-10 p-0">
+                    {tourData ? (
+                        tourData.pages !== 0 ? (
+                            <Grid container className="services-list m-0 p-0">
+                                {tourData.tours.map((tour) => {
+                                    return (
+                                        <Grid
+                                            key={tour.id}
+                                            item
+                                            xs={12}
+                                            md={6}
+                                            lg={4}
+                                            className="p-2">
+                                            <ServiceItem service={tour} />
+                                        </Grid>
+                                    );
+                                })}
+                            </Grid>
+                        ) : (
+                            'Không có tour nào được tìm thấy!'
+                        )
+                    ) : (
+                        <SkeletonServicesList />
+                    )}
+                </Grid>
+            </Grid>
+            <Stack className="mt-5" direction="row" justifyContent="center">
+                <Pagination
+                    shape="rounded"
+                    variant="outlined"
+                    color="primary"
+                    size="large"
+                    count={tourData?.pages}
+                    page={page}
+                    onChange={handleChangePage}
+                />
+            </Stack>
+        </Container>
+    );
 };
 export default memo(ServicesList);
