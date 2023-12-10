@@ -1,7 +1,7 @@
 import request from "./requestServices";
 import { AxiosError, AxiosResponse } from "axios";
 import responseServices from "./responseServices";
-import { RatingRequest, TourFilter, UpdateRatingRequest } from "../_types";
+import { CreateTourRequest, RatingRequest, TourFilter, UpdateRatingRequest } from "../_types";
 
 
 const tourServies = {
@@ -113,5 +113,51 @@ const tourServies = {
             return responseServices.error(error as AxiosError);
         }
     },
+    delete: async (id: number, accessToken: string) => {
+        try {
+            const response: AxiosResponse = await request.post(`admin/tour/delete/${id}`, null, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });                                    
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    create: async (data: CreateTourRequest, accessToken: string) => {
+        
+        const payload = new FormData();
+        payload.append("tour", new Blob([JSON.stringify(data.tour)], {type: "application/json"}));
+
+        if(data.images.length > 0) {
+            data.images.forEach((image) => {
+                image != null ? payload.append("images", image) : payload.append("images", new Blob([JSON.stringify(null)]));
+            });
+        }
+        else {
+            payload.append("images", new Blob([JSON.stringify(null)]));
+        }
+
+        try {
+            const response: AxiosResponse = await request.post(`admin/tour/add`, payload, {
+                headers: {
+                    "Content-Type": 'multipart/form-data',
+                    Authorization: accessToken,
+                }
+            });                                    
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    getPopularDestinations: async () => {
+        try {
+            const response: AxiosResponse = await request.get(`/tour/top-destination`);                                    
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    }
 }
 export default tourServies;

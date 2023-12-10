@@ -37,6 +37,10 @@ body {
     background-color: var(--primary-background);
 }
 
+button {
+    text-wrap: nowrap;
+}
+
 .text-light {
     color: var(--light) !important;
 }

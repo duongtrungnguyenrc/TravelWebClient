@@ -2,6 +2,7 @@
 
 'use client';
 
+import { Loading } from '@/app/_components';
 import { useRouter } from 'next/navigation';
 import { set } from '@/app/_context/userSlice';
 import { LoginResponse, User } from '@/app/_types';
@@ -36,7 +37,7 @@ const AuthRedirectPage = ({ searchParams }: { searchParams: { token: string } })
     }, []);
 
     return (
-        <></>
+        <Loading/>
     );
 };
 export default AuthRedirectPage;

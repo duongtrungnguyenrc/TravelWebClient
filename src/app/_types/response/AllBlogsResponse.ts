@@ -8,4 +8,5 @@ export default class AllBlogsResponse {
         this.pages = pages;
         this.posts = posts;
     }
+    
 }

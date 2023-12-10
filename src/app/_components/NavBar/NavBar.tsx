@@ -41,8 +41,6 @@ const NavBar = () => {
     const [searchLoading, setSearchLoading] = useState<boolean>(false);
     const currentUser = useSelector((state) => (state as RootState).user);
 
-    console.log(currentUser);
-
     const dispath = useDispatch();
     const router = useRouter();
 

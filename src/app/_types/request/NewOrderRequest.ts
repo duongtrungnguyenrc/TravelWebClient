@@ -1,7 +1,5 @@
 export interface ContactInfo {
     customerFullName: string;
-    customerFirstName: string;
-    customerLastName: string;
     customerPhone: string;
     customerEmail: string;
     customerAddress: string;
@@ -36,8 +34,6 @@ export default class NewOrderRequest {
         return new NewOrderRequest(0, 0, 0, "", -1, "",
             {
                 customerFullName: "",
-                customerFirstName: "",
-                customerLastName: "",
                 customerPhone: "",
                 customerEmail: "",
                 customerAddress: "",
@@ -45,9 +41,9 @@ export default class NewOrderRequest {
         )
     }
 
-    static checkRequireInformation(instance: NewOrderRequest): boolean {                
+    static checkRequireInformation(instance: NewOrderRequest): boolean {                        
         for (const key in instance) {
-            if (instance.hasOwnProperty(key) && key != "hotelId" && key != "roomType" && key != "children" && key != "specialRequest" && key != "amount" && key != "sessionToken") {                
+            if (instance.hasOwnProperty(key) && key != "hotelId" && key != "roomType" && key != "children" && key != "specialRequest" && key != "amount" && key != "sessionToken" && key != "tourDateId") {                
                 const value = instance[key as keyof NewOrderRequest];
                 if (typeof value === 'string' && (!value || value.trim().length === 0)) {
                     return false;
@@ -57,19 +53,6 @@ export default class NewOrderRequest {
                 }
             }
         }
-
-        for(const nestedKey in instance.contactInfo) {
-            if(instance.contactInfo.hasOwnProperty(nestedKey)) {
-                const contactInfo = instance.contactInfo[nestedKey as keyof ContactInfo];                
-                if (typeof contactInfo === 'string' && (!contactInfo || contactInfo.trim().length === 0)) {
-                    return false;
-                }
-                else if(typeof contactInfo === "number" && (!contactInfo || contactInfo === 0)) {
-                    return false;
-                }
-            }
-        }
-
         return true;
     }    
 }

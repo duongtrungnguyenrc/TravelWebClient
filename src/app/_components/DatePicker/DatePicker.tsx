@@ -2,7 +2,7 @@
 
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -51,6 +51,10 @@ const DatePicker = ({ onChange, displayDate, title, valueKey } : { onChange: Fun
       
         return res;
     }
+
+    useEffect(() => {
+      setSelectedDate([0, 0, 0]);
+    }, []);
   
     const prevMonth = () => {
       if(date.year > currentDate.getFullYear())

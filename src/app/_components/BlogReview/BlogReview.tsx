@@ -19,7 +19,7 @@ import {
     TextField,
 } from '@mui/material';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { tourServices } from '@/app/_services';
+import { blogServices } from '@/app/_services';
 import {
     DeleteTourRatingResponse,
     RatingRequest,
@@ -40,10 +40,10 @@ import CreateTourRatingResponse from '@/app/_types/response/CreateTourRatingResp
 import { toast } from 'react-toastify';
 import UpdateTourRatingResponse from '@/app/_types/response/UpdateTourRatingResponse';
 
-const ServiceReview = ({ id, ratingAcceptance }: { id: string; ratingAcceptance?: boolean }) => {
+const BlogReview = ({ id, ratingAcceptance }: { id: string; ratingAcceptance?: boolean }) => {
     const [ratingData, setRatingData] = useState<TourRatingsResponse>(new TourRatingsResponse());
     const [page, setPage] = useState<number>(1);
-    const [newRating, setNewRating] = useState<RatingRequest>(new RatingRequest(parseInt(id), 0, '', 5));
+    const [newRating, setNewRating] = useState<RatingRequest>(new RatingRequest(0, parseInt(id), '', 5));
     const [mode, setMode] = useState<number>(0);
     const [editingRating, setEditingRating] = useState<UpdateRatingRequest>(new UpdateRatingRequest(0, '', 5));
 
@@ -52,7 +52,7 @@ const ServiceReview = ({ id, ratingAcceptance }: { id: string; ratingAcceptance?
 
     useEffect(() => {
         const fetchRatingData = async () => {
-            const response: Response = await tourServices.getTourRating(id, page, 10, currentUser?.accessToken);
+            const response: Response = await blogServices.getBlogRating(id, page, 10, currentUser?.accessToken);
             if (response.status) {
                 setRatingData(response.data as TourRatingsResponse);
             }
@@ -82,7 +82,7 @@ const ServiceReview = ({ id, ratingAcceptance }: { id: string; ratingAcceptance?
         e.preventDefault();
 
         if (mode === 0) {
-            const response = await toast.promise(tourServices.addRating(currentUser.accessToken, newRating), {
+            const response = await toast.promise(blogServices.addRating(currentUser.accessToken, newRating), {
                 pending: 'Đang cập nhật...',
                 success: 'Thêm đánh giá thành công',
                 error: 'có lỗi đã xảy ra!',
@@ -108,7 +108,7 @@ const ServiceReview = ({ id, ratingAcceptance }: { id: string; ratingAcceptance?
                 return updatedList;
             };
 
-            const response = await toast.promise(tourServices.updateRating(currentUser.accessToken, editingRating), {
+            const response = await toast.promise(blogServices.updateRating(currentUser.accessToken, editingRating), {
                 pending: 'Đang cập nhật...',
                 success: 'Cập nhật đánh giá thành công',
                 error: 'có lỗi đã xảy ra!',
@@ -138,7 +138,7 @@ const ServiceReview = ({ id, ratingAcceptance }: { id: string; ratingAcceptance?
     };
 
     const handleRemoveComment = async (commentID: number) => {
-        const response = await toast.promise(tourServices.removeRating(currentUser.accessToken, commentID), {
+        const response = await toast.promise(blogServices.removeRating(currentUser.accessToken, commentID), {
             pending: 'Đang xử lý...',
             success: 'Xóa đánh giá thành công!',
             error: {
@@ -328,4 +328,4 @@ const ServiceReview = ({ id, ratingAcceptance }: { id: string; ratingAcceptance?
         </div>
     );
 };
-export default ServiceReview;
+export default BlogReview;

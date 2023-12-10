@@ -5,3 +5,4 @@ export { default as blogServices } from "./blogServices";
 export { default as userServices } from "./userServices";
 export { default as orderServices } from "./orderServices";
 export { default as statisticServices } from "./statisticServices";
+export { default as chatServices } from "./chatServices";

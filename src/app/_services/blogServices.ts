@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import request from "./requestServices";
 import responseServices from "./responseServices";
-import { CreateBlogPostRequest } from "../_types";
+import { CreateBlogPostRequest, RatingRequest, UpdateRatingRequest } from "../_types";
 
 const blogServices = {
     get: async (page?: number, limit?: number, id?: number) => {
@@ -15,6 +15,14 @@ const blogServices = {
                 return responseServices.success(response)
             }
 
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    getLastest: async () => {
+        try {
+            const response: AxiosResponse = await request.get(`/blog/latest`);
+            return responseServices.success(response);
         } catch (error) {
             return responseServices.error(error as AxiosError);
         }
@@ -39,7 +47,59 @@ const blogServices = {
         } catch (error) {
             return responseServices.error(error as AxiosError);
         }
-    }
+    },
+    getBlogRating: async (id: string, page: number, limit: number, accessToken?: string) => {
+        try {
+            const response = await request.get(`/rate/blog/${id}?page=${page}&limit=${limit}`, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });
+            return responseServices.success(response);
+        }
+        catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    addRating: async (accessToken: string, payload: RatingRequest) => {
+        try {
+            const response = await request.post(`/rate`, payload, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });
+            return responseServices.success(response);
+        }
+        catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    updateRating: async (accessToken: string, payload: UpdateRatingRequest) => {
+        try {
+            const response = await request.post(`/rate/update`, payload, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });
+            return responseServices.success(response);
+        }
+        catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
+    removeRating: async (accessToken: string, id: number) => {
+        try {
+            const response = await request.post(`/rate/delete/${id}` , null, {
+                headers: {
+                    Authorization: accessToken,
+                }
+            });
+            return responseServices.success(response);
+        }
+        catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
 }
 
 export default blogServices;

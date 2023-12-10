@@ -10,13 +10,17 @@ import { useRouter} from "next/navigation";
 import "./styles.scss";
 import { Skeleton } from "..";
 
-const BlogList = ({ data } : { data: AllBlogsResponse }) => {
+const BlogList = ({ data } : { data: AllBlogsResponse | null }) => {
 
     const router = useRouter();
 
     const handleChangePage = (_event: React.ChangeEvent<unknown>, value: number) => {
         router.push(`/blog?page=${value}`, {scroll: false});
     };
+
+    function removeHtmlTags(input: string) {
+        return input.replace(/<[^>]*>?/gm, '');
+    }
 
     return (
         <Stack direction="column" gap={4}>
@@ -25,7 +29,7 @@ const BlogList = ({ data } : { data: AllBlogsResponse }) => {
             </Typography>
             <Grid container spacing={3}>
             {
-                data ? data.posts.slice(4).map((post) => {
+                data ? data.posts.map((post) => {
                     return  <Grid key={post.id + post.author} item xs={12}>
                                 <Card component="a" href={`/blog/post/${post.id}`} className="post" sx={{boxShadow: "none"}}>
                                     <CardMedia
@@ -44,7 +48,7 @@ const BlogList = ({ data } : { data: AllBlogsResponse }) => {
                                             {post.author} | <CalendarTodayIcon sx={{fontSize: "12px"}}/>  { post.time.split(" ")[0] } | <AccessAlarmIcon sx={{fontSize: "12px"}}/>  { post.time.split(" ")[1] }
                                         </Typography>
                                         <Typography variant="body2" color="text.secondary">
-                                            { post.description.substring(0, 150) }...
+                                            { removeHtmlTags(post.description.substring(0, 150)) }...
                                         </Typography>
                                     </CardContent>
                                 </Card>
@@ -177,7 +181,7 @@ const BlogList = ({ data } : { data: AllBlogsResponse }) => {
 
             </Grid>
             <Stack  direction="row" justifyContent="center">
-                <Pagination shape="rounded" variant="outlined" color="primary" size="large" count={data.pages} onChange={handleChangePage} />
+                <Pagination shape="rounded" variant="outlined" color="primary" size="large" count={data?.pages} onChange={handleChangePage} />
             </Stack>
         </Stack>
     );
