@@ -25,7 +25,7 @@ export { default as UpdatePasswordRequest } from "./request/UpdatePasswordReques
 export { default as UpdateUserProfileRequest } from "./request/UpdateUserProfileRequest";
 export { default as CreateTourRequest } from "./request/CreateTourRequest";
 export { default as MessageRequest } from "./request/MessageRequest";
-
+export { default as UpdateOrderStatusRequest } from "./request/UpdateOrderStatusRequest";
 export type { default as LoginResponse } from "./response/LoginResponse";
 export type { default as UpdateTourRatingResponse } from "./response/UpdateTourRatingResponse";
 export type { default as CreateTourRatingResponse } from "./response/CreateTourRatingResponse";

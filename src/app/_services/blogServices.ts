@@ -19,6 +19,19 @@ const blogServices = {
             return responseServices.error(error as AxiosError);
         }
     },
+    adminGet: async (page: number, limit: number, accessToken: string) => {
+        try {
+            const response: AxiosResponse = await request.get(`admin/blog?page=${page}&limit=${limit}`, {
+                headers: {
+                    Authorization: accessToken
+                }
+            });
+            return responseServices.success(response)
+
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
     getLastest: async () => {
         try {
             const response: AxiosResponse = await request.get(`/blog/latest`);

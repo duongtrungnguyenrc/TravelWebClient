@@ -12,6 +12,7 @@ import {
     List,
     ListItem,
     Modal,
+    Radio,
     Stack,
     TextField,
     Typography,
@@ -22,8 +23,8 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import './styles.scss';
 import { useDebouncedCallback } from 'use-debounce';
-import { ChangeEvent, ReactEventHandler, useRef, useState } from 'react';
-import { AllBlogsResponse, CreateBlogPostRequest } from '@/app/_types';
+import { ChangeEvent, ReactEventHandler, useRef, useState, useEffect } from 'react';
+import { AllBlogsResponse, Blog, CreateBlogPostRequest } from '@/app/_types';
 import { Paragraph } from '@/app/_types/request/CreateBlogPostRequest';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/_context/store';
@@ -59,7 +60,8 @@ const style = {
     p: 4,
 };
 
-const BlogEditor = ({ data }: { data: AllBlogsResponse }) => {
+const BlogEditor = () => {
+    const [data, setData] = useState<AllBlogsResponse>({pages: 0, posts: []});
     const currentUser = useSelector((state) => (state as RootState).user);
     const [post, setPost] = useState<CreateBlogPostRequest>(
         CreateBlogPostRequest.getEmptyInstance(currentUser.user?.fullName)
@@ -71,6 +73,17 @@ const BlogEditor = ({ data }: { data: AllBlogsResponse }) => {
     const quillRef = useRef<ReactQuill | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
     const previewRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await blogServices.adminGet(1, 20, currentUser.accessToken);
+            if (response.status) {
+                setData(response.data as AllBlogsResponse);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleContentChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -179,6 +192,15 @@ const BlogEditor = ({ data }: { data: AllBlogsResponse }) => {
         if (response.status) {
             setPost(CreateBlogPostRequest.getEmptyInstance());
             setPostImages([]);
+            setData((prevState) => {
+                return {
+                    ...prevState,
+                    posts: [
+                        ...prevState.posts,
+                        response.data as Blog
+                    ]
+                }
+            })
             formRef?.current?.reset();
             quillRef?.current?.getEditor().setText('');
         } else {
@@ -240,28 +262,38 @@ const BlogEditor = ({ data }: { data: AllBlogsResponse }) => {
                                         className="p-2 rounded"
                                         sx={{ maxWidth: '100px', height: '140px' }}
                                     />
-                                    <CardContent className="p-0 d-flex flex-column justify-content-center">
-                                        <Chip
-                                            label={post.type}
-                                            style={{ borderRadius: '3px', width: 'max-content', fontSize: '12px' }}
-                                            size="small"
-                                        />
-                                        <Typography noWrap variant="h6" component="h6" className="mt-2" fontSize={14}>
-                                            {post.title}
-                                        </Typography>
-                                        <Typography
-                                            display="flex"
-                                            variant="body2"
-                                            color="text.secondary"
-                                            marginBottom="10px"
-                                            fontSize="12px"
-                                            alignItems="center"
-                                            gap="5px"
-                                            className="mt-2">
-                                            {post.author} | <CalendarTodayIcon sx={{ fontSize: '12px' }} />{' '}
-                                            {post.time.split(' ')[0]}
-                                        </Typography>
-                                    </CardContent>
+                                    <div className="d-flex justify-content-between w-100">
+                                        <CardContent className="p-0 d-flex flex-column justify-content-center">
+                                            <Chip
+                                                label={post.type}
+                                                style={{ borderRadius: '3px', width: 'max-content', fontSize: '12px' }}
+                                                size="small"
+                                            />
+                                            <Typography
+                                                noWrap
+                                                variant="h6"
+                                                component="h6"
+                                                className="mt-2"
+                                                fontSize={14}>
+                                                {post.title}
+                                            </Typography>
+                                            <Typography
+                                                display="flex"
+                                                variant="body2"
+                                                color="text.secondary"
+                                                marginBottom="10px"
+                                                fontSize="12px"
+                                                alignItems="center"
+                                                gap="5px"
+                                                className="mt-2">
+                                                {post.author} | <CalendarTodayIcon sx={{ fontSize: '12px' }} />{' '}
+                                                {post.time?.split(' ')[0]}
+                                            </Typography>
+                                        </CardContent>
+                                        <div className='h-100 d-flex align-items-center p-3'>
+                                            <input type='radio' name="selected"/>
+                                        </div>
+                                    </div>
                                 </Card>
                             </ListItem>
                         );

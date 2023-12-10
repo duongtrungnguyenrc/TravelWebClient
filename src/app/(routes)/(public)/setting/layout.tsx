@@ -1,13 +1,25 @@
 // Produced by Duong Trung Nguyen
-// Produced by Duong Trung Nguyen
 
 'use client'
 
 import { SettingSideBar } from '@/app/_components';
+import { RootState } from '@/app/_context/store';
 import { Container, Grid } from '@mui/material';
-import { ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
+import { ReactNode, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const SettingLayout = ({ children } : { children: ReactNode }) => {
+    const currentUser = useSelector((state) => (state as RootState).user);
+    const router = useRouter();
+
+    useEffect(() => {        
+        if(!currentUser.user) {  
+            
+            router.push("/login");
+        }
+    }, [])
+
     return (
         <Container
             maxWidth="xl"

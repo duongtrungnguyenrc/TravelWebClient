@@ -57,5 +57,5 @@ export { default as AdminHero } from "./AdminHero/AdminHero";
 export { default as OrderList } from "./OrderList/OrderList";
 export { default as AdminChat } from "./AdminChat/AdminChat";
 export { default as ProfitChart } from "./ProfitChart/ProfitChart";
-
+export { default as ForbiddenStatus } from "./ForbiddenStatus/ForbiddenStatus";
 export { default as DatePicker } from "./DatePicker/DatePicker";

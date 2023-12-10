@@ -31,6 +31,7 @@ const AdminTourList = ({ page }: { page: number }) => {
     const [tourData, setTourData] = useState<AllToursResponse>();
     const [selectedItem, setSelectedItem] = useState(-1);
     const [isCreateTour, setIsCreateTour] = useState<boolean>(false);
+    const [isUpdateTour, setIsUpdateTour] = useState<boolean>(false);
     const [openDeleteConfirmModal, setOpenDeleteConfirmModal] = useState<boolean>(false);
     const router = useRouter();
 
@@ -58,7 +59,7 @@ const AdminTourList = ({ page }: { page: number }) => {
         } else {
             toast.error(response.message);
         }
-        setSelectedItem(-1)
+        setSelectedItem(-1);
         setOpenDeleteConfirmModal(false);
     };
 
@@ -69,9 +70,7 @@ const AdminTourList = ({ page }: { page: number }) => {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Xác nhận xóa
                     </Typography>
-                    <Typography id="modal-modal-description mt-2">
-                        Bạn có muốn xóa tour ${selectedItem}?
-                    </Typography>
+                    <Typography id="modal-modal-description mt-2">Bạn có muốn xóa tour ${selectedItem}?</Typography>
                     <div className="d-flex mt-2 justify-content-end gap-1">
                         <Button variant="contained" onClick={() => setOpenDeleteConfirmModal(false)}>
                             Hủy
@@ -82,7 +81,8 @@ const AdminTourList = ({ page }: { page: number }) => {
                     </div>
                 </Box>
             </Modal>
-            <CreateTourModal isOpen={isCreateTour} dismiss={setIsCreateTour} accessToken={currentUser.accessToken}/>
+            <CreateTourModal isOpen={isCreateTour} dismiss={setIsCreateTour} accessToken={currentUser.accessToken} />
+            <CreateTourModal isOpen={isUpdateTour} dismiss={setIsUpdateTour} accessToken={currentUser.accessToken} tour={tourData?.tours.find((tour) => tour.id === selectedItem)} />
             <Grid container spacing={2}>
                 <Grid item xs={8} className="pl-0">
                     <div className="row dashboard-container">
@@ -93,10 +93,14 @@ const AdminTourList = ({ page }: { page: number }) => {
                                     <Button variant="contained" onClick={() => setIsCreateTour(true)}>
                                         Thêm tour
                                     </Button>
-                                    <Button variant="contained" disabled={selectedItem === -1}>
+                                    <Button variant="contained" disabled={selectedItem === -1} onClick={() => setIsUpdateTour(true)}>
                                         Chỉnh sửa
                                     </Button>
-                                    <Button variant="contained" disabled={selectedItem === -1} color="error" onClick={() => setOpenDeleteConfirmModal(true)}>
+                                    <Button
+                                        variant="contained"
+                                        disabled={selectedItem === -1}
+                                        color="error"
+                                        onClick={() => setOpenDeleteConfirmModal(true)}>
                                         Xóa
                                     </Button>
                                 </div>
@@ -115,11 +119,12 @@ const AdminTourList = ({ page }: { page: number }) => {
 
                                     <tbody>
                                         {tourData && tourData.tours.length > 0 ? (
-                                            tourData?.tours.map((tour) => {                                                
+                                            tourData?.tours.map((tour) => {
                                                 return (
                                                     <tr key={tour.id} className="data-row">
                                                         <td>
                                                             <Radio
+                                                                size="small"
                                                                 name="selected"
                                                                 value={tour.id}
                                                                 checked={selectedItem === tour.id}
@@ -200,10 +205,12 @@ const AdminTourList = ({ page }: { page: number }) => {
                     </div>
                 </Grid>
                 <Grid item xs={4}>
-                    <Skeleton variant="rectangular" className="h-100">
+                    <Skeleton variant="rectangular" className="h-100 w-100">
                         <iframe
                             className="h-100 w-100"
-                            src={`http://localhost:3000/explore/tour/${tourData?.tours[selectedItem]?.id || tourData?.tours[0]?.id}`}
+                            src={`http://localhost:3000/explore/tour/${
+                                tourData?.tours[selectedItem]?.id || tourData?.tours[0]?.id
+                            }`}
                             frameBorder="0"></iframe>
                     </Skeleton>
                 </Grid>

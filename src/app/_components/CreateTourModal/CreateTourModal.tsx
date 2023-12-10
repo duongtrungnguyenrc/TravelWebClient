@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import { useDebouncedCallback } from 'use-debounce';
 import { toast } from 'react-toastify';
-import { Address, CreateTourRequest, TourDate, TourSchedule } from '@/app/_types';
+import { Address, CreateTourRequest, Tour, TourDate, TourSchedule } from '@/app/_types';
 import axios from 'axios';
 import { TourTypeConstant, TourVehicalConstant } from '@/app/_constants';
 import { DatePicker, ServiceStepper } from '..';
@@ -79,10 +79,12 @@ const CreateTourModal = ({
     isOpen,
     dismiss,
     accessToken,
+    tour
 }: {
     isOpen: boolean;
     dismiss: Function;
     accessToken: string;
+    tour?: Tour
 }) => {
     const [departAddressData, setDepartAddressData] = useState<{
         cities: { ProvinceID: number; ProvinceName: string }[];
@@ -201,6 +203,23 @@ const CreateTourModal = ({
 
     useEffect(() => {
         fetchCities();
+        if(tour) {
+            const currentTour : CreateTourRequest = {
+                tour: {
+                    id: tour.id,
+                    name: tour.name,
+                    vehicle: tour.vehicle,
+                    tourType: "",
+                    depart: tour.depart,
+                    destination: tour.location,
+                    tourDate: [],
+                    schedules: [],
+                    hotelIds: [],
+                    paragraphs: [],
+                },
+                images: []
+            }
+        }
     }, []);
 
     useEffect(() => {
@@ -530,13 +549,15 @@ const CreateTourModal = ({
                                 </Typography>
                                 <div className="input-group mt-3">
                                     <label htmlFor="">Tên tour:</label>
-                                    <TextField placeholder="Nhập tên tour" name="name" onChange={handleNewTourChange} />
+                                    <TextField defaultValue={tour?.name} placeholder="Nhập tên tour" name="name" onChange={handleNewTourChange} required/>
                                 </div>
                                 <div className="input-group mt-3">
                                     <label htmlFor="">Phương tiện</label>
-                                    <Select displayEmpty name="vehicle" onChange={handleNewTourSelect}>
+                                    <Select displayEmpty name="vehicle" onChange={handleNewTourSelect} required>
                                         <MenuItem disabled defaultChecked>
-                                            Phương tiện di chuyển
+                                            {
+                                                tour ? tour.vehicle : "Phương tiện di chuyển"
+                                            }
                                         </MenuItem>
                                         {TourVehicalConstant?.map((vehical) => {
                                             return (

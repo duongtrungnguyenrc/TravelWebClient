@@ -123,7 +123,7 @@ const TourPage = ({ params }: { params: { id: string } }) => {
             {/* Tabs display */}
 
             <Box className="mt-3 position-sticky" sx={{ borderBottom: 1, borderColor: "divider", top: 70, zIndex: 1, background: "#fff" }}>
-              <Tabs value={ activeTab }>
+              <Tabs>
                 <Tab label={<b>TỔNG QUAN</b>}/>
                 <Tab label={<b>ĐỊA ĐIỂM</b>}/>
                 <Tab label={<b>LỊCH TRÌNH</b>}/>

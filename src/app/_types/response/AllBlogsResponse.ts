@@ -4,9 +4,9 @@ export default class AllBlogsResponse {
     pages: number;
     posts: Blog[];
 
-    constructor(pages: number, posts: Blog[]) {
-        this.pages = pages;
-        this.posts = posts;
+    constructor() {
+        this.pages = 0;
+        this.posts = [];
     }
     
 }

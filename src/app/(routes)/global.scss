@@ -324,3 +324,14 @@ form {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.link {
+    color: #007AFF;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.nowrap {
+    text-wrap: nowrap;
+}

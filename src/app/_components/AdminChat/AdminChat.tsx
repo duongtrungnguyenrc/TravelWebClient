@@ -53,15 +53,14 @@ const AdminChat = () => {
                     newestMessage: res,
                 };
 
-                if (newRoom.roomId != currentRoom) {
-                    toast.warn(`Bạn có tin nhắn mới từ ${newRoom.name}`);
-                }
-
                 if (rooms.some((item) => item.roomId === newRoom.roomId)) {
                     setRooms((prevState) => {
                         return prevState.map((room) => {
                             if (room.roomId === newRoom.roomId) {
-                                return newRoom;
+                                return {
+                                    ...room,
+                                    newestMessage: newRoom.newestMessage
+                                };
                             } else {
                                 return room;
                             }
@@ -70,7 +69,10 @@ const AdminChat = () => {
                 } else {
                     setRooms((prevState) => [...prevState, newRoom]);
                 }
-                setUnreadMessage((prevState) => [...prevState, newRoom.roomId]);
+                if(currentRoom !== newRoom.roomId) {
+                    toast.warn(`Bạn có tin nhắn mới từ ${newRoom.name}`);
+                    setUnreadMessage((prevState) => [...prevState, newRoom.roomId]);
+                }
             });
 
             socketRef.current.on('change', () => {
@@ -158,7 +160,7 @@ const AdminChat = () => {
             };
         });
         setUnreadMessage((prevState) => {
-            return prevState.filter((unreadRoom) => unreadRoom != room);
+            return prevState.filter((unreadRoom) => unreadRoom != room)
         })
     };
 
