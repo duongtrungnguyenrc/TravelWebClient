@@ -60,9 +60,9 @@ const BookingForm = ({
     }>({ cities: [], districts: [], wards: [] });
     const [address, setAddress] = useState<Address>(Address.getEmptyInstance());
     const [newOrder, setNewOrder] = useState<NewOrderRequest>(NewOrderRequest.getEmptyInstance());
-    const [name, setName] = useState<{ customerFirstName: string; customerLastName: string }>({
-        customerFirstName: '',
-        customerLastName: '',
+    const [name, setName] = useState<{ firstName: string; lastName: string }>({
+        firstName: '',
+        lastName: '',
     });
     const [isIncludeHotel, setIsIncludeHotel] = useState<boolean>(false);
     const [ticketExpanded, setTicketExpanded] = useState<boolean>(false);
@@ -247,18 +247,6 @@ const BookingForm = ({
         const name: string = e.target.name;
         const value: string = e.target.value;
 
-        if (name == 'firstName') {
-            setNewOrder((prevState) => {
-                return {
-                    ...prevState,
-                    contactInfo: {
-                        ...prevState.contactInfo,
-                        customerFullName: value,
-                    },
-                };
-            });
-        }
-
         setNewOrder((prevState) => {
             return {
                 ...prevState,
@@ -272,12 +260,11 @@ const BookingForm = ({
 
     const handleCreateOrder: FormEventHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const { contactInfo }: NewOrderRequest = newOrder;
         const newOrderI = newOrder;
         currentTourDate && (newOrderI.tourDateId = currentTourDate?.id);
         newOrderI.amount = calculateTotalPrice();
         newOrderI.sessionToken = generateSessionToken();
-        newOrderI.contactInfo.customerFullName = name.customerFirstName + name.customerLastName;
+        newOrderI.contactInfo.customerFullName = name.firstName + name.lastName;
 
         const response = await toast.promise(orderServices.createOrder(newOrderI, currentUser?.accessToken), {
             pending: 'Đang xử lý',
@@ -372,7 +359,7 @@ const BookingForm = ({
                                     </label>
                                     <TextField
                                         type="Last-name"
-                                        name="LastName"
+                                        name="lastName"
                                         placeholder="Vui lòng nhập họ"
                                         required
                                         onChange={handleNewOrderCustomerNameChange}
@@ -727,7 +714,7 @@ const BookingForm = ({
                                             <Typography className="title">Họ và tên:</Typography>
                                         </td>
                                         <td className="text-end">
-                                            {name.customerFirstName + name.customerLastName || '---'}
+                                            {name.firstName + name.lastName || '---'}
                                         </td>
                                     </tr>
                                     <tr>
