@@ -52,6 +52,18 @@ const orderServices = {
         } catch (error) {
             return responseServices.error(error as AxiosError);
         }
+    },
+    adminCancel: async (payload: {id: number, status: string}, accessToken?: string) => {
+        try {
+            const response = await request.post(`/admin/order/update`, payload, (accessToken ? {
+                headers: {
+                    Authorization: accessToken,
+                }
+            } : {}));
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
     }
 }
 

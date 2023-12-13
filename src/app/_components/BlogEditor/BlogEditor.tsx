@@ -67,7 +67,7 @@ const BlogEditor = () => {
         CreateBlogPostRequest.getEmptyInstance(currentUser.user?.fullName)
     );
     const [postImages, setPostImages] = useState<{ src: string; name: string; resource: File | null }[]>([]);
-    const [modifyParagraph, setModifyParagraph] = useState<number>(-1);
+    const [modifyParagraph, setModifyParagraph] = useState<number | null>(null);
     const [progress, setProgress] = useState(0);
 
     const quillRef = useRef<ReactQuill | null>(null);

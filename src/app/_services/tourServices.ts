@@ -151,6 +151,32 @@ const tourServies = {
             return responseServices.error(error as AxiosError);
         }
     },
+    update: async (data: CreateTourRequest, tourId: number, accessToken: string) => {
+        
+        const payload = new FormData();
+        payload.append("tour", new Blob([JSON.stringify(data.tour)], {type: "application/json"}));
+
+        if(data.images.length > 0) {
+            data.images.forEach((image) => {
+                image != null ? payload.append("images", image) : payload.append("images", new Blob([JSON.stringify(null)]));
+            });
+        }
+        else {
+            payload.append("images", new Blob([JSON.stringify(null)]));
+        }
+
+        try {
+            const response: AxiosResponse = await request.post(`admin/tour/update/${tourId}`, payload, {
+                headers: {
+                    "Content-Type": 'multipart/form-data',
+                    Authorization: accessToken,
+                }
+            });                                    
+            return responseServices.success(response);
+        } catch (error) {
+            return responseServices.error(error as AxiosError);
+        }
+    },
     getPopularDestinations: async () => {
         try {
             const response: AxiosResponse = await request.get(`/tour/top-destination`);                                    

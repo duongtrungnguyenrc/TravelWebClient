@@ -63,6 +63,26 @@ const AdminTourList = ({ page }: { page: number }) => {
         setOpenDeleteConfirmModal(false);
     };
 
+
+    const handleUpdateTour = (open: boolean, tourRes: Tour) => {
+        setIsUpdateTour(open);
+        setTourData((prevState) => {
+            if (prevState) {
+                return {
+                    ...prevState,
+                    tours: prevState.tours.map((tour) => {
+                        if (tour.id === tourRes.id) {
+                            return tourRes;
+                        } else {
+                            return tour;
+                        }
+                    }),
+                };
+            }
+            return prevState;
+        });
+    }
+
     return (
         <Container maxWidth="xl">
             <Modal open={openDeleteConfirmModal} onClose={() => setOpenDeleteConfirmModal(false)}>
@@ -82,7 +102,7 @@ const AdminTourList = ({ page }: { page: number }) => {
                 </Box>
             </Modal>
             <CreateTourModal isOpen={isCreateTour} dismiss={setIsCreateTour} accessToken={currentUser.accessToken} />
-            <CreateTourModal isOpen={isUpdateTour} dismiss={setIsUpdateTour} accessToken={currentUser.accessToken} tour={tourData?.tours.find((tour) => tour.id === selectedItem)} />
+            <CreateTourModal isOpen={isUpdateTour} dismiss={handleUpdateTour} accessToken={currentUser.accessToken} tour={tourData?.tours.find((tour) => tour.id === selectedItem)} />
             <Grid container spacing={2}>
                 <Grid item xs={8} className="pl-0">
                     <div className="row dashboard-container">
@@ -151,7 +171,7 @@ const AdminTourList = ({ page }: { page: number }) => {
                                                             <span>{tour.depart}</span>
                                                         </td>
                                                         <td>
-                                                            <span>{tour.startFrom.toLocaleString('en')}đ</span>
+                                                            <span>{tour.startFrom?.toLocaleString('en')}đ</span>
                                                         </td>
                                                     </tr>
                                                 );

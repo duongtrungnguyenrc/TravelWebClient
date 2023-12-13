@@ -2,7 +2,7 @@
 
 'use client';
 
-import { ChangeEvent, FormEvent, memo, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, memo, useEffect, useRef, useState } from 'react';
 import {
     Box,
     Button,
@@ -79,12 +79,12 @@ const CreateTourModal = ({
     isOpen,
     dismiss,
     accessToken,
-    tour
+    tour,
 }: {
     isOpen: boolean;
     dismiss: Function;
     accessToken: string;
-    tour?: Tour
+    tour?: Tour;
 }) => {
     const [departAddressData, setDepartAddressData] = useState<{
         cities: { ProvinceID: number; ProvinceName: string }[];
@@ -102,6 +102,8 @@ const CreateTourModal = ({
     const [schedule, setSchedule] = useState<TourSchedule>(TourSchedule.getEmptyInstance());
     const [tourDate, setTourDate] = useState<TourDate>(TourDate.getEmptyInstance());
     const [isOpenDatePicker, setIsOpenDatePicker] = useState<number>(-1);
+
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const fetchCities = async () => {
         const response = await axios.get('https://online-gateway.ghn.vn/shiip/public-api/master-data/province', {
@@ -201,24 +203,28 @@ const CreateTourModal = ({
         }
     };
 
+    console.log(tour);
+
     useEffect(() => {
         fetchCities();
-        if(tour) {
-            const currentTour : CreateTourRequest = {
+        if (tour) {
+            const currentTour: CreateTourRequest = {
                 tour: {
                     id: tour.id,
                     name: tour.name,
                     vehicle: tour.vehicle,
-                    tourType: "",
+                    tourType: '',
                     depart: tour.depart,
                     destination: tour.location,
-                    tourDate: [],
-                    schedules: [],
-                    hotelIds: [],
-                    paragraphs: [],
+                    tourDate: tour.tourDate,
+                    schedules: tour.schedules,
+                    hotelIds: tour.hotels.map((hotel) => hotel.id),
+                    paragraphs: tour.overview.paragraphs,
                 },
-                images: []
-            }
+                images: [],
+            };
+
+            setNewTour(currentTour);
         }
     }, []);
 
@@ -380,6 +386,9 @@ const CreateTourModal = ({
                     },
                 };
             });
+            if (inputRef.current) {
+                inputRef.current.value = '';
+            }
             setSchedule(TourSchedule.getEmptyInstance());
         } else {
             toast.error('Vui lòng nhập thời gian và thông tin lịch trình!');
@@ -460,18 +469,45 @@ const CreateTourModal = ({
         e.preventDefault();
 
         const payload = { ...newTour };
-        payload.tour.depart = `${departAddress.addressDetail} - ${departAddress.ward.name} - ${departAddress.district.name} - ${departAddress.city.name}`;
-        payload.tour.destination = `${destinationAddress.addressDetail} - ${destinationAddress.ward.name} - ${destinationAddress.district.name} - ${destinationAddress.city.name}`;
+        const [depart, destination] = buildAddress();
+        if ((tour?.depart != depart || payload.tour.depart === "") && depart.replace("-", "").trim() != "") {
+            payload.tour.depart = depart;
+        }
+        if ((tour?.location != destination || payload.tour.destination === "") && destination.replace("-", "").trim() != "") {
+            payload.tour.destination = destination;
+        }
 
-        const response = await toast.promise(tourServices.create(payload, accessToken), {
-            pending: 'Đang xử lý...',
-        });
+        let response = null;
+        if (tour) {
+            response = await toast.promise(tourServices.update(payload, tour.id, accessToken), {
+                pending: 'Đang xử lý...',
+            });
+
+            if(response.status) {
+                dismiss(false, response.data as Tour);
+            }
+        } else {
+            response = await toast.promise(tourServices.create(payload, accessToken), {
+                pending: 'Đang xử lý...',
+            });
+
+            if(response.status) {
+                dismiss(false);
+            }
+        }
 
         if (response.status) {
-            toast.success('Tạo tour mới thành công');
+            toast.success(response.message);
         } else {
             toast.error(response.message);
         }
+    };
+
+    const buildAddress = () => {
+        return [
+            `${departAddress.addressDetail} - ${departAddress.ward.name} - ${departAddress.district.name} - ${departAddress.city.name}`,
+            `${destinationAddress.addressDetail} - ${destinationAddress.ward.name} - ${destinationAddress.district.name} - ${destinationAddress.city.name}`,
+        ];
     };
 
     return (
@@ -549,15 +585,18 @@ const CreateTourModal = ({
                                 </Typography>
                                 <div className="input-group mt-3">
                                     <label htmlFor="">Tên tour:</label>
-                                    <TextField defaultValue={tour?.name} placeholder="Nhập tên tour" name="name" onChange={handleNewTourChange} required/>
+                                    <TextField
+                                        defaultValue={tour?.name}
+                                        placeholder="Nhập tên tour"
+                                        name="name"
+                                        onChange={handleNewTourChange}
+                                    />
                                 </div>
-                                <div className="input-group mt-3">
+                                <div className="input-group mt-2">
                                     <label htmlFor="">Phương tiện</label>
-                                    <Select displayEmpty name="vehicle" onChange={handleNewTourSelect} required>
+                                    <Select displayEmpty name="vehicle" onChange={handleNewTourSelect}>
                                         <MenuItem disabled defaultChecked>
-                                            {
-                                                tour ? tour.vehicle : "Phương tiện di chuyển"
-                                            }
+                                            {tour ? tour.vehicle : 'Phương tiện di chuyển'}
                                         </MenuItem>
                                         {TourVehicalConstant?.map((vehical) => {
                                             return (
@@ -568,7 +607,7 @@ const CreateTourModal = ({
                                         })}
                                     </Select>
                                 </div>
-                                <div className="d-flex mt-2 gap-1">
+                                <div className="d-flex mt-3 gap-1">
                                     <Button variant="contained">Thêm hình ảnh</Button>
                                     <Button variant="contained">Thêm mô tả</Button>
                                     <Button variant="contained">Xem trước</Button>
@@ -583,9 +622,7 @@ const CreateTourModal = ({
                                 </Typography>
                                 <div className="w-100 d-flex mt-3">
                                     <div className="input-group col-6 p-0 pr-2">
-                                        <label htmlFor="">
-                                            Tỉnh/Thành phố <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Tỉnh/Thành phố</label>
                                         <FormControl>
                                             <Select displayEmpty name="city" onChange={handleAddressChange}>
                                                 <MenuItem disabled>Chọn Tỉnh / Thành phố</MenuItem>
@@ -603,15 +640,9 @@ const CreateTourModal = ({
                                         </FormControl>
                                     </div>
                                     <div className="input-group col-6 p-0 pl-2">
-                                        <label htmlFor="">
-                                            Quận/Huyện <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Quận/Huyện</label>
                                         <FormControl>
-                                            <Select
-                                                displayEmpty
-                                                name="district"
-                                                onChange={handleAddressChange}
-                                                required>
+                                            <Select displayEmpty name="district" onChange={handleAddressChange}>
                                                 <MenuItem defaultChecked disabled>
                                                     Chọn Quận / Huyện
                                                 </MenuItem>
@@ -633,16 +664,13 @@ const CreateTourModal = ({
                                 </div>
                                 <div className="w-100 d-flex mt-2">
                                     <div className="input-group mt-3 pr-2">
-                                        <label htmlFor="">
-                                            Phường/Xã <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Phường/Xã</label>
                                         <FormControl>
                                             <Select
                                                 displayEmpty
                                                 inputProps={{ 'aria-label': 'Without label' }}
                                                 name="ward"
-                                                onChange={handleAddressChange}
-                                                required>
+                                                onChange={handleAddressChange}>
                                                 <MenuItem disabled>Chọn Phường / Xã</MenuItem>
                                                 {departAddressData?.wards &&
                                                     departAddressData?.wards.map((ward) => {
@@ -658,16 +686,13 @@ const CreateTourModal = ({
                                         </FormControl>
                                     </div>
                                     <div className="input-group mt-3 pl-2">
-                                        <label htmlFor="">
-                                            Địa chỉ <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Địa chỉ</label>
                                         <TextField
-                                            placeholder="Địa chỉ chi tiết"
+                                            placeholder={tour?.depart || 'Địa chỉ chi tiết'}
                                             maxRows={10}
                                             name="addressDetail"
                                             onChange={handleAddressChange}
                                             disabled={departAddress.ward.name === ''}
-                                            required
                                         />
                                     </div>
                                 </div>
@@ -678,9 +703,7 @@ const CreateTourModal = ({
                                 </Typography>
                                 <div className="w-100 d-flex mt-3">
                                     <div className="input-group col-6 p-0 pr-2">
-                                        <label htmlFor="">
-                                            Tỉnh/Thành phố <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Tỉnh/Thành phố</label>
                                         <FormControl>
                                             <Select displayEmpty name="city" onChange={handleDestinationAddressChange}>
                                                 <MenuItem disabled>Chọn Tỉnh / Thành phố</MenuItem>
@@ -698,15 +721,12 @@ const CreateTourModal = ({
                                         </FormControl>
                                     </div>
                                     <div className="input-group col-6 p-0 pl-2">
-                                        <label htmlFor="">
-                                            Quận/Huyện <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Quận/Huyện</label>
                                         <FormControl>
                                             <Select
                                                 displayEmpty
                                                 name="district"
-                                                onChange={handleDestinationAddressChange}
-                                                required>
+                                                onChange={handleDestinationAddressChange}>
                                                 <MenuItem defaultChecked disabled>
                                                     Chọn Quận / Huyện
                                                 </MenuItem>
@@ -728,16 +748,13 @@ const CreateTourModal = ({
                                 </div>
                                 <div className="w-100 d-flex mt-2">
                                     <div className="input-group mt-3 pr-2">
-                                        <label htmlFor="">
-                                            Phường/Xã <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Phường/Xã</label>
                                         <FormControl>
                                             <Select
                                                 displayEmpty
                                                 inputProps={{ 'aria-label': 'Without label' }}
                                                 name="ward"
-                                                onChange={handleDestinationAddressChange}
-                                                required>
+                                                onChange={handleDestinationAddressChange}>
                                                 <MenuItem disabled>Chọn Phường / Xã</MenuItem>
                                                 {destinationAddressData?.wards &&
                                                     destinationAddressData?.wards.map((ward) => {
@@ -753,16 +770,13 @@ const CreateTourModal = ({
                                         </FormControl>
                                     </div>
                                     <div className="input-group mt-3 pl-2">
-                                        <label htmlFor="">
-                                            Địa chỉ <span>*</span>
-                                        </label>
+                                        <label htmlFor="">Địa chỉ</label>
                                         <TextField
-                                            placeholder="Địa chỉ chi tiết"
+                                            placeholder={tour?.location || 'Địa chỉ chi tiết'}
                                             maxRows={10}
                                             name="addressDetail"
                                             onChange={handleDestinationAddressChange}
                                             disabled={destinationAddress.ward.name === ''}
-                                            required
                                         />
                                     </div>
                                 </div>
@@ -791,6 +805,7 @@ const CreateTourModal = ({
                                         name="content"
                                         rows={5}
                                         onChange={handleScheduleChange}
+                                        ref={inputRef}
                                     />
                                 </div>
                                 <Button
@@ -801,7 +816,7 @@ const CreateTourModal = ({
                                     Thêm lịch trình
                                 </Button>
                                 <Box sx={{ overflow: 'auto', height: '400px' }} className="mt-3">
-                                    <ServiceStepper steps={newTour.tour.schedules} />
+                                    <ServiceStepper steps={tour?.schedules || newTour.tour.schedules} />
                                 </Box>
                             </div>
                         </div>
@@ -887,7 +902,7 @@ const CreateTourModal = ({
                                         <th>Thời gian</th>
                                         <th>Giá</th>
                                     </thead>
-                                    {newTour.tour.tourDate.map((date) => {
+                                    {tour?.tourDate?.map((date) => {
                                         return (
                                             <tr>
                                                 <td>{date.maxPeople}</td>
@@ -897,7 +912,18 @@ const CreateTourModal = ({
                                                 <td>{date.adultPrice.toLocaleString('vn')}</td>
                                             </tr>
                                         );
-                                    })}
+                                    }) ||
+                                        newTour.tour.tourDate.map((date) => {
+                                            return (
+                                                <tr>
+                                                    <td>{date.maxPeople}</td>
+                                                    <td>
+                                                        {date.departDate} - {date.endDate}
+                                                    </td>
+                                                    <td>{date.adultPrice.toLocaleString('vn')}</td>
+                                                </tr>
+                                            );
+                                        })}
                                 </table>
                             </div>
                         </div>

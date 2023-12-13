@@ -5,12 +5,26 @@
 import './styles.scss';
 import { useEffect, useState } from 'react';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
-import { Avatar, Button, Divider, Pagination, Radio } from '@mui/material';
+import { Avatar, Button, Divider, Pagination, Radio, Typography } from '@mui/material';
 import { AllOrdersResponse } from '@/app/_types';
 import { orderServices } from '@/app/_services';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/_context/store';
 import { Skeleton, StatisticModal } from '..';
+import { toast } from 'react-toastify';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    borderRadius: 3,
+    bgcolor: 'background.paper',
+    p: 4,
+};
 
 const OrderList = () => {
     const currentUser = useSelector((state) => (state as RootState).user);
@@ -18,6 +32,7 @@ const OrderList = () => {
     const [selectedItem, setSelectedItem] = useState(0);
     const [page, setPage] = useState(1);
     const [openStatistic, setOpenStatistic] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,10 +45,61 @@ const OrderList = () => {
         fetchData();
     }, [page]);
 
+    const handleCalcelOrder = async () => {
+        const response = await toast.promise(
+            orderServices.adminCancel({ id: selectedItem || -1, status: 'canceled' }, currentUser.accessToken),
+            {
+                pending: 'Đang xử lý...',
+            }
+        );
+
+        if (response.status) {
+            toast.success('Hủy đơn đặt tour thành công');
+            setOrderData((prevState) => {
+                if (prevState) {
+                    return {
+                        ...prevState,
+                        orders: prevState.orders.map((order) => {
+                            if (order.id === selectedItem) {
+                                return {
+                                    ...order,
+                                    status: 'ĐÃ HỦY',
+                                };
+                            } else {
+                                return order;
+                            }
+                        }),
+                    };
+                }
+            });
+            setOpen(false);
+        } else {
+            toast.error(response.message);
+        }
+    };
+
     const selectedOrder = orderData?.orders[selectedItem];
 
     return (
         <div className="order-list-container row px-3">
+            <Modal open={open} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Xác nhận hủy
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Bạn có muốn hủy đơn đặt tour?
+                    </Typography>
+                    <div className="d-flex gap-2 justify-content-end mt-3">
+                        <Button variant="contained" color="error" onClick={() => setOpen(false)}>
+                            Hủy
+                        </Button>
+                        <Button variant="contained" onClick={handleCalcelOrder}>
+                            Xác nhận
+                        </Button>
+                    </div>
+                </Box>
+            </Modal>
             <StatisticModal isOpen={openStatistic} setClose={setOpenStatistic} />
             <div className="col-9">
                 <div className="d-flex left-site">
@@ -61,15 +127,15 @@ const OrderList = () => {
                                     <th>STATUS</th>
                                 </thead>
                                 <tbody>
-                                    {orderData?.orders.map((order, index) => {
+                                    {orderData?.orders?.map((order, index) => {
                                         return (
                                             <tr className="data-row">
                                                 <td>
                                                     <Radio
                                                         color="info"
                                                         value={index}
-                                                        checked={selectedItem === index}
-                                                        onChange={() => setSelectedItem(index)}
+                                                        checked={selectedItem === order.id}
+                                                        onChange={() => setSelectedItem(order.id)}
                                                     />
                                                 </td>
                                                 <td>{order.id} </td>
@@ -154,7 +220,9 @@ const OrderList = () => {
                 </div>
             </div>
             <div className="col-12 flex-center py-3 gap-2">
-                <Button variant="outlined">Hủy</Button>
+                <Button variant="outlined" onClick={() => setOpen(true)}>
+                    Hủy
+                </Button>
                 <Button variant="outlined" onClick={() => setOpenStatistic(true)}>
                     Xem thống kê chi tiết
                 </Button>

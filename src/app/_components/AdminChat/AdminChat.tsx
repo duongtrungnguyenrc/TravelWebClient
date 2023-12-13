@@ -108,7 +108,7 @@ const AdminChat = () => {
 
         if (response.status) {
             setRooms(response.data as AllMessagesResponse[]);
-            setCurrentRoom((response.data as AllMessagesResponse[])[0]?.roomId);
+            // setCurrentRoom((response.data as AllMessagesResponse[])[0]?.roomId);
         }
     };
 
