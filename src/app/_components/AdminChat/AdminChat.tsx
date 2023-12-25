@@ -34,6 +34,7 @@ const AdminChat = () => {
             socketRef.current.on('connected', (res: Message[]) => {
                 console.log('chat service connected');
                 setMessasges(res);
+                setCurrentRoom(res[0].room)
                 scrollToBottom();
             });
 
@@ -91,7 +92,7 @@ const AdminChat = () => {
     }, [currentRoom]);
 
     const socketInit = () => {
-        socketRef.current = io(`ws://localhost:8085`);
+        socketRef.current = io(`http://192.168.31.214:8085`);
 
         socketRef.current?.emit('join-room', {
             admin: true,
